@@ -17,7 +17,7 @@ from InDetRecExample.InDetJobProperties import InDetFlags
 InDetFlags.doSecVertexFinder.set_Value_and_Lock(False)
 
 
-athenaCommonFlags.FilesInput=["/nfs/dust/atlas/user/tkar/derivations/grid_files/user.tkar/user.tkar.16945796._000915.OUT.AOD.combinedhh4b.pool.root"]
+athenaCommonFlags.FilesInput=["/nfs/dust/atlas/user/tkar/derivations/run/OUT1.AOD.combinedhh4b.pool.root"]
 #athenaCommonFlags.FilesInput=["ESD.Fullhh4b.pool.root"]
 
 #### Rubbish!!!
@@ -112,10 +112,6 @@ rec.doWriteTAG.set_Value_and_Lock(False) # uncomment if do not write TAG
 
 #rec.doDumpTES=True
 
-# TODO
-#from MyAnalysis.MyVertexAnalysisConf import MyVertexAnalysis
-#topSequence += MyVertexAnalysis()
-
 from AthenaCommon.AlgSequence import AlgSequence
 from AthenaCommon.AppMgr import ToolSvc,theApp,ServiceMgr
 from AthenaCommon.AthenaCommonFlags  import athenaCommonFlags
@@ -138,6 +134,13 @@ from JetMomentTools.JetMomentToolsConf import JetVertexFractionTool
 from JetMomentTools.JetMomentToolsConf import JetVertexTaggerTool
 
 from InDetTrackSelectionTool.InDetTrackSelectionToolConf import InDet__InDetTrackSelectionTool
+
+from MyAnalysis.MyAnalysisConf import MyPVAnalysis
+topSequence += MyPVAnalysis("MyPVAnalysis")
+topSequence.MyPVAnalysis.NumberOfVertexBins = 40
+topSequence.MyPVAnalysis.RangeOfZVertex = 200. #mm
+topSequence.MyPVAnalysis.MinimumPtJet = 5000. # MeV
+topSequence.MyPVAnalysis.MaximumNumberJets = 10
 
 jtm += InDet__InDetTrackSelectionTool(
   "trk_ttttrackselloose",
@@ -177,12 +180,17 @@ jtm += TrackVertexAssociationTool(
   VertexContainer         = "PrimaryVertices",
   TrackVertexAssoTool     = jtm.jetTighTVAtool,
 )
+
+from TrackVertexAssociationTool.TrackVertexAssociationToolConf import CP__TightTrackVertexAssociationTool
+jtm += CP__TightTrackVertexAssociationTool("jetTighTVAtoolTTT", dzSinTheta_cut=5.0, doPV=True)
+
 jtm += TrackVertexAssociationTool(
   "ttttvassoc",
   TrackParticleContainer  = "TTTParticles",
   TrackVertexAssociation  = "JetTTTTrackVtxAssoc",
-  VertexContainer         = "PrimaryVertices",
-  TrackVertexAssoTool     = jtm.jetTighTVAtool,
+  ####VertexContainer         = "PrimaryVertices",
+  VertexContainer         = "MyPrimaryVertices",        # Change this to use the standard offline PV
+  TrackVertexAssoTool     = jtm.jetTighTVAtoolTTT,
 )
 
 # Jet vertex fraction with selection.
@@ -198,7 +206,8 @@ jtm += TrackVertexAssociationTool(
 # Jet vertex tagger.
 jtm += JetVertexTaggerTool(
   "jvtTTT",
-  VertexContainer = "PrimaryVertices", # TODO
+  ####VertexContainer = "PrimaryVertices",
+  VertexContainer         = "MyPrimaryVertices",        # Change this to use the standard offline PV
   TrackParticleContainer  = "TTTParticles",
   AssociatedTracks = "GhostTTTTrack",
   TrackVertexAssociation = "JetTTTTrackVtxAssoc",
@@ -223,7 +232,8 @@ jtm += JetVertexTaggerTool(
 
 jtm += JetVertexFractionTool(
   "jvfTTT",
-  VertexContainer = "PrimaryVertices", # TODO
+  ####VertexContainer = "PrimaryVertices",
+  VertexContainer         = "MyPrimaryVertices",        # Change this to use the standard offline PV
   AssociatedTracks = "GhostTTTTrack",
   TrackVertexAssociation = "JetTTTTrackVtxAssoc",
   TrackSelector = jtm.ttttrackselloose,
@@ -232,7 +242,7 @@ jtm += JetVertexFractionTool(
 
 jtm += JetVertexFractionTool(
   "jvfStd",
-  VertexContainer = "PrimaryVertices", # TODO
+  VertexContainer = "PrimaryVertices",
   AssociatedTracks = "GhostStdTrack",
   TrackVertexAssociation = "JetStdTrackVtxAssoc",
   TrackSelector = jtm.stdtrackselloose,
@@ -361,12 +371,13 @@ jtm.modifiersMap["truth"] = [jtm.jetsorter]
 jtm.modifiersMap["tttcalo"] = [jtm.jvfTTT, jtm.jvtTTT]
 jtm.modifiersMap["stdcalo"] = [jtm.jvfStd, jtm.jvtStd]
 madeJet = []
-def makeJetAlg(jetName, mods, inGetter, R = 0.4):
+def makeJetAlg(jetName, mods, inGetter, R = 0.4, ivtx = None):
   finderArgs = dict( modifiersin = mods, consumers = [])
   finderArgs['ptmin'] = 10e3
   finderArgs['ptminFilter'] = 10e3
   finderArgs['ghostArea'] = 0.0
   finderArgs['calibOpt'] = ""
+  finderArgs['ivtxin'] = ivtx
   # create the finder for the temporary collection
   finderTool = jtm.addJetFinder(jetName, "AntiKt", R, inGetter,
                                         **finderArgs   # pass the prepared arguments
@@ -397,6 +408,12 @@ topSequence += makeJetAlg("AntiKt4TTTTrackJets", mods = [], inGetter = "TTTTrack
 topSequence += makeJetAlg("AntiKt2StdTrackJets", mods = [], R=0.2, inGetter = "TrackGetter")
 topSequence += makeJetAlg("AntiKt2TTTTrackJets", mods = [], R=0.2, inGetter = "TTTTrackGetter")
 
+topSequence += makeJetAlg("AntiKt4PV0StdTrackJets", mods = [], R = 0.4, ivtx = 0, inGetter = "TrackGetter")
+topSequence += makeJetAlg("AntiKt4PV0TTTTrackJets", mods = [], R = 0.4, ivtx = 0, inGetter = "TTTTrackGetter")
+
+topSequence += makeJetAlg("AntiKt2PV0StdTrackJets", mods = [], R = 0.2, ivtx = 0, inGetter = "TrackGetter")
+topSequence += makeJetAlg("AntiKt2PV0TTTTrackJets", mods = [], R = 0.2, ivtx = 0, inGetter = "TTTTrackGetter")
+
 topSequence += makeJetAlg("AntiKt4TTTEMTopoJets", mods = "tttcalo", inGetter = "TTTCaloGetter")
 topSequence += makeJetAlg("AntiKt4StdEMTopoJets", mods = "stdcalo", inGetter = "StdCaloGetter")
 #topSequence += makeJetAlg("AntiKt4StdEMTopoJets", mods = [], inGetter = "CaloGetter")
@@ -426,4 +443,4 @@ print("The juice!")
 print(jtm.trk_trackselloose)
 print(jtm.trk_ttttrackselloose)
 
-theApp.EvtMax = 100
+theApp.EvtMax = -1
