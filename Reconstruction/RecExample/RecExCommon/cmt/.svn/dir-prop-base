@@ -1,0 +1,9 @@
+K 10
+svn:ignore
+V 39
+setup.*
+cleanup.*
+Makefile
+version.cmt
+
+END

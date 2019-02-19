@@ -1,0 +1,5221 @@
+2016-07-18 Walter Lampl <walter.lampl@ cern.ch>
+	* Add flag to turn persistency optimization on/off
+	* tag RecExCommon-00-14-47-09
+
+2016-07-07 Walter Lampl <walter.lampl@ cern.ch>
+	* fix reco-step name (RAWtoALL)
+	* tag RecExCommon-00-14-47-08
+
+2016-06-03 Walter Lampl <walter.lampl@ cern.ch>
+	* RecExCommon_topOptions.py: Schedule xAODEventInfo conversion algo
+	  earlier to run before the XYZRawDataProviderAlgs
+	* tag  RecExCommon-00-14-47-07
+
+2016-04-01 Peter van Gemmeren <gemmeren@anl.gov> 
+	* BACKED OUT change OBO Jack Cranshaw
+	* share/RecoUtils.py: Reset POOL/ROOT attributes for DxAOD writing.
+	Long-term this should really go somewhere else (currently it is used
+	in merge only).
+	* tagging RecExCommon-00-14-47-06
+
+2016-03-13 Walter Lampl <walter.lampl@ cern.ch>
+	* Enable RecoTimingAlg also in RAWtoALL workflow
+	* Tagging as RecExCommon-00-14-47-04
+
+2016-03-02 Attila Krasznahorkay <Attila.Krasznahorkay@cern.ch>
+	* Removed the lines from RecoUtils.py that set a split level
+	  of 99 for some xAOD interface containers. Didn't bother to
+	  add this split level for the auxiliary containers though.
+	  (For which they were actually meant for.)
+	* This is to fix the problem with reading files in the
+	  analysis release.
+	* Tagging as RecExCommon-00-14-47-03
+
+2015-02-18 Antonio.Limosani@cern.ch
+	* Ensure meta data is available
+        * tagging RecExCommon-00-14-47-02
+
+2015-02-08 Edward.Moyse@cern.ch
+	* Merged in RecExCommon-00-14-32-03 (ZDC support). Fixes ATLASRECTS-2831.
+        * tagging RecExCommon-00-14-47-01
+
+2015-12-08 Walter Lampl <walter.lampl@ cern.ch>
+	* don't hardcode outputlevel=1
+	* tag RecExCommon-00-14-47
+
+2015-11-28 Will Buttinger <will@cern.ch>
+	* share/RecExCommon_topOptions.py: Scheduled lumiblock creating alg always if running in athenaMP, otherwise can use the metadatatool, which should be ok in single process
+	* tagging RecExCommon-00-14-46
+
+2015-11-19 Peter van Gemmeren <gemmeren@anl.gov>
+	* share/SystemRec_config.py: Undo inadvertent change by
+	RecExCommon-00-14-44 (Thanks John).
+	* tagging RecExCommon-00-14-45
+
+2015-11-05 Peter van Gemmeren <gemmeren@anl.gov> 
+	* share/RecoUtils.py: More fine tuning to primary xAOD split level,
+	saves ~2kb/event in data (more in MC).
+	* tagging RecExCommon-00-14-44
+
+2015-10-01 Peter van Gemmeren <gemmeren@anl.gov> 
+	* share/RecoUtils.py: Set primary xAOD to un-split static aux store.
+	* tagging RecExCommon-00-14-43
+
+2015-09-25  John Baines  <john.baines@stfc.ac.uk>
+
+	* share/SystemRec_config.py: Add include to FTK_RecExample/FTKRec_jobOptions.py
+	* Tag as  RecExCommon-00-14-42
+
+2015-09-01  Rolf Seuster
+	* share/RecoUtils.py  add support for AthMemoryAuditor
+	* tagging RecExCommon-00-14-41
+
+2015-08-26 Antonio Limosani <antonio.limosani@cern.ch>
+	* share/CombinedRec_config.py+ Revert previous tag changes (ATLASRECTS-2395)
+	* tagging RecExCommon-00-14-40
+
+2015-08-25 Antonio Limosani <antonio.limosani@cern.ch>
+	* share/CombinedRec_config.py+ Remove egLocker (ATLASRECTS-2395)
+	* tagging RecExCommon-00-14-39
+
+2015-08-17 Niels van Eldik
+	* share/SystemRec_config.py + RecoUsefulFlags.py: remove usage of obsolete flags
+	* tagging RecExCommon-00-14-38
+
+2015-07-29 Jovan Mitrevski <Jovan.Mitrevski@cern.ch>
+	* share/RecExCommon_topOptions.py: put back OKS_streamAOD_fromESD.py, remove forgotten debugs
+	* Tagging RecExCommon-00-14-37
+
+2015-07-29 Jovan Mitrevski <Jovan.Mitrevski@cern.ch>
+	* share/RecExCommon_topOptions.py: stop removing objects not in first file (ATEAM-191)
+	* Tagging RecExCommon-00-14-36
+
+2015-06-30  Karsten Koeneke  <karsten.koeneke@cern.ch>
+	* share/RecExCommon_topOptions.py: Always run CutFlowSvc and AllExecutedEvents. Copying from 00-14-32-branch.
+	* tagging RecExCommon-00-14-35
+
+2015-06-22 Peter van Gemmeren <gemmeren@anl.gov>
+	* share/RecoUtils.py: Set xAOD to split static aux store (previously hardcoded).
+	Modify POOL settings (AutoFlush) for ESD, 100 events causes VMEM
+	increase, reduced to 10. No longer split aux store (reduces branch count).
+	* tagging RecExCommon-00-14-34
+
+2015-06-04 Peter van Gemmeren <gemmeren@anl.gov>
+	* share/RecoUtilsForTF1.py: Remove JobOptions for TF1 testing.
+	* share/RecoUtils.py: Modify POOL settings (AutoFlush) for ESD to archive
+	smaller disk size, less VMEM and better sequential read speed.
+	* tagging RecExCommon-00-14-33
+
+2015-06-01 Nick Styles <nicholas.styles - at - cern.ch>
+	* share/RecExCommon_topOptions.py: Schedule EventInfoUnlocker if doESDReconstruction is true
+	* Tagging as RecExCommon-00-14-32
+
+2015-05-29 Jovan Mitrevski <Jovan.Mitrevski@cern.ch>
+	* Testing/Reference_RecExCommonTesting.log: update, based on 20.1.X-VAL,rel_5
+	* Tagging as RecExCommon-00-14-31
+
+2015-05-20 Jovan Mitrevski <Jovan.Mitrevski@cern.ch>
+	* share/recexcommon-links.py: update default input file
+	* share/myTopOptions.py: update default input file
+	* Testing/Reference_RecExCommonTesting.log: update, based on 20.1.X-VAL,rel_2
+	* Tagging as RecExCommon-00-14-30
+
+2015-04-29 Jovan Mitrevski <Jovan.Mitrevski@cern.ch>
+	* share/RecExCommon_topOptions.py: remove temporary fix that was added -27
+	* Tagging as RecExCommon-00-14-29
+
+2015-04-29  scott snyder  <snyder@bnl.gov>
+
+	* Tagging RecExCommon-00-14-28.
+	* share/RecoUtils.py: Set error message limit to 500.
+
+2015-04-27 Jovan Mitrevski <Jovan.Mitrevski@cern.ch> (for Attila <Attila.Krasznahorkay@cern.ch>)
+  * Disabled the usage of xAODMaker::TriggerMenuMetaDataTool
+	when neither an ESD or an AOD file is getting written in
+	the job.
+  * This is to avoid the crash observed in ATR-10821, until
+	we understand what actually is going on there.
+  * At the same time, removed the VERBOSE output setting for
+	the two new metadata tools.
+  * Tagging as RecExCommon-00-14-27
+
+2015-04-21 Karsten Koeneke <karsten.koeneke@cern.ch>
+  * share/RecExCommon_topOptions.py: Improve cut-flow meta-data handling
+  * Fix https://its.cern.ch/jira/browse/ATLASG-66
+  * Tagging RecExCommon-00-14-26
+
+2015-04-14 Jovan Mitrevski <Jovan.Mitrevski@cern.ch>
+  * share/RecExCommon_topOptions.py: fix metadata for split trigger
+  * Tagging RecExCommon-00-14-24
+
+2015-03-24 Jovan Mitrevski <Jovan.Mitrevski@cern.ch>
+  * share/RecExCommon_topOptions.py: further metadata updates
+  * Tagging RecExCommon-00-14-23
+
+2015-03-24 Jovan Mitrevski <Jovan.Mitrevski@cern.ch>
+  * share/RecExCommon_topOptions.py: for new LumiBlock code (from M. Shapiro)
+  * Tagging RecExCommon-00-14-22
+
+2015-03-19 Jovan Mitrevski <Jovan.Mitrevski@cern.ch>
+  * share/recexcommon-links.py: update default input file again (if it exists)
+  * share/myTopOptions.py: update the default input file again
+  * Testing/Reference_RecExCommonTesting.log: update ATN test reference
+  * Tagging RecExCommon-00-14-21
+
+2015-03-11 Jovan Mitrevski <Jovan.Mitrevski@cern.ch>
+  * share/recexcommon-links.py: update default input file (if it exists)
+  * share/myTopOptions.py: update the default input file
+  * Testing/Reference_RecExCommonTesting.log: update ATN test reference
+  * Tagging RecExCommon-00-14-20
+
+2015-03-05  RD Schaffer  <R.D.Schaffer@cern.ch>
+
+  * share/RecExCommon_topOptions.py: also replace with cluster name from egammaKeys
+  * Tagging RecExCommon-00-14-19
+  * share/RecExCommon_topOptions.py: renamed key to write out cells for egammaClusters
+  * Tagging RecExCommon-00-14-18
+
+2015-02-20 Jovan Mitrevski <Jovan.Mitrevski@cern.ch>
+  * share/recexcommon-links.py: no longer setup DB replica
+  * Tagging RecExCommon-00-14-17
+
+2015-02-10  Tulay Cuhadar Donszelmann <tcuhadar@cern.ch>
+  * Update the condition tag of qtest_run2 to OFLCOND-RUN12-SDR-22.
+  * Tagging RecExCommon-00-14-16
+
+2015-02-09  Tulay Cuhadar Donszelmann <tcuhadar@cern.ch>
+  * Update the condition tag of qtest_run1 to OFLCOND-RUN12-SDR-22.
+  * Tagging RecExCommon-00-14-15
+
+2015-01-28  Simon George  <S.George@rhul.ac.uk>
+
+  * share/BSRead_config.py: Add L1TopoRDOCollection to
+  ByteStreamAddressProviderSvc.TypeNames so there will be a proxy
+  for it.
+  * tag RecExCommon-00-14-14
+
+2015-01-19 Graeme Stewart <graeme.andrew.stewart@cern.ch>
+  * share/RecoUtils.py
+  - Disable AthDsoLogger because of thread unsaftey
+  * tag RecExCommon-00-14-13
+
+2014-12-22 Niels van Eldik
+        * share/CombinedRec_config.py: configure track selector
+        * tag RecExCommon-00-14-12
+
+2014-12-19 Niels van Eldik
+        * share/RecExCommon_topOptions.py: add clusters of TrackParticleCellAssociationAlg to addClusterToCaloCellAOD
+        * tag RecExCommon-00-14-11
+
+2014-12-19 Niels van Eldik
+        * share/CombinedRec_config.py: TrackParticleCellAssociationAlg
+        * tag RecExCommon-00-14-10
+
+2014-12-04 Jovan Mitrevski <Jovan.Mitrevski@cern.ch>
+        * share/CombinedRec_config.py: make isoGetter only run if doESD = true
+  * share/RecExCommon_topOptions.py: make container remapping only work if reading old data
+  * share/ContainerRemapping.py: add more remapping
+        * tag RecExCommon-00-14-09
+
+2014-12-01 Niels van Eldik
+        * share/CombinedRec_config.py:
+    - add protection around adding egLocker to only run when egamma enabled
+    - add check on rec.doJetMissingETTag() before scheduling Jets
+        * tag RecExCommon-00-14-08
+
+2014-12-01 Jovan Mitrevski <Jovan.Mitrevski@cern.ch>
+        * share/CombinedRec_config.py: adding egLocker for new iso
+        * tag RecExCommon-00-14-07
+
+2014-11-28  Karsten Koeneke  <karsten.koeneke@cern.ch>
+  * Prepare for new cutflow bundle
+  * tagging RecExCommon-00-14-06
+
+2014-11-24 Jovan Mitrevski <Jovan.Mitrevski@cern.ch>
+  * share/ContainerRemapping.py: add even more remapping
+  * tag RecExCommon-00-14-05
+
+2014-11-24 Jovan Mitrevski <Jovan.Mitrevski@cern.ch>
+  * share/ContainerRemapping.py: add more remapping
+  * tag RecExCommon-00-14-04
+
+2014-11-24 Attila Krasznahorkay <Attila.Krasznahorkay@cern.ch>
+  * Removed the _v1 postfix from the names of xAOD::EventFormat
+    and xAOD::EventInfo.
+  * Tagging as RecExCommon-00-14-03
+
+2014-11-24 Jovan Mitrevski <Jovan.Mitrevski@cern.ch>
+  * share/ContainerRemapping.py: add
+  * share/RecExCommon_topOptions.py: include call for ContainerRemapping.py
+  * tag RecExCommon-00-14-02
+
+2014-11-20 <graeme.andrew.stewart@cern.ch>
+  * RecExCommon_topOptions.py
+  - move scheduling of xAODMaker::EventInfoCnvAlg to before
+    TriggerTower simulation
+  * tag RecExCommon-00-14-01
+
+2014-11-20  Rolf Seuster
+  * update new shell scripts
+  * tag RecExCommon-00-14-00
+
+2014-11-18  Jovan Mitrevski
+  * share/CombinedRec_config.py: add pflow-isolation after pflow
+  * tag RecExCommon-00-13-99
+
+2014-11-12  Jovan Mitrevski
+  * share/CombinedRec_config.py: make eflowRec run before jet finding
+  * tag RecExCommon-00-13-98
+
+2014-11-11  Rolf Seuster
+  * install two new shell scripts
+  * tag RecExCommon-00-13-97
+
+2014-11-05  Rolf Seuster
+  * add two shell scripts for running athena tests for developers: qtest_run1.sh and qtest_run2.sh
+  * tag RecExCommon-00-13-96
+
+2014-10-21 T. Donszelmann
+  * Updating name of library to AnalysisTools.AnalysisToolsConf
+  * tag RecExCommon-00-13-95
+
+2014-10-15 Karsten Koeneke <karsten.koeneke@ cern.ch>
+  * share/AnalysisCommon_topOptions.py: Some more cleanup for AthAnalysisBase
+  * cmt/requirements: Ready it for AthAnalysisBase
+  * tag RecExCommon-00-13-94
+
+2014-10-07 Jovan Mitrevski <Jovan.Mitrevski@cern.ch>
+  * share/rdotobs.py: lock doESD to false instead of just setting it
+  * tagging RecExCommon-00-13-93
+
+2014-09-03 Peter van Gemmeren <gemmeren@anl.gov>
+  * share/RecoUtilsForTF1.py: Remove JobOptions for TF1 testing.
+  * share/RecoUtils.py: Modify POOL settings (AutoFlush) to archive
+  smaller disk size and better sequential read speed for xAOD.
+  * tagging RecExCommon-00-13-92
+
+2014-08-22 Walter Lampl <walter.lampl@ cern.ch>
+  * refine valgrind tweaks (to work also in merging jobs)
+  * tag RecExCommon-00-13-91
+
+2014-08-19 Walter Lampl
+  * RecExCommon_topOptions.py: use new flag rec.doRecoTiming
+  * MallocTweaks.py: New pre-include to turn off PerfMon dn RecoTiming
+  * myTopOptions_Eigen.py: Removed
+  * tag RecExCommon-00-13-90
+
+2014-08-13  Rolf Seuster
+  * FPEAuditor has changed packages
+  * tagging RecExCommon-00-13-89
+
+2014-07-25  Karsten Koeneke  <karsten.koeneke@cern.ch>
+
+  * Fix DRAW writing
+  * tagging RecExCommon-00-13-88
+
+2014-07-22 Niels van Eldik
+  * remove include of MuonAlgs/MuonTrackSlimmer.py, package obsolete
+  * tag RecExCommon-00-13-87
+
+2014-07-16 Walter Lampl <walter.lampl@ cern.ch>
+  * adjust excludeTracePatterns
+  * tag RecExCommon-00-13-86
+
+2014-07-11 Walter Lampl <walter.lampl@ cern.ch>
+  * don't run tauRec if jet-rec doesn't work
+  * tag RecExCommon-00-13-85
+
+2014-06-27 Attila Krasznahorkay <Attila.Krasznahorkay@cern.ch>
+  * Updated RecExCommon_topOptions.py to only add
+    xAODMaker::EventInfoCnvAlg to the main algorithm sequence if
+    it is not in it already. Since the HLT also needs to create
+    xAOD::EventInfo to run correctly. When running the HLT and
+    reconstruction together, this would result in an error message
+    during job configuration.
+  * Tagging as RecExCommon-00-13-84
+
+2014-06-02  Karsten Koeneke  <karsten.koeneke@cern.ch>
+
+  * share/AnalysisCommon_topOptions.py: Add for fast analysis setup (prototype)
+  * tagging RecExCommon-00-13-83
+
+2014-05-28 Peter van Gemmeren <gemmeren@anl.gov>
+  * share/RecExCommon_topOptions.py: Add making of minimal TAG to be
+  written into AOD
+  * tagging RecExCommon-00-13-82
+
+2014-05-05 Walter Lampl <walter.lampl@ cern.ch>
+  * Run eflow before MET
+  * tag RecExCommon-00-13-79
+
+2014-04-29 Peter van Gemmeren <gemmeren@anl.gov>
+  * share/RecExCommon_topOptions.py: Fix typo when using BS (Thanks Alex U).
+  * tagging RecExCommon-00-13-78
+
+2014-04-16 Jovan Mitrevski <Jovan.Mitrevski@cern.ch>
+  * share/RecExCommon_topOptions.py: merge back in changes for online (from -13-45-branch)
+  * tag RecExCommon-00-13-77
+
+2014-04-16 Walter Lampl <walter.lampl@ cern.ch>
+  * don't run MET if ID is off
+  * tag RecExCommon-00-13-76
+
+2014-04-11 Walter Lampl <walter.lampl@ cern.ch>
+  * protect include of CombinedMuons and BTagging
+  * tag RecExCommon-00-13-75
+
+2014-04-10 Walter Lampl <walter.lampl@ cern.ch>
+  * remove debris from release 19.0.1-building
+  * tag RecExCommon-00-13-74
+
+2014-04-01 Walter Lampl <walter.lampl@ cern.ch>
+  * remove AOD-cells for Tau1P3PCellEM012ClusterContainer
+  * tag RecExCommon-00-13-73
+
+2014-03-31 Walter Lampl <walter.lampl@ cern.ch>
+  * put back TypeNames += ["ZdcDigitsCollection/ZdcDigitsCollection"]
+  * tag RecExCommon-00-13-72
+
+2014-03-31 Walter Lampl <walter.lampl@ cern.ch>
+  * don't add Lucid and ZDC bytstream containers to ByteStreamAddressProviderSvc.TypeNames. These are read by algorithms (not converters)
+  * tag RecExCommon-00-13-71
+
+2014-03-31 Walter Lampl <walter.lampl@ cern.ch>
+  * remove obsolete file CleanItemList_Rel19.py
+  * tag RecExCommon-00-13-70
+
+2014-03-28 Walter Lampl <walter.lampl@ cern.ch>
+  * include BTag configuration
+  * tag RecExCommon-00-13-69
+
+2014-03-26 Jovan Mitrevski <Jovan.Mitrevski@cern.ch>
+  * share/RecExCommon_topOptions.py: remove check of (obsolete) doWritexAOD
+  * tag RecExCommon-00-13-68
+
+2014-03-18  Walter Lampl <walter.lampl@ cern.ch>
+  * set TREE_AUTO_FLUSH and CONTAINER_SPLITLEVEL separatly (suggestion by Peter vG)
+  * tag RecExCommon-00-13-67
+
+2014-03-17  Vakho Tsulaia  <tsulaia@cern.ch>
+  * Bring myTopOptions.py up to date
+  * Tagging as RecExCommon-00-13-66
+
+2014-03-15  Vakho Tsulaia  <tsulaia@cern.ch>
+  * Switch from MissingET to METReconstruction
+  * Tagging as RecExCommon-00-13-65
+
+2014-03-12  Vakho Tsulaia  <tsulaia@cern.ch>
+  * Cleanup TypesToRemove list in CleanItemList_Rel19.py
+  * Tagging as RecExCommon-00-13-64
+
+2014-03-12  Vakho Tsulaia  <tsulaia@cern.ch>
+  * PanTau part removed from CombinedRec_config.py (OBO Felix Friedrich)
+  * Tagging as RecExCommon-00-13-63
+
+2014-03-12 Attila Krasznahorkay <Attila.Krasznahorkay@cern.ch>
+  * RecExCommon_topOptions.py now adds the metadata contents of
+    objKeyStore into the metadata ItemList of the output ESD
+    and AOD file.
+  * Since only the trigger is using this part of objKeyStore
+    at the moment, this just means that the trigger configuration
+    metadata can now be added to the output files when the trigger
+    is running.
+  * Tagging as RecExCommon-00-13-62
+
+2014-03-07 Walter Lampl <walter.lampl@ cern.ch>
+  * don't import stuff from egamma if rec.doEgamma is false
+  * tag RecExCommon-00-13-61
+
+2014-02-20 Walter Lampl <walter.lampl@ cern.ch>
+  * Move setting of pool-attribute CONTAINER_SPLITLEVEL to RecoUtils
+  * tag RecExCommon-00-13-60
+
+2014-02-13 Walter Lampl <walter.lampl@ cern.ch>
+  * Don't run event-info cnv if xAOD::EventInfo is already there
+  * tag RecExCommon-00-13-59
+
+2014-02-12 Walter Lampl <walter.lampl@ cern.ch>
+  * AODs have now SG key as branch names. Add CaloCluster and Taujet to item-list cleaning
+  * tag RecExCommon-00-13-58
+
+2014-02-04 Walter Lampl <walter.lampl@ cern.ch>
+  * include TruthParticleBuilder_jobOptions.py (obo Niels)
+  * tag RecExCommon-00-13-57
+
+2014-01-28 Walter Lampl <walter.lampl@ cern.ch>
+  * ItemList cleaning: More flexiblity
+  * tag RecExCommon-00-13-56
+
+2014-01-28 Walter Lampl <walter.lampl@ cern.ch>
+  * Revert Pool configuration hack
+  * tag RecExCommon-00-13-55
+
+2014-01-28 Walter Lampl <walter.lampl@ cern.ch>
+  * fix problem with missing StreamAOD_Augmented in ATN tests
+  * tag RecExCommon-00-13-54
+
+2014-01-22 Walter Lampl
+  * CleanItemList_Rel19.py: Remove by type not by by type#name
+  * RecoUtils.py: Don't set any PoolAttributes (hack to get xAOD writing going
+  * tag RecExCommon-00-13-53
+
+2014-01-21 rocco mandrysch
+  * update path for atn reco test to atlastestdata
+  * tag RecExCommon-00-13-52
+
+2014-01-21 Walter Lampl <walter.lampl@ cern.ch>
+  * CombinedRec_jobOptions.py: Use Jet flags to turn off jet reco if requested
+  * RecExCommon_topOptions.py: Add EventFormat as metadata to ESD and AOD if xAOD is requested
+  * Add jobO fragment CleanItemList_Rel19.py to remove items whose converter don't work in rel 19.0.0
+  * Modify myTopOptions.py to turn off part of reco that don't work in rel 19.0.0
+  * tag RecExCommon-00-13-51
+
+2014-01-13 Walter Lampl <walter.lampl@ cern.ch>
+  * schedule conversion algorithm for xAOD::EventInfo
+  * tag RecExCommon-00-13-50
+
+2014-01-09 Walter Lampl <walter.lampl@ cern.ch>
+  * allow PanTau when reading from ESD
+  * tag RecExCommon-00-13-49
+
+2014-01-06 Walter Lampl <walter.lampl@ cern.ch>
+  * update myTopOptions_Eigen.py
+  * tag RecExCommon-00-13-48
+
+2013-12-19 rocco mandrysch
+  * update default rdo input file in recexcommon-links.
+  * update lfn name for rdo file
+  * requires RecExCond-00-02-60
+  * tag RecExCommon-00-13-47
+
+2013-12-16 Walter Lampl
+  * Add myTopOptions_Eigen.py. Disables parts of Reco that are
+    not (yet) working with the new Tracking EDM.
+    * tag RecExCommon-00-13-46
+
+2013-10-17 Walter Lampl
+  * exclude CommonSliceHelper.py from python trace
+  * Fix a warning in BSRead_config.py
+  * tag RecExCommon-00-13-45
+
+2013-10-10 rocco mandrysch
+  * update input file in share/bstoesd.py
+  * tag RecExCommon-00-13-44
+
+2013-08-05 Peter van Gemmeren <gemmeren@anl.gov>
+  * share/RecoUtilsForTF1.py: Add JobOptions for TF1 testing.
+  * tagging RecExCommon-00-13-43
+
+2013-04-29 Rocco Mandrysch <rocco.mandrysch at cern.ch>
+  * Remove RECOSHIFT from test name in test/RecExCommon_TestConfiguration.xml
+  * tag RecExCommon-00-13-42
+2013-04-25 Rocco Mandrysch <rocco.mandrysch at cern.ch>
+  * add () to isonline in RecExCommon_topOptions.py
+  * tag RecExCommon-00-13-41
+
+2013-03-10 Jovan Mitrevski <jovan.mitrevski@cern.ch>
+  * Testing/CompareFiles.sh: Fixed it finding the release in AtlasProduction cache
+  * tag RecExCommon-00-13-40
+
+2013-01-14 Rocco Mandrysch <rocco.mandrysch AT cern.ch>
+  * remove jp.AthenaCommonFlags.EvtMax from aodtotag.py
+  * tag RecExCommon-00-13-39
+
+2012-12-17 Walter Lampl
+  * Call HIPRec_jobOptions.py for p-Pb reconstruction
+  * tag RecExCommon-00-13-38
+
+2012-12-11 Peter van Gemmeren <gemmeren@anl.gov>
+  * share/RecExCommon_topOptions.py: Add TAG attributeList to AOD file
+  * tagging RecExCommon-00-13-37
+
+2012-08-23  Joao Firmino da Costa  <joao.costa@cern.ch>
+
+  * share/RecoUtils.py: Increasing Pool file size limit from 10 GB to 12 GB
+  * tagging RecExCommon-00-13-36
+
+2012-08-13  Karsten Koeneke  <karsten.koeneke@cern.ch>
+
+  * share/RecExCommon_topOptions.py: Improve AODSelect feature
+  * tagging RecExCommon-00-13-35
+
+2012-08-07 Rolf Seuster
+  * protect against missing MemoryAlg in 17.2.x releases
+  * tagging RecExCommon-00-13-34
+
+2012-08-07 Rolf Seuster
+  * remove DEBUG output level
+  * tagging RecExCommon-00-13-33
+
+2012-07-17 Rolf Seuster
+  * transfer RecoTimingObj from simulation and digitization over to ESD/AOD
+  * add RecoTimingObj for memory information
+  * tagging RecExCommon-00-13-32
+
+2012-06-05 Thomas Kittelmann <thomas.kittelmann@cern.ch>
+  * CBNT_config.py: Dont include CaloRec_CBNT_jobOptions.py
+  * tagging RecExCommon-00-13-31
+
+2012-04-30 Peter van Gemmeren <gemmeren@anl.gov>
+  * share/RecoUtils.py: Storage layout optimization for RDO.
+  * tagging RecExCommon-00-13-30
+
+
+2012-04-03  David Rousseau  <droussea@voatlas107.cern.ch>
+
+  * share/RecExCommon_topOptions.py : add a few more
+  excludeTracePattern files:
+   - reshuffle include of RecoOutputESDList_jobOptions.py so that
+   DPD filtering can use OKS. StreamESD is now identical to OKS.StreamESD
+  * tagging RecExCommon-00-13-29
+
+2012-03-27  Karsten Koeneke  <karsten.koeneke@cern.ch>
+
+  * share/RecExCommon_topOptions.py: Exlcude DESD_GOODTIME and DESD_MBIAS from BStoESD.
+  * tagging RecExCommon-00-13-28
+
+2012-03-24  David Rousseau  <droussea@voatlas107.cern.ch>
+
+  * share/RecExCommon_topOptions.py: better protection for DESD when trigger off
+  * tagging RecExCommon-00-13-27
+
+2012-03-22  David Rousseau  <droussea@voatlas107.cern.ch>
+
+  * share/RecExCommon_topOptions.py : switch off DESD bookkeeping of
+  trigger or one detector switched of
+  * tagging RecExCommon-00-13-26
+
+2012-03-20  David Rousseau  <droussea@voatlas107.cern.ch>
+
+  * share/tagtoaod.py, tagtocbnt: no eventnumber selection by default
+  * tagging RecExCommon-00-13-25
+
+2012-03-20  David Rousseau  <droussea@voatlas107.cern.ch>
+
+  * share/tagtocbnt.py,tagtoaod.py: update using autoconfiguration.
+  * tagging RecExCommon-00-13-24
+
+
+2012-03-16  David Rousseau  <droussea@voatlas107.cern.ch>
+
+  * share/PrintRecoSummary.py: do not print ObjKeyStore by default
+
+  * share/RecExCommon_topOptions.py : set
+  svcMgr.CoreDumpSvc.SetFatalHandler(438) as required by athena change
+
+  remove setting of doFastCaloSim (obsolete)
+
+  do not load ParticleBuilderOptions/**PoolCnv_jobOptions.py
+  * tagging RecExCommon-00-13-23
+
+2012-03-13  David Rousseau  <droussea@voatlas107.cern.ch>
+
+  * data/recexcommon-afserver-cache.ascii.gz: update file
+
+  * share/RecExCommon_topOptions.py : reenable athfile cache (saves
+  15s init time when job is rerun). Maybe more if inputFilePeeker
+  called several time in more complex cases.
+  * tagging RecExCommon-00-13-22
+
+2012-03-13  Karsten Koeneke  <karsten.koeneke@cern.ch>
+
+  * share/RecExCommon_topOptions.py: Add random number service for DPDs
+  * tagging RecExCommon-00-13-21
+
+2012-02-28 Rolf Seuster <seuster AT cern.ch>
+  * don't call LumiBlockMuWriter_jobOptions.py if online
+  * improve detection when to issue ERROR for setting up DPD makers (will fail in e.g. AtlasReco project)
+  * tagging RecExCommon-00-13-20
+
+2012-02-10  David Rousseau  <droussea@voatlas107.cern.ch>
+
+  * share/BSRead_config.py : mu BS config package has moved
+
+  * share/CombinedRec_config.py : protect panTau inclusion with a
+  simple WARNING (until pantau properly set up in the release)
+  * tagging RecExCommon-00-13-19
+
+2012-02-08 Rolf Seuster <seuster AT cern.ch>
+  * share/CombinedRec_config.py: call PanTau only when doAOD is true
+  * tagging RecExCommon-00-13-18
+
+2012-02-03 Peter van Gemmeren <gemmeren@anl.gov>
+  * share/RecoUtils.py: Increase basket size for DataHeaderForm in new TTree.
+  * tagging RecExCommon-00-13-17
+
+2012-01-30 Rolf Seuster <seuster AT cern.ch>
+  * share/CombinedRec_config.py: add PanTau
+  * tagging RecExCommon-00-13-16
+
+2012-01-21 Rolf Seuster <seuster AT cern.ch>
+  * share/RecExCommon_topOptions: test for more projects when deciding error or warning (FIXME!)
+  * tagging RecExCommon-00-13-15
+
+2012-01-20 Rolf Seuster <seuster AT cern.ch>
+  * share/RecExCommon_topOptions: add athena version for each substep to in file metadata
+  * tagging RecExCommon-00-13-14
+
+2012-01-13 Rolf Seuster <seuster AT cern.ch>
+  * share/RecExCommon_topOptions: include physvalmon jobOptions, if requested
+  * should be bundled with RecJobTransforms-00-09-00
+  * tagging RecExCommon-00-13-13
+
+2011-12-13 Rolf Seuster <seuster AT cern.ch>
+  * share/SystemRec_config.py: add doStandalone to the muonrec flags
+  * tagging RecExCommon-00-13-12
+
+2011-12-11 Rolf Seuster <seuster AT cern.ch>
+  * share/bstoesd.py: fix name, and remove hardcoded conditions tag
+  * tagging RecExCommon-00-13-11
+
+2011-12-14  David Rousseau  <droussea@voatlas107.cern.ch>
+
+  * share/CBNT_config.py (logCBNT_config): do not include eflow CBNT
+  * tagging RecExCommon-00-13-10
+
+  * share/RecExCommon_topOptions.py (MetaDataStore): protect if no ByteStreamCnvSvc
+  * tagging RecExCommon-00-13-09
+
+2011-11-26 Rolf Seuster <seuster AT cern.ch>
+  * share/RecExCommon_topOptions.py: add AtlasHLT to list of projects for which prints WARNING instead of ERROR for setting up DPDs (which is in AtlasAnalysis)
+  * tagging RecExCommon-00-13-08
+
+22011-11-26 Rolf Seuster <seuster AT cern.ch>
+  * share/RecExCommon_topOptions.py: print FATAL in JobInfo if in nightly, print WARNING otherwise
+  * tagging RecExCommon-00-13-07
+
+2011-11-18 Rolf Seuster <seuster AT cern.ch>
+  * share/RecExCommon_topOptions.py: for MC add another TimingAlg, schedule JobInfo, which
+  * prints out number of dictionaries used in root (needs RecAlgs-00-00-04)
+  * tagging RecExCommon-00-13-06
+
+2011-11-11 Rolf Seuster <seuster AT cern.ch>
+  * share/RecExCommon_topOptions.py: trigger off, if reading and re-doing ESD (#87654)
+  * tagging RecExCommon-00-13-05
+
+2011-11-08  Karsten Koeneke  <karsten.koeneke@.cern.ch>
+
+  * share/RecExCommon_topOptions.py: Adding AODSelect option
+  * tagging RecExCommon-00-13-04
+
+2011-10-04 Peter van Gemmeren <gemmeren@anl.gov>
+  * share/RecExCommon_topOptions.py: Move TAG building to make AttributeList available during AOD writing.
+  * tagging RecExCommon-00-13-03
+
+2011-09-15 Rolf Seuster <seuster AT cern.ch>
+  * schedule reco timing algorithms
+  * tagging RecExCommon-00-13-02
+
+2011-09-07 Rolf Seuster <seuster AT cern.ch>
+  * ignore the "sunday conditions" when comparing logfiles in ATN
+  * tagging RecExCommon-00-13-01
+
+2011-09-01 David Cote  <david.cote@cern.ch>
+  * Introduced new EventCounterAlg in replacement for broken EventSelectorCounterTool
+    this fixes bug #84741 that affects all DPD
+  * tagging RecExCommon-00-13-00 (requires EventBookkeeperTools-00-00-48)
+
+2011-08-02  David Rousseau  <droussea@voatlas107.cern.ch>
+
+  * share/RecoUtils.py: disable chrono_xyz printing
+  * tagging RecExCommon-00-12-99
+
+2011-07-12 Peter van Gemmeren <gemmeren@anl.gov>
+  * share/RecoUtils.py: Move Pool attribute setting to JetTagInfo_tlp3
+  * tagging RecExCommon-00-12-98
+
+2011-06-06 Rolf Seuster <seuster AT cern.ch>
+  * again, modify (hopefully!) last changs due to dropping of standalone python flags
+  * tagging RecExCommon-00-12-97
+
+2011-05-31 Rolf Seuster <seuster AT cern.ch>
+  * modify (hopefully!) last changs due to dropping of standalone python flags
+  * tagging RecExCommon-00-12-96
+
+2011-05-23 Rolf Seuster <seuster AT cern.ch>
+  * change how to detect which nightly is running the ATN test
+  * tagging RecExCommon-00-12-95
+
+2011-05-22 Rolf Seuster <seuster AT cern.ch>
+  * typos
+  * tagging RecExCommon-00-12-94
+
+2011-05-22 Rolf Seuster <seuster AT cern.ch>
+  * further changes to ATN test
+  * tagging RecExCommon-00-12-93
+
+2011-05-21 Rolf Seuster <seuster AT cern.ch>
+  * small changes to ATN test
+  * tagging RecExCommon-00-12-92
+
+2011-05-20 Rolf Seuster <seuster AT cern.ch>
+  * python cleanup of flags
+  * tagging RecExCommon-00-12-91
+
+2011-05-17 Peter van Gemmeren <gemmeren@anl.gov>
+  * share/RecoUtils.py: Protect split auxiliary container against FPE in TTree::OptimizeBaskets
+  by setting pre-optimized basket size to 2KB. (Savannah #82341)
+  * tagging RecExCommon-00-12-90
+
+2011-05-17 Peter van Gemmeren <gemmeren@anl.gov>
+  * share/RecoUtils.py: Fine-Tune Compression Level for ESD.
+  * tagging RecExCommon-00-12-88
+
+2011-05-09 Jamie Boyd <Jamie.Boyd@cern.ch>
+        * RecExCommon_topOptions.py:
+        * fix mu-in-athena call for MC and cosmics/single-beam
+        * still requires LumiBlockComps-00-04-04
+        * tagging RecExCommon-00-12-85
+
+2011-05-06 Jamie Boyd <Jamie.Boyd@cern.ch>
+        * RecExCommon_topOptions.py:
+  * include LumiBlockComps/LumiBlockMuWriter_jobOptions.py
+  * requires LumiBlockComps-00-04-04
+  * tagging RecExCommon-00-12-84
+
+2011-05-04 Walter Lampl <walter.lampl@ cern.ch>
+  * RecExCommon_topOptions.py:
+    Set AthenaEventLoopMgr.EventPrintoutInterval = 100 for AOD-reading
+    (eg Analysis) jobs
+  * tagging RecExCommon-00-12-83
+
+2011-04-19 Rolf Seuster <seuster AT cern.ch>
+  * update Reference file
+  * fix bug #67414
+  * tagging RecExCommon-00-12-82
+
+2011-04-15 Peter van Gemmeren <gemmeren@anl.gov>
+  * share/RecoUtils.py: Increase Compression Level for AOD.
+  * tagging RecExCommon-00-12-81
+
+2011-04-15 Rolf Seuster <seuster AT cern.ch>
+  * share/RecExCommon_topOptions.py: add StreamTAG to AthRegSeq (o.b.o. Attila)
+  * tagging RecExCommon-00-12-80
+
+2011-04-11 Rolf Seuster <seuster AT cern.ch>
+  * cmt/requirements: move TestPolicy to private
+  * tagging RecExCommon-00-12-79
+
+2011-04-08 Peter van Gemmeren <gemmeren@anl.gov>
+  * share/RecoUtils.py: Increase DataHeader baskets
+  * tagging RecExCommon-00-12-78
+
+2011-04-07 Thomas Kittelmann <thomas.kittelmann@cern.ch>
+  * Support doSemiDetailedPerfMon flag.
+  * tagging RecExCommon-00-12-77
+
+2011-04-06 Walter Lampl <walter.lampl@cern.ch>
+  * share/SystemRec_config.py: Run ID before Calo in case of doFatrasID, otherwise Calo before ID
+  * tagging RecExCommon-00-12-76
+
+2011-04-05 Peter van Gemmeren <gemmeren@anl.gov>
+  * share/RecoUtils.py: In release 16, we were using MuonMeasurements_tlp1 (not tlp2)
+  * tagging RecExCommon-00-12-75
+
+2011-04-03 Peter van Gemmeren <gemmeren@anl.gov>
+  * Fix auxiliary container optimization for rel 16, by explicitly switching it OFF.
+  * tagging RecExCommon-00-12-74
+
+2011-04-01 Peter van Gemmeren <gemmeren@anl.gov>
+  * Minor changes for auxiliary container optimization
+  * tagging RecExCommon-00-12-73
+
+2011-03-30 Rolf Seuster <seuster AT cern.ch>
+  * adding "()"
+  * tagging RecExCommon-00-12-72
+
+2011-03-30 Rolf Seuster <seuster AT cern.ch>
+  * implement code for TrackParticleSlimming (needs ParticleBuilderOptions-00-03-05 or ParticleBuilderOptions-00-03-03-01)
+  * tagging RecExCommon-00-12-71
+
+2011-03-29 Peter van Gemmeren <gemmeren@anl.gov>
+  * Do not use AutoFlush for auxiliary container
+  * tagging RecExCommon-00-12-70
+
+2011-03-27 Peter van Gemmeren <gemmeren@anl.gov>
+  * Optimize auxiliary container
+  * tagging RecExCommon-00-12-69
+
+2011-03-25 Rolf Seuster <seuster AT cern.ch>
+  * apply changes in -65 only, if LCGCMTVersion is different from "59".
+  * tagging RecExCommon-00-12-68
+
+2011-03-24 Peter van Gemmeren <gemmeren@anl.gov>
+  * Add some more custom persistency settings to StreamESD
+  * tagging RecExCommon-00-12-67
+
+2011-03-24 David Cote  <david.cote@cern.ch>
+  * Added configuration of ParentStreamName of SkimmingCycleDefiner for DPD
+  * tagging RecExCommon-00-12-66 (requires EventBookkeeperTools-00-00-43 though it is protected with try/except)
+
+2011-03-23 Rolf Seuster <seuster AT cern.ch>
+  * o.b.o. Peter vG: changes in RecoUtils: stream dependent PoolAtttributes
+  * tagging RecExCommon-00-12-65
+
+2011-03-15 Rolf Seuster <seuster AT cern.ch>
+  * undo changes from Ilija, now done elsewhere
+  * tagging RecExCommon-00-12-64
+
+2011-03-15 Rolf Seuster <seuster AT cern.ch>
+  * undo changes from Ilija, now done elsewhere
+  * tagging RecExCommon-00-12-63
+
+2011-03-12 Ilija Vukotic <ilija@vukotic.me>
+  * if runArgs is None
+  * tagging RecExCommon-00-12-62
+
+2011-03-11 Jamie.Boyd@cern.ch
+        * move the RecBackground to run before monitoring
+        * tagging RecExCommon-00-12-61
+
+2011-03-11 Ilija Vukotic <ilija@vukotic.me>
+  * Change naming scheme of perfmon and chronostat files.
+  * tagging RecExCommon-00-12-60
+
+2011-03-07 Walter Lampl <walter.lampl@ cern.ch>
+  * Add hook to run Fast Physics Monitoring
+    (using new rec-flag doFastPhysMonitoring)
+  * tagging RecExCommon-00-12-59
+
+2011-03-01 Jamie.Boyd@cern.ch
+        * move the RecBackground to run before ESD is written out
+        * tagging RecExCommon-00-12-58
+
+2011-02-15 Jamie.Boyd@cern.ch
+  * add in call to RecBackground jo (for background wordfilling)
+  * tagging RecExCommon-00-12-57
+
+2011-02-15  Rolf Seuster <seuster AT cern.ch>
+  * small fix for running in the AtlasReconstruction project
+  * tagging RecExCommon-00-12-56
+
+2011-02-10  Rolf Seuster <seuster AT cern.ch>
+  * new scheme to configure trigger, and fill ItemLists
+  * tagging RecExCommon-00-12-55
+
+2011-02-07  Rolf Seuster <seuster AT cern.ch>
+        * update reference file for ATN test once more
+  * propagate ByteStreamMetadata to ESD and AOD (o.b.o. Peter vG)
+  * tagging RecExCommon-00-12-54
+
+2011-02-07 Walter Lampl <walter.lampL@ cern.ch>
+        * RecoUtils.py: Activate optimized pool-root writing by adding
+    "ContainerName='TTree=CollectionTree'; TREE_AUTO_FLUSH ='-30000000'"
+    to the POOL attributes.
+  * tagging RecExCommon-00-12-53
+
+2011-01-26  Rolf Seuster <seuster AT cern.ch>
+  * update reference file for ATN test
+  * tagging RecExCommon-00-12-52
+
+2011-01-19  Karsten Koeneke  <kkoeneke@lxplus302.cern.ch>
+
+  * share/RecExCommon_topOptions.py: Implement the ESD bookkeeping for the new PrimaryDPDMaker-00-03-59
+  M          340541   share/RecExCommon_topOptions.py
+  M          340541   ChangeLog
+  * RecExCommon-00-12-51
+
+2010-12-24  David Rousseau  <droussea@lxbuild084.cern.ch>
+
+  * share/RecExCommon_topOptions.py: call AODFix after
+  RecExCommon_flags
+  * RecExCommon-00-12-50
+
+2010-12-23  David Rousseau  <droussea@lxbuild084.cern.ch>
+
+  * share/CBNT_config.py (logCBNT_config): remove tau CBNT algorithm
+  * RecExCommon-00-12-49
+
+
+2010-12-11 Rolf Seuster <seuster AT cern.ch>
+  * CombinedRec_Config.py, SystemRec_config.py, RecExCommon_topOptions.py: call hooks for AODFix in any case, even if subsystem off
+  * add metadata inside AODFix
+  * remove ObjMissingET
+  * RecExCommon-00-12-48
+
+2010-12-09 Rolf Seuster <seuster AT cern.ch>
+  * CombinedRec_Config.py, SystemRec_config.py, RecExCommon_topOptions.py: add hooks for AODFix
+  * RecExCommon-00-12-47
+
+2010-12-07  David Rousseau  <droussea@lxbuild084.cern.ch>
+
+  * share/RecExCommon_topOptions.py: do not redo AODCellContainer if
+  reading AOD
+  * RecExCommon-00-12-46
+
+2010-12-04 David Cote <david.cote@cern.ch>
+  * Removed problematic if doWriteESD/AOD() for LumiBlocks in RecExCommon_topOptions
+    hence fixing bug #75941
+  * RecExCommon-00-12-45
+
+2010-11-30 Rolf Seuster <seuster AT cern.ch>
+  * correct filename in bstoesd.py
+  * RecExCommon-00-12-44
+
+2010-11-26 Rolf Seuster <seuster AT cern.ch>
+  * correct email address for ATN test
+  * RecExCommon-00-12-43
+
+2010-11-17 Walter Lampl <Walter.lampl@ cern.ch>
+  * share/SystemRec_config.py: Run Calo Reconstruction before Inner Detector reconstruction
+    (Reason: Some Heavy Ion background events cause out-of-mem in InDetReco. Calo info is useful to
+     identify those and skip part of Inner Detector reconstruction)
+  * RecExCommon-00-12-42
+
+2010-11-03  David Rousseau  <droussea@lxbuild084.cern.ch>
+
+  * test/RecExCommon_TestConfiguration.xml: change auto email
+  * RecExCommon-00-12-41
+
+2010-10-20 Rolf Seuster <seuster AT cern.ch>
+  * savannah 74013, change WARNING to ERROR, except only AtlasTrigger or AtlasReconstruction project
+  * RecExCommon-00-12-40
+
+2010-10-05 David Cote <david.cote@cern.ch>
+  * Removed forgotten svcMgr.CutFlowSvc.OutputLevel=DEBUG in RecExCommon_topOptions
+  * RecExCommon-00-12-39
+
+2010-10-01 David Cote <david.cote@cern.ch>
+  * Added protection against python traceback in RAW->DRAW (related to DESD pass-through mode)
+  * RecExCommon-00-12-38
+
+2010-10-01 David Cote <david.cote@cern.ch>
+  * Added protection for DESD pass-through mode in AtlasTrigger standalone
+  * RecExCommon-00-12-37
+
+2010-09-28 David Cote <david.cote@cern.ch>
+  * Added EventSelector.Counter, with further cleaning of EventBookkeeper configuration in RecExCommon_topOptions
+  * RecExCommon-00-12-36 (requires EventBookkeeperTools-00-00-37)
+
+2010-09-27  David Rousseau  <droussea@lxbuild084.cern.ch>
+  * share/RecExCommon_topOptions.py : do not trace
+  MultipleStreamManager.py, write millions of lines
+  * RecExCommon-00-12-35
+
+2010-09-23 David Cote <david.cote@cern.ch>
+  * Modified RecExCommon_topOptions to use only new mechanism (CutFlowSvc) for EventBookkeepers,
+    while keeping the old mechanism for SkimDecisions,
+    and supporting all current functionalities including DPD pass-through mode.
+  * RecExCommon-00-12-34 (requires RecExConfig-00-02-61)
+
+2010-09-22 Walter Lampl <walter.lampl@cern.ch>
+  * Check if AllPhotonsClusers exist before calling addClusterToCaloCellAOD("AllPhotonsClusters")
+    (fix #72892)
+  * tag  RecExCommon-00-12-33
+
+2010-09-21 David Cote <david.cote@cern.ch>
+  * Added D2PDFlags in RecoUsefulFlags.py (not tagged)
+
+2010-09-16 David Cote <david.cote@cern.ch>
+  * Removed DAOD pass through mode altogether, and edited DESD pass-through to NOT happen if readESD
+  * tagging RecExCommon-00-12-32
+
+2010-09-17  David Rousseau  <droussea@lxbuild084.cern.ch>
+
+  * share/RecExCommon_topOptions.py : schedule space point building
+  if JiveXML activated
+  * tagging RecExCommon-00-12-31
+
+2010-09-16 David Cote <david.cote@cern.ch>
+  * Introduced CutFlowSvc usage if doDPD()=True in RecExCommon_topOptions, using a parallel EB collection for now
+  * tagging RecExCommon-00-12-30 (requires EventBookkeeperTools-00-00-28)
+
+
+2010-09-14 Rolf Sesuter <seuster AT cern.ch>
+  * tagging RecExCommon-00-12-29
+  * share/RecExCommon_topOptions.py: retire TAGCOM and print warning if requsted
+
+2010-08-30  David Rousseau  <droussea@lxbuild084.cern.ch>
+
+  * tagging RecExCommon-00-12-28
+  * share/bstoesd.py: change default input file again
+
+2010-08-27  David Rousseau  <droussea@lxbuild084.cern.ch>
+
+  * tagging RecExCommon-00-12-27
+  * share/bstoesd.py: change default input file
+
+  * tagging RecExCommon-00-12-26
+  * run/manyrecotests.sh: default output bs file name has
+  changed. Fix input file name.
+
+
+2010-08-20  Sebastien Binet  <sebastien.binet@cern.ch>
+
+  * tagging RecExCommon-00-12-24
+  * updating athfile cache for new RDO file w/ ATLAS-GEO-10-00-00
+  * M data/recexcommon-afserver-cache.ascii
+
+2010-08-19  Sebastien Binet  <binet@voatlas51.cern.ch>
+
+  * tagging RecExCommon-00-12-23
+  * do not enable algsequence timeout when a debugger has been requested
+  * M share/RecExCommon_topOptions.py
+
+2010-08-05 Rocco Mandrysch <rocco.mandrysch AT cern.ch>
+  * add new RDO file with ATLAS-GEO-10-00-00 in recexcommon-links.py
+  * tagging RecExCommon-00-12-22
+
+2010-07-29  David Rousseau  <droussea@lxbuild084.cern.ch>
+
+  * share/RecExCommon_topOptions.py : update excludeTracePattern to
+  keep athena -s log file reasonable
+  * tagging RecExCommon-00-12-21
+
+2010-07-12 David Cote <david.cote@cern.ch>
+  * Moved EventBookkeeperMetaDataTool outside the DPD section of RecExCommon_topOptions, to be effective also during DESD merging (bug fix!)
+  * tagging RecExCommon-00-12-20
+
+2010-06-30 David Cote <david.cote@cern.ch>
+  * Updated DPD EventBookkeeper part for Cycle info in RecExCommon_topOptions.py
+  * tagging RecExCommon-00-12-19
+
+2010-06-24 David Cote <david.cote@cern.ch>
+  * New attempt to add AthenaPoolCnvSvc.CommitInterval=1000000000 as default for all cases, this time in RecoUtils.py
+  * Added try/except protection for FPEAuditor in RecoUtils
+  * tagging RecExCommon-00-12-18
+
+2010-06-23 Rolf Seuster <seuster AT cern.ch>
+  * add FPEAuditor by default - to be made more configurable
+  * tagging RecExCommon-00-12-17
+
+2010-06-23 David Cote <david.cote@cern.ch>
+  * Added AthenaPoolCnvSvc.CommitInterval=1000000000 as default for all cases, in RecExCommon_topOptions.py
+  * tagging RecExCommon-00-12-16
+
+2010-06-09  David Rousseau  <droussea@lxbuild084.cern.ch>
+
+  * share/RecoUtils.py : set svcMgr.AthenaPoolCnvSvc.PoolAttributes
+  += [  "TREE_BRANCH_OFFSETTAB_LEN ='100'" ]
+   This was set in RecExCommo_topOptions.py only when readin pool
+   file, when it should be set also when reading BS writing pool
+   file. Saves 50MB memory for RAWtoESD.
+   * tagging RecExCommon-00-12-15 (note: tag -00-12-14 doesn't exist)
+
+2010-05-31  David Rousseau  <droussea@lxbuild084.cern.ch>
+
+  * Testing/Reference_RecExCommonTesting.log : update reference
+   * tagging RecExCommon-00-12-13
+
+2010-05-28  David Rousseau  <droussea@lxbuild084.cern.ch>
+
+  * share/RecoUsefulFlags.py: import CaloCellFlags
+  * tagging RecExCommon-00-12-12
+
+
+2010-05-20 Rolf Seuster <seuster AT cern.ch>
+  * revert Rocco's change
+  * increase default max size of pool files to 10 GB
+  * tagging RecExCommon-00-12-11
+
+2010-05-12 Rocco Mandrysch <rocco.mandrysch@cern.ch>
+  * update RDO input file in recexcommon-links.py
+  * tagging RecExCommon-00-12-10
+
+2010-05-11  David Rousseau  <droussea@lxbuild084.cern.ch>
+
+  * share/RecExCommon_topOptions.py : item from
+  OKS_StreamAOD_fromESD that are not available in input file are
+  dropped (Scott Snyder 67233)
+        * tagging RecExCommon-00-12-09
+
+2010-04-29 Rolf Seuster <seuster AT cern.ch>
+  * change the configuration for the LArRawDataContByteStreamTool
+        * tagging RecExCommon-00-12-08
+
+2010-04-27 David Cote <david.cote@cern.ch>
+  * Removed unnecessary try: statement in DPD section line 1153 of RecExCommon_topOptions
+        * tagging RecExCommon-00-12-07
+
+2010-04-14 David Cote <david.cote@cern.ch>
+  * Added protection if rec.DPDMakerScripts()!=[] in bottom DPD part of RecExCommon_topOptions.
+    This is safer now with doDPD=True by default and has always been the spirit of this part anyways.
+        * tagging RecExCommon-00-12-06
+
+2010-04-14  David Rousseau  <droussea@lxbuild084.cern.ch>
+
+  * Testing/Reference_RecExCommonTesting.log: update
+        * tagging RecExCommon-00-12-05
+
+2010-04-09 David Cote <david.cote@cern.ch>
+  * Replaced treatException("Could not load RawInfoSummaryForTagWriter_joboptions !" ) by logRecExCommon_topOptions.warning
+        * tagging RecExCommon-00-12-04
+
+2010-04-08 David Cote <david.cote@cern.ch>
+  * typo fix to add DAOD SkimDecisions to the AOD
+        * tagging RecExCommon-00-12-03
+
+2010-04-08 David Cote <david.cote@cern.ch>
+        * share/RecExCommon_topOptions.py: Add DAOD SkimDecisions to the AOD (from Karsten Koeneke)
+        * tagging RecExCommon-00-12-02
+
+2010-04-08 Rolf Seuster <seuster AT cern.ch>
+  * add protections against including DPD maker jobOptions
+  * tagging RecExCommon-00-12-01
+
+2010-04-05 Rolf Seuster <seuster AT cern.ch>
+  * correct logic for including RawInfoSummaryForTagWriter_jobOptions.py
+  * tagging RecExCommon-00-12-00
+
+2010-03-31 Rolf Seuster <seuster AT cern.ch>
+  * better name for new flag in RecExConfig for inclusion of RawInfoSummaryForTagWriter_jobOptions.py when writing ESDs
+  * tagging RecExCommon-00-11-99
+
+2010-03-31 Rolf Seuster <seuster AT cern.ch>
+  * include RawInfoSummaryForTagWriter_jobOptions.py when writing ESDs
+  * tagging RecExCommon-00-11-98
+
+2010-03-19  David Rousseau  <droussea@lxbuild084.cern.ch>
+
+  * test/RecExCommon_TestConfiguration.xml: prefix ATN RecExCommon
+  with RECOSHIFT
+  * tagging RecExCommon-00-11-97
+
+2010-03-17  David Rousseau  <droussea@lxbuild084.cern.ch>
+
+  * share/RecoUtils.py : really enable detailed perfmon when
+  rec.doDetailedPerfMon
+  * tagging RecExCommon-00-11-96
+
+2010-03-15 Rolf Seuster <seuster AT cern.ch>
+        * share/SystemRec_config.py: include ForwardRec_jobOptions.py
+  * tagging RecExCommon-00-11-95
+
+2010-03-10 Michael Boehler <michael.boehler@cern.de>
+        * m share/RecExCommon_topOptions.py: added triggerStreamOfFile to TagInfo
+  * tagging RecExCommon-00-11-94
+
+2010-03-08  David Rousseau  <droussea@lxbuild084.cern.ch>
+
+  * share/CBNT_config.py : use InDetPriVxCBNT_jobOptions.py only for collisions
+  * tagging RecExCommon-00-11-93
+
+2010-03-05 Rolf Seuster <seuster AT cern.ch>
+  * from -89-branch
+  * share/RecExCommon_topOptions.py : write StreamRDO instead of Stream1
+  * tagging RecExCommon-00-11-92
+
+2010-02-26 David Cote <david.cote@cern.ch>
+  * Removed requirement that no DPDMaker is requested for DPD pass through mode, not necessary with PrimaryDPDMaker-00-02-65.
+  * tagging RecExCommon-00-11-91
+
+2010-02-25 David Cote <david.cote@cern.ch>
+  * Added "D1PD pass through mode" during RAW->ESD when doDPD=True and no DPDMaker is requested
+  (requires PrimaryDPDMaker-00-02-63+OutputStreamAthenaPool-00-02-20), also propagate SkimDecision container to AOD.
+  * Added try: protection to objKeyStore.addManyTypesInputFile(inputFileSummary['eventdata_itemsList']) in RecExCommon_topOptions.py
+  * tagging RecExCommon-00-11-90
+
+2010-02-05  David Rousseau  <droussea@lxbuild084.cern.ch>
+
+  * share/RecoUtils.py : use default athena limit on file size
+  (effectively decrease max output size from 15Gb to 5GB, to be
+  coupled with AthenaPoolCnvSvc-00-16-10
+  * tagging RecExCommon-00-11-88
+
+2010-01-14  David Rousseau  <droussea@lxbuild084.cern.ch>
+
+  * share/RecExCommon_doall.sh : remove gcc34Default from default
+  requirement file
+  * tagging RecExCommon-00-11-87
+
+2010-01-13 Michael Boehler <michael.boehler@cern.de>
+        * m share/RecExCommon_topOptions.py: added project_name to TagInfo (this is needed to run autoConfiguration=everything without COOL peeking)
+  * tagging RecExCommon-00-11-86
+
+
+2010-01-04  Sebastien Binet  <binet@farnsworth>
+
+  * tagging RecExCommon-00-11-85
+  * fixing regression wrt symlinks and copies of myTopOptions.py
+  * M share/recexcommon-links.py
+
+2009-12-18  David Rousseau  <droussea@lxbuild084.cern.ch>
+
+  * share/myTopOptions.py: revise completely
+  * tagging RecExCommon-00-11-81
+
+2009-12-18  Sebastien Binet  <binet@farnsworth>
+
+  * tagging RecExCommon-00-11-80
+  * update athfile-cache file
+  * replace all xyz_links.[c]sh scripts with a python one
+  * add a first version of manyrecotests.sh in python
+  * A Testing/many-reco-tests.py
+  * M share/recexcommon-links.py
+  * M share/RecExCommon_links.csh
+  * M share/RecExCommon_links.sh
+  * M cmt/requirements
+  * M data/recexcommon-afserver-cache.ascii
+
+2009-12-10 Michael Boehler <michael.boehler@cern.de>
+  * added to share/RecoUsefulFlags.py: from AthenaCommon.BFieldFlags import jobproperties and from InDetRecExample.InDetJobProperties import InDetFlags
+  * tagging RecExCommon-00-11-79
+
+2009-12-08  Rolf Seuster <seuster AT cern.ch>
+  * share/BSRead_config.py, remove obsolete trigger item (L2Result)
+  * tagging RecExCommon-00-11-78
+
+2009-12-08  David Rousseau  <droussea@lxbuild084.cern.ch>
+
+  * share/RecExCommon_doall.sh : fix autosetting cmthome requirement
+  for 15.6.X
+
+
+2009-12-07  David Cote <david.cote@cern.ch>
+  * Added MSMgr.AddItemToAllStreams("SkimDecisionCollection#DESD_COLLCAND_SkimDecisionsContainer") in RecExCommon_topOptions
+  * tagging RecExCommon-00-11-77
+
+2009-11-29  David Rousseau  <droussea@lxbuild084.cern.ch>
+
+  * share/RecExCommon_topOptions.py: protect disabling of athfile cache
+
+
+2009-11-25  David Rousseau  <droussea@lxbuild084.cern.ch>
+
+  * tagging RecExCommon-00-11-75
+  * share/RecExCommon_topOptions.py : disable athfile caching
+
+2009-11-23  Sebastien Binet  <binet@lxplus301.cern.ch>
+
+  * tagging RecExCommon-00-11-74
+  * apply timeout modifications to AlgSequence
+  * M share/RecExCommon_topOptions.py
+
+2009-11-20  David Rousseau  <droussea@lxplus209.cern.ch>
+
+  * share/RecExCommon_topOptions.py: more robust if no input file in
+  flags (for RTT)
+
+2009-11-19  David Rousseau  <droussea@lxbuild084.cern.ch>
+
+  * share/RecExCommon_topOptions.py : fix for trigger track ntuple
+  (obo clemencia/jiri)
+  * tagging RecExCommon-00-11-72
+
+
+2009-11-18  David Rousseau  <droussea@lxbuild084.cern.ch>
+
+  * share/BSRead_config.py: add ZDC
+  * tagging RecExCommon-00-11-71
+
+2009-11-16 Michael Boehler <michael.boehler@cern.de>
+  * added to share/RecExCommon_topOptions.py write beam_type and beam_energy into output file
+  * tagging RecExCommon-00-11-70
+
+
+2009-11-15  David Rousseau  <droussea@lxbuild084.cern.ch>
+
+  * share/RecExCommon_topOptions.py : use
+  svcMgr.ByteStreamAddressProviderSvc rather than ByteStreamAddressProviderSvc
+  * tag RecExCommon-00-11-69
+
+2009-11-13  David Rousseau  <droussea@lxplus215.cern.ch>
+
+  * share/RecExCommon_topOptions.py : typo when doing RDO to RDO
+
+2009-11-12  David Rousseau  <droussea@lxbuild084.cern.ch>
+
+  * share/RecExCommon_topOptions.py : add lucid in output
+
+  * share/RecExCommon_doall.sh : adapt to 15.5 15.6
+
+  * share/RecExCommon_topOptions.py : no warning if no trigger flags
+
+2009-11-09  David Rousseau  <droussea@lxbuild084.cern.ch>
+
+  * share/BSRead_config.py: ByteStreamInputSvc.ProcessBadEvent=True if isOnline or rec.readTAG
+
+2009-11-09 Thomas Kittelmann <thomas.kittelmann@cern.ch>
+  * Fixes for rec.doVP1 flag: No longer ignore it in non-commisioning mode and
+  disable alg timeout when set.
+
+2009-11-09 Michael Boehler <michael.boehler@desy.de>
+  * bugfix in share/RecExCommon_topOptions.py more protection for backward compatibility: added StreamRDO_FH, StreamESD_FH and StreamAOD_FH
+  * tagging RecExCommon-00-11-64
+
+
+2009-11-09 Michael Boehler <michael.boehler@desy.de>
+  * bugfix in share/RecExCommon_topOptions.py fixing problem in TCT with AOD/DPD merging
+  * tagging RecExCommon-00-11-63
+
+2009-11-06 Michael Boehler <michael.boehler@desy.de>
+  * modified share/RecExCommon_topOptions.py
+  * updated StreamRDO, StreamESD and StreamAOD using MSMgr (StreamRDO_augmented)
+  * MSMgr needed to be updated -> OutputStreamAthenaPool-00-02-06 is required
+  * tagging RecExCommon-00-11-62
+
+2009-11-05  Adrien Renaud  <arenaud@lxplus230.cern.ch>
+
+  * tagging RecExCommon-00-11-61
+  * adding try for PerfMonDomain in PrintRecoSummary.py
+
+2009-11-05  Adrien Renaud  <arenaud@lxplus230.cern.ch>
+
+  * tagging RecExCommon-00-11-60
+  * adding try for PerfMonDomain in PrintRecoSummary.py
+
+2009-11-03  Adrien Renaud  <arenaud@lxplus230.cern.ch>
+
+  * tagging RecExCommon-00-11-59
+  * adding domain flags
+
+2009-11-02  David Rousseau  <droussea@lxbuild084.cern.ch>
+
+  * share/RecoUsefulFlags.py: import muonCnvFlags
+
+
+2009-10-29  David Cote <david.cote@cern.ch>
+  * Modified MSMgr.CreateEventBookkeepersWriterForAllFilters(rec.doTruth()), in RecExCommon_topOptions.py
+  * tag RecExCommon-00-11-57 (requires EventBookkeeperTools-00-00-20 + OutputStreamAthenaPool-00-02-05)
+
+2009-10-26  David Rousseau  <droussea@lxbuild084.cern.ch>
+
+  * share/RecExCommon_topOptions.py : add cells from AllPhotonsClusters
+
+2009-10-23 Michael Boehler <michael.boehler@desy.de>
+  * m share/PrintRecoSummary.py added output for Trf JobReport -> metaData.xml
+  * tag RecExCommon-00-11-55
+
+2009-10-22  David Rousseau  <droussea@lxbuild084.cern.ch>
+  * share/RecExCommon_topOptions.py : remove obsolete runTriggerFirst
+
+  * Testing/manyrecotests.sh: fix all reco test (AOD were not made)
+               : rdotobs : need to force trigger enable. fix bs to
+               esd (not working yet)
+
+  * share/RecoUtils.py : less WARNING and ERROR string
+
+
+  * share/RecExCommon_topOptions.py : uncomment trigger config lines
+
+2009-10-21 David Cote  <david.cote@cern.ch>
+  * Use new rec.mergingStreamName flag for pool file merging, hence fixing a problem with DPD merging
+  * Added EventBookkeepers already at ESD and AOD level, for the basics
+  * Added DetStatusSvc_ToFileMetaData.py in DPD
+  * tag RecExCommon-00-11-52 (requires RecExConfig-00-01-88)
+
+2009-10-15  David Rousseau  <droussea@lxbuild084.cern.ch>
+
+  * share/RecExCommon_topOptions.py : no trigger if rec.doTrigger=False
+
+
+2009-10-12  David Rousseau  <droussea@lxbuild084.cern.ch>
+
+  * share/RecExCommon_topOptions.py: fix for trigger monitroing at
+  ESD stage
+
+
+2009-10-09  David Rousseau  <droussea@lxbuild084.cern.ch>
+
+  * share/RecExCommon_topOptions.py : first fix to rading BS with TAG
+
+
+2009-10-07 David Cote  <david.cote@cern.ch>
+  * Added ProcessBadEvent=True as default in BSRead_config.py
+  * tag RecExCommon-00-11-38
+
+2009-09-28  David Rousseau  <droussea@lxbuild084.cern.ch>
+
+  * share/RecoUsefulFlags.py: add btagging flags
+
+2009-09-28  David Rousseau  <droussea@lxbuild084.cern.ch>
+
+  * share/RecoUsefulFlags.py: more muon flags (obo MartinW)
+
+
+2009-09-23  David Rousseau  <droussea@lxbuild084.cern.ch>
+
+  * share/BSRead_config.py : fix lucid reading
+
+
+2009-09-17  David Rousseau  <droussea@lxbuild084.cern.ch>
+
+  * share/RecoUsefulFlags.py: import muon flags
+
+  * share/RecExCommon_doall.sh : adapt to 15.4.X.Y and higher
+
+2009-09-16 Walter Lampl <walter.lampl@cern.ch>
+  * RecExCOmmission_topOptions: Set up DetectorDescription in the same way
+    (include RecExCond/AllDet_detDescr.py) independent from the rec.Commissioning
+    flag.
+  * tag RecExCommon-00-11-32
+
+2009-09-14  David Rousseau  <droussea@lxplus230.cern.ch>
+
+  * Testing/Reference_RecExCommonTesting.log: update
+
+2009-08-27  David Rousseau  <droussea@lxbuild084.cern.ch>
+
+  * share/RecExCommon_topOptions.py : update excludeTracePattern
+
+2009-08-22  David Rousseau  <droussea@lxbuild084.cern.ch>
+
+  * share/BSRead_config.py (svcMgr): add LUCID reading
+
+2009-08-21  David Rousseau  <droussea@lxbuild084.cern.ch>
+
+  * share/BSRead_config.py : protect lvl1 bs if no trigger
+
+  * share/PrintRecoSummary.py: less impressive Traceback if cannot
+  pickle configuration
+  e
+2009-08-20  David Rousseau  <droussea@lxbuild084.cern.ch>
+
+  * share/RecExCommon_topOptions.py (topSequence): add
+          svcMgr.AthenaPoolCnvSvc.PoolAttributes += [
+          "TREE_BRANCH_OFFSETTAB_LEN ='100'" ]
+  to save in memory
+
+  * share/RecoUtils.py (theAuditorSvc): abort on error message optionally
+
+2009-08-13 Michael Boehler <michael.boehler@desy.de>
+  * changed share/RecExCommon_topOptions.py using JiveXML/JiveXML_RecEx_config.py now
+  * This change requires JiveXML-01-02-07 (bundle needed)
+  * tag RecExCommon-00-11-23
+
+2009-08-13 Michael Boehler <michael.boehler@desy.de>
+  * code cleaning: removed ATLASCosmicFlags from share/JiveXML_config.py
+  * tag RecExCommon-00-11-22
+
+
+2009-07-29  David Rousseau  <droussea@lxbuild084.cern.ch>
+
+  * Testing/manyrecotests.sh: typo PoolRDOInput wrongly specified in
+  some case
+
+  * Testing/manyrecotests_noautoconf.sh: test the old way without autoconf
+
+
+2009-07-23  David Rousseau  <droussea@lxbuild084.cern.ch>
+
+  * share/RecExCommon_topOptions.py : no slimming if AOD to AOD
+
+
+2009-07-23 Michael Boehler <michael.boehler@desy.de>
+  * bug fix: share/RecExCommon_topOptions.py
+             fixed typo: TriggerFlags.NtupleProductionFlags.ProduceNtuples() to
+                   TriggerFlags.NtupleProductionFlags.produceNtuples()
+  * tag RecExCommon-00-11-20
+
+
+2009-07-22 Michael Boehler <michael.boehler@desy.de>
+  * code cleaning: share/RecExCommon_topOptions.py cleaned from ATLASCosmicFlags
+  * tag RecExCommon-00-11-18
+
+
+2009-07-21 Michael Boehler <michael.boehler@desy.de>
+  * migrated python/GetCool.py to RecExConfig
+  * tag RecExCommon-00-11-16
+
+
+  * share/RecExCommon_topOptions.py : change conditions for
+  TriggerNtupleProduction (Clemencia)
+
+  * share/CBNT_config.py : protect if no trigger
+
+2009-07-21 Michael Boehler <michael.boehler@desy.de>
+  * migrated python/GetCool.py to RecExConfig
+  * tag RecExCommon-00-11-16
+
+2009-07-20  David Rousseau  <droussea@lxbuild084.cern.ch>
+
+  * share/RecExCommon_topOptions.py : do not test onTriggerFlags if rec.doTrigger=False
+
+
+2009-07-17 Michael Boehler <michael.boehler@desy.de>
+  * migrated AutoConfiguration.py to RecExConfig
+  * modified python/GetCool.py using RecExConfig.AutoConfiguration now
+  * tag RecExCommon-00-11-14
+
+
+2009-07-17 Walter Lampl <walter.lampl@cern.ch>
+  * RecExCommission_topOptions.py & BSRead_config.py: Clean up ByteStream reading configuration
+  * tag RecExCommon-00-11-13
+
+2009-07-17 David Cote <david.cote@cern.ch>
+  * Sorry! Previous tag was committed too quick and was buggy...  :-/
+    In the end, I switched to an import cool method. Now this works.
+  * tag RecExCommon-00-11-12
+
+2009-07-17 David Cote <david.cote@cern.ch>
+  * In Autoconfiguration: Simplified again the handling of cool query.
+    Should now be done only if necessary (and so not when reading MC)
+  * tag RecExCommon-00-11-11
+
+2009-07-16  David Rousseau  <droussea@lxbuild084.cern.ch>
+
+  * python/AutoConfiguration.py : fix TAG reading
+
+2009-07-16 David Cote <david.cote@cern.ch>
+  * Typo fix in metaDataItemList=inputFileSummary['metadata_itemsList'] in RecEx_topOptions, to be coherent with RecExConfig-00-01-54)
+  * tag RecExCommon-00-11-09
+
+2009-07-15 David Cote <david.cote@cern.ch>
+  * Added trigger ntuple in RecExCommon_topOptions (from Clemencia Mora)
+  * tag RecExCommon-00-11-08
+
+2009-07-15 David Cote <david.cote@cern.ch>
+  * More improvements of auto-configuration
+    -Now execute auto-configuration functions in a pre-defined order
+    -Fix in DoTruth to use eventdata_itemsList rather than no longer existing eventdata_itemsDic
+    -Query cool only once in a more transparent way (was the case before, but cumbersomely)
+    -Improvements of printouts
+  * tag RecExCommon-00-11-07
+
+2009-07-14 David Cote <david.cote@cern.ch>
+  * Moved auto-configuration call to RecExCommon_flags.py
+  * Major changes in auto-configuration itself:
+    -New auto-config options: InputType (migrated from inputFilePeeker),ProjectName,RealOrSim and everything
+    -Trigger stream taken from input file when possible
+    -Various protections needed to pass tests with MC AOD/ESD, and data BS/ESD/AOD inputs
+    -Removed unused GuessProjectFromFileName
+    -Added a function to get TAG StreamRef (used by both inputFilePeeker and ConfigureInputType)
+  * tag RecExCommon-00-11-06 (requires RecExConfig-00-01-53 and RecExCond-00-01-99)
+
+2009-07-13 Michael Boehler <michael.boehler@desy.de>
+        * python/AutoConfiguration.py: changed ConfigureFieldAndGeo()
+    - only if input is BS --> cool is asked for B-Field
+    - if input is pool --> configuring B-Field with geometry
+  * tag RecExCommon-00-11-05
+
+2009-07-10 Rolf Seuster <seuster AT cern.ch>
+  * python/AutoConfiguration.py : small bug fix to IsInInputFile(collectionname,key=None) method
+  * tag RecExCommon-00-11-04
+
+2009-07-09  David Rousseau  <droussea@lxbuild084.cern.ch>
+
+  * share/CBNT_config.py: CBNT_TrackParticle also for commissioning
+
+
+2009-07-08  David Rousseau  <droussea@lxbuild084.cern.ch>
+
+  * share/xtoy.py: fix various copy fragments
+
+2009-07-06 Michael Boehler <michael.boehler@desy.de>
+  * removed RecExCommon.InputFilePeeker & RecExCommon.RecoFunctions
+  * tag RecExCommon-00-11-02
+
+2009-07-06 Michael Boehler <michael.boehler@desy.de>
+  * moved RecExCommon.InputFilePeeker & RecExCommon.RecoFunctions to RecExConfig (from AtlasReconstruction to AtlasEvent)
+  * updated all clients
+  * tag RecExCommon-00-11-01
+
+2009-06-30 David Cote <david.cote@cern.ch>
+  * switched back again to GEO-08 in AutoConfiguration FieldAndGeo
+  * tag RecExCommon-00-10-99
+
+2009-06-30 David Cote <david.cote@cern.ch>
+  * Changed syntax for algorithm time out to: aas = AlgSequence("AthAlgSeq"); aas.TimeOut=3600 * Units.s
+  * tag RecExCommon-00-10-98
+
+2009-06-29 Michael Boehler <michael.boehler@desy.de>
+  * added checking islocked()
+  * added auto configure doTruth if McCollection is in inputfile
+  * tag RecExCommon-00-10-97
+
+2009-06-26  David Rousseau  <droussea@lxbuild084.cern.ch>
+
+  * share/RecoUtils.py : log library size id doDetailedAuditor=True
+
+  * share/bstoesd.py : globalflags.InputFormat="bytestream" (was not
+  properly set) (Denis Damazio)
+
+2009-06-26 David Cote <david.cote@cern.ch>
+  * Reverted again to GEO-03/04 in AutoConfiguration FieldAndGeo
+  * tag  RecExCommon-00-10-94
+
+2009-06-26 David Cote <david.cote@cern.ch>
+  * InputFilePeeker loops over inputFiles until it finds a valid *non-empty* file, then fills inputFileSummary.
+  * tag RecExCommon-00-10-93
+
+2009-06-26  David Rousseau  <droussea@lxbuild084.cern.ch>
+
+  * share/CBNT_config.py: no egamma if no id (only photon)
+
+2009-06-25 David Cote
+  * python/inputFilePeeker loops over all input files until it finds a valid file (from David CRousseau)
+  * python/autoconfiguration use again the -08 geometry
+  * tag RecExCommon-00-10-92
+
+2009-06-24 Michael Boehler <michael.boehler@desy.de>
+        * python/InputFilePeeker.py: replaced "RunTimeError" by error message
+    * tag RecExCommon-00-10-91
+
+2009-06-23 Michael Boehler <michael.boehler@desy.de>
+  * python/AutoConfiguration.py : change geometry values back to old version
+  * fix bug 52162 with exception statement to check RunNumber in inputFileSummary
+  * tag RecExCommon-00-10-90
+
+2009-06-21  David Rousseau  <droussea@lxbuild084.cern.ch>
+
+  * python/AutoConfiguration.py : change geometry values (NOTE :
+  also for 2008 data, not completely sure this is the right thing)
+  * tag RecExCommon-00-10-88
+
+2009-06-19 Michael Boehler <michael.boehler@desy.de>
+  * added "data08_calocomm","data08_muoncomm","data09_calocomm","data09_muoncomm" to list of KnownCosmicsProjects
+  * tag RecExCommon-00-10-88
+
+2009-06-18  David Rousseau  <droussea@lxbuild084.cern.ch>
+
+  * python/InputFilePeeker.py : navigate from TAG to physical file
+
+2009-06-14 Rolf Seuster <seuster AT cern.ch>
+  * python/AutoConfiguration.py : add IsInInputFile(collectionname,key=None) method
+  * tag RecExCommon-00-10-86
+
+2009-06-12  David Rousseau  <droussea@lxbuild084.cern.ch>
+
+  * share/RecExCommon_doall.sh : fix for 15.1 15.2 15.3
+
+2009-06-10  David Rousseau  <droussea@lxbuild084.cern.ch>
+
+  * share/RecExCommon_topOptions.py: use of FilesInput
+
+2009-06-10 Michael Boehler <michael.boehler@desy.de>
+  * add in AutoConfiguration.py log entries for each auto configured item
+  * tag RecExCommon-00-10-84
+
+2009-06-03 Walter Lampl <walter.lampl@ cern.ch>
+  * RecExCommon_topOptions.py: Use RecoGeometry also for commissioning
+    (saves memory)
+  * tag RecExCommon-00-10-82
+
+2009-05-28  Sebastien Binet  <binet@farnsworth>
+
+  * tagging RecExCommon-00-10-81
+  * adding a cache of AthFiles for testing purposes
+  * A data/recexcommon-afserver-cache.ascii
+  * A share/recexcommon-links.py
+  * M cmt/requirements
+
+2009-05-16  David Rousseau  <droussea@lxbuild084.cern.ch>
+
+  * python/AutoConfiguration.py : protect if input file not specified
+
+2009-05-14 Michael Boehler <michael.boehler@desy.de>
+  * bugfix AutoConfiguration.py - doTruth is turned off if NO McEventCollection is available
+  * Tag RecExCommon-00-10-78
+
+
+2009-05-11  David Rousseau  <droussea@lxbuild084.cern.ch>
+
+  * share/CBNT_config.py : put back CBNTAA_eflow
+  * update reference log file
+
+
+
+2009-05-07 Michael Boehler <michael.boehler@desy.de>
+  * add Meta data Item List to inputFileSummary (in InputFilePeeker)
+  * bugfix AutoConfiguration.py - excetion handler added
+  * modified share/RecExCommon_topOptions.py - DPD Maker uses inputFileSummary
+  * Tag RecExCommon-00-10-76
+
+
+2009-05-06  David Rousseau  <droussea@lxbuild084.cern.ch>
+
+  * share/RecExCommon_topOptions.py : alg timeout
+
+  * share/CBNT_config.py : no CBNTAA_eflow given unchecked sc:
+
+2009-05-06  David Rousseau  <droussea@lxbuild084.cern.ch>
+
+  * share/RecExCommon_topOptions.py : make AOD cell container if
+  doAOD (from karsten k)
+
+
+2009-05-05 Michael Boehler <michael.boehler@desy.de>
+  * bugfix AutoConfiguration.py in ConfigureDoTruth  - now using inputFileSummary['eventdata_itemsDic']
+  * modified all functions in AutoConfiguration - using inputFileSummary now
+  * Tag RecExCommon-00-10-74
+
+2009-05-04 Michael Boehler <michael.boehler@desy.de>
+  * mofify InputFilePeeker - using new AthFile from (PyUtils-00-05-00)
+  * add Meta data to inputFileSummary
+  * modify AutoConfiguration.py - using new inputFileSummary
+
+
+
+2009-04-29  David Rousseau  <droussea@lxbuild084.cern.ch>
+
+  * share/CBNT_config.py : no ObjMet MissingETSig cbnt
+
+2009-04-27  David Rousseau  <droussea@lxbuild084.cern.ch>
+
+  * Testing/manyrecotests.sh: add tagtocbnt test
+
+  * share/tagtocbnt.py (readTAG): fix tag to cbnt
+
+
+2009-04-27  Sebastien Binet  <binet@farnsworth>
+
+  * use factory functions rather than "ctor"s
+  * M python/InputFilePeeker.py
+
+2009-04-24 Michael Boehler <michael.boehler@desy.de>
+  * Added InputFilePeeker which provides the inputFileSummary
+  * modify AutoCinfiguration.py now uses partially the inputFileSummary
+  * Tag RecExCommon-00-10-70
+
+2009-04-21 David Cote <david.cote@cern.ch>
+  * Added more project tags for beamType autoConfig: "data09_idcomm","data09_calocomm","data09_muoncomm","data09_tilecomm","data09_larcomm"
+  * Tag RecExCommon-00-10-69
+
+2009-04-17 David Cote <david.cote@cern.ch>
+  * Migrated rec.UserExecs to use the standard from PyJobTransformsCore.trfutil import StringToExec used by preExec/postExec
+  * Tag RecExCommon-00-10-68
+
+2009-04-15 David Cote <david.cote@cern.ch>
+  * Added new known projects data09_xxx and EO_NOISE for beam type auto-configuration
+  * Tag RecExCommon-00-10-67
+
+2009-04-14 Max Baak <mbaak@cern.ch>
+  M share/RecExCommon_topOptions.py
+  * When isOnline=True, turn on dependency of THistSvc on athenacommonflags.doOnlineStateless flag.
+  * Depends on: AthenaCommon-02-15-16
+  * Tagging RecExCommon-00-10-66
+
+
+2009-04-15 Ketevi A. Assamagan <ketevi@bnl.gov>
+
+  * move track slimmers into StreamAOD
+
+2009-04-08  scott snyder  <snyder@bnl.gov>
+
+  * share/RecExCommon_topOptions.py: Fix loop over UserAlgs.
+
+2009-03-25  David Rousseau  <droussea@lxbuild084.cern.ch>
+
+  * share/RecExCommon_topOptions.py: introduce abortOnUncheckedStatusCode
+
+2009-03-18  David Rousseau  <droussea@lxbuild084.cern.ch>
+
+  * share/CBNT_config.py : no more doMergedTau
+
+
+2009-03-18 David Cote <david.cote@cern.ch>
+  * Removed if rec.Commissioning(): CaloTrkGeo = False
+    As far as I can tell, this has no effect at all...
+  * Tag RecExCommon-00-10-61
+
+
+2009-03-13  David Rousseau  <droussea@lxbuild084.cern.ch>
+
+  * share/RecExCommon_doall.sh : specify gcc34Default
+
+2009-03-12 David Cote <david.cote@cern.ch>
+  * Added TriggerStream option in python/AutoConfiguration (from Clemencia & Simon)
+  * Tag RecExCommon-00-10-59
+
+2009-03-04 Jamie Boyd <Jamie.Boyd@cern.ch>
+  * removed obsolete call to RecExCommissionFilteredESD_jobOptions.py from RecExCommon_topOptions.py
+  (FilteredESD dead in 15 - still need to get rid of the ATLASCosmicFlag.FilteredESD swicthes...)
+
+2009-03-02 Jamie Boyd <Jamie.Boyd@cern.ch>
+  * remove InDetCosmicRecExample references from CBNT_config.py (package is no longer)
+
+2009-02-20  David Rousseau  <droussea@lxbuild084.cern.ch>
+
+  * share/CombinedRec_config.py : run MissingET even if no calo RIO
+  (case of redoing missingET from AOD)
+
+  * share/RecExCommon_topOptions.py : more excludeTracePattern
+
+2009-02-16 David Cote <david.cote@cern.ch>
+  * Change to wild card for DPD metadata: MSMgr.AddMetaDataItemToAllStreams( "EventBookkeeperCollection#*" )
+  * Tag RecExCommon-00-10-53
+
+2009-02-11  David Rousseau  <droussea@lxbuild084.cern.ch>
+
+  * share/RecExCommon_links_zc.sh: change default input file
+
+2009-02-09 David Cote <david.cote@cern.ch>
+  * Tag RecExCommon-00-10-50 is a clone of RecExCommon-00-10-49 with runTriggerFirst=True (15.0.0 version)
+
+2009-02-06 Walter Lampl <walter.lampl@cern.ch>
+  * Fix name clash btw 'Configurable' Module and Class in RecExCommission_topOptions.py and PrintRecoSummary.py
+           set runTriggerFirst=False (14.X.0 version)
+  * Tag RecExCommon-00-10-49
+
+2009-02-05  David Rousseau  <droussea@lxbuild084.cern.ch>
+
+  * share/CBNT_config.py : use MuonCBNT_jobOptions.py all the time
+
+2009-02-04 David Cote <david.cote@cern.ch>
+  * tagged RecExCommon-00-10-46, a clone of RecExCommon-00-10-45 but with runTriggerFirst=False (i.e. release 14.5.Y)
+    (Put back runTriggerFirst=True afterwards at HEAD)
+
+2009-02-04 David Cote <david.cote@cern.ch>
+  * Generalized EventBookkeepers to bookkeep all DPD filters in RecExCommon_topOptions
+  * Changed to runTriggerFirst=True (i.e. release 15.0.0)
+  * Tag RecExCommon-00-10-45 (requires OutputStreamAthenaPool-00-01-47 and EventBookkeeperTools-00-00-07)
+
+2009-02-03 David Cote <david.cote@cern.ch>
+  * Updated EventBookkeeper treatment for DPD (requires EventBookkeeperTools-00-00-06).
+  * Updated auto-configured conditionsTag to new re-reprocessing values.
+  * Tag RecExCommon-00-10-43
+
+
+2009-01-30  David Rousseau  <droussea@lxbuild084.cern.ch>
+
+  * share/RecExCommon_topOptions.py : disable Configurable printing
+  if rec.Production
+
+
+2009-01-28  David Rousseau  <droussea@lxbuild084.cern.ch>
+
+  * share/RecoUsefulFlags.py: do not import muon flags until they
+  depend on order
+
+2009-01-28  David Rousseau  <droussea@lxbuild084.cern.ch>
+
+  * share/RecExCommon_doall.sh (TODO): adapt to 14.5.X
+
+
+
+2009-01-26 David Cote <david.cote@cern.ch>
+  * Moved TAG+TAGCOMM making+writing after DPD (i.e. at the end) in RecExCommon_topOptions.py.
+    This is necessary to fill a "Primary DPD word" in TAGs.
+  * Tag  RecExCommon-00-10-40
+
+2009-01-22  David Rousseau  <droussea@lxbuild084.cern.ch>
+
+  * share/CBNT_Truth_jobOptions.py : protect using of CBNTAA_HijingEventParams
+
+
+2009-01-21  David Rousseau  <droussea@lxbuild084.cern.ch>
+
+  * share/RecExCommon_topOptions.py : now run trigger first
+
+2009-01-14  David Rousseau  <droussea@lxbuild084.cern.ch>
+
+  * share/RecExCommon_links_zc.sh: use ppool_insertFileToCatalog.py
+  rather than ool_insertFileToCatalog
+
+
+2009-01-07  David Rousseau  <droussea@lxbuild084.cern.ch>
+
+  * share/bstoesd.py: remove hardcoded EvtMax
+
+2008-12-19  David Rousseau  <droussea@lxbuild084.cern.ch>
+
+  * python/AutoConfiguration.py : fix typo
+
+
+
+2008-12-18  David Rousseau  <droussea@lxbuild084.cern.ch>
+
+  * python/AutoConfiguration.py : fix removing of PHYSICS or DEBUG
+  from stream name
+
+
+
+2008-12-17  David Rousseau  <droussea@lxbuild084.cern.ch>
+
+  * share/RecExCommon_topOptions.py: use resilience in AthenaCOmmon
+
+2008-12-17  David Rousseau  <droussea@lxbuild084.cern.ch>
+
+  * python/RecoFunctions.py : InputFileNames to be replaced by RecExCond.RecFlagFunctions::inputFileNames
+
+
+2008-12-17  David Rousseau  <droussea@lxbuild084.cern.ch>
+
+  * share/RecExCommon_topOptions.py : disable TAG writing if could
+  not configure it
+
+
+2008-12-16  David Rousseau  <droussea@lxbuild084.cern.ch>
+
+  * share/bstoesd.py: fix input bs file name (again....)
+
+
+2008-12-10  David Rousseau  <droussea@lxbuild084.cern.ch>
+
+  * share/RecExCommon_topOptions.py (varInit): clean up
+    svcMgr.ByteStreamNavigationProviderSvc.TypeNames usage (from Peter van g)
+
+
+2008-12-04 David Cote <david.cote@cern.ch>
+  * Added LateEvents and debug_XXX trigger streams for conditionsTag autoconfiguration.
+  * Bug fix: take DPD metadata items from input file only if globalflags.InputFormat()=='pool'
+  * RecExCommon-00-10-19
+
+2008-12-03 David Cote <david.cote@cern.ch>
+  * For DPD, take metadata items from input file using newly updated loadKeyStoreFromPoolFile.
+  * RecExCommon-00-10-18
+
+2008-12-03 David Cote <david.cote@cern.ch>
+  * Added known project data08_idcomm (and reorganized this part a bit) in autoConfiguration.
+  * Filled trigger stream vs conditionsTag autoConfiguration.
+  * Tag RecExCommon-00-10-17
+
+2008-12-03 David Cote <david.cote@cern.ch>
+  * Added dpd in OutFileName in python/RecoFunctions.py
+  * Tag RecExCommon-00-10-16
+
+2008-12-02  David Rousseau  <droussea@lxbuild084.cern.ch>
+
+  * Testing/manyrecotests.sh: update input BS file name
+
+2008-11-28 David Cote <david.cote@cern.ch>
+  * Added WriteSkimDecisionsOfAllStreams() for DPD in RecExCommon_topOptions.py
+  * Added MSMgr.Print() in PrintRecoSummary.py
+  * Tag RecExCommon-00-10-13 (requires PrimaryDPDMaker-00-01-06)
+
+2008-11-26  David Rousseau  <droussea@lxbuild084.cern.ch>
+
+  * share/RecExCommon_topOptions.py : fix THistSvc loading (from
+  sebastien)
+
+2008-11-25 David Cote <david.cote@cern.ch>
+  * Added explicit list of triggerStreams to auto-configure conditionsTag.
+  * Tag RecExCommon-00-10-08
+
+2008-11-25 David Cote <david.cote@cern.ch>
+  * In RecExCommon_topOptions, now pass full list from rec.AutoConfiguration() instead of iterating over it.
+  * Major improvement of AutoConfiguration methods: now takes project name from cool, can configure conditionsTag, etc.
+  * Tag RecExCommon-00-10-07 (requires RecExConfig-00-01-37)
+
+2008-11-21  David Rousseau  <droussea@lxbuild084.cern.ch>
+
+  * share/RecExCommon_topOptions.py : cleanup use of oldRecExCommissionCOnfig
+
+2008-11-19  David Rousseau  <droussea@lxbuild084.cern.ch>
+
+  * share/RecExCommon_topOptions.py : run MetaDataTools if read ESD
+  or AOD
+
+2008-11-19  David Rousseau  <droussea@lxbuild084.cern.ch>
+
+  * share/RecExCommon_doall.sh : fix to include cache build and
+  14.4.X.Y build  	14.5.X.Y build
+
+
+2008-11-17  David Rousseau  <droussea@lxbuild084.cern.ch>
+
+  * Testing/Reference_RecExCommonTesting.log: update
+
+
+2008-11-14 David Cote <david.cote@cern.ch>
+  * Added IOVMetaDataContainer metadata to all DPD.
+  * Tag RecExCommon-00-10-03
+
+
+2008-11-11 David Cote <david.cote@cern.ch>
+  * Introduced python/AutoConfiguration functions in RecExCommon_topOptions, controled by rec.AutoConfiguration flag:
+    -GetRunNumber (from inside the file, using S. Binet tools), ConfigureFieldAndGeo(), SetBeamTypeFromFileName()
+  * Implemented new functions in python/RecoFunctions.py:
+    -InputFileNames(), ItemInList, AddValidItemToList and RemoveValidItemFromList
+  * Tag RecExCommon-00-10-02 (requires RecExConfig-00-01-36)
+
+2008-11-07  David Rousseau  <droussea@lxbuild084.cern.ch>
+
+  * share/CBNT_config.py : no triggerCBNT if ESD made without trigger
+
+  * share/RecExCommon_topOptions.py : from Sylvie Brunet for overlay reconstructio
+          if globalflags.DataSource() == 'data' and globalflags.InputFormat() == 'bytestream':
+               include("TriggerRelease/BStoESD_Tier0_HLTConfig_jobOptions.py")
+
+
+  * Testing/Reference_RecExCommonTesting.log: update
+
+2008-11-05  David Rousseau  <droussea@lxbuild084.cern.ch>
+
+  * Testing/manyrecotests.sh: no need to switch doTruth=False for BS
+
+2008-10-30 David Cote <david.cote@cern.ch>
+  * added protection for DPD from BS input (for BS->skimming->BS)
+  * Tag RecExCommon-00-09-98
+
+2008-10-29 David Cote <david.cote@cern.ch>
+  * Added svcMgr.TagInfoMgr.ExtraTagValuePairs += ["AMITag", rec.AMITag() ] in RecExCommon_topOptions.py
+  * tag RecExCommon-00-09-97 (requires RecExCond-00-01-61 + RecExConfig-00-01-35)
+
+2008-10-28  David Rousseau  <droussea@lxbuild084.cern.ch>
+  * share/RecExCommon_topOptions.py : use += for
+  svcMgr.AthenaPoolCnvSvc.PoolAttributes (Peter van G suggestion)
+
+2008-10-28 Maria Jose Costa <Maria.Jose.Costa@ific.uv.es>
+  * share/CBNT_config.py: update for muon final merging
+  * tag RecExCommon-00-09-94
+
+2008-10-28 Maria Jose Costa <Maria.Jose.Costa@ific.uv.es>
+       * share/CBNT_config.py: Call Calo CBNT if LArg or Tile are ON
+       and create muon ntuple also if readESD
+       * tag RecExCommon-00-09-93
+
+2008-10-27  David Rousseau  <droussea@lxbuild084.cern.ch>
+
+  * share/CBNT_config.py :  fix CBNT jet config
+
+2008-10-24  David Rousseau  <droussea@lxbuild084.cern.ch>
+
+  * share/RecExCommon_topOptions.py : add
+  StreamBSFileOutput.ItemList += [ "CTP_RDO#*", "MuCTPI_RDO#*" ]
+  (from Attila)
+  (topSequence): switch back to run trigger last
+
+2008-10-23  David Rousseau  <droussea@lxbuild084.cern.ch>
+
+  * share/bstoesd.py : BS input file name should have run number
+
+  * share/RecExCommon_topOptions.py : histo file creation option should be RECREATE
+
+2008-10-16 Maria Jose Costa <Maria.Jose.Costa@cern.ch>
+  * share/RecExCommon_topOptions.py: add tracking ntuple
+  * tag RecExCommon-00-09-87
+
+2008-10-15  David Rousseau  <droussea@lxbuild084.cern.ch>
+
+  * share/RecExCommon_topOptions.py : now run trigger first by default
+
+2008-10-14  David Rousseau  <droussea@lxbuild083.cern.ch>
+
+  * share/RecExCommon_topOptions.py : intgerate dumper
+
+  * share/RecExCommon_topOptions.py : no cell to aod for egamma and
+  tau if rec.ScopingLevel=4
+
+
+2008-10-10  David Rousseau  <droussea@lxbuild084.cern.ch>
+
+  * share/RecExCommon_topOptions.py : fix reading BS with TAG
+
+2008-10-02  David Rousseau  <droussea@lxbuild084.cern.ch>
+
+  * share/RecExCommon_topOptions.py : InDetBeamSpotService
+
+2008-10-02  Jamie.Boyd <Jamie.Boyd@cern.ch>
+
+        * fix type in for ID CBNTshare/CBNT_config.py
+
+
+2008-10-02  David Rousseau  <droussea@lxbuild084.cern.ch>
+
+  * share/CBNT_config.py : integrate commissioning ntuple
+
+2008-10-01  David Rousseau  <droussea@lxbuild084.cern.ch>
+
+  * share/SystemRec_config.py : use CaloRec_jobptions.py also for commissioning
+
+  * share/CBNT_config.py : use CaloRec_CBNT_jobOptions.py
+
+2008-09-29 Maria Jose Costa <Maria.Jose.Costa@cern.ch>
+  * share/RecExCommon_topOptions.py: turn off readRDO when reading
+  from ESDs
+  * tag RecExCommon-00-09-73
+
+2008-09-29  David Rousseau  <droussea@lxbuild084.cern.ch>
+
+  * share/RecExCommon_topOptions.py : do not add PixelOfflineCalin.py
+
+2008-09-26  David Rousseau  <droussea@lxbuild084.cern.ch>
+
+  * share/RecExCommon_doall.sh : handle 14.2.2X.Y-VAL case
+
+2008-09-23  Jamie Boyd <Jamie.Boyd@cern.ch>
+  * share/RecExCommon_topOptions.py: update monitoring includes to
+  point to AthenaMonitoring also remove commissioning includes
+  everything should be done through the main include (with Michael Wilson)
+
+2008-09-23  David Rousseau  <droussea@lxbuild084.cern.ch>
+
+  * share/RecExCommon_doall.sh : fix 14.2.2X-VAL case
+
+2008-09-18  David Cote  <david.cote@cern.ch>
+  * added isDefault() in python/RecoFunctions.py
+
+2008-09-17  David Rousseau  <droussea@lxbuild084.cern.ch>
+
+  * share/RecExCommon_topOptions.py : fix root histogram setting
+
+
+2008-09-17  David Rousseau  <droussea@lxbuild084.cern.ch>
+
+  * share/RecExCommon_topOptions.py : need to disable id align
+  monitoring if commissioning and collision
+
+
+2008-09-17  David Rousseau  <droussea@lxbuild084.cern.ch>
+
+  * share/RecExCommon_topOptions.py : integrate back Collisions_topOptions.py
+
+
+2008-09-16  David Rousseau  <droussea@lxbuild084.cern.ch>
+
+  * share/SystemRec_config.py, JiveXML_config.py : fix jivexml and
+  persint output
+
+2008-09-08 Maria Jose Costa <Maria.Jose.Costa@cern.ch>
+  * share/RecExCommission_topOptions.py: fix for single beam
+  * tag RecExCommon-00-09-58
+
+2008-09-02  David Rousseau  <droussea@lxbuild084.cern.ch>
+
+  * share/RecExCommon_doall.sh : fix to handle 14.2.2X etc...
+
+  * share/Collisions_topOptions.py : fix trigger XML config
+
+2008-08-20  Jamie Boyd <Jamie.Boyd@cern.ch>
+  * Added option to run single beam reco from RecExCommission required small change in RecExCommon_topOptions
+
+2008-08-18  David Cote  <david.cote@cern.ch>
+  * Added LumiBlock to DPD.
+  * Tagged RecExCommon-00-09-54
+
+2008-08-10  David Cote  <david.cote@cern.ch>
+  * updated if rec.doDPD() section in RecExCommon_topOptions.py
+  * Tagged RecExCommon-00-09-53
+
+2008-08-06  David Rousseau  <droussea@lxbuild083.cern.ch>
+
+  * share/Collisions_topOptions.py : enable to skip event in bytestream
+
+
+2008-08-06  David Rousseau  <droussea@lxbuild084.cern.ch>
+
+  * share/PrintRecoSummary.py: print esd and aod only if dowriteesd
+  and dowriteaod
+
+
+2008-08-05  David Rousseau  <droussea@lxbuild084.cern.ch>
+
+  * Testing/manyrecotests.sh: make sure all output file are suffixed
+
+2008-07-31  David Rousseau  <droussea@lxbuild084.cern.ch>
+
+  * share/RecoUtils.py : do not set here floating point exception
+  (done in athena now)
+
+
+2008-07-29 David Cote <david.cote@cern.ch>
+  * Added new flags doDPD=False, LoadGeometry=True and DPDMakerScripts=[].
+  * Tagged RecExCommon-00-09-46 (requires RecExConfig-00-01-26 and RecExCond-00-01-33)
+
+2008-07-25  David Rousseau  <droussea@lxbuild084.cern.ch>
+
+  * share/Collisions_topOptions.py : StreamBSFileOutput.ItemList had
+  duplicates. Now removed
+
+2008-07-24  David Rousseau  <droussea@lxbuild084.cern.ch>
+
+  * share/Collisions_topOptions.py : fix BS writing (froom John
+  Baines/Tadashi Maeno)
+
+  * share/PrintRecoSummary.py: protect against non existent of oks
+
+  * share/*.py:  use MuonCombinedRec_config.py (from Martin
+  Woudstra)
+
+
+
+2008-07-22  David Rousseau  <droussea@lxbuild084.cern.ch>
+
+  * share/RecoUtils.py : more auditors by default
+
+2008-07-18 David Cote <david.cote@cern.ch>
+  * Removed a few obsolete lines in Collisions_topOptions, as discussed with David Rousseau:
+    SimpleRawObjGetter, ChronoStatSvc.NumberOfSkippedEventsForMemStat, "pass" dummy line
+  * No tag for this...
+
+2008-07-18 David Cote <david.cote@cern.ch>
+  * Cleaned-up print statements, now all concentrated in share/PrintRecoSummary.py, included once at the end.
+    Note the use of rec.OutputLevel() which is currently all to INFO, but may be changed to DEBUG in some cases(?).
+  * Tagged RecExCommon-00-09-42
+
+2008-07-17 David Cote <david.cote@cern.ch>
+  * Migrated DetectorStatus stuff from Collisions_topOptions to RecExCommon_topOptions, using new RecFlag doDetStatus.
+  * Tagged RecExCommon-00-09-41 (requires RecExConfig-00-01-25 and RecExCond-00-01-30)
+
+2008-07-16 David Cote <david.cote@cern.ch>
+  * Changed the logic of doPerfMon in RecoUtils.py.
+    Now doPerfMon=False bypasses completely PerfMon.
+    doPerfMon=True is the default value and execute doFastMon=True
+    doDetailedPerfMon is a new flag to execute the full PerfMon.
+  * Tagged RecExCommon-00-09-40 (requires RecExConfig-00-01-24 and RecExCond-00-01-29)
+    (by mistake RecExCommon-00-09-39 is copy of RecExCommon-00-09-38)
+
+2008-07-15  David Rousseau  <droussea@lxbuild084.cern.ch>
+
+  * share/RecoUtils.py: use CfgMgr (auditors setting was broken)
+
+  * share/RecExCommon_doall.sh : fix to new cache schema
+
+2008-07-11 David Cote <david.cote@cern.ch>
+  * Migrated RecExCond/AllDet_detDescr.py and PartPropSvc/PartPropSvc.py to RecoUtils.py
+  * Tagged RecExCommon-00-09-37
+
+2008-07-10 David Cote <david.cote@cern.ch>
+  * Migrated RecExCommon_flags.py and IOVDbSvc setGlobalTag to RecExCommon_topOptions.py
+  * Tagged RecExCommon-00-09-36
+
+2008-07-10 David Cote <david.cote@cern.ch>
+  * Migrated PerfMon to RecoUtils.py
+  * Introduced python/RecoFunctions.py, where OutFileName is now determined from the rec flags.
+  * Cleaned up a few unnecessary import (theApp,ServiceMgr,globalflags,athenaCommonFlags) in Collisions_topOptions
+  * Tagged RecExCommon-00-09-35
+
+2008-07-09 David Cote <david.cote@cern.ch>
+  * Migrated the following from Collisions_topOptions to RecExCommon/RecoUtils:
+   -rec.doFloatingPointException()
+   -rec.doTimeLimit()
+  * Commited Collisions_topOptions rev 1.8, RecoUtils rev 1.5
+
+2008-07-09 David Cote <david.cote@cern.ch>
+  * Migrated the following from Collisions_topOptions to RecExCommon/RecoUtils:
+   -AthenaPoolCnvSvc output file options
+   -ServiceMgr.MessageSvc options
+   -Service('IOVSvc').sortKeys=True
+  * Tagged RecExCommon-00-09-34
+
+2008-07-09 David Cote <david.cote@cern.ch>
+  * Removed obsolete if rec.doCheckJOT(): protectedInclude("AthenaCommon/JobOptTraceInclude.py")
+  * Migrated all auditors to RecoUtils
+  * Commited Collisions_topOptions rev 1.6, RecoUtils rev 1.3
+
+2008-07-09 David Cote <david.cote@cern.ch>
+  * Migrated (Collisions_topOptions -> RecoUtils)
+  import resource
+        softas,hardas = resource.getrlimit( resource.RLIMIT_AS ) ...
+  and
+  from AthenaCommon.Include import excludeTracePattern
+        excludeTracePattern.append("*/RecExConfig/Resilience.py") ...
+  * Commited: Collisions_topOptions rev 1.5, RecoUtils rev 1.2
+
+2008-07-09 Sebastian Schaetzel <sebastian.schaetzel@cern.ch>
+        * share/Collisions_topOptions.py: call DQ monitoring also when reading
+  ESD
+
+2008-07-08  Ketevi A. Assamagan <ketevi@bnl.gov>
+
+  * added share/tagtoesd.py
+  * added share/tagtordo.py
+  * added share/tagtojivexml.py
+  * the above for event selection with TAG and writing out RDO or ESD or JiveXML
+  * RecExCommon-00-09-33
+
+2008-07-02  David Rousseau  <droussea@lxbuild084.cern.ch>
+
+  * share/SystemRec_config.py : do not make MuonCluster if RDO to BS
+
+  * share/BSRead_config.py: fix BS reading
+
+2008-06-27  David Rousseau  <droussea@lxbuild084.cern.ch>
+
+  * share/Collisions_topOptions.py : fix typo
+
+2008-06-27 David Cote <david.cote@cern.ch>
+  * Introduced new files Collisions_topOptions.py and RecoUtils.py
+  in preparation to merge with RecExCommission.
+  * not yet tagged
+
+2008-06-27  David Rousseau  <droussea@lxbuild084.cern.ch>
+
+  * share/bsfdrtoesd.py: attempt to fix bs reading for 14.2.10
+
+2008-06-21  David Rousseau  <droussea@lxbuild084.cern.ch>
+
+  * share/RecExCommon_doall.sh : typo in doall script for val
+
+2008-06-17  David Rousseau  <droussea@lxbuild084.cern.ch>
+
+  * share/RecExCommon_topOptions.py : better handle OKS, use pers OK
+  from RecExPers
+
+2008-05-30  David Rousseau  <droussea@lxbuild084.cern.ch>
+
+  * share/RecExCommon_topOptions.py : use LumiBlockMetadataTool
+
+2008-05-27  David Rousseau  <droussea@lxbuild084.cern.ch>
+
+  * share/RecExCommon_topOptions.py : remove obsolete cabling
+  definition line (bs made with 14.1.X will not be readable anymore)
+
+2008-05-23  David Rousseau  <droussea@lxbuild084.cern.ch>
+
+  * share/RecExCommon_topOptions.py : set GlobalTag
+
+  * share/CombinedRec_config.py : move jet reco after combined muon
+
+2008-05-19 David Cote <david.cote@cern.ch>
+  * Update of BS reading, following Tadashi's prescription.
+  This means:
+   -replaced include( "ByteStreamCnvSvc/BSEventStorageEventSelector_jobOptions.py" )
+    by from ByteStreamCnvSvc import ReadByteStream
+   -replaced include( "TriggerRelease/jobOfragment_ReadBS.py" )
+    by include("RecExCommon/BSRead_config.py")
+
+2008-05-15  David Rousseau  <droussea@lxbuild083.cern.ch>
+
+  * share/CombinedRec_config.py: no more doJetRec
+
+2008-05-12  David Rousseau  <droussea@lxbuild083.cern.ch>
+
+  * share/CBNT_config.py : really switch off cbnt egamma and jet if
+  not necessary
+
+2008-05-07  David Rousseau  <droussea@lxbuild083.cern.ch>
+
+  * share/CBNT_config.py : more resilient
+
+2008-05-06  David Rousseau  <droussea@lxbuild083.cern.ch>
+
+  * share/CombinedRec_config.py (mlog): introduce jobproperties.egammaRecFlags
+
+2008-05-05  David Rousseau  <droussea@lxbuild083.cern.ch>
+
+  * share/CombinedRec_config.py : enable MuonBuilder at RDO->ESD stage
+
+2008-05-01  David Rousseau  <droussea@lxbuild083.cern.ch>
+
+  * share/RecExCommon_topOptions.py : add MonteCarloReact (false by default)
+
+2008-04-30  David Rousseau  <droussea@lxbuild083.cern.ch>
+
+  * share/bsfdrtoesd.py: add fdr bs fragment reco
+
+2008-04-29  David Rousseau  <droussea@lxbuild083.cern.ch>
+
+  * share/RecExCommon_topOptions.py : fix FDR BS reading ( to be
+  merged in the HEAD)
+
+
+2008-06-02  Sebastian Schaetzel <sebastian.schaetzel@cern.ch>
+  * only in branch for FDR-2
+        * share/RecExCommon_topOptions.py: use jobConfig fragment disableRPC
+  and fix to remove RpcPadContainer/RPCPAD only for bytestream input
+
+2008-06-02  Sebastian Schaetzel <sebastian.schaetzel@cern.ch>
+        * share/RecExCommon_topOptions.py: added writing of Pixel calibration
+  ntuple. Removed RpcPadContainer/RPCPAD (only for FDR-2!) because of
+  bug https://savannah.cern.ch/bugs/index.php?36938
+
+2008-05-26  Sebastian Schaetzel <sebastian.schaetzel@cern.ch>
+        * share/RecExCommon_topOptions.py: moved TriggerGetter() up for
+  trigger-aware monitoring and set up InDetFlags.doMonitoring before
+  the system configuration is fixed
+
+2008-05-05  David Rousseau  <droussea@lxbuild083.cern.ch>
+
+  * share/RecExCommon_doall.sh :adapt to cache nightlies
+
+2008-04-30  David Rousseau  <droussea@lxbuild083.cern.ch>
+
+  * share/bsfdrtoesd.py: add fdr bs fragment reco
+
+2008-04-29  David Rousseau  <droussea@lxbuild083.cern.ch>
+
+  * share/RecExCommon_topOptions.py : fix FDR BS reading ( to be
+  merged in the HEAD)
+
+
+2008-04-24 David Cote <david.cote@cern.ch>
+  * Modification of StreamBSFileOutput.ItemList (from Guillaume Unal).
+  Added "2542#*","2541#*","2540#*".
+  Removed: "TRT_RDO_Container#*", "SCT_RDO_Container#*", "PixelRDO_Container#*".
+  Also, now proceed to fill the itemList even if the trigger already started to fill it (i.e. removed an "else" conditon).
+  Slight code clean-up by DC.
+
+2008-04-24 David Cote <david.cote@cern.ch>
+  * Added configuration of calonoisetool for LAr bytestream writing when doTrigger=False (from Guillaume Unal)
+  * Removed obsolete Pixel and SCT cabling in BS writing (from Guillaume Unal)
+
+2008-04-24 David Cote <david.cote@cern.ch>
+  * Added if rec.doWriteBS() protection before creating transient BS when doTrigger=False.
+    Added if rec.doWriteBS() protection to decide about filling StreamBSFileOutput.ItemList (from Guillaume Unal)
+
+2008-04-23 David Cote <david.cote@cern.ch>
+  * Added explicit transient BS stream when doTrigger=False, using RDP_ByteStream_jobOptions.py.
+
+2008-04-23 David Cote <david.cote@cern.ch>
+  * Removed temporary fix for disabling tau trigger slices in rdotobs.py
+
+2008-04-22 David Cote <david.cote@cern.ch>
+  * Temporary fix: disabling tau trigger slices in rdotobs.py
+
+2008-04-21 David Cote <david.cote@cern.ch>
+  * Replaced lines 992-1042 of RecExCommon_topOptions.py by Tadashi's one-line definition:
+  StreamBSFileOutput = WriteByteStream.getStream("EventStorage","StreamBSFileOutput").
+  The latter is identical to the former, **with the exception that it fixes one problem**
+  with persitent ByteStream writing by using:
+  ByteStreamCnvSvc.ByteStreamOutputSvcList += ["ByteStreamEventStorageOutputSvc"]
+  instead of the incorrect:
+  ByteStreamCnvSvc.ByteStreamOutputSvc = "ByteStreamEventStorageOutputSvc"
+
+2008-04-18 Ketevi A. Assamagan <ketevi@bnl.gov>
+
+        * implementation of Rousseau's request to run MuonBuilder as the ESD saving MuonCollections in both ESD and AOD
+        * this tag is for 14.2.0 ONLY - MUST be collected together with others tags of MuonRecExample, MuonAlgs, and ParticleBuilderOptions
+        * tagging RecExCommon-00-09-01
+
+2008-04-16  David Rousseau  <droussea@lxbuild083.cern.ch>
+
+  * share/CBNT_config.py : no muontrack_cbnt if not reading esd (not
+  properly configured)
+
+2008-04-14  Sandrine Laplace <laplace@lapp.in2p3.fr>
+  * changed name of collection LArClusterEM57NoCorr to LArclusterEM7_11NoCorr in
+    addClusterToCaloCellAOD in RecExCommon_topOption.py
+
+2008-04-11  David Rousseau  <droussea@lxplus230.cern.ch>
+
+  * share/RecExCommon_topOptions.py : fix OKS AOD from ESD
+
+2008-04-04  David Rousseau  <droussea@lxbuild083.cern.ch>
+
+  * share/simpletagtoesd.py: use simple tag to make ESD
+
+  * share/rdotosimpletag.py: new jobO to make simple tag
+
+2008-04-03  David Rousseau  <droussea@lxbuild083.cern.ch>
+
+  * share/RecExCommon_topOptions.py : if doDumpProperties dump
+  config in ascii file
+
+2008-03-27  David Rousseau  <droussea@lxplus234.cern.ch>
+
+  * share/CombinedRec_config.py : remove conversion
+  * *.py : doMoore doMuonboy now muonRecFlags
+
+2008-03-25  David Rousseau  <droussea@lxplus217.cern.ch>
+
+  * share/RecExCommon_topOptions.py : change perfmon output file name
+
+  * share/SystemRec_config.py : do not switch off ID geo/makerio if
+  InDetRec_jobOption did not laod
+
+
+2008-03-22  David Rousseau  <droussea@lxplus212.cern.ch>
+
+
+  * share/RecExCommon_topOptions.py : hide DataProxy WARNING
+
+
+2008-03-21  David Rousseau  <droussea@lxplus230.cern.ch>
+
+  * share/RecExCommon_doall.sh : handle AtlasPoint1,
+  AtlasProduction, 14.0.0.Y nightlies
+
+2008-03-12  David Rousseau  <droussea@lxplus231.cern.ch>
+
+  * share/CBNT_config.py (logCBNT_config): temporary disable MuonMakeSegmentNtuple
+
+  * share/RecExCommon_topOptions.py : specify
+  StreamAOD.ForceRead=True
+  * share/RecExCommon_topOptions.py : mask ERROR from historySvc
+  (will have to be unmasked just after 14.0.0)
+
+
+2008-03-11 David Cote <david.cote@cern.ch>
+  * share/RecExCommon_topOptions.py: Simplified StreamESD and StreamAOD setup as suggested by Peter van Gemmeren.
+  * share/RecExCommon_topOptions.py: Moved LumiBlock creation before StreamESD creation, as a consequence of the new output stream setup.
+
+2008-03-11 David Cote <david.cote@cern.ch>
+  * share/RecExCommon_topOptions.py : Added LumiBlock meta data containers to StreamESD and AOD.
+
+2008-02-26  David Rousseau  <droussea@lxbuild083.cern.ch>
+
+  * share/RecExCommon_topOptions.py : include DataQualityMon
+
+2008-02-24  David Rousseau  <droussea@lxbuild083.cern.ch>
+
+  * share/CombinedRec_config.py: use new tauRecFlags
+
+2008-02-20  David Rousseau  <droussea@lxbuild083.cern.ch>
+
+  * share/JiveXML_config.py: use rec flags
+
+2008-02-18  David Rousseau  <droussea@lxbuild083.cern.ch>
+
+  * share/CombinedRec_config.py: use new CaloRecFlags
+
+2008-02-11  David Rousseau  <droussea@lxbuild084.cern.ch>
+
+  * share/RecExCommon_topOptions.py : correctly load perfmon "light
+
+2008-02-08  David Rousseau  <droussea@lxbuild084.cern.ch>
+
+  * share/CombinedRec_config.py (mlog): doJetRec=False => taurec
+  desactivated (but keep tau1p3p)
+
+  * share/RecExCommon_topOptions.py : doDumpProperties better printout
+
+2008-01-31  David Rousseau  <droussea@lxbuild083.cern.ch>
+
+  * share/bstoesd.py: put back
+
+2008-01-30  David Rousseau  <droussea@lxbuild083.cern.ch>
+
+  * share/CBNT_config.py : fix AOD to CBNT
+
+2008-01-24  David Rousseau  <droussea@lxbuild083.cern.ch>
+
+  * Testing/manyrecotests.sh: put back bs test
+
+2008-01-21  Tomasz Bold <Tomasz.Bold@cern.ch>
+
+  * share/RecExCommon_topOptions.py modified Trigger inclusion, direct use of TriggerJobOpts.TriggerGetter introduced (old stuff commented out)
+
+2008-01-17  David Rousseau  <droussea@lxbuild083.cern.ch>
+
+  * share/RecExCommon_topOptions.py : override.runnumber also for bs
+  input file
+
+  * Testing/manyrecotests.sh: put back BS test
+
+
+2008-01-15  David Rousseau  <droussea@lxbuild083.cern.ch>
+
+  * share/RecExCommon_doall.sh : support for mig and lcg nightlies
+
+
+2008-01-10  Ketevi A. Assamagan <ketevi@bnl.gov>
+
+  *share/aodtotag.py and myTopOptions.py - show options to switch off Trigger in the TAG
+
+2008-01-10  David Rousseau  <droussea@lxbuild083.cern.ch>
+
+  * share/RecExCommon_topOptions.py : merge in 13.0.40 changes
+  (mainly mixed pool rdo)
+
+2008-01-10  David Rousseau  <droussea@lxbuild083.cern.ch>
+
+  * share/RecExCommon_topOptions.py : put back ChronoAuditor
+
+
+2008-01-08  David Rousseau  <droussea@lxbuild083.cern.ch>
+
+  * share/CBNT_config.py : do not use anymore CBNT_AthenaAware
+
+  * share/RecExCommon_links_zc.sh: do not add obsolete file
+
+
+2007-12-17  David Rousseau  <droussea@lxbuild083.cern.ch>
+
+  * share/RecExCommon_topOptions.py : use AttemptCalalogPatch to
+  allow fixing of PoolFileCatalog
+
+2007-12-14  David Rousseau  <droussea@lxbuild083.cern.ch>
+
+  * share/RecExCommon_topOptions.py : no explicit DLL loading
+
+2007-12-06  David Rousseau  <droussea@lxbuild083.cern.ch>
+
+  * share/*.py :  use Resilience.py
+
+2007-12-05  David Rousseau  <droussea@lxbuild083.cern.ch>
+
+  * share/CBNT_Truth_jobOptions.py : no more CBNTAthenaAware
+
+2007-12-04  David Rousseau  <droussea@lxbuild083.cern.ch>
+
+  * share/RecExCommon_topOptions.py  : use OverrideRunNumber by
+  default (temporary)
+
+2007-11-26  David Rousseau  <droussea@lxbuild083.cern.ch>
+
+  * share/SystemRec_config.py : do not test on doMoore
+
+2007-11-20  David Rousseau  <droussea@lxbuild083.cern.ch>
+
+  * share/CBNT_config.py : enable MuonTrack_CBNT_joboptions.py
+
+2007-11-19  David Rousseau  <droussea@lxbuild083.cern.ch>
+
+  * share/RecExCommon_topOptions.py : use rec.oldFlagCompatibility()
+
+  * share/CBNT_config.py : add  MuonTrack_CBNT_jobOptions.py
+
+2007-11-16  David Rousseau  <droussea@lxbuild083.cern.ch>
+
+  * share/CombinedRec_config.py : do not enable taurec if calo off
+
+2007-11-15  David Rousseau  <droussea@lxbuild083.cern.ch>
+
+  * share/RecExCommon_topOptions.py : remove explicit load of converters
+                                 introduce FloatingPointException
+
+2007-11-09  David Rousseau  <droussea@lxbuild083.cern.ch>
+
+  * share/RecExCommon_topOptions.py : resilient against PerfMon failure
+
+2007-11-08  David Rousseau  <droussea@lxbuild083.cern.ch>
+
+  * share/RecExCommon_topOptions.py : use CaloCellAODGetter
+
+2007-10-23  David Rousseau  <droussea@lxbuild083.cern.ch>
+
+  * share/CBNT_config.py : fix CBNT jet configuration
+
+2007-10-18  David Rousseau  <droussea@lxbuild084.cern.ch>
+
+  * share/RecExCommon_topOptions.py : tags clean up
+
+2007-10-15  David Rousseau  <droussea@lxbuild084.cern.ch>
+
+  * share/CBNT_config.py : switch to python module for jet
+
+2007-10-13  Ketevi A. Assamagan <ketevi@bnl.gov>
+
+  * share/RecoOutputItemList_jobOptions.py
+  * added include("TrackParticleTruthAthenaPool/TrackParticleTruthAthenaPool_joboptions.py")
+
+2007-10-12  David Rousseau  <droussea@lxbuild084.cern.ch>
+
+  * share/CBNT_config.py : fix wrong CBNT_Conversion access
+
+2007-10-04  David Rousseau  <droussea@lxbuild083.cern.ch>
+
+  * share/RecExCommon_topOptions.py : adapt to COnfigurable hack removal
+
+2007-10-02  Ketevi A. Assamagan <ketevi@bnl.gov>
+
+  * share/aodtosan.py is removed
+
+2007-10-01  David Rousseau  <droussea@lxbuild084.cern.ch>
+
+  * share/RecExCommon_topOptions.py : explicit list of non truth RDO
+  if BS->RDO
+
+2007-09-26  David Rousseau  <droussea@lxbuild084.cern.ch>
+
+  * share/RecExCommon_topOptions.py : manor cleanup for configurable
+
+
+2007-11-27  David Rousseau  <droussea@lxbuild083.cern.ch>
+
+  * share/RecExCommon_topOptions.py : excludeTracePattern for trigger
+
+  * share/SystemRec_config.py : excludeTracePattern for calo cluster correction
+
+2007-10-25  David Rousseau  <droussea@lxbuild083.cern.ch>
+
+  * share/RecExCommon_topOptions.py : fix BS making
+
+  * share/bstoesd.py:  fix default name
+
+
+2007-10-19  David Rousseau  <droussea@lxbuild084.cern.ch>
+
+  * share/rdotobs.py share/RecExCommon_topOptions.py : cleanup RDO->BS
+
+
+2007-10-18  David Rousseau  <droussea@lxbuild084.cern.ch>
+
+  * share/RecExCommon_topOptions.py : increase maximum output pool
+  size to 15GB (up from 2GB)
+
+2007-10-17  David Rousseau  <droussea@lxbuild084.cern.ch>
+
+  * share/RecExCommon_topOptions.py : do not cleanup  theApp.OutStream = []
+
+
+2007-10-15  David Rousseau  <droussea@lxbuild084.cern.ch>
+
+  * share/RecoOutputPoolCnv_jobOptions.py: add
+  TrackParticleTruthAthenaPool_joboptions.py to fix AOD to AOD
+
+  * share/RecExCommon_topOptions.py : add explicit item list for BS
+  reading
+
+
+  * share/RecExCommon_doall.sh : use AtlasOffline to access checklog.py
+
+
+2007-09-19  David Rousseau  <droussea@lxbuild083.cern.ch>
+
+  * share/RecExCommon_topOptions.py : use takeItemsFromInput for esd
+  to esd and aod to aod copy
+
+2007-09-17  David Rousseau  <droussea@lxbuild084.cern.ch>
+
+  * share/bstoesd.py : specify the IOBDbSvc.GlbalTag when reading
+  from BS
+
+  * Testing/manyrecotests.sh: enable doWriteTAG when doing all
+
+2007-09-14  David Rousseau  <droussea@lxbuild083.cern.ch>
+
+  * share/rdotobs.py , bstoesd.py : first version
+
+2007-09-13  David Rousseau  <droussea@lxbuild084.cern.ch>
+
+  * share/RecExCommon_topOptions.py : no WARNING if ESD->ESD copy
+
+
+2007-09-10  David Rousseau  <droussea@lxbuild084.cern.ch>
+
+  * share/RecExCommon_topOptions.py : IOVSvc.sortKeys=True for reproduceability
+
+  * share/CBNT_Truth_jobOptions.py : add HijingParameters
+
+
+2007-09-07  David Rousseau  <droussea@lxbuild084.cern.ch>
+
+  * share/SystemRec_config.py : remove DetStatusAlg (obsoleted by
+  file meta data)
+
+  * share/RecExCommon_topOptions.py : include file meta data
+
+  * Testing/Reference_RecExCommonTesting.log : update reference log file
+
+  * share/SystemRec_config.py : propagate switch off moore and muonboy if no
+  muon geo
+
+2007-09-06  David Rousseau  <droussea@lxbuild084.cern.ch>
+
+  * share/RecExCommon_topOptions.py : use TakeItemsFromInput when
+  copying RDO
+
+2007-09-06  David Rousseau  <droussea@lxbuild084.cern.ch>
+
+  * share/RecExCommon_dump.py : major update
+
+
+2007-09-06  David Rousseau  <droussea@lxbuild084.cern.ch>
+
+  * share/SystemRec_config.py : new muon jobO
+
+
+2007-09-05  David Rousseau  <droussea@lxbuild084.cern.ch>
+
+  * share/RecExCommon_topOptions.py : typo if reading TAG
+
+2007-09-04  David Rousseau  <droussea@lxplus209.cern.ch>
+
+  * share/RecExCommon_topOptions.py : even safer use of EventDataModelMonitor
+
+2007-09-04  Sebastien Binet  <binet@lblbox>
+
+  * tagging RecExCommon-00-08-26
+  * share/RecExCommon_topOptions.py: fix typo in getConfigurable
+
+2007-09-04  David Rousseau  <droussea@lxbuild005.cern.ch>
+
+  * share/RecExCommon_topOptions.py : use 2kB buffer to save memory
+
+  * share/CombinedRec_config.py : special JetRec if doCaloSim
+
+  * share/SystemRec_config.py : remove obsolete BS stuff
+
+2007-09-03  David Rousseau  <droussea@lxbuild005.cern.ch>
+
+  * share/XXXtoYYY.py : revise
+
+2007-08-31  David Rousseau  <droussea@lxplus096.cern.ch>
+
+  * share/RecExCommon_topOptions.py: avoid ERROR string to appear
+  when running with athena -s
+                     more COnfigurable cleanup
+
+2007-08-29  David Rousseau  <droussea@lxplus207.cern.ch>
+
+  * share/RecExCommon_topOptions.py : also add muoncluster cell if
+  separate ESD->AOD
+
+2007-08-28  David Rousseau  <droussea@lxplus203.cern.ch>
+
+  * share/RecExCommon_runTimeFiles_zc.sh: systematically point to
+  local replica if at CERN
+
+2007-08-23  David Rousseau  <droussea@lxbuild084.cern.ch>
+
+  * share/RecoOutputItemList_jobOptions deleted (replaced by RecExPers/RecoOutputESDItemList_joboptions.py)
+
+
+2007-08-24  Ketevi A. Assamagan <ketevi@bnl.gov>
+
+        * share/RecExCommon_topOptions.py
+        * For AODCellCollection making - added rec.readESD() option
+          (that was there before but I had removed it for no convincing reason
+           I put it back).
+
+2007-08-23  David Rousseau  <droussea@lxbuild084.cern.ch>
+
+  * share/RecExCommon_doall.sh : fix
+
+2007-08-22  David Rousseau  <droussea@lxbuild084.cern.ch>
+
+  * share/CBNT_config.py : add muon sp shower from Stephane W
+
+
+2007-08-21  David Rousseau  <droussea@lxbuild084.cern.ch>
+
+  * share/RecExCommon_doall.sh : - remove obsolete monolithic build
+  support
+                          - fix possibility to add MYTAGS additional
+        tags like dbg
+                          - automatically use dbg for MIG0 MIG1
+
+
+2007-08-17  Ketevi A. Assamagan <ketevi@bnl.gov>
+
+  * share/esdtoesd.py
+  * fix esd to esd to esd copying; job options fix (problem reported by Peter)
+
+2007-08-13  Ketevi A. Assamagan <ketevi@bnl.gov>
+
+  * share/RecExCommon_topOptions.py
+  * added these lines as a temporary fix for these warnings:
+        AlgContextSvc     WARNING IAlgorithm* points to NULL
+  ### Suggested by F. Winklmeier
+  from AthenaCommon.ConfigurableDb import getConfigurable
+        svcMgr += getConfigurable("AlgContextSvc")(OutputLevel = ERROR)
+  ### we should remember to remove them when the problem is fixed in the version of Gaudi
+
+2007-08-12  Ketevi A. Assamagan <ketevi@bnl.gov>
+
+  * share/SystemRec_config.py
+  * CombinedRec_config.py
+  * fix MuidANNtuple configuration problem (Stephane)
+  * fix MuonClusterCollection making
+  * fix Muon AOD cell making
+
+2007-08-11  Ketevi A. Assamagan <ketevi@bnl.gov>
+
+  * share/SystemRec_config.py
+  * CombinedRec_config.py
+  * RecExCommon_topOptions.py
+  * fix MuidANNtuple configuration problem (Stephane)
+  * fix MuonClusterCollection making
+  * fix Muon AOD cell making
+
+2007-08-10  Ketevi A. Assamagan <ketevi@bnl.gov>
+
+  * share/SystemRec_config.py
+  * fix MuonClusterCollection persistency
+
+2007-08-09  Ketevi A. Assamagan <ketevi@bnl.gov>
+
+  * share/SystemRec_config.py
+  * fix MuonClusterCollection Initialize
+
+2007-08-01  Ketevi A. Assamagan <ketevi@bnl.gov>
+
+  * share/CombinedRec_config.py
+  * fix duplication include of algorithm
+
+2007-07-26  Ketevi A. Assamagan <ketevi@bnl.gov>
+
+  * share/RecoOutputItemList_jobOptions.py
+  * added MuonClusterCollection to ESD
+
+2007-07-25  Ketevi A. Assamagan <ketevi@bnl.gov>
+
+  * share/RecoOutputItemList_jobOptions.py
+  * added MuonClusterCollection to the ItemList
+
+2007-07-19  David Rousseau  <droussea@lxbuild083.cern.ch>
+
+  * share/CombinedRec_config.py : fix jet, pileup jet include
+
+2007-07-18  David Rousseau  <droussea@lxbuild083.cern.ch>
+
+  * share/RecExCommon_topOptions.py : add slimmed AOD tracks (for
+  egamma), and fixed aod cells
+                            use RecExPers ESD itemlist
+
+2007-07-16  David Rousseau  <droussea@lxbuild083.cern.ch>
+
+  * share/CBNT_config.py : if readESD disable CBNTAA_Muon and CBNT_TileMu
+
+  * share/SystemRec_config.py : properly take into account doMoore
+  or doMuonboy being set to false in MuonRec_jobOptions.py
+
+
+2007-07-15  David Rousseau  <droussea@lxbuild083.cern.ch>
+
+  * share/RecExCommon_doall.sh, athenarec.sh: change default CMTVERSION to v1r20p20070524
+
+
+
+2007-07-13  David Rousseau  <droussea@lxbuild083.cern.ch>
+
+  * share/RecExCommon_topOptions.py : do not load converters explicitly
+
+  * share/CombinedRec_config.py : fix staco flags checking
+
+
+2007-07-06  David Rousseau  <droussea@lxbuild084.cern.ch>
+
+  * share/RecExCommon_topOptions.py : correctly load THistSvc
+
+2007-07-02  Ketevi A. Assamagan <ketevi@bnl.gov>
+
+  * share/CombinedRec_config.py - Pieer-Antoine's fragment for making pileup truth jets
+
+2007-06-27  David Rousseau  <droussea@lxbuild084.cern.ch>
+
+  * share/CBNT_Truth_jobOptions.py : drop CBNTAA_SpclMC
+
+2007-06-25  David Rousseau  <droussea@lxbuild084.cern.ch>
+
+  * share/CombinedRec_config.py : correctly disable true jet
+
+  * share/CBNT_Truth_jobOptions.py: Enable CBNTAA_Truth configurable
+
+  * Testing/manyrecotests.sh : improve
+
+2007-06-22  David Rousseau  <droussea@lxbuild084.cern.ch>
+
+  * share/RecExCommon_links_zc.sh: remove duplicates
+
+2007-06-22  David Rousseau  <droussea@lxbuild084.cern.ch>
+
+  * share/RecExCommon_doall.sh : handle pcache nightlies
+
+
+2007-06-21  Ketevi A. Assamagan <ketevi@bnl.gov>
+
+  * new aodtotag.py after the bug fix #26235
+  * aodtotag will crash because of data quality TAG problem
+    a new bug report was filed for that: see bug number 27387
+
+
+2007-06-20  David Rousseau  <droussea@lxbuild084.cern.ch>
+
+  * share/CBNT_config.py : add HI CBNT
+
+  * share/RecExCommon_topOptions.py : add HI postoptionsESD and postoptionsAOD
+                                      add PerfMonSvc
+
+2007-06-19  Ketevi A. Assamagan <ketevi@bnl.gov>
+
+  * share/RecExCommon_topOptions.py - treatment for pileup truth jet algorithms
+  * share/combineRec_config.py - treatment for pileup truth jet algorithms
+  * share/RecoOutputItemList_jobOptions - saving the pileup truth jets
+
+2007-06-13  David Rousseau  <droussea@lxbuild084.cern.ch>
+
+  * share/rdotoesdprod.py :  do not set doRestrictedESD=True
+
+2007-06-05  David Rousseau  <droussea@lxbuild084.cern.ch>
+
+  * share/RecExCommon_topOptions.py : hide HepMcParticleLink WARNING
+  *                                   add HeavyIonRec
+
+2007-06-04  David Rousseau  <droussea@lxbuild084.cern.ch>
+
+  * share/RecExCommon_links_cern_zc.sh: major update / clean-up
+
+2007-05-24  David Rousseau  <droussea@lxbuild054.cern.ch>
+
+  * share/RecoOutputItemList_jobOptions.py : explicit TauRecContainer
+
+2007-05-23  David Rousseau  <droussea@lxbuild055.cern.ch>
+
+  * share/RecoOutputItemList_jobOptions.py : JetTruthParticles was missing
+          tau cluster was missing, CaloMuId was missing
+
+  * share/RecoOutputItemList_jobOptions.py : add tau clusters
+
+  * share/CBNT_config.py : no CBNT_Muon if from ESD
+
+
+
+2007-05-22  David Rousseau  <droussea@lxbuild055.cern.ch>
+
+  * share/CBNT_config.py : enable CBNT_CaloTrkMuId
+
+2007-05-21  David Rousseau  <droussea@lxplus220.cern.ch>
+
+  * share/RecExCommon_topOptions.py : remove LArTowerEM from
+  theDictESD, call AOD cell container building after streamESD
+
+  * share/CBNT_config.py : re-enable cbnt cluster if read from esd
+
+2007-05-18  David Rousseau  <droussea@lxbuild055.cern.ch>
+
+  * share/RecoOutputItemList_jobOptions.py : no muon stuff
+  explicitly anymore
+
+
+2007-05-16  David Rousseau  <droussea@lxbuild055.cern.ch>
+
+  * share/* fix for ESD/AOD cluster/cell content:
+
+  * share/RecExCommon_doall.sh : handle val mig0 and mig1 case
+
+2007-05-15  David Rousseau  <droussea@lxbuild055.cern.ch>
+
+  * share/RecExCommon_topOptions.py : change jet name
+
+  * share/CombinedRec_config.py : correctly disable jet if calo setof
+
+  * share/RecExCommon_topOptions.py : add DetStatusMap in initial
+  ESD and AOD content
+
+2007-05-10  David Rousseau  <droussea@lxbuild055.cern.ch>
+
+  * share/RecoOutputItemList_jobOptions.py, SystemRec_joboptions.py : add detector status word
+
+
+2007-05-10  David Rousseau  <droussea@lxbuild055.cern.ch>
+
+  * share/CombinedRec_config.py : use jet configurable
+
+
+2007-04-30  David Rousseau  <droussea@lxbuild055.cern.ch>
+
+  * share/rdotoesdprod.py : add and use
+
+  * share/esdtoaodprod.py : add and use
+
+  * share/RecExCommon_topOptions.py : MessageSvc.statLevel=WARNING
+
+2007-04-26  David Rousseau  <droussea@lxbuild055.cern.ch>
+
+  * share/*.py : fix initial objkeystre when running on aod
+         add MissingETSig
+
+2007-04-25  David Rousseau  <droussea@lxbuild055.cern.ch>
+
+  * share/RecExCommon_topOptions.py : fix thedictaod thedictesd
+  following egamma change
+
+  * share/CBNT_config.py : cbnt egamma modif
+
+2007-04-16 Karim Bernardet <bernardet@cppm.in2p3.fr>
+
+  * share/CombinedRec_config.py :egammaRec with a working softeGetter
+
+2007-04-16  Ketevi A. Assamagan  <ketevi@bnl.gov>
+
+        * Fix ItemList of TauJet container and details in ESD
+
+2007-04-13  David Rousseau  <droussea@lxbuild055.cern.ch>
+
+  * share/CombinedRec_config.py, SystemRec_config.py : use except Exception
+
+2007-04-11  David Rousseau  <droussea@lxbuild055.cern.ch>
+
+  * share/*.py : introduce resilience with lots of try/except
+
+2007-04-10  David Rousseau  <droussea@lxbuild055.cern.ch>
+
+  * share/RecoOutputItemList_jobOptions.py: update jet output
+
+2007-03-30  Ketevi A. Assamagan  <ketevi@bnl.gov>
+
+  * Atlfast TrackParticle turn ON in RecExCommon_topOptions.py
+
+2007-03-29  David Rousseau  <droussea@lxbuild054.cern.ch>
+
+  * share/RecExCommon_topOptions.py : fill initial values for ObjKeyStore
+
+2007-03-28  David Rousseau  <droussea@lxbuild054.cern.ch>
+
+  * share/RecExCommon_topOptions.py : modif for bytestream (Jiri
+  Masik's suggestion)
+
+2007-03-22  David Rousseau  <droussea@lxbuild054.cern.ch>
+
+  * share/RecExCommon_topOptions.py : clean up dumpproperties
+
+2007-03-19  David Rousseau  <droussea@lxbuild054.cern.ch>
+
+  * share/CombinedRec_config.py: add CaloTrkMuID
+
+2007-03-07  David Rousseau  <droussea@lxbuild054.cern.ch>
+
+  * share/CBNT_config.py:  put back CBNT_egtruth
+
+
+2007-02-23  David Rousseau  <droussea@lxbuild054.cern.ch>
+
+  * share/SystemRec_config.py: exercise new jobproperties
+
+
+2007-02-22  David Rousseau  <droussea@lxbuild054.cern.ch>
+
+  * share/RecoOutputItemList_jobOptions.py: change egamma
+
+
+2007-02-20  David Rousseau  <droussea@lxbuild054.cern.ch>
+
+  * share/CBNT_config.py: egammaAOD config
+
+
+2007-02-14  David Rousseau  <droussea@lxbuild054.cern.ch>
+
+  * share/RecExCommon_topOptions.py: stupid bug
+
+
+2007-02-14  Ketevi A. Assamagan  <ketevi@bnl.gov>
+
+  * fix Muon dictionary loading
+
+
+2007-02-08  David Rousseau  <droussea@lxbuild055.cern.ch>
+
+  * share/RecExCommon_topOptions.py : different ObjKeyStore
+
+2007-01-30  David Rousseau  <droussea@lxbuild055.cern.ch>
+
+  * share/RecExCommon_doall.sh: prefer 32 binary over 64
+
+2007-01-24  David Rousseau  <droussea@lxplus006.cern.ch>
+
+  * share/RecExCommon_topOptions.py : typo
+
+2007-01-19  Ketevi A. Assamagan  <ketevi@bnl.gov>
+
+  * integrated the 12.0.5 fixes into the main branch
+
+2007-01-16  David Rousseau  <droussea@lxplus054.cern.ch>
+
+  * share/RecExCommon_topOptions.py : remove duplicated trigger line
+
+2007-01-07  Ketevi A. Assamagan  <ketevi@bnl.gov>
+
+  * share/RecoOutputItemList_jobOptions.py : remove CombinedMuonContainer
+
+2007-01-06  Ketevi A. Assamagan  <ketevi@bnl.gov>
+
+  * share/RecoOutputItemList_jobOptions.py : adapt to muonEvent change
+
+2007-01-05  David Rousseau  <droussea@lxbuild031.cern.ch>
+
+  * share/RecoOutputItemList_jobOptions.py : adapt to egamma change
+
+2006-12-21  David Rousseau  <droussea@lxplus011.cern.ch>
+
+  * share/RecoOutputPoolCnv_jobOptions.py: include EventCommonAthenaPool
+
+2006-12-12  David Rousseau  <droussea@lxplus002.cern.ch>
+  * merge back 12.0.4 RecExCommon-00-07-04-branch into HEAD
+
+2006-12-17  David Rousseau  <droussea@lxplus011.cern.ch>
+        * merge back RecExCommon-00-07-04-branch (12.0.4) into HEAD
+
+2006-11-28  David Rousseau  <droussea@lxplus011.cern.ch>
+
+  * share/RecExCommon_topOptions.py : no spurious warning if CBNT_Athena.Members empty
+
+  * share/myTopOptions.py: more comments
+
+2006-11-16  David Rousseau  <droussea@lxplus060.cern.ch>
+
+  * share/CBNT_Truth_jobOptions.py : add CBNTAA_SpclMC
+
+2006-11-10  David Rousseau  <droussea@lxplus061.cern.ch>
+
+  * share/RecExCommon_topOptions.py (theAuditorSvc): commit interval 10
+       not detailed chrono if trigger, because of randomized keys
+
+2006-11-07  David Rousseau  <droussea@lxplus013.cern.ch>
+
+  * share/RecoOutputItemList_jobOptions.py: MuonEntryRecordFilter => MuonEntryLayerFilter
+
+2006-10-27  David Rousseau  <droussea@lxplus008.cern.ch>
+
+  * share/SystemRec_config.py : do not manipulate doAODLVL1 anymore
+
+
+2006-10-20  David Rousseau  <droussea@lxplus018.cern.ch>
+
+  * share/AllDet_detDescr.py, RecExCommon_flags.py : delegate to RecExCond package
+
+
+2006-10-19  David Rousseau  <droussea@lxplus068.cern.ch>
+
+  * share/RecExCommon_flags.py (RecExCommonAlgs): make sure AOD truth is off if doTruth is false
+
+2006-10-17  David Rousseau  <droussea@lxplus052.cern.ch>
+
+  * doc/athenarec.sh, recexcommon_doal.sh : use CMT v1r18p20061003
+
+2006-10-16  David Rousseau  <droussea@lxplus065.cern.ch>
+
+  * share/RecExCommon_flags.py : ATLAS-CSC-01-02-00 now the default
+
+2006-10-13  David Rousseau  <droussea@lxplus012.cern.ch>
+
+  * share/RecExCommon_flags.py (RecExCommonAlgs): disable mugirl
+
+2006-10-12  David Rousseau  <droussea@lxbuild034.cern.ch>
+
+  * share/RecExCommon_links_zc.sh: add ATLAS-CSC-01-02-00 extracted top file
+
+  * share/RecExCommon_topOptions.py: fix rdo to rdo copy
+
+2006-10-09  David Rousseau  <droussea@lxplus059.cern.ch>
+
+  * share/RecExCommon_topOptions.py : all StreamXYZ now use AthenaOutputStreamTool
+
+2006-10-03  David Rousseau  <droussea@lxplus012.cern.ch>
+
+  * share/CBNT_config.py: put back CBNTAA_Audit
+
+  * share/SystemRec_config.py : use MuonRec_jobOptions.py
+   temporary disable CBNTAA_Audit (crash in getmem)
+
+  * merging 12.0.X branch RecExCommon-00-07-04-branch into the trunk:
+
+2006-09-11  David Rousseau  <droussea@lxbuild034.cern.ch>
+
+  * share/RecExCommon_topOptions.py : use EVentCount_jobOptions.py
+
+2006-08-28  David Rousseau  <droussea@lxbuild034.cern.ch>
+
+  * share/RecExCommon_topOptions.py , RecExCommon_flags.py: from Jack Cranshaw use registrationServices to handle correctly the different tag making situation
+
+2006-08-25  David Rousseau  <droussea@lxbuild034.cern.ch>
+
+  * share/CombinedRec_config.py: use MuidExample/MuonIdentification_jobOptions.py
+
+  * Testing/script_post_check.sh, script_pre_check.sh : fix gmake chech ATN test
+
+  * share/RecExCommon_flags.py (RecExCommonFlags): CBNTAthenaAware now true by default (only for 12.X.0)
+
+2006-08-24  David Rousseau  <droussea@lxbuild034.cern.ch>
+
+  * share/RecExCommon_topOptions.py : ParticleEventAthenaPool->ParticleBuilderOptions
+
+
+
+2006-09-29  David Rousseau  <droussea@lxbuild034.cern.ch>
+
+  * share/RecExCommon_topOptions.py : possibility to not load
+       trigger pool info
+
+2006-09-29  David Rousseau  <droussea@lxbuild034.cern.ch>
+
+  * share/rdotordo.py : do not run any alg
+
+
+2006-09-26  David Rousseau  <droussea@lxbuild034.cern.ch>
+
+  * share/SystemRec_config.py : muon clusterization after rdotoprepdata
+
+  * share/RecExCommon_topOptions.py : fix tag handling, load RecAthenaPool also when reading AOD
+
+2006-09-20  David Rousseau  <droussea@lxbuild034.cern.ch>
+
+  * share/RecExCommon_topOptions.py : add TrigEventAthenaPool_jobOptions.py
+
+
+2006-09-20  David Rousseau  <droussea@lxplus065.cern.ch>
+
+  * share/RecExCommon_topOptions.py (EventCounter): add EDMMonitor
+
+  * share/CBNT_config.py: reeanable tau1p3p cbnt
+
+2006-09-19  David Rousseau  <droussea@lxplus051.cern.ch>
+
+  * share/CombinedRec_config.py: tau1p3p by default
+
+2006-09-16  David Rousseau  <droussea@lxplus052.cern.ch>
+
+  * share/RecExCommon_flags.py (RecExCommonAlgs): fix aodall logic
+
+2006-09-15  David Rousseau  <droussea@lxbuild034.cern.ch>
+
+  * share/RecExCommon_flags.py (RecExCommonAlgs): fix aodall logic
+
+
+2006-09-14  David Rousseau  <droussea@lxplus070.cern.ch>
+
+  * share/RecExCommon_flags.py : fix doAODall handling
+
+2006-09-12  David Rousseau  <droussea@lxplus016.cern.ch>
+
+  * share/RecExCommon_flags.py: fix typ AODAll-> AODall
+
+2006-09-12  David Rousseau  <droussea@lxbuild034.cern.ch>
+
+  * remove python/GlobalFlags.py : has been moved since long in AthenaCommon/python
+
+2006-09-11  David Rousseau  <droussea@lxbuild034.cern.ch>
+
+  * share/RecExCommon_topOptions.py : EventCount moved to AthenaPoolTools
+
+2006-09-07  David Rousseau  <droussea@lxplus064.cern.ch>
+
+  * share/RecExCommon_flags.py (RecExCommonFlags): preparing multiple track collection in ESD and AOD
+
+2006-09-06  David Rousseau  <rousseau@lal.in2p3.fr>
+
+  * share/RecExCommon_topOptions.py : add VxMultiVertex dictionary
+
+2006-09-04  David Rousseau  <droussea@lxbuild034.cern.ch>
+
+  * share/CombinedRec_config.py, CBNT_config.py: add in tau1p3p (commented out so far)
+
+  * Testing/* : correct failure detection of ATN test
+
+2006-08-31  David Rousseau  <droussea@lxplus011.cern.ch>
+
+  * share/CBNT_config.py: add mutagtool library
+  use new InDetConversionCBNT following COnversionALgs evolution
+
+2006-08-28  David Rousseau  <droussea@lxbuild034.cern.ch>
+
+  * share/RecExCommon_links_cern_zc.sh: dc3-07 top file
+
+2006-08-25  David Rousseau  <droussea@lxbuild034.cern.ch>
+
+  * Testing/script_pre_check.sh: fix
+
+2006-08-24  David Rousseau  <droussea@lxbuild034.cern.ch>
+
+  * Testing/script_post_check.sh: script_pre_check.sh
+
+  * share/RecExCommon_topOptions.py : McParticleEventAthenaPool->ParticleBuilderOptions
+
+
+2006-12-12  David Rousseau  <droussea@lxplus002.cern.ch>
+
+  * share/CombinedRec_config.py: include MuonTruth there
+
+2006-12-11  David Rousseau  <droussea@lxplus019.cern.ch>
+
+  * share/RecExCommon_topOptions.py : put back atlfast at the right place
+
+  * share/RecoOutputItemList_jobOptions.py : muon output item list now from MuonRecExample
+
+2006-12-02  David Rousseau  <droussea@lxplus006.cern.ch>
+
+  * share/RecExCommon_topOptions.py, aodtosan.py : introduce SAN
+
+2006-12-01  David Rousseau  <droussea@lxplus057.cern.ch>
+
+  * share/RecoOutputItemList_jobOptions.py : fix list of jets
+         explicit egamma
+
+  * share/RecoOutputPoolCnv_jobOptions.py: add CaloAthenaPoolPoolCnv for cluster T/P separation
+
+2006-12-01  David Rousseau  <droussea@lxplus053.cern.ch>
+
+  * share/CombinedRec_config.py, CBNT_config.py : include JetReco jobO
+
+2006-11-28  David Rousseau  <droussea@lxplus005.cern.ch>
+
+  * share/tagtocbnt.py : add TAG(AOD)->CBNT
+
+  * share/aodtoaodtag.py  : add AOD->AOD + TAG
+
+2006-11-28  David Rousseau  <droussea@lxplus011.cern.ch>
+
+  * share/RecExCommon_topOptions.py : no spurious warning from CBNT_Athena.Members
+
+2006-11-24  David Rousseau  <droussea@lxbuild034.cern.ch>
+
+  * share/rdotoesdnotrigger.py : remove doAODLVL1 (obsolete)
+
+2006-11-24  David Rousseau  <droussea@lxplus059.cern.ch>
+
+  * share/CBNT_config.py: include TileMuId/CBNT_TileMu_jobOptions.py"
+
+2006-11-17  David Rousseau  <droussea@lxplus002.cern.ch>
+
+  * share/RecExCommon_topOptions.py  : remove use of doAODLVL1
+  (now fully controlled from within trigger)
+
+
+2006-11-16  David Rousseau  <droussea@lxplus060.cern.ch>
+
+  * share/CBNT_Truth_jobOptions.py :add CBNTAA_SpclMC
+
+2006-11-09  David Rousseau  <droussea@lxplus011.cern.ch>
+
+  * share/RecExCommon_topOptions.py: commit interval 10
+
+2006-11-07  David Rousseau  <droussea@lxplus013.cern.ch>
+
+  * share/RecoOutputItemList_jobOptions.py : MuonEntryRecordFilter => MuonEntryLayerFilter
+
+2006-10-27  David Rousseau  <droussea@lxplus008.cern.ch>
+
+  * share/SystemRec_config.py : do not manipulate AODLVL1 anymore
+
+2006-10-20  David Rousseau  <droussea@lxplus018.cern.ch>
+
+  * share/AllDet_detDescr.py, RecExCommon_flags.py : delegate to RecExCond package
+
+2006-10-19  David Rousseau  <droussea@lxplus068.cern.ch>
+
+  * share/RecExCommon_flags.py : switch of the truth also for the AOD
+
+2006-10-17  David Rousseau  <droussea@lxplus052.cern.ch>
+
+  * doc/athenarec.sh, RecExCommon_doall.sh : switch to cmt v1r18p20061003
+
+  * share/RecExCommon_topOptions.py : StreamTAG was not run !!!
+
+2006-10-16  David Rousseau  <droussea@lxplus065.cern.ch>
+
+  * share/RecExCommon_flags.py : ATLAS-CSC-01-02-00 now default
+
+2006-10-13  David Rousseau  <droussea@lxplus012.cern.ch>
+
+  * share/RecExCommon_flags.py: disable mugirl
+
+2006-10-12  David Rousseau  <droussea@lxbuild034.cern.ch>
+
+  * share/RecExCommon_links_zc.sh : add ATLAS-CSC-01-02-00 extracted top file
+
+  * share/RecExCommon_topOptions.py: fix rdo to rdo copy
+
+  * share/SystemRec_config.py : use muon example
+
+2006-09-29  David Rousseau  <droussea@lxbuild034.cern.ch>
+
+  * share/RecExCommon_topOptions.py : possibility to not load
+       trigger pool info
+
+2006-09-29  David Rousseau  <droussea@lxbuild034.cern.ch>
+
+  * share/rdotordo.py : do not run any alg
+
+
+2006-09-26  David Rousseau  <droussea@lxbuild034.cern.ch>
+
+  * share/SystemRec_config.py : muon clusterization after rdotoprepdata
+
+  * share/RecExCommon_topOptions.py : fix tag handling, load RecAthenaPool also when reading AOD
+
+2006-09-20  David Rousseau  <droussea@lxbuild034.cern.ch>
+
+  * share/RecExCommon_topOptions.py : add TrigEventAthenaPool_jobOptions.py
+
+
+2006-09-20  David Rousseau  <droussea@lxplus065.cern.ch>
+
+  * share/RecExCommon_topOptions.py (EventCounter): add EDMMonitor
+
+  * share/CBNT_config.py: reeanable tau1p3p cbnt
+
+2006-09-19  David Rousseau  <droussea@lxplus051.cern.ch>
+
+  * share/CombinedRec_config.py: tau1p3p by default
+
+2006-09-16  David Rousseau  <droussea@lxplus052.cern.ch>
+
+  * share/RecExCommon_flags.py (RecExCommonAlgs): fix aodall logic
+
+2006-09-15  David Rousseau  <droussea@lxbuild034.cern.ch>
+
+  * share/RecExCommon_flags.py (RecExCommonAlgs): fix aodall logic
+
+
+2006-09-14  David Rousseau  <droussea@lxplus070.cern.ch>
+
+  * share/RecExCommon_flags.py : fix doAODall handling
+
+2006-09-12  David Rousseau  <droussea@lxplus016.cern.ch>
+
+  * share/RecExCommon_flags.py: fix typ AODAll-> AODall
+
+2006-09-12  David Rousseau  <droussea@lxbuild034.cern.ch>
+
+  * remove python/GlobalFlags.py : has been moved since long in AthenaCommon/python
+
+2006-09-11  David Rousseau  <droussea@lxbuild034.cern.ch>
+
+  * share/RecExCommon_topOptions.py : EventCount moved to AthenaPoolTools
+
+2006-09-07  David Rousseau  <droussea@lxplus064.cern.ch>
+
+  * share/RecExCommon_flags.py (RecExCommonFlags): preparing multiple track collection in ESD and AOD
+
+2006-09-06  David Rousseau  <rousseau@lal.in2p3.fr>
+
+  * share/RecExCommon_topOptions.py : add VxMultiVertex dictionary
+
+2006-09-04  David Rousseau  <droussea@lxbuild034.cern.ch>
+
+  * share/CombinedRec_config.py, CBNT_config.py: add in tau1p3p (commented out so far)
+
+  * Testing/* : correct failure detection of ATN test
+
+2006-08-31  David Rousseau  <droussea@lxplus011.cern.ch>
+
+  * share/CBNT_config.py: add mutagtool library
+  use new InDetConversionCBNT following COnversionALgs evolution
+
+2006-08-28  David Rousseau  <droussea@lxbuild034.cern.ch>
+
+  * share/RecExCommon_links_cern_zc.sh: dc3-07 top file
+
+2006-08-25  David Rousseau  <droussea@lxbuild034.cern.ch>
+
+  * Testing/script_pre_check.sh: fix
+
+2006-08-24  David Rousseau  <droussea@lxbuild034.cern.ch>
+
+  * Testing/script_post_check.sh: script_pre_check.sh
+
+  * share/RecExCommon_topOptions.py : McParticleEventAthenaPool->ParticleBuilderOptions
+
+
+2006-08-23  David Rousseau  <droussea@lxplus059.cern.ch>
+
+  * share/RecExCommon_flags.py, _topOptions.py : remove atlfast, now run as part of esd->aod step
+
+  * share/RecExCommon_topOptions.py : revert back changes for 12.X.0 only (AthenaServices -> OutpuStreamAthenaPool)
+
+  * share/CombinedRec_config.py, RecExCommon_flags.py : muGirl to replace MuidLowPt
+
+  * share/RecExCommon_topOptions.py, RecoOutputPoolCnv_jobOptions.py : clean-up typos
+
+2006-08-22  David Rousseau  <droussea@lxplus059.cern.ch>
+
+  * share/RecExCommon_flags.py, RecExCommon_topOptions.py : ParticleEventAthenaPool->ParticleBuilderOptions
+
+2006-08-18  Tadashi Maeno <tmaeno@bnl.gov>
+
+  * share/RecExCommon_topOptions.py : load OutputStreamAthenaPool instead of AthenaServices for MakeInputDataHeader
+  * RecExCommon-00-07-02 (12.X.0 only)
+
+2006-08-04  David Rousseau  <droussea@lxplus010.cern.ch>
+
+  * share/RecExCommon_topOptions.py (EventCounter): load TrackRecordCollection converters also if no reco
+
+  * share/SystemRec_config.py (logSystemRec_config): do not configure AtlasTrackingGeometry more than once
+
+  * share/RecExCommon_flags.py, RecExCommon_topOptions.py: introduce CollFromRDO
+
+2006-08-03  David Rousseau  <droussea@lxplus060.cern.ch>
+
+  * cmt/requirements: put back macro RecExRecoTest_TestConfiguration
+
+  * share/RecExCommon_topOptions.py: do not set EventSelector.RefName="Stream1" when reading RDO
+
+  * share/RecoOutputItemList_jobOptions.py (ToolSvc): MBTSContainer only once
+
+  * test/RecExCommon_TestConfiguration.xml: put back gmake chec test
+
+2006-08-02  David Rousseau  <droussea@lxplus020.cern.ch>
+
+  * Testing/CompareFiles.sh: only test against large cap WARNING ERROR FATAL
+
+
+2006-08-02  Ketevi A. Assamagan  <ketevi@bnl.gov>
+
+  * RecExCommon-00-06-94
+  * Fixed the ESD ItemList for Rec::MuonSpShowerContainer and Rec::SegmentParticleContainer
+
+
+2006-08-02  David Rousseau  <droussea@lxplus020.cern.ch>
+
+  * share/SystemRec_config.py : also include MuonRdoDigit_jobOptions.py on rome data
+
+
+2006-07-31  David Rousseau  <droussea@lxplus014.cern.ch>
+
+  * share/CombinedRec_config.py: switch off ObjMissingET if ID or Muon is off
+
+2006-07-30  Ketevi A. Assamagan  <ketevi@bnl.gov>
+
+  * RecExCommon-00-06-91
+  * job jobOptions addition of SegmentParticleContainer and MuonSpShowerContianer to ItemList
+
+2006-07-27  David Rousseau  <droussea@lxplus001.cern.ch>
+
+  * share/RecExCommon_topOptions.py : fix BS reading
+
+2006-07-25  David Rousseau  <droussea@lxplus004.cern.ch>
+
+  * share/CBNT_Truth_jobOptions.py (CBNT_Truth): max particles from 100000 to 20000
+
+2006-07-24  David Rousseau  <droussea@lxplus004.cern.ch>
+
+  * share/SystemRec_config.py : use CscThresholdClusterizationOptions.py instead of G4CscClusterOptions.py
+
+2006-07-21  David Rousseau  <droussea@lxplus003.cern.ch>
+
+  * share/RecExCommon_topOptions.py : handle correctly doHist=False and doCBNT=True
+  (MemStatAuditor): put back memStatAuditor by default
+
+2006-07-19  David Rousseau  <droussea@lxplus003.cern.ch>
+
+  * share/RecExCommon_doall.sh : apply_tag bugfix at the right place
+
+2006-07-14  Ketevi A. Assamagan <ketevi@bnl.gov>
+
+  * add the object based MissingEt stuff
+  * RecExCommon-00-06-84
+
+2006-07-12  Sandrine Laplace <laplace@lapp.in2p3.fr>
+  *  added photon clusters keys to ESD output list
+
+2006-07-12  Ketevi A. Assamagan <ketevi@bnl.gov>
+
+  * share/RecExCommon_flags.py at the request of Markus and John
+  * RecExCommon-00-06-82
+
+2006-07-06  David Rousseau  <droussea@lxplus009.cern.ch>
+
+  * share/aodtocbnt.py : doCBNT=True should be on !
+
+2006-07-05  David Rousseau  <droussea@lxplus018.cern.ch>
+
+  * share/RecExCommon_flags.py, RecExCommon_topOtions.py : introduce possibility to dump ascii file input of persint (controlled with doPersint=False by default)
+
+2006-07-03  David Rousseau  <droussea@lxplus064.cern.ch>
+
+  * share/RecExCommon_doall.sh : typo for normal release build + use apply_tag setup, apply_tag setupCMT
+
+2006-06-27  David Rousseau  <droussea@lxplus056.cern.ch>
+
+  * share/CombinedRec_config.py: switch of muid if ipatrec is off
+  (to be fixed)
+
+
+2006-06-27  David Rousseau  <droussea@lxplus056.cern.ch>
+
+  * share/RecExCommon_flags.py : introduce doRestrictedESD
+
+
+2006-06-26  David Rousseau  <droussea@lxplus006.cern.ch>
+
+  * share/RecExCommon_topOptions.py : put back MemStatAuditor
+
+  * share/RecoOutputItemList_jobOptions.py : add "TileCellContainer#MBTSContainer"
+
+  * share/CBNT_config.py: CBNT MissingET delegated to fragment
+
+  * share/RecExCommon_topOptions.py : only put TruthEvent in RDO
+
+2006-06-22  David Rousseau  <droussea@lxplus011.cern.ch>
+
+  * share/SystemRec_config.py : remove rpcclusterization
+
+2006-06-22  David Rousseau  <droussea@lxplus006.cern.ch>
+
+  * share/RecExCommon_flags.py CBNT_config.py : remove obsolete makeBothTrackParticle
+
+2006-06-22  David Rousseau  <droussea@lxplus067.cern.ch>
+
+  * share/SystemRec_config.py share/RecExCommon_flags.py : always load id dd tool
+
+2006-06-21  David Rousseau  <droussea@lxplus068.cern.ch>
+
+  * share/RecoOutputItemList_jobOptions.py : delegate ID ESD content
+
+2006-06-21  David Rousseau  <droussea@lxplus061.cern.ch>
+
+  * share/CBNT_config.py: improve handling of CBNT for clusters
+
+2006-06-20  David Rousseau  <droussea@lxplus063.cern.ch>
+
+  * share/RecExCommon_doall.sh : fix typo
+
+  * share/CBNT_Truth_jobOptions.py: enable CBNTAA_Truth
+
+2006-06-19  David Rousseau  <droussea@lxplus010.cern.ch>
+
+  * Testing/manyrecotests.sh : add dc3-05 tests
+
+  * share/RecExCommon_doall.sh : fix typo
+
+2006-06-16  David Rousseau  <droussea@lxplus064.cern.ch>
+
+  * share/RecoOutputItemList_jobOptions.py : explicit list of
+  CaloClusterContainer and related objects, and add muon prep data
+
+  * share/RecExCommon_topOptions.py : try to fix MemStatAuditor usage
+
+2006-06-15  David Rousseau  <droussea@lxplus059.cern.ch>
+
+  * share/RecExCommon_doall.sh, athenared.ch: treat properly 12.0.X nightlies
+
+2006-06-13  David Rousseau  <droussea@lxplus061.cern.ch>
+
+  * share/RecExCommon_flags.py: allow AOD to AOD copy
+
+2006-06-01  David Rousseau  <droussea@lxplus069.cern.ch>
+
+  * share/RecExCommon_topOptions.py : introduce doBackNavigation
+
+2006-05-30  David Rousseau  <droussea@lxplus059.cern.ch>
+
+  * share/RecExCommon_doall.sh : fix for project release build
+
+2006-05-30  David Rousseau  <droussea@lxplus061.cern.ch>
+
+  * share/MuonRdoDigit_jobOptions.py: fix typo
+
+2006-05-30  David Rousseau  <droussea@lxplus017.cern.ch>
+
+  * scripts/* remove obsolete rome trf
+
+2006-05-30  David Rousseau  <droussea@lxplus017.cern.ch>
+
+  * share/CombinedRec_config.py: doMuidLowPt to steer independently
+  of MuonID combined
+
+2006-05-29  David Rousseau  <droussea@lxplus062.cern.ch>
+
+  * doc/athenarec.sh: fix for release 12 and more
+
+2006-05-26  David Rousseau  <droussea@lxplus065.cern.ch>
+
+  * Testing/manyrecotests.sh : use afs test files if possible
+
+2006-05-22  Karim Bernardet  <bernardet@cppm.in2p3.fr>
+
+  * share/RecoOutputItemList_jobOptions.py : uncomment fullItemList += [ "tauContainer#*" ]
+
+2006-05-22  Karim Bernardet  <bernardet@cppm.in2p3.fr>
+
+  * share/RecExCommon_flags.py : switch on doMuonIDStandAlone and doMuonIDCombined
+
+2006-05-21  David Rousseau  <droussea@lxplus066.cern.ch>
+
+  * share/RecExCommon_flags.py : temporary switch off doMuonIDStandAlone
+
+2006-05-21  David Rousseau  <droussea@lxplus069.cern.ch>
+
+  * share/esdtocbnt.py: fix input esd file
+
+2006-05-18  David Rousseau  <droussea@lxplus012.cern.ch>
+
+  * share/CombinedRec_config.py: add mugirl
+
+2006-05-15  David Rousseau  <droussea@lxplus001.cern.ch>
+
+  * share/RecExCommon_links_zc.sh: make sure no spurious error when
+  building PoolFileCatalog
+
+2006-05-12  David Rousseau  <droussea@lxplus007.cern.ch>
+
+  * share/RecoOutputItemList_jobOptions.py : clean-up
+
+2006-05-11  David Rousseau  <droussea@lxplus057.cern.ch>
+
+  * doc/athenarec.sh: adapt to project build
+
+2006-05-10  David Rousseau  <droussea@lxplus006.cern.ch>
+
+  * cmt/requirements: use AtlasReconstructionRunTime
+
+2006-05-05  David Rousseau  <droussea@lxplus004.cern.ch>
+
+  * share/SystemRec_config.py : load muon cabling even if RDO->RDO
+
+  * share/CBNT_Truth_jobOptions.py : increase max number of truth
+  particles to 100000
+
+  * share/RecoOutputPoolCnv_jobOptions.py: specify LArTowerEMHEC
+
+2006-04-25  David Rousseau  <droussea@lxplus003.cern.ch>
+
+  * share/RecExCommon_topOptions.py if readColl handle correctly RefName
+
+  * share/RecoOutputItemList_jobOptions.py : put back
+  JetCollection#KtParticleJets and the like (not sure why)
+
+2006-04-19  David Rousseau  <droussea@lxplus057.cern.ch>
+
+  * share/RecExCommon_RTT_*.py : change default file DetDescrversion
+
+  * test/RecExCommon_TestConfiguration.xml: change file to be top
+  DC3 rather than higgs Rome.
+
+2006-04-13  David Rousseau  <droussea@lxplus067.cern.ch>
+
+  * share/CBNT_config.py: no more InDetTrackSummaryHelperTool/InDetTrackSummaryHelperTool_jobOptions.py"
+
+2006-04-11  David Rousseau  <droussea@lxplus004.cern.ch>
+
+  * share/RecExCommon_topOptions.py : magic reordering of converters
+
+  * share/RecoOutputPoolCnv_jobOptions.py: magic reordering of converters
+
+  * share/SystemRec_config.py : config trackinggeometry also when
+  making aod
+
+2006-04-03  David Rousseau  <droussea@lxplus013.cern.ch>
+
+  * share/CBNT_config.py: fix eflow jet config
+
+2006-03-31  David Rousseau  <droussea@lxplus059.cern.ch>
+
+  * share/RecExCommon_flags.py (RecExCommonAlgs): doMuonIdCombined
+  false by default (temporary)
+
+2006-03-30  David Rousseau  <droussea@lxplus004.cern.ch>
+
+  * share/SystemRec_config.py : no need to switch of id alg by hand anymore
+
+2006-03-29  David Rousseau  <droussea@lxplus004.cern.ch>
+
+  * share/RecExCommon_flags.py : introduce newTracking flag
+
+  * share/RecExCommon_links_zc.sh: also take TrackingGeometryMaterialDescription.RomeInitial.root
+
+2006-03-14  David Rousseau  <droussea@lxplus059.cern.ch>
+
+  * share/RecExCommon_topOptions.py : load  McAOD_PoolCnv_jobOptions
+  if relevant
+
+2006-03-14  David Rousseau  <droussea@lxplus016.cern.ch>
+
+  * share/CBNT_Truth_jobOptions.py: CBNT_Truth AthenaAware
+
+2006-03-12  David Rousseau  <droussea@lxplus016.cern.ch>
+
+  * share/RecoOutputItemList_jobOptions.py : fix stupid typo ESD Itemlist
+
+2006-03-09  David Rousseau  <droussea@lxplus017.cern.ch>
+
+  * share/RecExCommon_topOptions.py : print output item lists
+
+2006-03-09  David Rousseau  <droussea@lxplus074.cern.ch>
+
+  * test/RecExCommon_TestConfiguration.xml: ATN xml test
+
+2006-03-08  David Rousseau  <droussea@lxplus014.cern.ch>
+
+  * share/*.py: introduce CBNTAthenaAware
+
+2006-03-07  David Rousseau  <droussea@lxplus017.cern.ch>
+
+  * share/RecoOutputPoolCnv_jobOptions.py: TrkEventAthenaPool also
+  for muon stand alone
+
+2006-03-03  David Rousseau  <rousseau@lal.in2p3.fr>
+
+  * share/RecExCommon_RTT_empty.py : doTruth = False
+
+2006-03-01  J T M Baines  <jtb@heplnx103.pp.rl.ac.uk>
+
+  * share/Trigger_config.py (logTrigger_config): include AnalysisTrigger_jobOptions.py moved after TriggerRelease include
+
+2006-02-13  David Rousseau  <rousseau@lal.in2p3.fr>
+
+  * share/RecExCommon_doall.sh : fix cmt config
+
+  * share/RecExCommon_topOptions.py : should run with ID off
+
+2006-02-10  David Rousseau  <rousseau@lal.in2p3.fr>
+
+  * share/RecExCommon_doall.sh : fix for project build
+
+2006-02-09  David Rousseau  <rousseau@lal.in2p3.fr>
+
+  * share/RecExCommon_topOptions.py : more protection if no calo
+
+
+2006-02-08  David Rousseau  <rousseau@lal.in2p3.fr>
+
+  * share/RecoOutputItemList_jobOptions.py : some TrackCollection
+  missing or wrong in ESD
+  fix typo
+
+2006-02-07  David Rousseau  <rousseau@lal.in2p3.fr>
+
+  * share/RecoOutputPoolCnv_jobOptions.py: MuonRIOOnTrack->MuonRIO_OnTrack
+
+2006-02-03  David Rousseau  <rousseau@lal.in2p3.fr>
+
+  * doc/athenarec.sh : update for project build
+
+
+2006-02-03  David Rousseau  <rousseau@lal.in2p3.fr>
+
+  * share/*.py : doTrigger=True by default
+
+
+2005-12-15  David Rousseau  <droussea@lxplus018.cern.ch>
+
+  * share/AllDet_detDescr.py: now use IOVRecExCommon.py
+
+2005-12-09  David Rousseau  <droussea@lxplus018.cern.ch>
+
+  * share/RecExCommon_links_cern_zc.sh: change top file
+
+2005-12-05  David Rousseau  <droussea@lxplus015.cern.ch>
+
+  * share/CBNT_config.py: correct CBNT config for topo em cluster
+
+
+2005-11-29  David Rousseau  <droussea@lxplus051.cern.ch>
+
+  * share/*.py: correct test of DetDescrVersion (was affecting DC2 reco)
+
+2005-11-22  David Rousseau  <droussea@lxplus073.cern.ch>
+
+  * share/RecExCommon_dump.C : improve ps file handling
+
+  * Testing/manyrecotests.sh : add ATLAS-DC3-01 tests
+
+  * share/CBNT_config.py: no ESD specific variable for CBNT_VxPrimary
+
+2005-11-17  David Rousseau  <droussea@lxplus073.cern.ch>
+
+  * share/*.py : adapt to DetDescrversion=ATLAS-DC3-01
+
+2005-11-16  David Rousseau  <droussea@lxplus060.cern.ch>
+
+  * share/AllDet_detDescr.py: do nto use conddb in 11.0.X
+
+2005-11-16  David Rousseau  <droussea@lxplus074.cern.ch>
+
+  * Testing/manyrecotests.sh : add readESD only test
+
+  * share/RecoOutputItemList_jobOptions.py : use MissingET#* rather
+  than explicit list
+
+2005-11-14  David Rousseau  <droussea@lxplus014.cern.ch>
+
+  * Testing/Reference_RecExCommonTesting.log: update reference log file
+
+  * share/RecoOutputItemList_jobOptions.py : fix
+  TrackTruthCollection key in ESD output itemlist
+
+2005-11-09  David Rousseau  <droussea@lxplus071.cern.ch>
+
+  * share/AllDet_detDescr.py: configure condition db
+
+  * share/CombinedRec_config.py: hide Mooretotracktool WARNING
+
+2005-11-03  David Rousseau  <droussea@lxplus015.cern.ch>
+
+  * Testing/Reference_RecExCommonTesting.log: fix reference fle
+
+2005-11-01 S. Rajagopalan <srinir@bnl.gov>
+  * Commented out writing INav4MomColl/CombinedTower
+  * only wrte out CaloTowerColl/CombTower with old symLinks
+
+2005-10-28  David Rousseau  <droussea@lxplus073.cern.ch>
+
+  * share/CBNT_config.py SystemRec_config.py : adapt to DetDescrVersion="ATLAS-DC3-01"
+
+2005-10-26  David Rousseau  <droussea@lxplus051.cern.ch>
+
+  * share/RecoOutputItemList_jobOptions.py : do not write LArEM tower
+
+2005-10-25  David Rousseau  <droussea@lxplus053.cern.ch>
+
+  * share/RecExCommon_topOptions.py : add call to EventCount if
+  doDumpInputPoolContent true
+
+2005-10-18 Hong Ma <hma@bnl.gov>
+  * add more Calo objects in RecoOutputItemList_jobOptions.py
+
+2005-10-17  David Rousseau  <droussea@lxplus016.cern.ch>
+
+  * share/RecExCommon_topOptions.py : use ByteStreamEventStorageInputSvc"
+
+2005-10-13  David Rousseau  <droussea@lxplus009.cern.ch>
+
+  * cmt/requirements: use AtlasAnalysisRunTime
+
+  * share/RecExCommon_topOptions.py : always enable checkdictionary,
+  only change output
+
+2005-10-06  David Rousseau  <droussea@lxplus012.cern.ch>
+
+  * share/CombinedRec_config.py: change muid
+
+2005-10-04  David Rousseau  <droussea@lxplus009.cern.ch>
+
+  * share/SystemRec_config.py : remove MuonPrepData
+
+  * share/RecExCommon_topOptions.py : go back to original TopAlg.
+
+2005-10-04  David Rousseau  <droussea@lxplus016.cern.ch>
+
+  * share/RecExCommon_topOptions.py : put back stream1. Change
+  StreamESD and StreamAOD from theApp.TopAlg to TheApp.OutStream
+
+2005-09-26  David Rousseau  <droussea@lxplus068.cern.ch>
+
+  * share/CombinedRec_config.py: add MuTag
+
+2005-09-15  Tadashi Maeno <tmaen@bnl.gov>
+
+  * share/RecExCommon_topOptions.py: removed StreamTAG.ExtraRefNames
+
+2005-08-31  David Rousseau  <droussea@lxplus073.cern.ch>
+
+  * share/AllDet_detDescr.py: update for lardetdescr
+
+2005-08-29  David Rousseau  <droussea@lxplus065.cern.ch>
+
+  * share/RecExCommon_RTT_*.py, _flags.py myTopOptions.py  : writing
+  esd aod and tag is now the default
+
+2005-08-26  David Rousseau  <droussea@lxplus073.cern.ch>
+
+  * share/RecExCommon_flags.py (RecExCommonFlags): writing ESD AOD
+  and TAG now enabled by default
+
+
+2005-08-25  David Rousseau  <droussea@lxplus053.cern.ch>
+
+  * share/RecExCommon_topOptions.py : doCheckJOT : check multiple
+  include and property modifications
+
+2005-08-25  David Rousseau  <droussea@lxplus053.cern.ch>
+
+  * share/CBNT_config.py: CBNT_AOD also if read AOD
+
+  * share/RecExCommon_topOptions.py : load recathenapool even if
+  just reading ESD
+
+2005-08-24  David Rousseau  <droussea@lxplus066.cern.ch>
+
+  * share/RecExCommon_flags.py : adapt to InDetFlags change
+
+  * share/RecExCommon_topOptions.py : adapt to atlfast change
+
+2005-08-23  David Rousseau  <droussea@lxplus065.cern.ch>
+
+  * share/RecExCommon_links_zc.sh, links_zern_zc.sh,
+  RecExCommonFlags.py : default test file is now redigitised with 10.0.4.
+
+
+2005-08-18  David Rousseau  <droussea@lxplus059.cern.ch>
+
+  * share/RecExCommon_links.sh: do not anymore put castor file in
+  the catalog by default, RecExCommon_links_cern_zc.sh need be
+  called separately when needed
+
+2005-08-17  David Rousseau  <droussea@lxplus072.cern.ch>
+
+  * share/RecExCommon_dump.C, RecExCommonTesting.log : fixes,
+
+2005-08-02  Ketevi A. Assamagan  <ketevi@bnl.gov>
+
+  * new share/RecExCommon_condDb.py from Richard Hawkings
+
+2005-08-02  Sandrine Laplace <laplace@lapp.in2p3.fr>
+  *  modified share/CBNT_config.py following A. Poppleton comments for the doMuonIDStandalone case
+
+2005-07-30  Ketevi A. Assamagan  <ketevi@bnl.gov>
+
+  * share/RecExCommon_XYZ.py: following Tadashi,
+  * doReadAOD and doWriteTag
+
+2005-07-13  David Rousseau  <droussea@lxplus072.cern.ch>
+
+  * share/RecExCommon_XYZ.py: from Tadashi, possibility to write
+  ESD, AOD and Tag simultenaously
+
+2005-07-12  David Rousseau  <droussea@lxplus016.cern.ch>
+
+  * share/AllDet_detDescr.py:
+  LArDetMgrDetDescrCnv/LArDetMgrDetDescrCnv_joboptions.py to LArDetDescr/LArDetDescr_joboptions.py
+
+2005-07-06  David Rousseau  <droussea@lxplus005.cern.ch>
+
+  * share/SystemRec_config.py: create moore trackparticle
+
+2005-06-30  David Rousseau  <droussea@lxplus074.cern.ch>
+
+  * share/CombinedRec_config.py: put back some protection on egamma
+  if ID is off
+
+2005-06-27  David Rousseau  <droussea@lxplus069.cern.ch>
+
+  * share/CombinedRec_config.py: do not switch off egamma anymore if
+  ID is off
+
+  * share/RecExCommon_flags.py : Rome H->e+e-m+m- now default
+
+2005-06-23  David Rousseau  <droussea@lxplus061.cern.ch>
+
+  * share/RecExCommon_*.py : introduce doWriteRDO option  (experimental)
+
+2005-06-20  David Rousseau  <droussea@lxplus012.cern.ch>
+
+  * share/RecoOutputItemList_jobOptions.py : fix track output
+
+2005-06-17  David Rousseau  <droussea@lxplus016.cern.ch>
+
+  * share/RecoOutputItemList_jobOptions.py : important fix
+
+2005-06-16  David Rousseau  <droussea@lxplus016.cern.ch>
+
+  * share/SystemRec_config.py: better handle presence of calocell in ESD
+
+  * share/RecoOutputItemList_jobOptions.py : list trackcollection explicitly
+
+2005-06-14  David Rousseau  <droussea@lxplus016.cern.ch>
+
+  * share/RecExCommon_topOptions.py: load both MuonEventAthenaPool
+  and InDetEventAthenaPool otherwise major slow down of calo
+
+  * cmt/requirements: fix RTT macro
+
+  * share/RecExCommon_flags.py : doBtagging back on
+
+2005-06-03  David Rousseau  <droussea@lxplus020.cern.ch>
+
+  * run/RecExCommonTesting.log: update
+  * share/RecExCommon_flags.py : disable btagging
+
+2005-05-31  David Rousseau  <droussea@lxplus007.cern.ch>
+
+  * share/SystemRec_config.py: no AODLVL1 if no calo
+
+2005-05-12  David Rousseau  <droussea@lxplus013.cern.ch>
+
+  * test/RecExCommon_TestConfiguration.xml, cmt/requirements: new RTT file
+
+2005-05-11  David Rousseau  <droussea@lxplus012.cern.ch>
+
+  * share/CombinedRec_config.py: remove btagadapter
+
+2005-04-11 Davide Costanzo <DCostanzo@bnl.gov>
+  * main reco trf to use 2 db servers in round-robin
+
+2005-04-07 Davide Costanzo <DCostanzo@bnl.gov>
+  * Add B phys transformation
+    rome.1001.reco.MuonDigit.OverrideRE.B.trf
+  * tag RecExCommon-00-03-48
+
+2005-04-06  David Rousseau  <droussea@lxplus056.cern.ch>
+
+  * share/*.py : remove zebra support
+
+
+2005-04-04 Davide Costanzo <DCostanzo@bnl.gov>
+  * update trf to keep specials up to eta = 1000
+  * tag RecExCommon-00-03-46
+
+2005-04-04 Davide Costanzo <DCostanzo@bnl.gov>
+  * update trf in the script directory
+  * tag RecExCommon-00-03-45
+
+
+2005-04-01  David Rousseau  <droussea@lxplus054.cern.ch>
+
+  * share/RecExCommon_flags.py, CombinedRec, CBNT_config: split
+  muonid standalone
+
+
+
+
+2005-03-22  David Rousseau  <droussea@lxplus071.cern.ch>
+
+  * share/RecExCommon_topOptions.py: augment vsize limit (from
+  Gregory Ripkine)
+
+2005-03-19  David Rousseau  <droussea@lxplus055.cern.ch>
+
+  * share/RecoOutputItemList_jobOptions.py: add MissingET#MET_Topo
+
+2005-03-16  David Rousseau  <droussea@lxplus019.cern.ch>
+
+  * share/CBNT_config.py: add Muon Entry record
+
+2005-03-11  David Rousseau  <droussea@lxplus054.cern.ch>
+
+  * share/RecoOutputItemList_jobOptions.py, SystemRec_config.py: filter TrackRecordCollection
+
+2005-02-25  David Rousseau  <droussea@lxplus019.cern.ch>
+
+  * share/CBNT_config.py: switch off CBNT_TrackParticle if readESD
+   this should be understood and fixed
+
+2005-02-23  David Rousseau  <droussea@lxplus053.cern.ch>
+
+  * test/RTT/RecExCommon_RTT_jobs.xml: more RTT jobs
+
+2005-02-22  David Rousseau  <droussea@lxplus053.cern.ch>
+
+  * share/RecExCommon_flags.py, RecExCommon_links_cern_zc.sh :
+  update BS file
+
+2005-02-21  David Rousseau  <droussea@lxplus028.cern.ch>
+
+  * share/RecExCommon_flags.py : fix readmuondigits thing
+
+2005-02-16  David Rousseau  <droussea@lxplus066.cern.ch>
+
+  * share/RecExCommon_topOptions.py : CBNT_Athena called after the
+     AOD builder
+
+2005-02-14  David Rousseau  <droussea@lxplus059.cern.ch>
+
+  * cmt/requirements + test/RTT : add RTT files
+
+  * share/SystemRec_config.py: two calo topo cluster coll
+
+2005-02-09  David Rousseau  <droussea@lxplus018.cern.ch>
+
+  * share/RecoOutputItemList_jobOptions.py : include optionally TriggerOutputItemList
+
+2005-02-07  David Rousseau  <droussea@lxplus016.cern.ch>
+
+  * share/CombinedRec_config.py: add MuidParticleCreatorLowPt
+
+2005-02-03  David Rousseau  <droussea@lxplus058.cern.ch>
+
+  * share/AllDet_detDescr.py: fix RPC/MDT for DC2
+
+  * share/CombinedRec_config.py: nomuonid if no ipatrec
+
+2005-02-01  David Rousseau  <droussea@lxplus016.cern.ch>
+
+  * share/CBNT_config.py: add LArRecUtils dll for cbnt_larcell
+
+2005-01-28  David Rousseau  <droussea@lxplus002.cern.ch>
+
+  * share/SystemRec_config.py: fix for muon for initial layout
+
+2005-01-25  David Rousseau  <droussea@lxplus005.cern.ch>
+
+  * share/*.py: changes for muon reco
+
+2005-01-14  David Rousseau  <droussea@lxplus007.cern.ch>
+
+  * share/RecExCommon_topOptions.py: fix for muon for initial layout
+       when doWriteESD=False
+
+2005-01-13  David Rousseau  <droussea@lxplus051.cern.ch>
+
+  * scripts/rome.reco.trf: (frome Davide Costanzo) first version
+     of rome reco transf
+
+2005-01-05  David Rousseau  <droussea@lxplus039.cern.ch>
+
+  * share/RecExCommon_flags.py, topOptions.py : introduce
+  doCheckDictionary flag, add EventCounter alg as first algorithm
+
+2005-01-05  David Rousseau  <droussea@lxplus039.cern.ch>
+
+  * doc/athenarec.sh: do not rebuild RecExCommon package
+
+
+2005-01-04  David Rousseau  <droussea@lxplus039.cern.ch>
+
+  * share/SystemRec_config.py, RecExCommon_flags.py : add
+  readMuonDigit flag for Rome data
+
+
+2004-12-22  David Rousseau  <droussea@lxplus008.cern.ch>
+
+  * share/RecExCommon_topOptions.py  dummy first alg if
+  detailed auditor
+
+2004-12-13  David Rousseau  <droussea@lxplus024.cern.ch>
+
+  * share/RecExCommon_topOptions.py : switch off RoIBResultToAOD for Rome
+
+2004-12-10  David Rousseau  <droussea@lxplus031.cern.ch>
+
+  * share/AllDet_detDescr.py: use geoModelInit.py for initial layout
+
+2004-11-29  David Rousseau  <droussea@lxplus031.cern.ch>
+
+  * share/CombinedRec_config.py: add BTagAdapter
+
+2004-11-26  David Rousseau  <droussea@lxplus031.cern.ch>
+
+  * share/RecExCommon_dump.C : flexibility on root file name
+
+2004-11-25  David Rousseau  <droussea@lxplus011.cern.ch>
+
+  * share/RecExCommon_topOptions.py : use correctly RootNtupleOutput
+
+2004-11-17  Fredrik Akesson <fredrik.akesson@cern.ch>
+
+  * Added Track- and TrackParticleTruthCollection
+  into the output stream for ESD in RecoOutputItemList_jobOptions.py
+
+2004-11-08  David Rousseau  <droussea@lxplus040.cern.ch>
+
+  * share/*.py: first fix to get going with BS reading
+
+2004-11-04  David Rousseau  <droussea@lxplus003.cern.ch>
+
+  * doc/athenarec.sh : fix valgrind with oracle problem
+
+2004-10-22  David Rousseau  <droussea@lxplus015.cern.ch>
+
+  * share/AllDet_detDescr.py: use improved muon det descr fragments
+
+2004-10-20  David Rousseau  <droussea@lxplus055.cern.ch>
+
+  * share/RecExCommon_topOptions.py, flags.py : doDetailedAuditor
+
+2004-10-06  David Rousseau  <droussea@lxplus054.cern.ch>
+
+  * share/AllDet_detDescr.py: take most of detdescr from nova
+
+  * share/SystemRec_config.py: fix muon on zebra
+
+2004-10-05  David Rousseau  <droussea@lxplus054.cern.ch>
+
+  * share/AllDet_detDescr.py: muon geometry switches
+
+2004-09-30  David Rousseau  <droussea@lxplus005.cern.ch>
+
+  * share/RecExCommon_topOptions.py : move some reamining flag to
+  RecExCommon_flags (docaloNoise, doLArCellDirect)
+
+  * share/CombinedRec_config.py: add Staco
+
+2004-09-21  David Rousseau  <droussea@lxplus062.cern.ch>
+
+  * share/RecExCommon_topOptions.py : hbook ntuple name was wrong
+  (Fred Derue)
+
+2004-09-20  David Rousseau  <droussea@lxplus067.cern.ch>
+
+  * share/*.py: add myTopOptions.py for even more configurability
+
+2004-09-07  David Rousseau  <droussea@lxplus002.cern.ch>
+
+  * share/AllDet_detDescr.py: add Oracle access
+  * share/AllDet_detDescr.py: remove Oracle access, not harmless
+
+
+2004-09-07  David Rousseau  <droussea@lxplus069.cern.ch>
+
+  * share/RecExCommon_topOptions.py: write ESD, read ESD write AOD
+  * share/RecExCommon_flags.py, topOptions.py: more configurability
+
+
+2004-09-01  David Rousseau  <droussea@lxplus055.cern.ch>
+
+  * share/RecExCommon_flags.py : easier handling
+
+  * share/*_jobOptions.py: improve ESD writing
+
+2004-08-30  David Rousseau  <droussea@lxplus057.cern.ch>
+
+  * share/*.py : possibility to configure RecExCommon from outside
+
+  * share/CBNT_Truth_jobOptions.py : possibility to have photon or
+  electron daughters without cuts
+
+  * share/RecExCommon_links*.(c)sh: take into account offsite and zhell/cshell:
+
+2004-08-06  David Rousseau  <droussea@lxplus026.cern.ch>
+
+  * share/RecExCommon_topOptions.py : fixes
+
+2004-08-05  David Rousseau  <droussea@lxplus034.cern.ch>
+
+  * share/CBNT_Truth_jobOptions.py : Now handle corectly generator
+  and geant4
+
+2004-08-02  David Rousseau  <droussea@lxplus037.cern.ch>
+
+  * share/CombinedRec_config.py: start using CaloCombinedTower_jobOptions.py
+
+  * share/*.py:  replace doTracking by DetFlags.haveRIO.ID_on()
+
+2004-07-31  David Rousseau  <droussea@lxplus037.cern.ch>
+
+  * doc/athenarec.sh: fix (in particular valgrind)
+
+2004-07-21  David Rousseau  <droussea@lxplus035.cern.ch>
+
+  * share/SystemRec_config.py: CaloCellMaker_jobOptions working at last
+
+2004-07-20  David Rousseau  <droussea@lxplus026.cern.ch>
+
+  * add LVL1AOD
+
+2004-07-18  David Rousseau  <droussea@lxplus060.cern.ch>
+
+  * share/RecExCommon_topOptions.py : fixes
+  * Testing/Reference_RecExCommonTesting.log : update
+
+2004-07-05  David Rousseau  <droussea@lxplus004.cern.ch>
+
+  * share/RecExCommon_topOptions.py : read/writeESD
+
+2004-06-30  David Rousseau  <droussea@lxplus004.cern.ch>
+
+  * adapt to inner detector changes:
+
+2004-06-24  David Rousseau  <droussea@lxplus062.cern.ch>
+
+  * share/AllDet_detDescr.py: reshuffle following TileDetDescr changes
+
+2004-06-22  David Rousseau  <droussea@lxplus072.cern.ch>
+
+  * share/DetFlags.py replaced by AthenaCommon/DetFlags.py
+  * share/RecExCommon_topOptions.py use AthenaCommon/DetFlags.py
+
+2004-06-04  David Rousseau  <droussea@lxplus026.cern.ch>
+
+  * share/SystemRec_config.py: one CaloCellMaker for all calo
+
+  * share/RecExCommon_topOptions.py : G4 is now default, more fixes
+
+2004-05-27  David Rousseau  <droussea@lxplus033.cern.ch>
+
+  * run/RecExCommon_topOptions.py: many fixes
+
+2004-05-17  David Rousseau  <droussea@lxplus016.cern.ch>
+
+  * share/RecExCommon_topOptions.py : fixes
+
+2004-05-13  David Rousseau  <droussea@lxplus031.cern.ch>
+
+  * run again on G4
+
+2004-05-10  David Rousseau  <droussea@lxplus013.cern.ch>
+
+  * share/*.txt: major clean up : delete jobOption files
+
+2004-04-22  Tadashi Maeno  <Tadashi.Maeno@cern.ch>
+
+  * share/DetFlags.py: added DetFlags.xxx_on() and DetFlags.Print()
+
+2004-04-21  David Rousseau  <droussea@lxplus025.cern.ch>
+
+  * share/RecExCommon_topOptions.py DetFlags.py first version of real py file
+
+2004-04-20  David Rousseau  <droussea@lxplus005.cern.ch>
+
+  * share/RecExCommon_(G4)_jobOptions.txt/py: fixes
+          new G4 file
+
+2004-03-24  David Rousseau  <droussea@lxplus064.cern.ch>
+
+  * share/RecExCommon_read_jobOptions.txt: remove tile detdescr root
+
+2004-03-18  David Rousseau  <droussea@lxplus073.cern.ch>
+
+  * share/RecExCommon_G4_jobOptions.txt: more g4 alg
+
+2004-03-17  David Rousseau  <droussea@lxplus056.cern.ch>
+
+  * share/RecExCommon_*: many fixes also for g4 and pool
+
+2004-03-03  David Rousseau  <droussea@lxplus017.cern.ch>
+
+  * share/RecExCommon_jobOptions.txt: also CBNT_VxPrimary
+
+2004-03-03  David Rousseau  <droussea@lxplus008.cern.ch>
+
+  * share/RecExCommon_G4_jobOptions.txt: integrate id reco from G4
+
+2004-03-02  David Rousseau  <droussea@lxplus018.cern.ch>
+
+  * share/RecExCommon_jobOptions.txt: new prim vertex finder
+
+2004-02-25  David Rousseau  <droussea@lxplus033.cern.ch>
+
+  * share/RecExCommon_jobOptions.txt: new xkalman
+
+2004-02-13  David Rousseau  <droussea@lxplus005.cern.ch>
+
+  * run/RecExCommon_G4_jobOptions.txt: first attempt to run on G4
+   other files added
+
+2004-02-10  David Rousseau  <droussea@lxplus034.cern.ch>
+
+  * share/RecExCommon_links.sh: use get_files (almost) everywhere
+
+2004-02-02  David Rousseau  <droussea@lxplus083.cern.ch>
+
+  * cmt/requirements, RecExCommon_links.sh: cleanup more auxilliary
+         files now eached through PathResolver
+
+2004-01-30  David Rousseau  <droussea@lxplus022.cern.ch>
+
+  * cmt/requirements: use AthenaServices (temporary)
+
+  * share/RecExCommon_links.sh: PDGTABLE.Mev
+
+2004-01-28  David Rousseau  <droussea@lxplus028.cern.ch>
+
+  * share/*.py : add python file
+
+2004-01-26  David Rousseau  <droussea@lxplus005.cern.ch>
+
+  * share/RecExCommon_jobOptions.txt: fix cbnt_softe
+
+2004-01-23  David Rousseau  <droussea@lxplus016.cern.ch>
+
+  * share/RecExCommon_jobOptions.txt: add TileMuId and CaloTopoCLuster
+
+
+2004-01-21  David Rousseau  <droussea@lxplus011.cern.ch>
+
+  * share/RecExCommon_links.sh, requirements: reduce
+
+2004-01-20  David Rousseau  <droussea@lxplus011.cern.ch>
+
+  * doc/athenarec.sh : use get_file to get slug.car
+
+
+2004-01-14  David Rousseau  <droussea@lxplus017.cern.ch>
+
+  * cmt/requirements: temporary add use CLHEP
+
+2004-01-12  David Rousseau  <droussea@lxplus083.cern.ch>
+
+  * share/RecExCommon_jobOptions.txt: add softerec
+
+  * share/RecExCommon_doall.sh: cleanup by Christian
+
+2004-01-07  David Rousseau  <droussea@lxplus089.cern.ch>
+
+  * cmt/requirements: cleanup considerably using athenaRunTIme
+
+  * run/RecExCommon_jobOptions.txt: no special cluster for eflow anymore
+
+2003-12-26  David Rousseau  <droussea@lxplus011.cern.ch>
+
+  * share/RecExCommon_jobOptions.txt: switch on again MemStatAuditor
+     given better monitoring by MemStatAuditor
+
+  * update reference file
+
+2003-12-23  David Rousseau  <droussea@lxplus064.cern.ch>
+
+  * share/RecExCommon_(read)_jobOptions.txt: foresee LArCell write/read
+
+  * share/RecExCommon_jobOptions.txt: DumpMC in TruthExamples.
+     Remove misleading FILE ZEBRA.P. Add commented lines
+      for time limit
+
+
+2003-12-23  David Rousseau  <droussea@lxplus064.cern.ch>
+
+  * share/RecExCommon_doall.sh,athenarec.sh (HOMECMTDIR): new cmt/requirements location
+
+2003-12-23  David Rousseau  <droussea@lxplus064.cern.ch>
+
+  * Testing/CompareFiles.sh: FAILURE if files are different
+
+
+2003-12-17  David Rousseau  <droussea@lxplus005.cern.ch>
+
+  * share/CBNT_Truth_jobOptions.txt: improve for tau analysis
+
+2003-12-17  David Rousseau  <droussea@lxplus005.cern.ch>
+
+  * share/RecExCommon_jobOptions.txt: add InDetRawUtils.dll
+   also update reference log file
+
+
+2003-12-15  David Rousseau  <droussea@lxplus069.cern.ch>
+
+  * share/RecExCommon_jobOptions.txt: put back muonboy
+
+2003-12-09  David Rousseau  <droussea@lxplus073.cern.ch>
+
+  * run/RecExCommon_(read)_jobOptions.txt: add HepMC write/read
+
+2003-12-09  David Rousseau  <droussea@lxplus073.cern.ch>
+
+  * Testing/CompareFiles.sh: check succesfull completion
+
+2003-12-09  David Rousseau  <droussea@lxplus073.cern.ch>
+
+  * Testing/Reference_RecExCommonTesting.log: update reference
+
+2003-11-27  David Rousseau  <droussea@lxplus076.cern.ch>
+
+  * share/RecExCommon_read_jobOptions.txt:
+  JetCollection<CombinedJet> persistency
+
+2003-11-25  David Rousseau  <droussea@lxplus071.cern.ch>
+
+  * share/RecExCommon_eg_jobOptions.txt: remove as it is no more maintained
+
+2003-11-20  David Rousseau  <droussea@lxplus027.cern.ch>
+
+  * share/RecExCommon_jobOptions.txt: witch off nova converters
+
+2003-11-13  David Rousseau  <droussea@lxplus029.cern.ch>
+
+  * doc/athenarec.sh share/RecExCommon_doall.sh : CMT version
+
+2003-10-22  David Rousseau  <droussea@lxplus065.cern.ch>
+
+  * doc/subm.sh : requires minimum memory for batch machine
+
+2003-10-21  David Rousseau  <droussea@lxplus080.cern.ch>
+
+  * share/RecExCommon_doall.sh, doc/athenarec.sh : change cmt version
+
+2003-10-16  David Rousseau  <droussea@lxplus077.cern.ch>
+
+  * share/CBNT_jobOptions.txt, RecExCommon_jobOptions.txt :
+  introduce LArTopoCluster
+
+2003-10-15  David Rousseau  <droussea@lxplus077.cern.ch>
+
+  * share/RecExCommon_(read)_jobOptions.txt: persitency with root
+
+2003-10-07  David Rousseau  <droussea@lxplus096.cern.ch>
+
+  * share/RecExCommon_jobOptions.txt: more jobOption from installArea
+
+2003-10-06  David Rousseau  <droussea@lxplus103.cern.ch>
+
+  * doc/athenarec.sh, share/RecExCommon_doall.sh : prefer cmtv1r1420030620
+
+
+2003-10-02  David Rousseau  <droussea@lxplus009.cern.ch>
+
+  * share/RecExCommon_links.sh, cmt/requirements: put back trigger in
+
+
+
+2003-10-01  David Rousseau  <droussea@lxplus065.cern.ch>
+
+  * doc/athenarec.sh, share/RecExCommon_doall.sh : source setup.sh
+  twice to make sure the jobOption search path is done correctly
+
+2003-09-18  David Rousseau  <droussea@lxplus097.cern.ch>
+
+  * share/*_jobOptions.txt: CBNT_Track.TracksLocations -> CBNT_Track.TracksNames
+
+
+2003-09-09  David Rousseau  <droussea@lxplus007.cern.ch>
+
+  * share/CBNT_jobOptions.txt: example for cross reference
+      between ntuples
+
+2003-09-09  David Rousseau  <droussea@lxplus007.cern.ch>
+
+  * share/RecExCommon_read.txt, share/RecExCommon_jobOptions.txt
+         experimental read/write in pool
+
+2003-08-28  David Rousseau  <droussea@lxplus104.cern.ch>
+
+  * share/RecExCommon_jobOptions.txt, dump.C: use root by default
+
+2003-08-28  David Rousseau  <droussea@lxplus104.cern.ch>
+
+  * doc/athenarec.sh, share/RecExCommon_doall.sh : update cmt version
+
+2003-07-31  David Rousseau  <droussea@lxplus071.cern.ch>
+
+  * run/RecExCommonTesting.log: update
+
+2003-07-22  David Rousseau  <droussea@lxplus069.cern.ch>
+
+  * cmt/requirements: typo in use_muonbox
+
+2003-07-04  David Rousseau  <droussea@lxplus079.cern.ch>
+
+  * share/RecExCommon_jobOptions.txt: fix PartPropSvc
+
+2003-07-03  David Rousseau  <droussea@lxplus079.cern.ch>
+
+  * share/RecExCommon_links.sh, RecExCommon_jobOptions.txt :
+      use new particle property service
+
+2003-06-18  David Rousseau  <droussea@lxplus067.cern.ch>
+
+
+
+2003-06-18  David Rousseau  <droussea@lxplus067.cern.ch>
+
+  * share/RecExCommon_doall.sh: possibility to specify setup tags
+  * run/RecExCommon_jobOptions.txt: fix
+  * Testing/ update reference log file
+
+2003-06-10  David Rousseau  <droussea@lxplus088.cern.ch>
+
+  * doc/athenarec.sh: integrate valgrind possibility
+                      integrate maximum time per event
+
+  * share/Atlas.supp, runvalgrind : to run valgrind
+
+2003-05-16  David Rousseau  <droussea@lxplus077.cern.ch>
+
+  * share/RecExCommon_doall.sh (CMTROOT): utilise gmake check
+
+2003-05-16  David Rousseau  <droussea@lxplus077.cern.ch>
+
+  * share/RecExCommon_links.sh: fix
+  * Testing/Reference_RecExCommonTesting.log : update
+
+
+2003-05-15  David Rousseau  <droussea@lxplus077.cern.ch>
+
+  * share/RecExCommon_jobOptions.txt: put back in energyflow
+        load explicitly calo manager
+
+2003-05-14  David Rousseau  <droussea@lxplus097.cern.ch>
+
+  * share/RecExCommon_jobOptions.txt: do not load iddict explicitly
+          (this will now be done by
+          Atlas_ZebraTDR.UnixStandardJob.txt)
+          switch to fals Compactidsonly flag
+
+2003-05-14  David Rousseau  <droussea@lxplus097.cern.ch>
+
+  * share/RecExCommon_jobOptions.txt : iddict loaded explicitly
+
+2003-05-06  David Rousseau  <droussea@lxplus013.cern.ch>
+
+  * share/RecExCommon_TDR_jobOptions.txt: remove (only maintain dc1)
+       fix other files accordingly
+
+2003-05-05  David Rousseau  <droussea@lxplus079.cern.ch>
+
+  * doc/athenarec.sh (CMTROOT): update
+
+2003-05-02  David Rousseau  <droussea@lxplus001.cern.ch>
+
+  * doc/athenarec.sh, share/RecExCommon_doall.sh: final fix hopefully
+
+2003-05-01  David Rousseau  <droussea@lxplus001.cern.ch>
+
+  * doc/athenarec.sh, share/RecExCommon_doall.sh: adapt to new
+        cmt/AtlasSettings
+
+2003-04-24  David Rousseau  <droussea@lxplus005.cern.ch>
+
+  * doc/athenarec.sh: improve to get traceback
+
+2003-04-23  David Rousseau  <droussea@lxplus081.cern.ch>
+
+  * share/RecExCommon_eg_jobOptions.txt: add
+
+2003-04-22  David Rousseau  <droussea@lxplus067.cern.ch>
+
+  * doc/*: update batch script to be able to specify simul/lumi02/lumi10
+
+2003-04-18  David Rousseau  <droussea@lxplus094.cern.ch>
+
+  * share/CBNT_jobOptions.txt: add CBNT_CaloCluster.EMOnly = true;
+
+2003-04-17  David Rousseau  <droussea@lxplus094.cern.ch>
+
+  * share/CBNT_Truth_jobOptions.txt: remove eta cut for lepton and
+  photon
+  * share/RecExCommon_links.sh: add atlfast stuff
+
+
+2003-04-15  David Rousseau  <droussea@lxplus093.cern.ch>
+
+  * share/RecExCommon_(TDR)_jobOptions.txt: increase HBOOK common
+
+2003-04-09  David Rousseau  <droussea@lxplus090.cern.ch>
+
+  * share/RecExCommon_(TDR)_jobOptions.txt:  include trigger
+  (commented out), switch off noise by default
+
+2003-04-08  David Rousseau  <droussea@lxplus083.cern.ch>
+
+  * share/RecExCommon_(TDR)_jobOptions.txt: add comment on the noise
+
+2003-03-28  David Rousseau  <droussea@lxplus086.cern.ch>
+
+  * run/RecExCommon_(TDR) jobOptions.txt: add ipattruth
+
+2003-03-27  David Rousseau  <droussea@lxplus015.cern.ch>
+
+  * share/RecExCommon_(TDR)_jobOptions.txt: calo noise is on by default
+
+  * share/CBNT_jobOptions.txt: change cbnt_calocluster to use
+                LArClusterEM
+
+2003-03-17  David Rousseau  <droussea@lxplus065.cern.ch>
+
+  * share/CBNT_jobOptions.txt: CBNT_track max number back to 300
+
+
+2003-03-13  David Rousseau  <droussea@lxplus086.cern.ch>
+
+  * share/RecExCommon_TDR_jobOptions.txt: include CBNT_Audit
+
+2003-03-06  David Rousseau  <droussea@lxplus038.cern.ch>
+
+  * share/RecExCommon_links.(c)sh: use environment variables to
+                     get auxilliary files
+
+2003-03-03  David Rousseau  <droussea@lxplus042.cern.ch>
+
+  * Testing/script_pre_check.sh: add source ../cmt/setup.sh
+
+  * share/RecExCommon_(TDR)_jobOptions.txt: CBNT_jet changes
+
+2003-02-25  David Rousseau  <droussea@lxplus032.cern.ch>
+
+  * share/RecExCommon_(TDR)_jobOptions.txt: new RDO
+
+2003-02-19  David Rousseau  <droussea@lxplus030.cern.ch>
+
+  * share/CBNT_jobOptions.txt: crude fix to CBNT_Jet evolution
+
+2003-02-13  David Rousseau  <droussea@lxplus055.cern.ch>
+
+  * share/CBNT_jobOptions.txt: removed CBNT_JetSums
+  * share/dump.kumac : reshuffle, add energy flw
+  * update log file
+
+
+2003-02-10  David Rousseau  <droussea@lxplus026.cern.ch>
+
+  * requirement, share/RecExCommon_(TDR)_jobOptions.txt:
+                    include cbnt_atlfast (optionally)
+
+2003-02-07  David Rousseau  <droussea@lxplus030.cern.ch>
+
+  * share/RecExCommon_(TDR)_jobOptions.txt, CBNT_jobOPtions.txt:
+   ipatrec simple tracks, clean up
+  * share/dump.kumac, C: fixes
+
+2003-01-17  David Rousseau  <droussea@lxplus046.cern.ch>
+
+  * share/dump.C: fix new tree access
+  * TEsting/Reference_RecExCommonTesting.log
+  * share/RecExCommon_(TDR)_jobOptions.txt : new clustering
+
+2003-01-15  David Rousseau  <droussea@lxplus029.cern.ch>
+
+  * share/RecExCommon_(TDR)_jobOptions.txt: add coneJet as
+                    a possibility
+
+2003-01-15  David Rousseau  <droussea@lxplus029.cern.ch>
+
+  * share/RecExCommon_jobOptions.txt: include eflowRec
+
+2003-01-14  David Rousseau  <droussea@lxplus033.cern.ch>
+
+  * share/RecExCommon_(TDR)_jobOptions.txt: HbookHistSvc.NPAWC
+                        move up the includes for CBNT (for Elzbieta)
+  * share/RecExCommon_doall.sh: typo
+
+2003-01-13  David Rousseau  <droussea@lxplus046.cern.ch>
+
+  * share/RecExCommon_(TDR)_jobOptions.txt: add muon det descr mgr
+        * Testing/Reference_RecExCommonTesting.log : update
+
+2003-01-13  David Rousseau  <droussea@lxplus046.cern.ch>
+
+  * cmt/requirements: typo
+
+2003-01-10  David Rousseau  <droussea@lxplus037.cern.ch>
+
+  * share/CBNT_Truth_jobOptions.txt, RecExCommon_jobOptions.txt,
+   RecExCommon_TDR_jobOptions.txt, cmt/requirements,
+2003-01-10  David Rousseau  <droussea@lxplus037.cern.ch>
+
+  * share/CBNT_Truth_jobOptions.txt: correct typo
+
+2003-01-09  David Rousseau  <droussea@lxplus048.cern.ch>
+
+  * share/CBNT_Truth_jobOptions.txt: use new history feature of CBNT_HepMC
+
+2003-01-07  David Rousseau  <droussea@lxplus048.cern.ch>
+
+  * cmt/requirements, share/RecExCommon_(TDR)_jobOptions.txt :
+              introduce IdDictDetDescrCnv
+
+
+2002-12-19  David Rousseau  <droussea@lxplus032.cern.ch>
+
+  * Testing/Reference_RecExCommonTesting.log: update
+  * cmt/requirements: put back Moore
+
+
+2002-12-16  David Rousseau  <droussea@lxplus062.cern.ch>
+
+  * cmt/requirements: remove use Moore
+
+2002-12-10  David Rousseau  <droussea@lxplus029.cern.ch>
+
+  * share/CBNT_Truth_jobOptions.txt: add photon and bosons in truth
+  selector
+  * doc/athenarec.sh, subm.sh submall.sh : add scripts for batch job
+
+2002-11-27  David Rousseau  <droussea@lxplus009.cern.ch>
+
+  * share/RecExCommon_(TDR)_jobOptions.txt: remove spurious tiledet include
+        * testing/Reference_RecExCommonTesting.log : update
+
+2002-11-26  David Rousseau  <droussea@lxplus007.cern.ch>
+
+  * share/RecExCommon_jobOptions.txt: include ipatrec,
+  * share/RecExCommon_(TDR)_jobOptions.txt,
+  CBNT_Truth_jobOptions.txt : include truth missing et
+
+
+2002-11-25  David Rousseau  <droussea@lxplus007.cern.ch>
+
+  * Testing/Reference_RecExCommonTesting.log : update
+  * Testing/CompareFiles.sh : also look at FATAL keyword
+  * share/RecExCommon_(TDR)_jobOptions.txt: correct detdesc managers
+  * share/CBNT_jobOptions.txt: switch off tau cells in cbnt
+
+
+2002-11-14  David Rousseau  <droussea@lxplus042.cern.ch>
+
+  * share/RecExCommon_TDR_jobOptions.txt: pick tilerec jobOptions in tilerec package
+
+
+2002-11-07  David Rousseau  <droussea@lxplus019.cern.ch>
+
+  * share/RecExCommon_(TDR)_jobOptions.txt: correct DetDescrManagers
+
+2002-10-30  David Rousseau  <droussea@lxplus041.cern.ch>
+
+  * cmt/requirements: share/*jobOptions.txt update for jetrec and id convertors
+
+
+2002-10-29  David Rousseau  <droussea@lxplus041.cern.ch>
+
+  * cmt/requirements, Testing/*: gmake check now run test on DC1 data
+          and compare log file with a reference
+
+
+2002-10-28  David Rousseau  <droussea@lxplus041.cern.ch>
+
+  * share/CBNT_Truth_jobOptions.txt: separate out cbnt truth stuff
+                                     update ipat for tdr
+                                     updadte jets for tdr
+
+2002-10-10  David Rousseau  <David.Rousseau@cern.ch>
+
+  * share/RecExCommon_links.sh: TDR tape is now in castor
+
+
+2002-09-24  David Rousseau  <David.Rousseau@cern.ch>
+
+  * share/RecExCommon_TDR_jobOptions.txt: add clusters, 3d points
+  and ipatrec
+  * share/RecExCommon_links.(c)sh: more files for clusters and 3d points
+
+2002-09-06  David Rousseau  <David.Rousseau@cern.ch>
+
+  * share/CBNT_jobOptions.txt: add CBNT_CaloInfo (commented out by default)
+
+2002-08-30  David Rousseau  <David.Rousseau@cern.ch>
+
+  * share/RecExCommon_links.sh: update DC1 data file name
+  * share/RecExCommon_links.csh: align with .sh
+  * remove Objy stuff
+
+2002-08-05  RD Schaffer  <R.D.Schaffer@cern.ch>
+
+
+  * tagging RecExCommon-00-00-40 for 4.2.0
+  * cmt/requirements: removed use of ObjyTDRCnv - no longer in
+  release.
+
+2002-08-01  David Rousseau  <David.Rousseau@cern.ch>
+
+  * cmt/requirements: add use LArHitZebraCnv
+
+
+2002-07-23  David Rousseau  <David.Rousseau@cern.ch>
+
+  * share/RecExCommon_jobOptions, RecExCommon_TDR_jobOptions : DC1
+        is now the default (without muon reco), keep TDR jobOptions
+  * share/dump.kumac: basic plots for DC1 and TDR ntuple
+  * share/CBNT_jobOptions.txt : add VisibleCHarged HepmcSelector
+
+
+2002-07-02  David Rousseau  <David.Rousseau@cern.ch>
+
+  * share/dump.C,dump.kumac: add vertex and conversion stuff
+  * share/RecExCommon_jobOptions: Moore_jobOptions now moved back to Moore
+
+2002-05-28  David Rousseau  <David.Rousseau@cern.ch>
+
+  * cmt/requirements: SimpleTrackALgs
+
+2002-05-23  David Rousseau  <David.Rousseau@cern.ch>
+
+  * share/RecExCommon_jobOptions.txt: add "CombinedCluster"
+  parameter, put back vertexprimary and conversion
+
+2002-05-13  David Rousseau  <David.Rousseau@cern.ch>
+
+  * share/dump.C: use global scope
+
+
+2002-05-02  David Rousseau  <David.Rousseau@cern.ch>
+
+  * share/RecExCommon_jobOptions.txt: comment out conversion
+
+2002-04-29  David Rousseau  <David.Rousseau@cern.ch>
+
+  * share/Moore_jobOptions.txt: follow repackaging
+  * share/TileRec_jobOptions.txt: follow repackaging
+  * share/RecExCommon_jobOptions.txt : follow repackaging
+
+
+2002-04-23  David Rousseau  <David.Rousseau@cern.ch>
+
+  * cmt/requirements, share/RecExCommon_jobOptions.txt, CBNT_jobOptions.txt: add conversion and primary
+  vertex algo
+
+
+2002-04-18  David Rousseau  <David.Rousseau@cern.ch>
+
+  * share/RecExCommon_jobOptions.txt: add forgotten CBNT_Calocluster
+
+
+2002-03-21  David Rousseau  <David.Rousseau@cern.ch>
+
+  * share/RecExCommon_jobOptions.txt: put back eventselector stuff
+  removed by mistake
+
+
+2002-03-20  David Rousseau  <David.Rousseau@cern.ch>
+
+  * share/dump.kumac dump.C : ntuple dump macro
+  * share/RecExCommon_jobOptions.txt, RecExCommon_Objy_setup.(c)sh :
+        major update for Objy reading/writing
+
+
+2002-03-12  David Rousseau  <David.Rousseau@cern.ch>
+
+  * share/RecExCommon_links.(c)sh: take PDGTABLE in GenratorModules
+  * cmt/requirement : use GeneratorModules rather than Generators
+                      use Objy packages
+
+2002-02-22  David Rousseau  <David.Rousseau@cern.ch>
+
+  * cmt/requirements: apply_pattern install_applications should not
+  be private
+
+
+2002-02-21  David Rousseau  <David.Rousseau@cern.ch>
+
+  * share/RecExCommon_links.sh: fixes
+  * share/RecExCommon_doall.sh: allow checkout
+  * cmt/requirements: apply_pattern install_applications now private
+
+2002-02-20  David Rousseau  <David.Rousseau@cern.ch>
+
+  *  add moore
+
+
+2002-01-28  David Rousseau  <David.Rousseau@cern.ch>
+
+  * share/RecExCommon_jobOptions.txt: enlarge hbook common block
+
+
+2002-01-24  David Rousseau  <David.Rousseau@cern.ch>
+
+  * share/RecExCommon_jobOptions.txt: JetRec_jobOptions moved in
+  JetRec package
+
+
+2002-01-23  David Rousseau  <David.Rousseau@cern.ch>
+
+  * share/CBNT_jobOptions.txt, RecExCommon_jobOptions.txt : follow
+     major upgrade of CBNT_HepMC for the truth
+
+
+2002-01-10  David Rousseau  <David.Rousseau@cern.ch>
+
+  * share/CBNT_jobOptions.txt, RecExCommon_jobOptions.txt : add
+        CBNT_HepMC for truth
+
+2001-12-13  David Rousseau  <David.Rousseau@cern.ch>
+
+  * share/RecExCommon_jobOptions.txt: more joboption fragment moved
+  back into their packages
+
+2001-11-26  David Rousseau  <David.Rousseau@cern.ch>
+
+  * share/RecExCommon_jobOptions.txt: add hepmc converter
+  * share/RecExCommon_doall.(c)sh: small fixes
+        * cmt/requirements : use install_application pattern
+  * share/RecExCommon_links.(*)sh : link to PDGTABLE
+
+
+2001-10-22  David Rousseau  <David.Rousseau@cern.ch>
+
+  * cmt/requirements: use the right packages instead of containers
+  * share/RecExCommon_jobOptions.txt: use env variable to locate
+  files, temporarily disable JetRec
+  * share/RecExCommon_links.(c)sh: use env variable to locate files
+  * share/RecExCommon_doall.(c)sh: tagged checkout
+
+
+2001-09-25  David Rousseau  <David.Rousseau@cern.ch>
+
+  * share/RecExCommon_doall.(c)sh: update release and gaudi number
+
+2001-09-11  David Rousseau  <David.Rousseau@cern.ch>
+
+  * share/RecExCommon_doall.(c)sh: update release and gaudi number
+
+2001-08-22  David Rousseau  <David.Rousseau@cern.ch>
+
+  * share/*.(c)sh: migrate setup scripts to cmt
+    tag RecExCommon-00-00-11
+
+
+2001-08-10  David Rousseau  <David.Rousseau@cern.ch>
+
+  * share/xKalman_jobOptions.txt: += instead of = for xKalman top algorithms
+
+
+2001-08-03  David Rousseau  <David.Rousseau@cern.ch>
+
+  * share/RecExCommon_Objy_setup.sh: update schema
+        * share/RecExCommon_Objy_setup.csh: update schema
+
+
+2001-07-26  David Rousseau  <David.Rousseau@cern.ch>
+
+  * PACKAGE: tag RecExCommon-00-00-10
+  * share/*.csh : introduce cshell scripts
+  * share/*.(c)sh : update release number
+  * share/JetRec_jobOptions.txt : example for running two jetrec
+  algo simutlaneously
+
+
+2001-07-18  David Rousseau  <David.Rousseau@cern.ch>
+
+
+  * PACKAGE: tag RecExCommon-00-00-09
+  * share/RecExCommon_links.sh,RecExCommon_doall.sh,RecExCommon_setup.sh
+     tune for easier use
+
+
+2001-07-16  David Rousseau  <David.Rousseau@cern.ch>
+
+  * PACKAGE: tag RecExCommon-00-00-08
+  * share/JetRec_jobOptions.txt, CaloCluster_jobOptions.txt: update
+  * GNUmakefile.in (TARGET_DATA): add MissingET_jobOptions.txt
+
+2001-07-04  Gilbert Poulard <Gilbert.Poulard@cern.ch>
+
+  * PACKAGE: tag RecExCommon-00-00-07
+
+2001-07-03  Gilbert Poulard <Gilbert.Poulard@cern.ch>
+
+  * PACKAGE: tag RecExCommon-00-00-06
+  *
+  * new jobOptions.txt
+  *   LArCell_jobOptions.txt                  // Add FCAL
+        *   CaloCluster_jobOptions.txt              // Include FCAL in towers
+        *   egammaRec_jobOptions.txt                // inlcude Tile
+        *   MissingET_jobOptions.txt                // NEW file
+        *   CBNT_jobOptions.txt                     // Add MissingET
+
+
+2001-06-27  David Rousseau  <David.Rousseau@cern.ch>
+
+  * PACKAGE: tag RecExCommon-00-00-04
+  * share/CBNT_jobOptions.txt | move CBNT_Athena.Members from here ...
+  * share/RecExCommon_jobOptions.txt |  ... to there
+
+
+2001-06-18  David Rousseau  <David.Rousseau@cern.ch>
+
+  * PACKAGE: tag RecExCommon-00-00-03
+  * shre/*.txt : lots of small fixes. Everything work now
+
+2001-06-14  David Rousseau  <David.Rousseau@cern.ch>
+
+  * PACKAGE: tag RecExCommon-00-00-02
+  * share/RecExCommon_jobOptions.txt, CBNT_jobOptions.txt: add taurec
+
+2001-06-13  David Rousseau  <David.Rousseau@cern.ch>
+
+  * PACKAGE: tag RecExCommon-00-00-01
+  * share/RecExCommon_jobOptions.txt CBNT_jobOptions.txt, Muonbox_jobOptions.txt : add muonbox
+
+2001-06-11  David Rousseau  <David.Rousseau@cern.ch>
+
+  * PACKAGE: new RecExCommon-00-00-00

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<!-- Edited By POOL -->
+<!DOCTYPE POOLFILECATALOG SYSTEM "InMemory">
+<POOLFILECATALOG>
+  <File ID="FE11D026-E5A7-DC43-B084-2057025F1B2E">
+    <physical>
+      <pfn filetype="ROOT_All" name="AOD2.combined.pool.root"/>
+    </physical>
+    <logical/>
+  </File>
+
+  <File ID="DBB7BC4F-A47D-DA48-9E35-1E6D5947EA3F">
+    <physical>
+      <pfn filetype="ROOT_All" name="InDetRecAOD_new.root"/>
+    </physical>
+    <logical/>
+  </File>
+
+  <File ID="7693CF44-B75D-8847-8F82-B9A27A0EFC40">
+    <physical>
+      <pfn filetype="ROOT_All" name="ESD.Fullhh4b.pool.root"/>
+    </physical>
+    <logical/>
+  </File>
+
+  <File ID="12329831-0B43-A14A-8962-98C9A18FCF3B">
+    <physical>
+      <pfn filetype="ROOT_All" name="AOD.pool.root"/>
+    </physical>
+    <logical/>
+  </File>
+
+  <File ID="87EAA16C-7AFF-C248-B410-4A6569BCCC96">
+    <physical>
+      <pfn filetype="ROOT_All" name="OUT.AOD.combinedhh4b.pool.root"/>
+    </physical>
+    <logical/>
+  </File>
+
+  <File ID="0C64C436-EDE8-564F-9175-715843DBF72F">
+    <physical>
+      <pfn filetype="ROOT_All" name="/nfs/dust/atlas/user/tkar/derivations/grid_files/user.tkar/user.tkar.16945796._000915.OUT.AOD.combinedhh4b.pool.root"/>
+    </physical>
+    <logical/>
+  </File>
+
+  <File ID="C8F28AB3-BD2C-424B-8030-82A012206F0B">
+    <physical>
+      <pfn filetype="ROOT_All" name="OUT1.AOD.combinedhh4b.pool.root"/>
+    </physical>
+    <logical/>
+  </File>
+
+</POOLFILECATALOG>

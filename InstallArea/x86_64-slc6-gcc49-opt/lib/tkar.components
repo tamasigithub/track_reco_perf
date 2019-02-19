@@ -1,0 +1,5 @@
+# --Beg MyAnalysis.components
+# --Date inserted: 2019-02-19 13:03:06.193263
+libMyAnalysis.so:MyAnalysis
+libMyAnalysis.so:MyPVAnalysis
+# --End MyAnalysis.components

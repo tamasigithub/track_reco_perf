@@ -1,0 +1,8 @@
+document genconfig MyAnalysisConf ../x86_64-slc6-gcc49-opt/libMyAnalysis.so outdir=/nfs/dust/atlas/user/tkar/derivations/MyAnalysis/genConf/MyAnalysis library=MyAnalysis library_preload= extra_modules= conf_destdir=/nfs/dust/atlas/user/tkar/derivations/InstallArea/python confModuleName=GaudiKernel.Proxy confDefaultName=Configurable.DefaultName confAlgorithm=ConfigurableAlgorithm confAlgTool=ConfigurableAlgTool confAuditor=ConfigurableAuditor confService=ConfigurableService
+make_fragment make_header /cvmfs/atlas.cern.ch/repo/sw/software/x86_64-slc6-gcc49-opt/20.20.10/CMT/v1r25p20160527/mgr/fragments/make_header
+make_fragment dependencies /cvmfs/atlas.cern.ch/repo/sw/software/x86_64-slc6-gcc49-opt/20.20.10/AtlasCore/20.20.10/AtlasPolicy/cmt/fragments/dependencies
+make_fragment cleanup_header /cvmfs/atlas.cern.ch/repo/sw/software/x86_64-slc6-gcc49-opt/20.20.10/AtlasCore/20.20.10/AtlasPolicy/cmt/fragments/cleanup_header
+make_fragment genconfig -header=genconfig_header /cvmfs/atlas.cern.ch/repo/sw/software/x86_64-slc6-gcc49-opt/20.20.10/GAUDI/v26r2p3-lcg81f/GaudiPolicy/cmt/fragments/genconfig
+make_fragment genconfig_header /cvmfs/atlas.cern.ch/repo/sw/software/x86_64-slc6-gcc49-opt/20.20.10/GAUDI/v26r2p3-lcg81f/GaudiPolicy/cmt/fragments/genconfig_header
+make_fragment document_header /cvmfs/atlas.cern.ch/repo/sw/software/x86_64-slc6-gcc49-opt/20.20.10/CMT/v1r25p20160527/mgr/fragments/document_header
+make_fragment dependency /cvmfs/atlas.cern.ch/repo/sw/software/x86_64-slc6-gcc49-opt/20.20.10/CMT/v1r25p20160527/mgr/fragments/dependency

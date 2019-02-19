@@ -1,0 +1,62 @@
+## checking [OUT1.AOD.combinedhh4b.pool.root]...
+[?1034hPy:AthFile           INFO loading cache from [athfile-cache.ascii.gz]...
+Py:AthFile           INFO loading cache from [athfile-cache.ascii.gz]... [done]
+================================================================================
+                          Container type | StoreGate keys                          
+-----------------------------------------+--------------------------------------   
+          xAOD::MissingETAuxComponentMap | METMap_TruthAux.                        
+                xAOD::VertexAuxContainer | GSFConversionVerticesAux., MSDisplacedVertexAux., PrimaryVerticesAux., TauSecondaryVerticesAux.
+           xAOD::TruthVertexAuxContainer | TruthVerticesAux.                       
+                   xAOD::JetAuxContainer | AntiKt10LCTopoJetsAux., AntiKt10TruthJetsAux., AntiKt10TruthWZJetsAux., AntiKt2PV0TrackJetsAux., AntiKt3PV0TrackJetsAux., AntiKt4EMPFlowJetsAux., AntiKt4EMTopoJetsAux., AntiKt4LCTopoJetsAux., AntiKt4PV0TrackJetsAux., AntiKt4TruthJetsAux., AntiKt4TruthWZJetsAux., CamKt12LCTopoJetsAux., CamKt12TruthJetsAux., CamKt12TruthWZJetsAux.
+                xAOD::PhotonAuxContainer | PhotonsAux.                             
+xAOD::TrackParticleClusterAssociationAuxContainer | InDetTrackParticlesClusterAssociationsAux.
+                 xAOD::ElectronContainer | Electrons, ForwardElectrons             
+                       CaloCellContainer | AODCellContainer                        
+             xAOD::MissingETAuxContainer | MET_CaloAux., MET_Core_AntiKt4EMPFlowAux., MET_Core_AntiKt4EMTopoAux., MET_Core_AntiKt4LCTopoAux., MET_EMTopoAux., MET_EMTopoRegionsAux., MET_LocHadTopoAux., MET_LocHadTopoRegionsAux., MET_Reference_AntiKt4EMPFlowAux., MET_Reference_AntiKt4EMTopoAux., MET_Reference_AntiKt4LCTopoAux., MET_TrackAux., MET_TruthAux., MET_TruthRegionsAux.
+                 MuonCaloEnergyContainer | MuonCaloEnergyCollection                
+              xAOD::MuonSegmentContainer | MuonSegments, MuonTruthSegments, NCB_MuonSegments
+                      xAOD::EventAuxInfo | EventInfoAux.                           
+                xAOD::TauJetAuxContainer | TauJetsAux.                             
+                   xAOD::PhotonContainer | Photons                                 
+                  xAOD::MuonAuxContainer | MuonsAux., StausAux.                    
+                      xAOD::JetContainer | AntiKt10LCTopoJets, AntiKt10TruthJets, AntiKt10TruthWZJets, AntiKt2PV0TrackJets, AntiKt3PV0TrackJets, AntiKt4EMPFlowJets, AntiKt4EMTopoJets, AntiKt4LCTopoJets, AntiKt4PV0TrackJets, AntiKt4TruthJets, AntiKt4TruthWZJets, CamKt12LCTopoJets, CamKt12TruthJets, CamKt12TruthWZJets
+           xAOD::MissingETAssociationMap | METAssoc_AntiKt4EMPFlow, METAssoc_AntiKt4EMTopo, METAssoc_AntiKt4LCTopo
+            xAOD::TrackParticleContainer | CombinedMuonTrackParticles, CombinedStauTrackParticles, ExtrapolatedMuonTrackParticles, ExtrapolatedStauTrackParticles, GSFTrackParticles, InDetTTTParticles, InDetTrackParticles, MSonlyTracklets, MuonSpectrometerTrackParticles, TTTParticles
+              xAOD::DiTauJetAuxContainer | DiTauJetsAux.                           
+                 xAOD::SlowMuonContainer | SlowMuons                               
+                    RawInfoSummaryForTag | RawInfoSummaryForTag                    
+xAOD::TrackParticleClusterAssociationContainer | InDetTrackParticlesClusterAssociations  
+              xAOD::CaloClusterContainer | CaloCalTopoClusters, ForwardElectronClusters, InDetTrackParticlesAssociatedClusters, MuonClusterCollection, TauPi0Clusters, egammaClusters, egammaTopoSeededClusters
+              xAOD::ElectronAuxContainer | ElectronsAux., ForwardElectronsAux.     
+           xAOD::CaloClusterAuxContainer | CaloCalTopoClustersAux., ForwardElectronClustersAux., InDetTrackParticlesAssociatedClustersAux., MuonClusterCollectionAux., TauPi0ClustersAux., egammaClustersAux., egammaTopoSeededClustersAux.
+         xAOD::TruthPileupEventContainer | TruthPileupEvents                       
+                   xAOD::VertexContainer | GSFConversionVertices, MSDisplacedVertex, PrimaryVertices, TauSecondaryVertices
+                   xAOD::PFOAuxContainer | JetETMissChargedParticleFlowObjectsAux., JetETMissNeutralParticleFlowObjectsAux., TauChargedParticleFlowObjectsAux., TauHadronicParticleFlowObjectsAux., TauNeutralParticleFlowObjectsAux., TauShotParticleFlowObjectsAux.
+                 xAOD::EventShapeAuxInfo | Kt4EMPFlowEventShapeAux., Kt4EMTopoEventShapeAux., Kt4LCTopoEventShapeAux., NeutralParticleFlowIsoCentralEventShapeAux., NeutralParticleFlowIsoForwardEventShapeAux., ParticleFlowIsoCentralEventShapeAux., ParticleFlowIsoForwardEventShapeAux., TopoClusterIsoCentralEventShapeAux., TopoClusterIsoForwardEventShapeAux.
+            CaloClusterCellLinkContainer | InDetTrackParticlesAssociatedClusters_links, MuonClusterCollection_links, egammaClusters_links
+              xAOD::SlowMuonAuxContainer | SlowMuonsAux.                           
+             xAOD::MissingETComponentMap | METMap_Truth                            
+         xAOD::TrackParticleAuxContainer | CombinedMuonTrackParticlesAux., CombinedStauTrackParticlesAux., ExtrapolatedMuonTrackParticlesAux., ExtrapolatedStauTrackParticlesAux., GSFTrackParticlesAux., InDetTTTParticlesAux., InDetTrackParticlesAux., MSonlyTrackletsAux., MuonSpectrometerTrackParticlesAux., TTTParticlesAux.
+      xAOD::TruthPileupEventAuxContainer | TruthPileupEventsAux.                   
+                      xAOD::PFOContainer | JetETMissChargedParticleFlowObjects, JetETMissNeutralParticleFlowObjects, TauChargedParticleFlowObjects, TauHadronicParticleFlowObjects, TauNeutralParticleFlowObjects, TauShotParticleFlowObjects
+         xAOD::TruthParticleAuxContainer | MuonTruthParticlesAux., TruthParticlesAux., egammaTruthParticlesAux.
+            xAOD::TruthParticleContainer | MuonTruthParticles, TruthParticles, egammaTruthParticles
+                        xAOD::EventShape | Kt4EMPFlowEventShape, Kt4EMTopoEventShape, Kt4LCTopoEventShape, NeutralParticleFlowIsoCentralEventShape, NeutralParticleFlowIsoForwardEventShape, ParticleFlowIsoCentralEventShape, ParticleFlowIsoForwardEventShape, TopoClusterIsoCentralEventShape, TopoClusterIsoForwardEventShape
+            xAOD::TruthEventAuxContainer | TruthEventsAux.                         
+                         xAOD::EventInfo | EventInfo                               
+                xAOD::MissingETContainer | MET_Calo, MET_Core_AntiKt4EMPFlow, MET_Core_AntiKt4EMTopo, MET_Core_AntiKt4LCTopo, MET_EMTopo, MET_EMTopoRegions, MET_LocHadTopo, MET_LocHadTopoRegions, MET_Reference_AntiKt4EMPFlow, MET_Reference_AntiKt4EMTopo, MET_Reference_AntiKt4LCTopo, MET_Track, MET_Truth, MET_TruthRegions
+                   xAOD::TauJetContainer | TauJets                                 
+              xAOD::TruthVertexContainer | TruthVertices                           
+                               EventInfo | McEventInfo                             
+                       LArNoisyROSummary | LArNoisyROSummary                       
+                           RecoTimingObj | ESDtoAOD_mems, ESDtoAOD_timings, EVNTtoHITS_timings, HITStoRDO_timings, RAWtoESD_mems, RAWtoESD_timings
+                         TileMuContainer | TileMuObj                               
+                       TileCellContainer | MBTSContainer                           
+           xAOD::MuonSegmentAuxContainer | MuonSegmentsAux., MuonTruthSegmentsAux., NCB_MuonSegmentsAux.
+                 xAOD::DiTauJetContainer | DiTauJets                               
+                              DataHeader | StreamAOD                               
+                     xAOD::MuonContainer | Muons, Staus                            
+        xAOD::MissingETAuxAssociationMap | METAssoc_AntiKt4EMPFlowAux., METAssoc_AntiKt4EMTopoAux., METAssoc_AntiKt4LCTopoAux.
+               xAOD::TruthEventContainer | TruthEvents                             
+================================================================================
+## Bye.
