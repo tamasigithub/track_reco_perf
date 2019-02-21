@@ -15,6 +15,8 @@
 
 #include "xAODTruth/TruthParticleContainer.h"
 #include "xAODTruth/TruthParticle.h"
+#include "xAODTruth/TruthVertexContainer.h"
+#include "xAODTruth/TruthVertex.h"
 
 #include "xAODTracking/TrackParticle.h"
 #include "xAODTracking/TrackParticleContainer.h"
@@ -291,8 +293,11 @@ private:
   float                 m_weight;
   std::vector<float>    m_truthM;
   std::vector<float>    m_truthPt;
+  std::vector<float>    m_truthP;
   std::vector<float>    m_truthEta;
+  std::vector<float>    m_truthTheta;
   std::vector<float>    m_truthPhi;
+  std::vector<float>    m_truthVz;
   std::vector<int>      m_truthPdg;
   std::vector<int>      m_truthStatus;
   std::vector<int>      m_truthBarcode;
@@ -316,20 +321,31 @@ private:
   std::vector<float>	m_InDetphi0;
   std::vector<float>	m_InDettheta;
   std::vector<float>	m_InDetqOverP;
+  std::vector<float>	m_InDetPt;
+  std::vector<float>	m_InDetEta;
   std::vector<int>	m_InDetTBarcode;
-  std::vector<int>	m_InDetTPt;
-  std::vector<int>	m_InDetTEta;
-  std::vector<int>	m_InDetTPhi;
+  std::vector<int>	m_InDetTPdg;
+  std::vector<float>	m_InDetTPt;
+  std::vector<float>	m_InDetTP;
+  std::vector<float>	m_InDetTEta;
+  std::vector<float>	m_InDetTTheta;
+  std::vector<float>	m_InDetTPhi;
+  std::vector<float>	m_InDetTZ0;
   std::vector<float>	m_TTTd0;
   std::vector<float>	m_TTTz0;
   std::vector<float>	m_TTTphi0;
   std::vector<float>	m_TTTtheta;
   std::vector<float>	m_TTTqOverP;
   std::vector<float>	m_TTTPt;
+  std::vector<float>	m_TTTEta;
   std::vector<int>	m_TTTTBarcode;
-  std::vector<int>	m_TTTTPt;
-  std::vector<int>	m_TTTTEta;
-  std::vector<int>	m_TTTTPhi;
+  std::vector<int>	m_TTTTPdg;
+  std::vector<float>	m_TTTTPt;
+  std::vector<float>	m_TTTTP;
+  std::vector<float>	m_TTTTEta;
+  std::vector<float>	m_TTTTTheta;
+  std::vector<float>	m_TTTTPhi;
+  std::vector<float>	m_TTTTZ0;
 
   std::vector<float>	m_calojetJVF;
   std::vector<float>	m_calojetJVT;

@@ -17,7 +17,7 @@ from InDetRecExample.InDetJobProperties import InDetFlags
 InDetFlags.doSecVertexFinder.set_Value_and_Lock(False)
 
 
-athenaCommonFlags.FilesInput=["/nfs/dust/atlas/user/tkar/derivations/run/OUT1.AOD.combinedhh4b.pool.root"]
+athenaCommonFlags.FilesInput=["/nfs/dust/atlas/user/tkar/derivations/grid_files/user.tkar/user.tkar/user.tkar.17123631._000874.OUT.AOD.combinedhh4b.pool.root"]
 #athenaCommonFlags.FilesInput=["ESD.Fullhh4b.pool.root"]
 
 #### Rubbish!!!
