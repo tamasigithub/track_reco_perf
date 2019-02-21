@@ -297,6 +297,8 @@ private:
   std::vector<float>    m_truthEta;
   std::vector<float>    m_truthTheta;
   std::vector<float>    m_truthPhi;
+  std::vector<float>    m_truthVx;
+  std::vector<float>    m_truthVy;
   std::vector<float>    m_truthVz;
   std::vector<int>      m_truthPdg;
   std::vector<int>      m_truthStatus;
@@ -331,6 +333,8 @@ private:
   std::vector<float>	m_InDetTTheta;
   std::vector<float>	m_InDetTPhi;
   std::vector<float>	m_InDetTZ0;
+  std::vector<float>	m_InDetTVx;
+  std::vector<float>	m_InDetTVy;
   std::vector<float>	m_TTTd0;
   std::vector<float>	m_TTTz0;
   std::vector<float>	m_TTTphi0;
@@ -346,6 +350,8 @@ private:
   std::vector<float>	m_TTTTTheta;
   std::vector<float>	m_TTTTPhi;
   std::vector<float>	m_TTTTZ0;
+  std::vector<float>	m_TTTTVx;
+  std::vector<float>	m_TTTTVy;
 
   std::vector<float>	m_calojetJVF;
   std::vector<float>	m_calojetJVT;

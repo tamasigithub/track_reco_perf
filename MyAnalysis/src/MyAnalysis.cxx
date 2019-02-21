@@ -29,11 +29,11 @@ AthAlgorithm(name, pSvcLocator),
 m_associator(0),
 vec_jetPars(0),m_collectionTree(0),m_event(0), 
 m_weight(0),
-m_truthM(0), m_truthPt(0), m_truthEta(0), m_truthPhi(0), m_truthVz(0), m_truthPdg(0), m_truthStatus(0), m_truthBarcode(0),
+m_truthM(0), m_truthPt(0), m_truthEta(0), m_truthPhi(0), m_truthVx(0), m_truthVy(0), m_truthVz(0), m_truthPdg(0), m_truthStatus(0), m_truthBarcode(0),
 m_truthjetEta(0),m_truthjetPhi(0),m_truthjetE(0),m_truthjetM(0),m_truthjetPt(0),m_truthjetPx(0),m_truthjetPy(0),m_truthjetPz(0),
 m_StdPVx(0), m_StdPVy(0), m_StdPVz(0), m_TTTPVz(0),
-m_InDetd0(0),m_InDetz0(0),m_InDetphi0(0),m_InDettheta(0),m_InDetqOverP(0), m_InDetPt(0), m_InDetEta(0), m_InDetTBarcode(0), m_InDetTPdg(0), m_InDetTPt(0), m_InDetTP(0), m_InDetTEta(0), m_InDetTTheta(0), m_InDetTPhi(0), m_InDetTZ0(0),
-m_TTTd0(0),m_TTTz0(0),m_TTTphi0(0),m_TTTtheta(0),m_TTTqOverP(0), m_TTTPt(0), m_TTTEta(0), m_TTTTBarcode(0), m_TTTTPdg(0), m_TTTTPt(0), m_TTTTP(0), m_TTTTEta(0), m_TTTTTheta(0), m_TTTTPhi(0), m_TTTTZ0(0),
+m_InDetd0(0),m_InDetz0(0),m_InDetphi0(0),m_InDettheta(0),m_InDetqOverP(0), m_InDetPt(0), m_InDetEta(0), m_InDetTBarcode(0), m_InDetTPdg(0), m_InDetTPt(0), m_InDetTP(0), m_InDetTEta(0), m_InDetTTheta(0), m_InDetTPhi(0), m_InDetTZ0(0), m_InDetTVx(0), m_InDetTVy(0),
+m_TTTd0(0),m_TTTz0(0),m_TTTphi0(0),m_TTTtheta(0),m_TTTqOverP(0), m_TTTPt(0), m_TTTEta(0), m_TTTTBarcode(0), m_TTTTPdg(0), m_TTTTPt(0), m_TTTTP(0), m_TTTTEta(0), m_TTTTTheta(0), m_TTTTPhi(0), m_TTTTZ0(0), m_TTTTVx(0), m_TTTTVy(0),
 m_calojetJVF(0), m_calojetJVT(0), m_calojetEta(0),m_calojetPhi(0),m_calojetE(0),m_calojetM(0),m_calojetPt(0),m_calojetPx(0),m_calojetPy(0),m_calojetPz(0),
 m_caloTTTjetJVF(0), m_caloTTTjetJVT(0), m_caloTTTjetEta(0),m_caloTTTjetPhi(0),m_caloTTTjetE(0),m_caloTTTjetM(0),m_caloTTTjetPt(0),m_caloTTTjetPx(0),m_caloTTTjetPy(0),m_caloTTTjetPz(0),
 m_caloStdjetJVF(0), m_caloStdjetJVT(0), m_caloStdjetEta(0),m_caloStdjetPhi(0),m_caloStdjetE(0),m_caloStdjetM(0),m_caloStdjetPt(0),m_caloStdjetPx(0),m_caloStdjetPy(0),m_caloStdjetPz(0),
@@ -140,6 +140,8 @@ StatusCode MyAnalysis::initialize()
   m_collectionTree->Branch("truthEta",     &m_truthEta);     
   m_collectionTree->Branch("truthTheta",   &m_truthTheta);     
   m_collectionTree->Branch("truthPhi",     &m_truthPhi);     
+  m_collectionTree->Branch("truthVx",      &m_truthVx);     
+  m_collectionTree->Branch("truthVy",      &m_truthVy);     
   m_collectionTree->Branch("truthVz",      &m_truthVz);     
   m_collectionTree->Branch("truthPdg",     &m_truthPdg);     
   m_collectionTree->Branch("truthStatus",  &m_truthStatus);     
@@ -175,6 +177,8 @@ StatusCode MyAnalysis::initialize()
   m_collectionTree->Branch("InDetTTheta",  &m_InDetTTheta);
   m_collectionTree->Branch("InDetTPhi",    &m_InDetTPhi);
   m_collectionTree->Branch("InDetTZ0",     &m_InDetTZ0);
+  m_collectionTree->Branch("InDetTVx",     &m_InDetTVx);
+  m_collectionTree->Branch("InDetTVy",     &m_InDetTVy);
 
   m_collectionTree->Branch("TTTd0",        &m_TTTd0);        
   m_collectionTree->Branch("TTTz0",        &m_TTTz0);        
@@ -191,6 +195,8 @@ StatusCode MyAnalysis::initialize()
   m_collectionTree->Branch("TTTTTheta",    &m_TTTTTheta);
   m_collectionTree->Branch("TTTTPhi",      &m_TTTTPhi);
   m_collectionTree->Branch("TTTTZ0",       &m_TTTTZ0);
+  m_collectionTree->Branch("TTTTVx",       &m_TTTTVx);
+  m_collectionTree->Branch("TTTTVy",       &m_TTTTVy);
 
   m_collectionTree->Branch("calojetJVF",   &m_calojetJVF);   
   m_collectionTree->Branch("calojetJVT",   &m_calojetJVT);   
@@ -319,6 +325,8 @@ StatusCode MyAnalysis::execute()
   m_truthEta.clear();
   m_truthTheta.clear();
   m_truthPhi.clear();
+  m_truthVx.clear();
+  m_truthVy.clear();
   m_truthVz.clear();
   m_truthPdg.clear();
   m_truthStatus.clear();
@@ -347,6 +355,9 @@ StatusCode MyAnalysis::execute()
   m_InDetTEta.clear();
   m_InDetTTheta.clear();
   m_InDetTPhi.clear();
+  m_InDetTZ0.clear();
+  m_InDetTVx.clear();
+  m_InDetTVy.clear();
 
   m_TTTd0.clear();
   m_TTTz0.clear();
@@ -363,6 +374,8 @@ StatusCode MyAnalysis::execute()
   m_TTTTTheta.clear();
   m_TTTTPhi.clear();
   m_TTTTZ0.clear();
+  m_TTTTVx.clear();
+  m_TTTTVy.clear();
                  
   m_calojetEta.clear();
   m_calojetPhi.clear();
@@ -522,7 +535,18 @@ StatusCode MyAnalysis::execute()
   	m_truthPdg.push_back(bquark[i]->pdgId());
   	m_truthStatus.push_back(bquark[i]->status());
   	m_truthBarcode.push_back(bquark[i]->barcode());
-	//m_truthVz.push_back(bquark[i]->prodVtx()->z());
+	if(bquark[i]->hasProdVtx()) 
+	{
+		m_truthVx.push_back(bquark[i]->prodVtx()->x());
+		m_truthVy.push_back(bquark[i]->prodVtx()->y());
+		m_truthVz.push_back(bquark[i]->prodVtx()->z());
+	}
+	else 
+	{
+		m_truthVx.push_back(99999.0);
+		m_truthVy.push_back(99999.0);
+		m_truthVz.push_back(99999.0);
+	}
   }
   for (size_t i = 0; i < SMHiggs.size(); ++i)
   {
@@ -535,6 +559,18 @@ StatusCode MyAnalysis::execute()
   	m_truthPdg.push_back(SMHiggs[i]->pdgId());
   	m_truthStatus.push_back(SMHiggs[i]->status());
   	m_truthBarcode.push_back(SMHiggs[i]->barcode());
+	if(SMHiggs[i]->hasProdVtx())
+	{
+		m_truthVx.push_back(SMHiggs[i]->prodVtx()->x());
+		m_truthVy.push_back(SMHiggs[i]->prodVtx()->y());
+		m_truthVz.push_back(SMHiggs[i]->prodVtx()->z());
+	}
+	else 
+	{
+		m_truthVx.push_back(99999.0);
+		m_truthVy.push_back(99999.0);
+		m_truthVz.push_back(99999.0);
+	}
 	//m_truthVz.push_back(SMHiggs[i]->prodVtx()->z());
   }
   for (size_t i = 0; i < BSMHiggs.size(); ++i)
@@ -548,6 +584,18 @@ StatusCode MyAnalysis::execute()
   	m_truthPdg.push_back(BSMHiggs[i]->pdgId());
   	m_truthStatus.push_back(BSMHiggs[i]->status());
   	m_truthBarcode.push_back(BSMHiggs[i]->barcode());
+	if(BSMHiggs[i]->hasProdVtx()) 
+	{
+		m_truthVx.push_back(BSMHiggs[i]->prodVtx()->x());
+		m_truthVy.push_back(BSMHiggs[i]->prodVtx()->y());
+		m_truthVz.push_back(BSMHiggs[i]->prodVtx()->z());
+	}
+	else 
+	{
+		m_truthVx.push_back(99999.0);
+		m_truthVy.push_back(99999.0);
+		m_truthVz.push_back(99999.0);
+	}
 	//m_truthVz.push_back(BSMHiggs[i]->prodVtx()->z());
   }
   for (xAOD::TruthParticleContainer::const_iterator itr = theTruth->begin(); itr != theTruth->end(); ++itr) 
@@ -566,6 +614,18 @@ StatusCode MyAnalysis::execute()
   		m_truthStatus.push_back(part->status());
   		m_truthBarcode.push_back(part->barcode());
 		charged.push_back(part);
+		if(part->hasProdVtx()) 
+		{
+			m_truthVx.push_back(part->prodVtx()->x());
+			m_truthVy.push_back(part->prodVtx()->y());
+			m_truthVz.push_back(part->prodVtx()->z());
+		}
+		else 
+		{
+			m_truthVx.push_back(99999.0);
+			m_truthVy.push_back(99999.0);
+			m_truthVz.push_back(99999.0);
+		}
 		//m_truthVz.push_back(pvtx->z());
 	}
   }
@@ -599,13 +659,15 @@ StatusCode MyAnalysis::execute()
 	m_InDetPt.push_back(particle->pt());
 	m_InDetEta.push_back(particle->eta());
 	const xAOD::TruthParticle *truth = m_associator->matched(const_cast<xAOD::IParticle *>(iparticle));
-	int truthBarcode = -999;
-	int truthPdg = -999;
-	float truthEta = -999;
-	float truthTheta = -999;
-	float truthPhi = -999;
-	float truthPt = -999;
-	float truthP = -999;
+	int truthBarcode = -99999;
+	int truthPdg = -99999;
+	float truthEta = -99999;
+	float truthTheta = -99999;
+	float truthPhi = -99999;
+	float truthPt = -99999;
+	float truthP = -99999;
+	float truthVx = -9999;
+	float truthVy = -9999;
 	float truthVz = -9999;
 	if (truth)
 	{
@@ -616,6 +678,18 @@ StatusCode MyAnalysis::execute()
 		truthEta = truth->p4().Eta();
 		truthTheta = truth->p4().Theta();
 		truthPhi = truth->p4().Phi();
+		if(truth->hasProdVtx()) 
+		{
+			truthVx = truth->prodVtx()->x();
+			truthVy = truth->prodVtx()->y();
+			truthVz = truth->prodVtx()->z();
+		}
+		else 
+		{
+			truthVx = 99999.0;
+			truthVy = 99999.0;
+			truthVz = 99999.0;
+		}
 		//truthVz = truth->prodVtx()->z();
 	}
 	m_InDetTBarcode.push_back(truthBarcode);
@@ -626,6 +700,8 @@ StatusCode MyAnalysis::execute()
 	m_InDetTTheta.push_back(truthTheta);
 	m_InDetTPhi.push_back(truthPhi);
 	m_InDetTZ0.push_back(truthVz);
+	m_InDetTVx.push_back(truthVx);
+	m_InDetTVy.push_back(truthVy);
 	//! print track particles
 	//ATH_MSG_INFO("printing InDet track particles... ");
 	if (m_debug) printTrackPcle( *particle );
@@ -660,14 +736,16 @@ StatusCode MyAnalysis::execute()
 	m_TTTEta.push_back(particle1->eta());
 
 	const xAOD::TruthParticle *truth = m_associator->matched(const_cast<xAOD::IParticle *>(iparticle1));
-	int truthBarcode = -999;
-	int truthPdg = -999;
-	float truthEta = -999;
-	float truthTheta = -999;
-	float truthP = -999;
-	float truthPhi = -999;
-	float truthPt = -999;
-	float truthVz = -9999;
+	int truthBarcode = -99999;
+	int truthPdg = -99999;
+	float truthEta = -99999;
+	float truthTheta = -99999;
+	float truthP = -99999;
+	float truthPhi = -99999;
+	float truthPt = -99999;
+	float truthVx = -99999;
+	float truthVy = -99999;
+	float truthVz = -99999;
 	if (truth)
 	{
 		truthBarcode = truth->barcode();
@@ -677,6 +755,18 @@ StatusCode MyAnalysis::execute()
 		truthEta = truth->p4().Eta();
 		truthTheta = truth->p4().Theta();
 		truthPhi = truth->p4().Phi();
+		if(truth->hasProdVtx()) 
+		{
+			truthVx = truth->prodVtx()->x();
+			truthVy = truth->prodVtx()->y();
+			truthVz = truth->prodVtx()->z();
+		}
+		else 
+		{
+			truthVx = 99999.0;
+			truthVy = 99999.0;
+			truthVz = 99999.0;
+		}
 		//truthVz = truth->prodVtx()->z();
 	}
 	m_TTTTBarcode.push_back(truthBarcode);
@@ -687,6 +777,8 @@ StatusCode MyAnalysis::execute()
 	m_TTTTTheta.push_back(truthTheta);
 	m_TTTTPhi.push_back(truthPhi);
 	m_TTTTZ0.push_back(truthVz);
+	m_TTTTVx.push_back(truthVx);
+	m_TTTTVy.push_back(truthVy);
 	//! print track particles
 	//ATH_MSG_INFO("printing TTT track particles... ");
 	if (m_debug) printTrackPcle( *particle1 );
