@@ -1,0 +1,7 @@
+git init
+git checkout -b local_macros
+git remote add My_Analysis <git_url>
+git add .
+git status
+git commit -m "commit message"
+git push My_Analysis local_macros
