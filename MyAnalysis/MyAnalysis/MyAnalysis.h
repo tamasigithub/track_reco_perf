@@ -291,18 +291,32 @@ private:
   TTree*		m_collectionTree;
   unsigned int 		m_event; 
   float                 m_weight;
+  //! all variables below labled as m_truth* have values
+  //! = -1 for truth particles reconstructed more than once with triplet reconstruction
   std::vector<float>    m_truthM;
   std::vector<float>    m_truthPt;
   std::vector<float>    m_truthP;
   std::vector<float>    m_truthEta;
   std::vector<float>    m_truthTheta;
   std::vector<float>    m_truthPhi;
-  std::vector<float>    m_truthVx;
-  std::vector<float>    m_truthVy;
-  std::vector<float>    m_truthVz;
+  std::vector<float>    m_truthVx; //!99999.0 production vertex does not exist
+  std::vector<float>    m_truthVy;//!99999.0 production vertex does not exist
+  std::vector<float>    m_truthVz;//!99999.0 production vertex does not exist
   std::vector<int>      m_truthPdg;
   std::vector<int>      m_truthStatus;
   std::vector<int>      m_truthBarcode;
+  //! all variables below labled by m_r* have values
+  //! = -99999.0 for unstable particles i.e. for status!=1
+  //! = 0 for inefficiency i.e. no TTT track was reconstructed for the corresponding stable and charged truth particle 
+  std::vector<float>	m_rTTTd0; 
+  std::vector<float>	m_rTTTz0;
+  std::vector<float>	m_rTTTphi0;
+  std::vector<float>	m_rTTTtheta;
+  std::vector<float>	m_rTTTqOverP;
+  std::vector<float>	m_rTTTPt;
+  std::vector<float>	m_rTTTEta;
+
+
 
   std::vector<float>	m_truthjetEta;
   std::vector<float>	m_truthjetPhi;
@@ -352,8 +366,20 @@ private:
   std::vector<float>	m_TTTTZ0;
   std::vector<float>	m_TTTTVx;
   std::vector<float>	m_TTTTVy;
+  //! ttt tracks barcode matched to truth particles 
+  std::vector<int>	mc_TTTTBarcode;
+  std::vector<int>	mc_TTTTStatus;
+  std::vector<int>	mc_TTTTPdg;
+  std::vector<float>	mc_TTTTPt;
+  std::vector<float>	mc_TTTTP;
+  std::vector<float>	mc_TTTTEta;
+  std::vector<float>	mc_TTTTTheta;
+  std::vector<float>	mc_TTTTPhi;
+  std::vector<float>	mc_TTTTZ0;
+  std::vector<float>	mc_TTTTVx;
+  std::vector<float>	mc_TTTTVy;
 
-  std::vector<float>	m_calojetJVF;
+ std::vector<float>	m_calojetJVF;
   std::vector<float>	m_calojetJVT;
   std::vector<float>	m_calojetEta;
   std::vector<float>	m_calojetPhi;
