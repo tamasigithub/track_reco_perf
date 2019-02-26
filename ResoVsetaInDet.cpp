@@ -17,7 +17,7 @@
 TCut mu_cut = "abs(M_pdg)==13 && M_barcode > 0 && abs(InDetTZ0) < 200 && abs(M_Vx)<10 && abs(M_Vy)<10";
 TCut pi_cut = "abs(M_pdg)==211 && M_barcode > 0 && abs(InDetTZ0) < 200 && abs(M_Vx)<10 && abs(M_Vy)<10";
 TCut e_cut  = "abs(M_pdg)==11 && M_barcode > 0 && abs(InDetTZ0) < 200 && abs(M_Vx)<10 && abs(M_Vy)<10";
-TCut all_cut= "InDetTBarcode > 0 && abs(InDetTPt)>5000 && abs(InDetTEta)<1.4 && abs(InDetpt)>5000 && abs(InDeteta)<1.4";
+TCut all_cut= "InDetTBarcode > 0 && abs(InDetTPt)>5000 && abs(InDetTEta)<1.4 && abs(InDetTZ0) < 100 && abs(InDetTVx) < 0.1 && abs(InDetTVy) < 0.1 && abs(InDetpt)>5000 && abs(InDeteta)<1.4";
 //! path for input files
 const char* path = "/afs/cern.ch/work/t/tkar/testarea/20.20.10.1/WorkArea/run/rec_outputs/SingleParticles_Sept272k18";
 char buf[4096];
@@ -54,7 +54,7 @@ int resolution_plots_Vs_eta
 (const char* output_file_name, const char* p_type = "all", bool save = false)
 {
 	TChain recTree("m_collectionTree");
-	recTree.Add("/media/tamasi/DriveT/tamasi/Desktop/PHD/work/mere_plots/athena/Analysis/user.tkar.hh4bsig5PU0_2_ntuples1_MYSTREAM/*.root");
+	recTree.Add("/media/tamasi/DriveT/tamasi/Desktop/PHD/work/mere_plots/athena/Analysis/user.tkar.hh4bsig5PU0_2_ntuples3_MYSTREAM/*.root");
 	TCut cut;
 	const char* type = p_type;
 	if(type == "muon"){ cut = mu_cut;}
@@ -161,11 +161,11 @@ int resolution_plots_Vs_eta
 	sprintf(out_file_root,"%s/%s.root",out_path,output_file_name);
 	TFile* output_file = new TFile(out_file_root, "RECREATE");	
 	relptmin     	= -0.1, relptmax    	= 0.1;
-	inv_ptmin    	= -2e-5, inv_ptmax 	= 2e-5;//4e-5
-	phimin		= -0.005, phimax     	= 0.005;
-	zmin         	= -12, 	 zmax         	= 12;//10
-	thetamin     	= -0.002, thetamax  	= 0.002;
-	eta_min      	= -0.003,eta_max   	= 0.003;//0.01
+	inv_ptmin    	= -1e-5, inv_ptmax 	= 1e-5;//4e-5
+	phimin		= -0.002, phimax     	= 0.002;
+	zmin         	= -0.4, 	 zmax   = 0.4;//10
+	thetamin     	= -0.001, thetamax  	= 0.001;
+	eta_min      	= -0.002,eta_max   	= 0.002;//0.01
 	dcamin	    	= -150, dcamax		= 150;
 	
 
@@ -318,7 +318,7 @@ return 0;
 
 int plot_one()
 {
-//resolution_plots_Vs_eta("ResoVsEtaInDet_all","all",true);
-resolution_plots_Vs_eta("ResoVsEtaInDet_all1.4_5GeV","all",true);
+resolution_plots_Vs_eta("ResoVsEtaInDet_all","all",true);
+//resolution_plots_Vs_eta("ResoVsEtaInDet_all1.4_5GeV","all",true);
 return 0;
 }

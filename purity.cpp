@@ -15,14 +15,14 @@
 #include <math.h>
 const char* out_path = "./plots/purity"; 
 
-int InDetpurity_Vs_etaphipt(const char* output_file_name = "testpurity", bool save = false)
+int InDetpurity_Vs_etaphipt(const char* output_file_name = "purity_dR0.1", bool save = false)
 {
 //! Define Cut
-TCut num_select= "InDetTBarcode > 0 && abs(InDetTPt)>2000 && abs(InDetTEta)<1.4 && abs(InDetpt)>2000 && abs(InDeteta)<1.4";
-TCut den_select= "abs(InDetpt)>2000 && abs(InDeteta)<1.4";
+TCut num_select= "InDetTBarcode > 0 && abs(InDetTPt)>2000 && abs(InDetTEta)<1.4 && abs(InDetpt)>2000 && abs(InDeteta)<1.4 && abs(InDetz0) < 100";
+TCut den_select= "abs(InDetpt)>2000 && abs(InDeteta)<1.4 && abs(InDetz0) < 100 ";
 	
 	TChain recTree("m_collectionTree");
-        recTree.Add("/media/tamasi/DriveT/tamasi/Desktop/PHD/work/mere_plots/athena/Analysis/user.tkar.hh4bsig5PU0_2_ntuples1_MYSTREAM/*.root");
+        recTree.Add("/media/tamasi/DriveT/tamasi/Desktop/PHD/work/mere_plots/athena/Analysis/user.tkar.hh4bsig5PU0_2_ntuples3_MYSTREAM/*.root");
 
 	int etabin = 13;
     	double etamin   = -1.3, etamax = 1.3;
@@ -108,14 +108,14 @@ TCut den_select= "abs(InDetpt)>2000 && abs(InDeteta)<1.4";
 
 //////////////// Purity for TTT tracks /////////////////
 
-int TTTpurity_Vs_etaphipt(const char* output_file_name = "testpurityTTT", bool save = false)
+int TTTpurity_Vs_etaphipt(const char* output_file_name = "purityTTT_dR0.1", bool save = false)
 {
 //! Define Cut
-TCut num_select= "TTTTBarcode > 0 && abs(TTTTPt)>2000 && abs(TTTTEta)<1.4 && abs(TTTpt)>2000 && abs(TTTeta)<1.4";
-TCut den_select= "abs(TTTpt)>2000 && abs(TTTeta)<1.4";
+TCut num_select= "TTTTBarcode > 0 && abs(TTTTPt)>2000 && abs(TTTTEta)<1.4 && abs(TTTpt)>2000 && abs(TTTeta)<1.4  && abs(TTTz0) < 100";
+TCut den_select= "abs(TTTpt)>2000 && abs(TTTeta)<1.4 && abs(TTTz0) < 100";
 
 	TChain recTree("m_collectionTree");
-        recTree.Add("/media/tamasi/DriveT/tamasi/Desktop/PHD/work/mere_plots/athena/Analysis/user.tkar.hh4bsig5PU0_2_ntuples1_MYSTREAM/*.root");
+        recTree.Add("/media/tamasi/DriveT/tamasi/Desktop/PHD/work/mere_plots/athena/Analysis/user.tkar.hh4bsig5PU0_2_ntuples3_MYSTREAM/*.root");
 
 	int etabin = 13;
     	double etamin   = -1.3, etamax = 1.3;
@@ -196,7 +196,7 @@ TCut den_select= "abs(TTTpt)>2000 && abs(TTTeta)<1.4";
 }
 
 /////////////// write purity to pdf /////////////////
-int write_topdf(const char* output_file_name = "purity_InDetTTT_hh4b")
+int write_topdf(const char* output_file_name = "purity_InDetTTT_hh4b_dR0.1")
 {
 
 	char out_file_open[1023];
@@ -206,13 +206,13 @@ int write_topdf(const char* output_file_name = "purity_InDetTTT_hh4b")
         char out_file_close[1023];
         sprintf(out_file_close,"%s/%s.pdf)",out_path,output_file_name);
 	//!InDet tracks
-	TFile* f = TFile::Open("./plots/purity/testpurity.root");
+	TFile* f = TFile::Open("./plots/purity/purity_dR0.1.root");
 	TH1D* h_eta 	= (TH1D*)f->Get("h_pur_vs_etaPU");
 	TH1D* h_pt 	= (TH1D*)f->Get("h_pur_vs_ptPU");
 	TH1D* h_phi	= (TH1D*)f->Get("h_pur_vs_phiPU");
 
 	//! TTT tracks
-	TFile* f0 = TFile::Open("./plots/purity/testpurityTTT.root");
+	TFile* f0 = TFile::Open("./plots/purity/purityTTT_dR0.1.root");
 	TH1D* h0_eta 	= (TH1D*)f0->Get("h_pur_vs_etaPU");
 	TH1D* h0_pt 	= (TH1D*)f0->Get("h_pur_vs_ptPU");
 	TH1D* h0_phi	= (TH1D*)f0->Get("h_pur_vs_phiPU");

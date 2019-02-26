@@ -14,7 +14,7 @@
 #include <math.h>
 //const char* out_path = "/eos/user/t/tkar/www/TTT/plots/resolution"; 
 const char* out_path = "./plots/reso_plots"; 
-int write_topdf(const char* output_file_name = "ResoVsPt_InDetTTT_hh4b1.4_5GeV")
+int write_topdf(const char* output_file_name = "ResoVsPt_InDetTTT_hh4b")
 {
 
 	char out_file_open[1023];
@@ -24,7 +24,7 @@ int write_topdf(const char* output_file_name = "ResoVsPt_InDetTTT_hh4b1.4_5GeV")
         char out_file_close[1023];
         sprintf(out_file_close,"%s/%s.pdf)",out_path,output_file_name);
 	//!InDet tracks
-	TFile* f = TFile::Open("./plots/reso_plots/testResoVsptInDet_all1.4_5GeV.root");
+	TFile* f = TFile::Open("./plots/reso_plots/testResoVsptInDet_all.root");
 	TH1D* h_dp 	= (TH1D*)f->Get("h_sigmadp");
 	TH1D* h_invpt 	= (TH1D*)f->Get("h_sigma_invPt");
 	TH1D* h_phi	= (TH1D*)f->Get("h_sigma_phi");
@@ -34,7 +34,7 @@ int write_topdf(const char* output_file_name = "ResoVsPt_InDetTTT_hh4b1.4_5GeV")
 //	TH1D* h_dca	= (TH1D*)f->Get("h_sigma_dca");
 
 	//! TTT tracks
-	TFile* f0 = TFile::Open("./plots/reso_plots/testResoVspt_all1.4_5GeV.root");
+	TFile* f0 = TFile::Open("./plots/reso_plots/testResoVspt_all.root");
 	TH1D* h0_dp 	= (TH1D*)f0->Get("h_sigmadp");
 	TH1D* h0_invpt 	= (TH1D*)f0->Get("h_sigma_invPt");
 	TH1D* h0_phi	= (TH1D*)f0->Get("h_sigma_phi");
@@ -296,7 +296,7 @@ int write_topdf(const char* output_file_name = "ResoVsPt_InDetTTT_hh4b1.4_5GeV")
         leg5->Draw();
 	C->Print(out_file_,"pdf");
 	
-	h_z0->GetYaxis()->SetRangeUser(0,2.0);
+	h_z0->GetYaxis()->SetRangeUser(0.0,1.5);
 	h_z0->Draw();
 	h0_z0->Draw("same");
 	TLegend *leg6=new TLegend(x1,y1,x2,y2,"");

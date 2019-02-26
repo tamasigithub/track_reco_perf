@@ -17,7 +17,7 @@
 TCut mu_cut = "abs(M_pdg)==13 && M_barcode > 0 && abs(TTTTZ0) < 200 && abs(M_Vx)<10 && abs(M_Vy)<10";
 TCut pi_cut = "abs(M_pdg)==211 && M_barcode > 0 && abs(TTTTZ0) < 200 && abs(M_Vx)<10 && abs(M_Vy)<10";
 TCut e_cut  = "abs(M_pdg)==11 && M_barcode > 0 && abs(TTTTZ0) < 200 && abs(M_Vx)<10 && abs(M_Vy)<10";
-TCut all_cut= "TTTTBarcode > 0 && abs(TTTTPt)>5000 && abs(TTTTEta)<1.4 && abs(TTTpt)>5000 && abs(TTTeta)<1.4";
+TCut all_cut= "TTTTBarcode > 0 && abs(TTTTPt)>5000 && abs(TTTTEta)<1.4 && abs(TTTTZ0) < 100 && abs(TTTTVx) < 0.1 && abs(TTTTVy) < 0.1 && abs(TTTpt)>5000 && abs(TTTeta)<1.4";
 //! path for input files
 const char* path = "/afs/cern.ch/work/t/tkar/testarea/20.20.10.1/WorkArea/run/rec_outputs/SingleParticles_Sept272k18";
 char buf[4096];
@@ -54,7 +54,7 @@ int resolution_plots_Vs_eta
 (const char* output_file_name, const char* p_type = "all", bool save = false)
 {
 	TChain recTree("m_collectionTree");
-	recTree.Add("/media/tamasi/DriveT/tamasi/Desktop/PHD/work/mere_plots/athena/Analysis/user.tkar.hh4bsig5PU0_2_ntuples1_MYSTREAM/*.root");
+	recTree.Add("/media/tamasi/DriveT/tamasi/Desktop/PHD/work/mere_plots/athena/Analysis/user.tkar.hh4bsig5PU0_2_ntuples3_MYSTREAM/*.root");
 	TCut cut;
 	const char* type = p_type;
 	if(type == "muon"){ cut = mu_cut;}
@@ -160,12 +160,12 @@ int resolution_plots_Vs_eta
 	char out_file_root[1023];
 	sprintf(out_file_root,"%s/%s.root",out_path,output_file_name);
 	TFile* output_file = new TFile(out_file_root, "RECREATE");	
-	relptmin     	= -0.3, relptmax    	= 0.3;
-	inv_ptmin    	= -8e-5, inv_ptmax 	= 4e-5;//4e-5
-	phimin		= -0.015, phimax     	= 0.015;
-	zmin         	= -12, 	 zmax         	= 12;//10
-	thetamin     	= -0.005, thetamax  	= 0.005;
-	eta_min      	= -0.006,eta_max   	= 0.006;//0.01
+	relptmin     	= -0.2, relptmax    	= 0.2;
+	inv_ptmin    	= -2e-5, inv_ptmax 	= 2e-5;//4e-5
+	phimin		= -0.006, phimax     	= 0.006;
+	zmin         	= -5, 	 zmax         	= 5;//10
+	thetamin     	= -0.004, thetamax  	= 0.004;
+	eta_min      	= -0.004,eta_max   	= 0.004;//0.01
 	dcamin	    	= -150, dcamax		= 150;
 	
 
@@ -318,7 +318,7 @@ return 0;
 
 int plot_one()
 {
-//resolution_plots_Vs_eta("ResoVsEtaTTT_all","all",true);
-resolution_plots_Vs_eta("ResoVsEtaTTT_all1.4_5GeV","all",true);
+resolution_plots_Vs_eta("ResoVsEtaTTT_all","all",true);
+//resolution_plots_Vs_eta("ResoVsEtaTTT_all1.4_5GeV","all",true);
 return 0;
 }

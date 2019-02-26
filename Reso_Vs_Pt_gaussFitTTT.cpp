@@ -20,7 +20,7 @@
 TCut mu_cut = "abs(M_pdg)==13 && M_barcode > 0 && abs(M_Vz) < 200 && abs(M_Vx)<10 && abs(M_Vy)<10";
 TCut pi_cut = "abs(M_pdg)==211 && M_barcode > 0 && abs(M_Vz) < 200 && abs(M_Vx)<10 && abs(M_Vy)<10";
 TCut e_cut  = "abs(M_pdg)==11 && M_barcode > 0 && abs(M_Vz) < 200 && abs(M_Vx)<10 && abs(M_Vy)<10";
-TCut all_cut= "TTTTBarcode > 0 && abs(TTTTPt)>5000 && abs(TTTTEta)<1.4 && abs(TTTpt)>5000 && abs(TTTeta)<1.4";
+TCut all_cut= "TTTTBarcode > 0 && abs(TTTTPt)>2000 && abs(TTTTEta)<1.4 && abs(TTTTZ0) < 150 && abs(TTTTVx) < 0.1 && abs(TTTTVy) < 0.1 && abs(TTTpt)>2000 && abs(TTTeta)<1.4";
 //! path for input files
 const char* path = "./../test_ntuple1.root";
 char buf[4096];
@@ -56,13 +56,8 @@ char buffer[1024];
 int resolution_plots_Vs_pt
 (const char* output_file_name, /*const char* p_type = "muon",*/ bool save = false)
 {
-	/*char in_file_name[1023];
-    	sprintf(in_file_name,"%s/%s",path,input_file);
-    	TFile* f = TFile::Open(in_file_name);
-	TTree* recTree = (TTree*)f->Get("m_recTree");*/
-
 	TChain recTree("m_collectionTree");
-	recTree.Add("/media/tamasi/DriveT/tamasi/Desktop/PHD/work/mere_plots/athena/Analysis/user.tkar.hh4bsig5PU0_2_ntuples1_MYSTREAM/*.root");
+	recTree.Add("/media/tamasi/DriveT/tamasi/Desktop/PHD/work/mere_plots/athena/Analysis/user.tkar.hh4bsig5PU0_2_ntuples3_MYSTREAM/*.root");
 	TCut cut;
 	//const char* type = p_type;
 	const char* type = "all";
@@ -75,7 +70,41 @@ int resolution_plots_Vs_pt
 	
 	int ptbin = 12;
     	//double ptmin   = 1500, ptmax = 100500;
-	double binlow[] = {0, 4500, 5500, 14500, 25500, 34500,45500,54500,65500,74500,85500,94500,105500};
+	double bincenter[] = {2000, 5000, 10000, 20000, 30000, 40000, 50000, 60000, 70000, 80000, 90000, 100000};
+	double binlow[] = {0, 2000, 5000, 10000, 20000, 30000, 40000, 50000, 60000, 70000, 80000, 90000, 100000};
+	double binhigh[] = {0, 2000, 5000, 10000, 20000, 30000, 40000, 50000, 60000, 70000, 80000, 90000, 100000};
+	std::cout<<"size :" << sizeof(bincenter)/sizeof(double) <<std::endl;
+	for (unsigned ik = 0; ik < sizeof(bincenter)/sizeof(double); ++ik)
+	{
+		float binwidth_low = 0;
+		float binwidth_high = 0;
+		if(ik == 0) 
+		{	
+			binwidth_low = 0.5*bincenter[ik];
+			binhigh[ik] = binlow[ik] + binwidth_low;
+		}
+		else 
+		{
+			binwidth_low = 0.5*(bincenter[ik] - bincenter[ik-1]);
+		}
+		if (ik == 11)
+		{
+			binwidth_high = 10.*bincenter[ik-1];
+		}
+		else
+		{
+			binwidth_high = 0.5*(bincenter[ik+1] - bincenter[ik]);
+		}
+		binlow[ik+1] = bincenter[ik] - binwidth_low;
+		binhigh[ik+1] = bincenter[ik] + binwidth_high;
+	//	std::cout<<"binlow[" <<ik <<"] : " << binlow[ik] << std::endl; 
+	}
+	for (unsigned ik = 0; ik <= sizeof(bincenter)/sizeof(double); ++ik)
+	{
+	
+		std::cout<<"binlow[" <<ik <<"] : " << binlow[ik] << std::endl; 
+		std::cout<<"binhigh[" <<ik <<"] : " << binhigh[ik] << std::endl; 
+	}
 	int binNum	    = 200;
 	double relptmin, relptmax;    
 	double inv_ptmin, inv_ptmax;    
@@ -84,16 +113,6 @@ int resolution_plots_Vs_pt
 	double thetamin, thetamax;
 	double eta_min, eta_max;
 	double dcamin, dcamax;
-	
-
-	/*relptmin     	= -1, relptmax    = 1;
-	inv_ptmin    	= -5e-5, inv_ptmax = 5e-5;
-	phimin	    	= -0.01,phimax      = 0.01;
-	zmin         	= -8.0,  zmax        = 8.0;
-	thetamin     	= -0.01,thetamax   = 0.01;
-	eta_min      	= -0.01,eta_max    = 0.01;
-	dcamin	    	= -120,  dcamax       = 150;
-*/
 	
 	TCanvas *C1 = new TCanvas("C1","");
 	TCanvas *C2 = new TCanvas("C2","");
@@ -177,16 +196,13 @@ int resolution_plots_Vs_pt
 	h_sigma_z0->SetDirectory(0);
 	h_sigma_dca->SetDirectory(0);
 	
-	//const char* out_path = "/eos/user/t/tkar/www/TTT/plots/resolution";
-//	const char* out_path = "/afs/cern.ch/work/t/tkar/testarea/20.20.10.1/WorkArea/run/macros";
-		const char* out_path = "./plots/reso_plots";
-                char out_file_root[1023];
-                sprintf(out_file_root,"%s/%s.root",out_path,output_file_name);
-                TFile* output_file = new TFile(out_file_root, "RECREATE");	
+	const char* out_path = "./plots/reso_plots";
+	char out_file_root[1023];
+	sprintf(out_file_root,"%s/%s.root",out_path,output_file_name);
+	TFile* output_file = new TFile(out_file_root, "RECREATE");	
 	//! divide eta into small bins and fill each bin with a histogram
 	//! Next fit all these small histograms with gauss fit and optimise the fit about the mean
-	double bincenter[] = {2000, 5000, 10000, 20000, 30000, 40000, 50000, 60000, 70000, 80000, 90000, 100000};
-	for (int  k = 0; k < 12; k++)
+	for (int  k = 0; k < sizeof(bincenter)/sizeof(double); k++)
 	{
 		if(k < 2)
 		{
@@ -242,7 +258,7 @@ int resolution_plots_Vs_pt
 		//TH1F *h7 = new TH1F("h7", "dca", binNum,dcamin,dcamax);
 		//h->SetDirectory(0);
 		//! define pt range in which you want to fit a gauss function
-		sprintf(buffer, "abs(TTTTPt-%f)<300", bincenter[k]);// corresponds to a binwidth of 1000MeV/c i.e. +- 500 MeV/c about the bincenter
+		sprintf(buffer, "((TTTTPt > %f) && (TTTTPt < %f))", binlow[k+1], binhigh[k+1]);// corresponds to a binwidth of 1000MeV/c i.e. +- 500 MeV/c about the bincenter
 		C1->Clear();
 		h1->GetXaxis()->SetTitle("(pt_{rec} - pt_{gen})/pt_{gen} ");
 		recTree.Draw("(TTTpt - TTTTPt)/TTTTPt>>h1",cut && TCut(buffer));
@@ -378,8 +394,8 @@ return 0;
 }
 int plot_reso_vs_pt()
 {
-	//resolution_plots_Vs_pt("testResoVspt_all",true);
-	resolution_plots_Vs_pt("testResoVspt_all1.4_5GeV",true);
+	resolution_plots_Vs_pt("testResoVspt_all",true);
+	//resolution_plots_Vs_pt("testResoVspt_all1.4_5GeV",true);
 	return 0;
 }
 
