@@ -17,7 +17,8 @@
 TCut mu_cut = "abs(M_pdg)==13 && M_barcode > 0 && abs(TTTTZ0) < 200 && abs(M_Vx)<10 && abs(M_Vy)<10";
 TCut pi_cut = "abs(M_pdg)==211 && M_barcode > 0 && abs(TTTTZ0) < 200 && abs(M_Vx)<10 && abs(M_Vy)<10";
 TCut e_cut  = "abs(M_pdg)==11 && M_barcode > 0 && abs(TTTTZ0) < 200 && abs(M_Vx)<10 && abs(M_Vy)<10";
-TCut all_cut= "TTTTBarcode > 0 && abs(TTTTPt)>5000 && abs(TTTTEta)<1.4 && abs(TTTTZ0) < 100 && abs(TTTTVx) < 0.1 && abs(TTTTVy) < 0.1 && abs(TTTpt)>5000 && abs(TTTeta)<1.4";
+TCut all_cut= "TTTTBarcode > 0 && abs(TTTTPt)>2000 && abs(TTTTEta)<1.4 && abs(TTTTZ0) < 100 && abs(TTTTVx) < 0.1 && abs(TTTTVy) < 0.1 && abs(TTTpt)>2000 && abs(TTTeta)<1.4";
+//TCut all_cut= "TTTTBarcode > 0 && abs(TTTTPt)>2000 && abs(TTTTEta)<1.4 && abs(TTTTZ0) < 100 && abs(TTTTVx) < 0.1 && abs(TTTTVy) < 0.1";
 char buf[4096];
 //! User defined Gauss fit function to optimise the fit 
 void fit_Gauss(TH1F* h)
@@ -52,7 +53,8 @@ int resolution_plots_Vs_phi
 (const char* output_file_name, const char* p_type = "all", bool save = false)
 {
 	TChain recTree("m_collectionTree");
-	recTree.Add("/media/tamasi/DriveT/tamasi/Desktop/PHD/work/mere_plots/athena/Analysis/user.tkar.hh4bsig5PU0_2_ntuples3_MYSTREAM/*.root");
+	recTree.Add("/media/tamasi/DriveT/tamasi/Desktop/PHD/work/mere_plots/athena/Analysis/user.tkar.hh4bsig5PU0_3_ntuples1_MYSTREAM/*.root");
+	//recTree.Add("/media/tamasi/DriveT/tamasi/Desktop/PHD/work/mere_plots/athena/Analysis/user.tkar.hh4bsig5PU0_2_ntuples3_MYSTREAM/*.root");
 	TCut cut;
 	const char* type = p_type;
 	if(type == "muon"){ cut = mu_cut;}
@@ -61,8 +63,8 @@ int resolution_plots_Vs_phi
 	else if(type == "all") cut = all_cut;
 	else{ std::cout <<"enter particle type"; return 0;} 
 	
-	int phibin = 15;
-    	double phi_min   = -3.0, phi_max = 3.0;
+	int phibin = 17;
+    	double phi_min   = -3.4, phi_max = 3.4;
 	int binNum	    = 200;
 	double relptmin, relptmax;    
 	double inv_ptmin, inv_ptmax;    
@@ -170,7 +172,7 @@ int resolution_plots_Vs_phi
 
 	//! divide phi into small bins and fill each bin with a histogram
 	//! Next fit all these small histograms with gauss fit and optimise the fit about the mean
-	for (double phi = -2.8; phi < 3.0; phi+=0.4)
+	for (double phi = -3.2; phi < 3.4; phi+=0.4)
 	{
 //		double phi = -1.2;
 		TH1F *h1 = new TH1F("h1", "Relative pt", binNum,relptmin,relptmax);
@@ -316,7 +318,7 @@ return 0;
 
 int plot_one()
 {
-resolution_plots_Vs_phi("ResoVsphiTTT_all","all",true);
+resolution_plots_Vs_phi("new1ResoVsphiTTTdR0.1","all",true);
 //resolution_plots_Vs_phi("ResoVsphiTTT_all1.4_5GeV","all",true);
 return 0;
 }

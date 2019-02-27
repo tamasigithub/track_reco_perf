@@ -17,9 +17,8 @@
 TCut mu_cut = "abs(M_pdg)==13 && M_barcode > 0 && abs(InDetTZ0) < 200 && abs(M_Vx)<10 && abs(M_Vy)<10";
 TCut pi_cut = "abs(M_pdg)==211 && M_barcode > 0 && abs(InDetTZ0) < 200 && abs(M_Vx)<10 && abs(M_Vy)<10";
 TCut e_cut  = "abs(M_pdg)==11 && M_barcode > 0 && abs(InDetTZ0) < 200 && abs(M_Vx)<10 && abs(M_Vy)<10";
-TCut all_cut= "InDetTBarcode > 0 && abs(InDetTPt)>5000 && abs(InDetTEta)<1.4 && abs(InDetTZ0) < 100 && abs(InDetTVx) < 0.1 && abs(InDetTVy) < 0.1 && abs(InDetpt)>5000 && abs(InDeteta)<1.4";
-//! path for input files
-const char* path = "/afs/cern.ch/work/t/tkar/testarea/20.20.10.1/WorkArea/run/rec_outputs/SingleParticles_Sept272k18";
+TCut all_cut= "InDetTBarcode > 0 && abs(InDetTPt)>2000 && abs(InDetTEta)<1.4 && abs(InDetTZ0) < 100 && abs(InDetTVx) < 0.1 && abs(InDetTVy) < 0.1 && abs(InDetpt)>2000 && abs(InDeteta)<1.4";
+//TCut all_cut= "InDetTBarcode > 0 && abs(InDetTPt)>2000 && abs(InDetTEta)<1.4 && abs(InDetTZ0) < 100 && abs(InDetTVx) < 0.1 && abs(InDetTVy) < 0.1";
 char buf[4096];
 //! User defined Gauss fit function to optimise the fit 
 void fit_Gauss(TH1F* h)
@@ -54,7 +53,7 @@ int resolution_plots_Vs_eta
 (const char* output_file_name, const char* p_type = "all", bool save = false)
 {
 	TChain recTree("m_collectionTree");
-	recTree.Add("/media/tamasi/DriveT/tamasi/Desktop/PHD/work/mere_plots/athena/Analysis/user.tkar.hh4bsig5PU0_2_ntuples3_MYSTREAM/*.root");
+	recTree.Add("/media/tamasi/DriveT/tamasi/Desktop/PHD/work/mere_plots/athena/Analysis/user.tkar.hh4bsig5PU0_3_ntuples1_MYSTREAM/*.root");
 	TCut cut;
 	const char* type = p_type;
 	if(type == "muon"){ cut = mu_cut;}
@@ -63,7 +62,9 @@ int resolution_plots_Vs_eta
 	else if(type == "all") cut = all_cut;
 	else{ std::cout <<"enter particle type"; return 0;} 
 	
-	int etabin = 13;
+/*	int etabin = 15;
+    	double etamin   = -1.5, etamax = 1.5;
+*/	int etabin = 13;
     	double etamin   = -1.3, etamax = 1.3;
 	int binNum	    = 200;
 	double relptmin, relptmax;    
@@ -172,6 +173,7 @@ int resolution_plots_Vs_eta
 
 	//! divide eta into small bins and fill each bin with a histogram
 	//! Next fit all these small histograms with gauss fit and optimise the fit about the mean
+	//for (double eta = -1.4; eta < 1.5; eta+=0.2)
 	for (double eta = -1.2; eta < 1.3; eta+=0.2)
 	{
 //		double eta = -1.2;
@@ -318,7 +320,7 @@ return 0;
 
 int plot_one()
 {
-resolution_plots_Vs_eta("ResoVsEtaInDet_all","all",true);
+resolution_plots_Vs_eta("new1ResoVsEtaInDetdR0.1","all",true);
 //resolution_plots_Vs_eta("ResoVsEtaInDet_all1.4_5GeV","all",true);
 return 0;
 }
