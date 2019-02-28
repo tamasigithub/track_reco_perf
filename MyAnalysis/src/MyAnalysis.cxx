@@ -30,7 +30,6 @@ m_associator(0),
 vec_jetPars(0),m_collectionTree(0),m_event(0), 
 m_weight(0),
 m_truthM(0), m_truthPt(0), m_truthEta(0), m_truthPhi(0), m_truthVx(0), m_truthVy(0), m_truthVz(0), m_truthPdg(0), m_truthStatus(0), m_truthBarcode(0),
-m_rTTTtid(0),m_rTTTd0(0),m_rTTTz0(0),m_rTTTphi0(0),m_rTTTtheta(0),m_rTTTqOverP(0),m_rTTTPt(0),m_rTTTEta(0),
 m_truthjetEta(0),m_truthjetPhi(0),m_truthjetE(0),m_truthjetM(0),m_truthjetPt(0),m_truthjetPx(0),m_truthjetPy(0),m_truthjetPz(0),
 m_StdPVx(0), m_StdPVy(0), m_StdPVz(0), m_TTTPVz(0),
 m_InDetd0(0),m_InDetz0(0),m_InDetphi0(0),m_InDettheta(0),m_InDetqOverP(0), m_InDetPt(0), m_InDetEta(0), m_InDetTBarcode(0), m_InDetTPdg(0), m_InDetTPt(0), m_InDetTP(0), m_InDetTEta(0), m_InDetTTheta(0), m_InDetTPhi(0), m_InDetTZ0(0), m_InDetTVx(0), m_InDetTVy(0),
@@ -147,14 +146,6 @@ StatusCode MyAnalysis::initialize()
   m_collectionTree->Branch("truthPdg",     &m_truthPdg);     
   m_collectionTree->Branch("truthStatus",  &m_truthStatus);     
   m_collectionTree->Branch("truthBarcode", &m_truthBarcode);     
-  m_collectionTree->Branch("r_TTTtid",	   &m_rTTTtid); 
-  m_collectionTree->Branch("r_TTTd0",	   &m_rTTTd0); 
-  m_collectionTree->Branch("r_TTTz0",	   &m_rTTTz0);
-  m_collectionTree->Branch("r_TTTphi0",	   &m_rTTTphi0);
-  m_collectionTree->Branch("r_TTTtheta",   &m_rTTTtheta);
-  m_collectionTree->Branch("r_TTTqOverP",  &m_rTTTqOverP);
-  m_collectionTree->Branch("r_TTTpt",	   &m_rTTTPt);
-  m_collectionTree->Branch("r_TTTeta",	   &m_rTTTEta);
 
   m_collectionTree->Branch("truthjetEta",   &m_truthjetEta);   
   m_collectionTree->Branch("truthjetPhi",   &m_truthjetPhi);   
@@ -351,14 +342,6 @@ StatusCode MyAnalysis::execute()
   m_truthPdg.clear();
   m_truthStatus.clear();
   m_truthBarcode.clear();
-  m_rTTTtid.clear(); 
-  m_rTTTd0.clear(); 
-  m_rTTTz0.clear();
-  m_rTTTphi0.clear();
-  m_rTTTtheta.clear();
-  m_rTTTqOverP.clear();
-  m_rTTTPt.clear();
-  m_rTTTEta.clear();
 
   m_truthjetEta.clear();
   m_truthjetPhi.clear();
@@ -609,14 +592,6 @@ StatusCode MyAnalysis::execute()
 		m_truthVy.push_back(99999.0);
 		m_truthVz.push_back(99999.0);
 	}
-	m_rTTTtid.push_back(-99999);
-	m_rTTTd0.push_back(-99999.0);
-	m_rTTTz0.push_back(-99999.0);
-	m_rTTTphi0.push_back(-99999.0);
-	m_rTTTtheta.push_back(-99999.0);
-	m_rTTTqOverP.push_back(-99999.0);
-	m_rTTTPt.push_back(-99999.0);
-	m_rTTTEta.push_back(-99999.0);
   }
   for (size_t i = 0; i < SMHiggs.size(); ++i)
   {
@@ -641,15 +616,6 @@ StatusCode MyAnalysis::execute()
 		m_truthVy.push_back(99999.0);
 		m_truthVz.push_back(99999.0);
 	}
-	m_rTTTtid.push_back(-99999);
-	m_rTTTd0.push_back(-99999.0);
-	m_rTTTz0.push_back(-99999.0);
-	m_rTTTphi0.push_back(-99999.0);
-	m_rTTTtheta.push_back(-99999.0);
-	m_rTTTqOverP.push_back(-99999.0);
-	m_rTTTPt.push_back(-99999.0);
-	m_rTTTEta.push_back(-99999.0);
-	//m_truthVz.push_back(SMHiggs[i]->prodVtx()->z());
   }
   for (size_t i = 0; i < BSMHiggs.size(); ++i)
   {
@@ -674,15 +640,6 @@ StatusCode MyAnalysis::execute()
 		m_truthVy.push_back(99999.0);
 		m_truthVz.push_back(99999.0);
 	}
-	m_rTTTtid.push_back(-99999);
-	m_rTTTd0.push_back(-99999.0);
-	m_rTTTz0.push_back(-99999.0);
-	m_rTTTphi0.push_back(-99999.0);
-	m_rTTTtheta.push_back(-99999.0);
-	m_rTTTqOverP.push_back(-99999.0);
-	m_rTTTPt.push_back(-99999.0);
-	m_rTTTEta.push_back(-99999.0);
-	//m_truthVz.push_back(BSMHiggs[i]->prodVtx()->z());
   }
   for (xAOD::TruthParticleContainer::const_iterator itr = theTruth->begin(); itr != theTruth->end(); ++itr) 
   {
@@ -693,122 +650,27 @@ StatusCode MyAnalysis::execute()
 		charged.push_back(part);
 		//! loop over the reconstructed tracks and check if the above stable, charged particle has been reconstructed or not
 		//! if not account it as inefficiency
-		int barcode_truth = part->barcode(); ATH_MSG_DEBUG("barcode_truth = " <<barcode_truth);
-		int OG_barcode;
-		int match_flag = -1, dc_count = -1;
-  		xAOD::TrackParticleContainer::const_iterator nextTrk2(TTTtracks->begin());
-  		xAOD::TrackParticleContainer::const_iterator lastTrk2(TTTtracks->end());
-  		for (; nextTrk2!=lastTrk2; nextTrk2++) 
-  		{
-			const xAOD::TrackParticle* particle2 = *nextTrk2;
-			if(particle2->auxdata<int>("m_barcode") == barcode_truth)
-			{
-				match_flag = 1;
-				dc_count++; 
-				// if track reconstructed more than once
-				if(dc_count > 0)
-				{
-					//! mark the truth quantities as double counted tracks
-					//! fill -1
-					OG_barcode = -1 * barcode_truth;
-					m_truthM.push_back(-1);
-					m_truthPt.push_back(-1);
-					m_truthP.push_back(-1);
-					m_truthEta.push_back(-1);
-					m_truthTheta.push_back(-1);
-					m_truthPhi.push_back(-1);
-					m_truthPdg.push_back(-1);
-					m_truthStatus.push_back(-1);
-					m_truthBarcode.push_back(-1);
-			
-					m_truthVx.push_back(-1);
-					m_truthVy.push_back(-1);
-					m_truthVz.push_back(-1);
-				
-				}
-				// else if track found once i.e. dc_count == 0
-				else 
-				{
-					//! fill the truth quantities into truth variables	
-					OG_barcode = barcode_truth;
-					m_truthM.push_back(part->p4().M());
-					m_truthPt.push_back(part->p4().Perp());
-					m_truthP.push_back(part->p4().P());
-					m_truthEta.push_back(part->p4().Eta());
-					m_truthTheta.push_back(part->p4().Theta());
-					m_truthPhi.push_back(part->p4().Phi());
-					m_truthPdg.push_back(part->pdgId());
-					m_truthStatus.push_back(part->status());
-					m_truthBarcode.push_back(part->barcode());
-					if(part->hasProdVtx()) 
-					{
-						m_truthVx.push_back(part->prodVtx()->x());
-						m_truthVy.push_back(part->prodVtx()->y());
-						m_truthVz.push_back(part->prodVtx()->z());
-					}
-					else 
-					{
-						m_truthVx.push_back(99999.0);
-						m_truthVy.push_back(99999.0);
-						m_truthVz.push_back(99999.0);
-					}
-				}
-				//! fill the matched reco quantities
-				m_rTTTtid.push_back(OG_barcode);
-				m_rTTTd0.push_back(particle2->d0());
-				m_rTTTz0.push_back(particle2->z0());
-				m_rTTTphi0.push_back(particle2->phi0());
-				m_rTTTtheta.push_back(particle2->theta());
-				m_rTTTqOverP.push_back(particle2->qOverP());
-				m_rTTTPt.push_back(particle2->pt());
-				m_rTTTEta.push_back(particle2->eta());
-			}//! end of if matched barcode found
-			
-		}//! end of loop over ttt tracks
-		ATH_MSG_DEBUG("dc_count : " <<dc_count);
-		//! account for inefficiencies
-		if(match_flag < 0)
-		{ 
-			//! if for a generated particle, no track is reconstructed dc_count<0 
-			//! here generated particles correspond to particles generating a cluster in the outermost triplet layer
-			if(dc_count<0)
-			{
-				//! fill zero's for matched variables
-				//! and truth quantities for truth variables	
-				m_truthM.push_back(part->p4().M());
-				m_truthPt.push_back(part->p4().Perp());
-				m_truthP.push_back(part->p4().P());
-				m_truthEta.push_back(part->p4().Eta());
-				m_truthTheta.push_back(part->p4().Theta());
-				m_truthPhi.push_back(part->p4().Phi());
-				m_truthPdg.push_back(part->pdgId());
-				m_truthStatus.push_back(part->status());
-				m_truthBarcode.push_back(part->barcode());
-				if(part->hasProdVtx()) 
-				{
-					m_truthVx.push_back(part->prodVtx()->x());
-					m_truthVy.push_back(part->prodVtx()->y());
-					m_truthVz.push_back(part->prodVtx()->z());
-				}
-				else 
-				{
-					m_truthVx.push_back(99999.0);
-					m_truthVy.push_back(99999.0);
-					m_truthVz.push_back(99999.0);
-				}
-				m_rTTTtid.push_back(0);
-				m_rTTTd0.push_back(0);
-				m_rTTTz0.push_back(0);
-				m_rTTTphi0.push_back(0);
-				m_rTTTtheta.push_back(0);
-				m_rTTTqOverP.push_back(0);
-				m_rTTTPt.push_back(0);
-				m_rTTTEta.push_back(0);
-				
-			}
-			else continue;
+		m_truthM.push_back(part->p4().M());
+		m_truthPt.push_back(part->p4().Perp());
+		m_truthP.push_back(part->p4().P());
+		m_truthEta.push_back(part->p4().Eta());
+		m_truthTheta.push_back(part->p4().Theta());
+		m_truthPhi.push_back(part->p4().Phi());
+		m_truthPdg.push_back(part->pdgId());
+		m_truthStatus.push_back(part->status());
+		m_truthBarcode.push_back(part->barcode());
+		if(part->hasProdVtx()) 
+		{
+			m_truthVx.push_back(part->prodVtx()->x());
+			m_truthVy.push_back(part->prodVtx()->y());
+			m_truthVz.push_back(part->prodVtx()->z());
 		}
-
+		else 
+		{
+			m_truthVx.push_back(99999.0);
+			m_truthVy.push_back(99999.0);
+			m_truthVz.push_back(99999.0);
+		}
 	}//! end of loop over stable charged particles
   }
 
