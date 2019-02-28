@@ -30,7 +30,7 @@ m_associator(0),
 vec_jetPars(0),m_collectionTree(0),m_event(0), 
 m_weight(0),
 m_truthM(0), m_truthPt(0), m_truthEta(0), m_truthPhi(0), m_truthVx(0), m_truthVy(0), m_truthVz(0), m_truthPdg(0), m_truthStatus(0), m_truthBarcode(0),
-m_rTTTd0(0),m_rTTTz0(0),m_rTTTphi0(0),m_rTTTtheta(0),m_rTTTqOverP(0),m_rTTTPt(0),m_rTTTEta(0),
+m_rTTTtid(0),m_rTTTd0(0),m_rTTTz0(0),m_rTTTphi0(0),m_rTTTtheta(0),m_rTTTqOverP(0),m_rTTTPt(0),m_rTTTEta(0),
 m_truthjetEta(0),m_truthjetPhi(0),m_truthjetE(0),m_truthjetM(0),m_truthjetPt(0),m_truthjetPx(0),m_truthjetPy(0),m_truthjetPz(0),
 m_StdPVx(0), m_StdPVy(0), m_StdPVz(0), m_TTTPVz(0),
 m_InDetd0(0),m_InDetz0(0),m_InDetphi0(0),m_InDettheta(0),m_InDetqOverP(0), m_InDetPt(0), m_InDetEta(0), m_InDetTBarcode(0), m_InDetTPdg(0), m_InDetTPt(0), m_InDetTP(0), m_InDetTEta(0), m_InDetTTheta(0), m_InDetTPhi(0), m_InDetTZ0(0), m_InDetTVx(0), m_InDetTVy(0),
@@ -147,6 +147,7 @@ StatusCode MyAnalysis::initialize()
   m_collectionTree->Branch("truthPdg",     &m_truthPdg);     
   m_collectionTree->Branch("truthStatus",  &m_truthStatus);     
   m_collectionTree->Branch("truthBarcode", &m_truthBarcode);     
+  m_collectionTree->Branch("r_TTTtid",	   &m_rTTTtid); 
   m_collectionTree->Branch("r_TTTd0",	   &m_rTTTd0); 
   m_collectionTree->Branch("r_TTTz0",	   &m_rTTTz0);
   m_collectionTree->Branch("r_TTTphi0",	   &m_rTTTphi0);
@@ -350,6 +351,7 @@ StatusCode MyAnalysis::execute()
   m_truthPdg.clear();
   m_truthStatus.clear();
   m_truthBarcode.clear();
+  m_rTTTtid.clear(); 
   m_rTTTd0.clear(); 
   m_rTTTz0.clear();
   m_rTTTphi0.clear();
@@ -607,6 +609,7 @@ StatusCode MyAnalysis::execute()
 		m_truthVy.push_back(99999.0);
 		m_truthVz.push_back(99999.0);
 	}
+	m_rTTTtid.push_back(-99999);
 	m_rTTTd0.push_back(-99999.0);
 	m_rTTTz0.push_back(-99999.0);
 	m_rTTTphi0.push_back(-99999.0);
@@ -638,6 +641,7 @@ StatusCode MyAnalysis::execute()
 		m_truthVy.push_back(99999.0);
 		m_truthVz.push_back(99999.0);
 	}
+	m_rTTTtid.push_back(-99999);
 	m_rTTTd0.push_back(-99999.0);
 	m_rTTTz0.push_back(-99999.0);
 	m_rTTTphi0.push_back(-99999.0);
@@ -670,6 +674,7 @@ StatusCode MyAnalysis::execute()
 		m_truthVy.push_back(99999.0);
 		m_truthVz.push_back(99999.0);
 	}
+	m_rTTTtid.push_back(-99999);
 	m_rTTTd0.push_back(-99999.0);
 	m_rTTTz0.push_back(-99999.0);
 	m_rTTTphi0.push_back(-99999.0);
@@ -683,12 +688,13 @@ StatusCode MyAnalysis::execute()
   {
  	const xAOD::TruthParticle *part = *itr;
 	//const xAOD::TruthVertex* pvtx = part->prodVtx();
-	if (part->status() == 1 && part->charge() != 0)
+	if (part->status() == 1 && part->isCharged())
 	{
 		charged.push_back(part);
 		//! loop over the reconstructed tracks and check if the above stable, charged particle has been reconstructed or not
 		//! if not account it as inefficiency
 		int barcode_truth = part->barcode(); ATH_MSG_DEBUG("barcode_truth = " <<barcode_truth);
+		int OG_barcode;
 		int match_flag = -1, dc_count = -1;
   		xAOD::TrackParticleContainer::const_iterator nextTrk2(TTTtracks->begin());
   		xAOD::TrackParticleContainer::const_iterator lastTrk2(TTTtracks->end());
@@ -704,6 +710,7 @@ StatusCode MyAnalysis::execute()
 				{
 					//! mark the truth quantities as double counted tracks
 					//! fill -1
+					OG_barcode = -1 * barcode_truth;
 					m_truthM.push_back(-1);
 					m_truthPt.push_back(-1);
 					m_truthP.push_back(-1);
@@ -723,6 +730,7 @@ StatusCode MyAnalysis::execute()
 				else 
 				{
 					//! fill the truth quantities into truth variables	
+					OG_barcode = barcode_truth;
 					m_truthM.push_back(part->p4().M());
 					m_truthPt.push_back(part->p4().Perp());
 					m_truthP.push_back(part->p4().P());
@@ -746,6 +754,7 @@ StatusCode MyAnalysis::execute()
 					}
 				}
 				//! fill the matched reco quantities
+				m_rTTTtid.push_back(OG_barcode);
 				m_rTTTd0.push_back(particle2->d0());
 				m_rTTTz0.push_back(particle2->z0());
 				m_rTTTphi0.push_back(particle2->phi0());
@@ -787,6 +796,7 @@ StatusCode MyAnalysis::execute()
 					m_truthVy.push_back(99999.0);
 					m_truthVz.push_back(99999.0);
 				}
+				m_rTTTtid.push_back(0);
 				m_rTTTd0.push_back(0);
 				m_rTTTz0.push_back(0);
 				m_rTTTphi0.push_back(0);
@@ -807,12 +817,12 @@ StatusCode MyAnalysis::execute()
   //! loop over the retrieved track particle conatiner and fill the TTree branches
   xAOD::TrackParticleContainer::const_iterator nextTrk(tracks->begin());
   xAOD::TrackParticleContainer::const_iterator lastTrk(tracks->end());
-  const std::vector<xAOD::IParticle*> tracksCont = tracks->stdcont();
-  m_associator->match(tracksCont, charged);
+  //const std::vector<xAOD::IParticle*> tracksCont = tracks->stdcont();
+  //m_associator->match(tracksCont, charged);
   for (; nextTrk!=lastTrk; nextTrk++) 
   {
 	const xAOD::TrackParticle* particle = *nextTrk;
-	const xAOD::IParticle* iparticle = particle;
+	//const xAOD::IParticle* iparticle = particle;
 
 	m_InDetd0.push_back(particle->d0());
 	m_InDetz0.push_back(particle->z0());
@@ -821,7 +831,17 @@ StatusCode MyAnalysis::execute()
 	m_InDetqOverP.push_back(particle->qOverP());
 	m_InDetPt.push_back(particle->pt());
 	m_InDetEta.push_back(particle->eta());
-	const xAOD::TruthParticle *truth = m_associator->matched(const_cast<xAOD::IParticle *>(iparticle));
+	//const xAOD::TruthParticle *truth = m_associator->matched(const_cast<xAOD::IParticle *>(iparticle));
+	const xAOD::TruthParticle *truth = nullptr;
+	double minDr = 0.1;
+  	for (std::vector<const xAOD::TruthParticle *>::const_iterator itr = charged.begin(); itr != charged.end(); ++itr) 
+  	{
+		double dr = (*itr)->p4().DeltaR(particle->p4());
+		if (dr < minDr) {
+			truth = *itr;
+			minDr = dr;
+		}
+	}
 	int truthBarcode = -99999;
 	int truthPdg = -99999;
 	float truthEta = -99999;
@@ -874,12 +894,12 @@ StatusCode MyAnalysis::execute()
   //! loop over the retrieved track particle conatiner and fill the TTree branches
   xAOD::TrackParticleContainer::const_iterator nextTrk1(TTTtracks->begin());
   xAOD::TrackParticleContainer::const_iterator lastTrk1(TTTtracks->end());
-  const std::vector<xAOD::IParticle*> TTTCont = TTTtracks->stdcont();
-  m_associator->match(TTTCont, charged);
+  //const std::vector<xAOD::IParticle*> TTTCont = TTTtracks->stdcont();
+  //m_associator->match(TTTCont, charged);
   for (; nextTrk1!=lastTrk1; nextTrk1++) 
   {
 	const xAOD::TrackParticle* particle1 = *nextTrk1;
-	const xAOD::IParticle* iparticle1 = particle1;
+	//const xAOD::IParticle* iparticle1 = particle1;
 	m_TTTd0.push_back(particle1->d0());
 	m_TTTz0.push_back(particle1->z0());
 	m_TTTphi0.push_back(particle1->phi0());
@@ -889,7 +909,17 @@ StatusCode MyAnalysis::execute()
 	m_TTTEta.push_back(particle1->eta());
 
 
-	const xAOD::TruthParticle *truth = m_associator->matched(const_cast<xAOD::IParticle *>(iparticle1));
+	//const xAOD::TruthParticle *truth = m_associator->matched(const_cast<xAOD::IParticle *>(iparticle1));
+	const xAOD::TruthParticle *truth = nullptr;
+	double minDr = 0.1;
+  	for (std::vector<const xAOD::TruthParticle *>::const_iterator itr = charged.begin(); itr != charged.end(); ++itr) 
+  	{
+		double dr = (*itr)->p4().DeltaR(particle1->p4());
+		if (dr < minDr) {
+			truth = *itr;
+			minDr = dr;
+		}
+	}
 	int truthBarcode = -99999;
 	int truthPdg = -99999;
 	float truthEta = -99999;
