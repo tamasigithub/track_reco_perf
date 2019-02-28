@@ -308,6 +308,7 @@ private:
   //! all variables below labled by m_r* have values
   //! = -99999.0 for unstable particles i.e. for status!=1
   //! = 0 for inefficiency i.e. no TTT track was reconstructed for the corresponding stable and charged truth particle 
+  std::vector<int>	m_rTTTtid; 
   std::vector<float>	m_rTTTd0; 
   std::vector<float>	m_rTTTz0;
   std::vector<float>	m_rTTTphi0;
