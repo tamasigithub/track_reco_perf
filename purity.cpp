@@ -15,26 +15,26 @@
 #include <math.h>
 const char* out_path = "./plots/purity"; 
 
-int InDetpurity_Vs_etaphipt(const char* output_file_name = "newpurity_dR0.01", bool save = false)
+int InDetpurity_Vs_etaphipt(const char* output_file_name = "pur_InDetdR0.01_eta1.4", bool save = false)
 //int InDetpurity_Vs_etaphipt(const char* output_file_name = "newpurity_dR0.1", bool save = false)
 {
 //! Define Cut
 //TCut num_select= "InDetTBarcode > 0 && abs(InDetTPt)>2000 && abs(InDetTEta)<1.4 && abs(InDetpt)>2000 && abs(InDeteta)<1.4 && abs(InDetz0) < 100";
-TCut num_select= "InDetTBarcode > 0 && abs(InDetpt)>2000 && abs(InDeteta)<1.4";
-TCut den_select= "abs(InDetpt)>2000 && abs(InDeteta)<1.4";
-//TCut num_select= "InDetTBarcode > 0 && abs(InDetpt)>2000 && abs(InDeteta)<1.4 && abs(InDetz0) < 100";
-//TCut den_select= "abs(InDetpt)>2000 && abs(InDeteta)<1.4 && abs(InDetz0) < 100 ";
+//TCut num_select= "InDetTBarcode > 0 && abs(InDetpt)>2000 && abs(InDeteta)<1.4";
+//TCut den_select= "abs(InDetpt)>2000 && abs(InDeteta)<1.4 && abs(InDetz0)";
+TCut num_select= "InDetTBarcode > 0 && abs(InDetpt)>2000 && abs(InDeteta)<1.4 && abs(InDetz0) < 100";
+TCut den_select= "abs(InDetpt)>2000 && abs(InDeteta)<1.4 && abs(InDetz0) < 100 ";
 	
 	TChain recTree("m_collectionTree");
         //recTree.Add("/media/tamasi/DriveT/tamasi/Desktop/PHD/work/mere_plots/athena/Analysis/user.tkar.hh4bsig5PU0_3_ntuples1_MYSTREAM/*.root");
 	//dR=0.01
-        recTree.Add("/media/tamasi/DriveT/tamasi/Desktop/PHD/work/mere_plots/athena/Analysis/user.tkar.hh4bsig5PU0_2_ntuples1_MYSTREAM/*.root");
+        recTree.Add("/media/tamasi/DriveT/tamasi/Desktop/PHD/work/mere_plots/athena/Analysis/user.tkar.hh4bsig5PU0_3_ntuples2_MYSTREAM/*.root");
 
 	int etabin = 13;
     	double etamin   = -1.3, etamax = 1.3;
 	
-	int phibin = 15;
-    	double phimin   = -3.0, phimax = 3.0;
+	int phibin = 16;
+    	double phimin   = -3.2, phimax = 3.2;
 
 	//int ptbins = 12;
 	//double xbins[] = {1000, 3500, 7500, 15000, 25000, 35000, 45000, 55000, 65000, 75000, 85000, 95000, 105000 };	
@@ -126,25 +126,25 @@ TCut den_select= "abs(InDetpt)>2000 && abs(InDeteta)<1.4";
 
 //////////////// Purity for TTT tracks /////////////////
 
-int TTTpurity_Vs_etaphipt(const char* output_file_name = "newpurityTTT_dR0.01", bool save = false)
+int TTTpurity_Vs_etaphipt(const char* output_file_name = "pur_TTTdR0.01_eta1.4", bool save = false)
 {
 //! Define Cut
 //TCut num_select= "TTTTBarcode > 0 && abs(TTTTPt)>2000 && abs(TTTTEta)<1.4 && abs(TTTpt)>2000 && abs(TTTeta)<1.4  && abs(TTTz0) < 100";
-TCut num_select= "TTTTBarcode > 0 && abs(TTTpt)>2000 && abs(TTTeta)<1.4";
-TCut den_select= "abs(TTTpt)>2000 && abs(TTTeta)<1.4";
-//TCut num_select= "TTTTBarcode > 0 && abs(TTTpt)>2000 && abs(TTTeta)<1.4  && abs(TTTz0) < 100";
-//TCut den_select= "abs(TTTpt)>2000 && abs(TTTeta)<1.4 && abs(TTTz0) < 100";
+//TCut num_select= "TTTTBarcode > 0 && abs(TTTpt)>2000 && abs(TTTeta)<1.4";
+//TCut den_select= "abs(TTTpt)>2000 && abs(TTTeta)<1.4";
+TCut num_select= "TTTTBarcode > 0 && abs(TTTpt)>2000 && abs(TTTeta)<1.4  && abs(TTTz0) < 100";
+TCut den_select= "abs(TTTpt)>2000 && abs(TTTeta)<1.4 && abs(TTTz0) < 100";
 
 	TChain recTree("m_collectionTree");
         //recTree.Add("/media/tamasi/DriveT/tamasi/Desktop/PHD/work/mere_plots/athena/Analysis/user.tkar.hh4bsig5PU0_3_ntuples1_MYSTREAM/*.root");
 	// dR=0.01
-        recTree.Add("/media/tamasi/DriveT/tamasi/Desktop/PHD/work/mere_plots/athena/Analysis/user.tkar.hh4bsig5PU0_2_ntuples1_MYSTREAM/*.root");
+        recTree.Add("/media/tamasi/DriveT/tamasi/Desktop/PHD/work/mere_plots/athena/Analysis/user.tkar.hh4bsig5PU0_3_ntuples2_MYSTREAM/*.root");
 
 	int etabin = 13;
     	double etamin   = -1.3, etamax = 1.3;
 	
-	int phibin = 15;
-    	double phimin   = -3.0, phimax = 3.0;
+	int phibin = 16;
+    	double phimin   = -3.2, phimax = 3.2;
 
 	//int ptbins = 12;
 	//double xbins[] = {1000, 3500, 7500, 15000, 25000, 35000, 45000, 55000, 65000, 75000, 85000, 95000, 105000 };
@@ -233,7 +233,7 @@ TCut den_select= "abs(TTTpt)>2000 && abs(TTTeta)<1.4";
 
 //////////////// Purity for TTT tracks /////////////////
 
-int newTTTpurity_Vs_etaphipt(const char* output_file_name = "newpurityTTT_barcode", bool save = false)
+int newTTTpurity_Vs_etaphipt(const char* output_file_name = "pur_TTTBMatched_eta1.4", bool save = false)
 {
 //! Define Cut
 //TCut num_select= "mTTTTBarcode > 0 && abs(mTTTTPt)>2000 && abs(mTTTTEta)<1.4 && abs(TTTpt)>2000 && abs(TTTeta)<1.4  && abs(TTTz0) < 100";
@@ -241,13 +241,13 @@ TCut num_select= "mTTTTBarcode > 0  && abs(TTTpt)>2000 && abs(TTTeta)<1.4  && ab
 TCut den_select= "mTTTTBarcode >= 0 && abs(TTTpt)>2000 && abs(TTTeta)<1.4 && abs(TTTz0) < 100";
 
 	TChain recTree("m_collectionTree");
-        recTree.Add("/media/tamasi/DriveT/tamasi/Desktop/PHD/work/mere_plots/athena/Analysis/user.tkar.hh4bsig5PU0_3_ntuples1_MYSTREAM/*.root");
+        recTree.Add("/media/tamasi/DriveT/tamasi/Desktop/PHD/work/mere_plots/athena/Analysis/user.tkar.hh4bsig5PU0_3_ntuples2_MYSTREAM/*.root");
 
 	int etabin = 13;
     	double etamin   = -1.3, etamax = 1.3;
 	
-	int phibin = 15;
-    	double phimin   = -3.0, phimax = 3.0;
+	int phibin = 16;
+    	double phimin   = -3.2, phimax = 3.2;
 
 	//int ptbins = 12;
 	//double xbins[] = {1000, 3500, 7500, 15000, 25000, 35000, 45000, 55000, 65000, 75000, 85000, 95000, 105000 };

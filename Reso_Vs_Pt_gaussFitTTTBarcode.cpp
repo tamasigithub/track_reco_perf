@@ -20,7 +20,8 @@
 TCut mu_cut = "abs(M_pdg)==13 && M_barcode > 0 && abs(M_Vz) < 200 && abs(M_Vx)<10 && abs(M_Vy)<10";
 TCut pi_cut = "abs(M_pdg)==211 && M_barcode > 0 && abs(M_Vz) < 200 && abs(M_Vx)<10 && abs(M_Vy)<10";
 TCut e_cut  = "abs(M_pdg)==11 && M_barcode > 0 && abs(M_Vz) < 200 && abs(M_Vx)<10 && abs(M_Vy)<10";
-TCut all_cut= "InDetTBarcode > 0 && abs(InDetTPt)>2000 && abs(InDetTEta)<1.4 && abs(InDetTZ0) < 100 && abs(InDetTVx) < 2 && abs(InDetTVy) < 2";
+//! use this for TTT track resolution with barcode matching
+TCut all_cut= "mTTTTBarcode > 0 && abs(mTTTTPt)>2000 && abs(mTTTTEta)<1.4 && abs(mTTTTZ0) < 100 && abs(mTTTTVx) < 10 && abs(mTTTTVy) < 10 ";
 //! path for input files
 const char* path = "./../test_ntuple1.root";
 char buf[4096];
@@ -56,14 +57,8 @@ char buffer[1024];
 int resolution_plots_Vs_pt
 (const char* output_file_name, /*const char* p_type = "muon",*/ bool save = false)
 {
-	/*char in_file_name[1023];
-    	sprintf(in_file_name,"%s/%s",path,input_file);
-    	TFile* f = TFile::Open(in_file_name);
-	TTree* recTree = (TTree*)f->Get("m_recTree");*/
-
 	TChain recTree("m_collectionTree");
 	recTree.Add("/media/tamasi/DriveT/tamasi/Desktop/PHD/work/mere_plots/athena/Analysis/user.tkar.hh4bsig5PU0_3_ntuples2_MYSTREAM/*.root");
-	std::cout<<"Collection Tree opened with " << recTree.GetEntries() << "entries" <<std::endl;
 	TCut cut;
 	//const char* type = p_type;
 	const char* type = "all";
@@ -111,7 +106,6 @@ int resolution_plots_Vs_pt
 		std::cout<<"binlow[" <<ik <<"] : " << binlow[ik] << std::endl; 
 		std::cout<<"binhigh[" <<ik <<"] : " << binhigh[ik] << std::endl; 
 	}
-
 	int binNum	    = 200;
 	double relptmin, relptmax;    
 	double inv_ptmin, inv_ptmax;    
@@ -148,7 +142,7 @@ int resolution_plots_Vs_pt
   	h_sigma_invPt->SetMarkerStyle(21);
   	h_sigma_invPt->GetXaxis()->SetTitle("P_{t_gen} [MeV/c]");
 	h_sigma_invPt->GetYaxis()->SetTitleOffset(1.3);
-  	h_sigma_invPt->GetYaxis()->SetTitle("#sigma_{#Delta(1/p_{t})} [MeV/c]^{-1}");
+  	h_sigma_invPt->GetYaxis()->SetTitle("#sigma_{#Delta(1/p_{t})} MeV^{-1}/c");
 	//! sigma phi Vs eta//
 	TH1D *h_sigma_phi = new TH1D("h_sigma_phi", "Phi resolution Vs P_{t}",ptbin,binlow);
         h_sigma_phi->SetLineColor(1);
@@ -213,45 +207,45 @@ int resolution_plots_Vs_pt
 	{
 		if(k < 2)
 		{
-			relptmin     	= -0.1, relptmax     = 0.1;
-			inv_ptmin    	= -2e-5, inv_ptmax   = 2e-5;
-			phimin	    	= -0.005,phimax       = 0.005;
-			zmin         	= -0.3,  zmax        = 0.3;
-			thetamin     	= -0.004,thetamax     = 0.004;
-			eta_min      	= -0.004,eta_max      = 0.004;
-			dcamin	    	= -120,  dcamax      = 130;
+			relptmin     	= -0.1, relptmax    = 0.1;
+			inv_ptmin    	= -4.5e-5, inv_ptmax = 3e-5;
+			phimin	    	= -0.01,phimax      = 0.01;
+			zmin         	= -8.0,  zmax        = 8.0;
+			thetamin     	= -0.01,thetamax   = 0.01;
+			eta_min      	= -0.01,eta_max    = 0.01;
+			dcamin	    	= -120,  dcamax       = 130;
 
 		}
 		else if(k >=2 && k < 4)
 		{
-			relptmin     	= -0.1, relptmax     = 0.1;
-			inv_ptmin    	= -0.6e-5, inv_ptmax = 0.6e-5;
-			phimin	    	= -0.002,phimax      = 0.002;
-			zmin         	= -0.2,  zmax        = 0.2;
-			thetamin     	= -0.001,thetamax    = 0.001;
-			eta_min      	= -0.001,eta_max     = 0.001;
+			relptmin     	= -0.2, relptmax    = 0.2;
+			inv_ptmin    	= -1.5e-5, inv_ptmax = 1.5e-5;
+			phimin	    	= -0.003,phimax      = 0.003;
+			zmin         	= -4.0,  zmax        = 4.0;
+			thetamin     	= -0.003,thetamax   = 0.003;
+			eta_min      	= -0.003,eta_max    = 0.003;
 			dcamin	    	= -50,  dcamax       = 130;
 
 		}		
 		else if(k >= 4 && k<8)
 		{
-			relptmin     	= -0.2, relptmax     = 0.2;
-			inv_ptmin    	= -0.2e-5, inv_ptmax = 0.2e-5;
-			phimin	    	= -0.0008,phimax      = 0.0008;
-			zmin         	= -0.1,  zmax        = 0.1;
-			thetamin     	= -0.0006,thetamax    = 0.0006;
-			eta_min      	= -0.0006,eta_max     = 0.0006;
+			relptmin     	= -0.4, relptmax    = 0.4;
+			inv_ptmin    	= -1e-5, inv_ptmax = 1e-5;
+			phimin	    	= -0.002,phimax      = 0.002;
+			zmin         	= -3.0,  zmax        = 3.0;
+			thetamin     	= -0.002,thetamax   = 0.002;
+			eta_min      	= -0.002,eta_max    = 0.002;
 			dcamin	    	= -50,  dcamax       = 130;
 
 		}
 		else if(k >=8 && k <12)
 		{
-			relptmin     	= -0.2, relptmax     = 0.2;
-			inv_ptmin    	= -0.2e-5, inv_ptmax = 0.2e-5;
-			phimin	    	= -0.0006,phimax      = 0.0006;
-			zmin         	= -0.1,  zmax        = 0.1;
-			thetamin     	= -0.0006,thetamax    = 0.0006;
-			eta_min      	= -0.0006,eta_max     = 0.0006;
+			relptmin     	= -0.8, relptmax    = 0.8;
+			inv_ptmin    	= -1e-5, inv_ptmax = 1e-5;
+			phimin	    	= -0.002,phimax      = 0.002;
+			zmin         	= -2.0,  zmax        = 2.0;
+			thetamin     	= -0.002,thetamax   = 0.002;
+			eta_min      	= -0.002,eta_max    = 0.002;
 			dcamin	    	= -50,  dcamax       = 130;
 
 		}
@@ -265,10 +259,10 @@ int resolution_plots_Vs_pt
 		//TH1F *h7 = new TH1F("h7", "dca", binNum,dcamin,dcamax);
 		//h->SetDirectory(0);
 		//! define pt range in which you want to fit a gauss function
-		sprintf(buffer, "((InDetTPt > %f) && (InDetTPt < %f))", binlow[k+1], binhigh[k+1]);// corresponds to a binwidth of 1000MeV/c i.e. +- 500 MeV/c about the bincenter
+		sprintf(buffer, "((mTTTTPt > %f) && (mTTTTPt < %f))", binlow[k+1], binhigh[k+1]);// corresponds to a binwidth of 1000MeV/c i.e. +- 500 MeV/c about the bincenter
 		C1->Clear();
 		h1->GetXaxis()->SetTitle("(pt_{rec} - pt_{gen})/pt_{gen} ");
-		recTree.Draw("(InDetpt - InDetTPt)/InDetTPt>>h1",cut && TCut(buffer));
+		recTree.Draw("(TTTpt - mTTTTPt)/mTTTTPt>>h1",cut && TCut(buffer));
 		fit_Gauss(h1);
 		//h1->Fit("gaus","L");
 		printf("pt = %.3f => mu = %.9f, sigma pt = %.9f, sigma err = %.9f\n", bincenter[k],h1->GetFunction("gaus")->GetParameter(1),h1->GetFunction("gaus")->GetParameter(2), h1->GetFunction("gaus")->GetParError(2));
@@ -282,7 +276,7 @@ int resolution_plots_Vs_pt
 	
 		C2->Clear();
 		h2->GetXaxis()->SetTitle("pt_inv_{rec} - pt_inv_{gen} ");
-                recTree.Draw("(1/InDetpt - 1/InDetTPt)>>h2",cut && TCut(buffer));
+                recTree.Draw("(1/TTTpt - 1/mTTTTPt)>>h2",cut && TCut(buffer));
                 fit_Gauss(h2);
 		//h2->Fit("gaus","L");
 
@@ -297,7 +291,7 @@ int resolution_plots_Vs_pt
 		
 		C3->Clear();
 		h3->GetXaxis()->SetTitle("phi_{rec} - phi_{gen} ");
-                recTree.Draw("InDetphi0 - InDetTPhi>>h3",cut && TCut(buffer));
+                recTree.Draw("TTTphi0 - mTTTTPhi>>h3",cut && TCut(buffer));
                 fit_Gauss(h3);
                 //h3->Fit("gaus","L");
 
@@ -312,7 +306,7 @@ int resolution_plots_Vs_pt
 		
 		C4->Clear();
 		h4->GetXaxis()->SetTitle("theta_{rec} - theta_{gen} ");
-                recTree.Draw("InDettheta - InDetTTheta>>h4",cut && TCut(buffer));
+                recTree.Draw("TTTtheta - mTTTTTheta>>h4",cut && TCut(buffer));
                 fit_Gauss(h4);
 		//h4->Fit("gaus","L");
 
@@ -327,7 +321,7 @@ int resolution_plots_Vs_pt
         
 		C5->Clear();
                 h5->GetXaxis()->SetTitle("eta_{rec} - eta_{gen} ");
-                recTree.Draw("InDeteta - InDetTEta>>h5",cut && TCut(buffer));
+                recTree.Draw("TTTeta - mTTTTEta>>h5",cut && TCut(buffer));
                 fit_Gauss(h5);
                 //h5->Fit("gaus","L");
 
@@ -342,7 +336,7 @@ int resolution_plots_Vs_pt
 
 		C6->Clear();
                 h6->GetXaxis()->SetTitle("z0_{rec} - z0_{gen} ");
-                recTree.Draw("InDetz0 - InDetTZ0>>h6",cut && TCut(buffer));
+                recTree.Draw("TTTz0 - mTTTTZ0>>h6",cut && TCut(buffer));
                 fit_Gauss(h6);
                 //h6->Fit("gaus","L");
 
@@ -401,8 +395,8 @@ return 0;
 }
 int plot_reso_vs_pt()
 {
-	resolution_plots_Vs_pt("ResoVsptInDet_dR0.01Matched",true);
-	//resolution_plots_Vs_pt("testResoVsptInDet_all1.4_5GeV",true);
+	resolution_plots_Vs_pt("ResoVspt_barcodeMatchedVxVy10",true);
+	//resolution_plots_Vs_pt("testResoVspt_all1.4_5GeV",true);
 	return 0;
 }
 

@@ -14,7 +14,7 @@
 #include <math.h>
 //const char* out_path = "/eos/user/t/tkar/www/TTT/plots/resolution"; 
 const char* out_path = "./plots/reso_plots"; 
-int write_topdf(const char* output_file_name = "new1ResoVsPhi_InDetTTT_hh4b")
+int write_topdf(const char* output_file_name = "ResoVsPhi_InDetTTTBMatched")
 {
 
 	char out_file_open[1023];
@@ -24,7 +24,7 @@ int write_topdf(const char* output_file_name = "new1ResoVsPhi_InDetTTT_hh4b")
         char out_file_close[1023];
         sprintf(out_file_close,"%s/%s.pdf)",out_path,output_file_name);
 	//!InDet tracks
-	TFile* f = TFile::Open("./plots/reso_plots/new1ResoVsphiInDetdR0.1.root");
+	TFile* f = TFile::Open("./plots/reso_plots/ResoVsphiInDet_dR0.01Matched.root");
 	TH1D* h_dp 	= (TH1D*)f->Get("h_sigmadp");
 	TH1D* h_invpt 	= (TH1D*)f->Get("h_sigma_invPt");
 	TH1D* h_phi	= (TH1D*)f->Get("h_sigma_phi");
@@ -34,7 +34,7 @@ int write_topdf(const char* output_file_name = "new1ResoVsPhi_InDetTTT_hh4b")
 //	TH1D* h_dca	= (TH1D*)f->Get("h_sigma_dca");
 
 	//! TTT tracks
-	TFile* f0 = TFile::Open("./plots/reso_plots/new1ResoVsphiTTTdR0.1.root");
+	TFile* f0 = TFile::Open("./plots/reso_plots/ResoVsphi_barcodeMatched.root");
 	TH1D* h0_dp 	= (TH1D*)f0->Get("h_sigmadp");
 	TH1D* h0_invpt 	= (TH1D*)f0->Get("h_sigma_invPt");
 	TH1D* h0_phi	= (TH1D*)f0->Get("h_sigma_phi");
@@ -69,13 +69,13 @@ int write_topdf(const char* output_file_name = "new1ResoVsPhi_InDetTTT_hh4b")
 	h_z0->SetMarkerColor(kRed);
 //	h_dca->SetMarkerColor(kRed);
 
-	h0_dp->SetMarkerColor(kBlue);
-        h0_invpt->SetMarkerColor(kBlue);
-        h0_phi->SetMarkerColor(kBlue);
-        h0_theta->SetMarkerColor(kBlue);
-        h0_eta->SetMarkerColor(kBlue);
-        h0_z0->SetMarkerColor(kBlue);
-//        h0_dca->SetMarkerColor(kBlue);
+	h0_dp->SetMarkerColor(kRed);
+        h0_invpt->SetMarkerColor(kRed);
+        h0_phi->SetMarkerColor(kRed);
+        h0_theta->SetMarkerColor(kRed);
+        h0_eta->SetMarkerColor(kRed);
+        h0_z0->SetMarkerColor(kRed);
+//        h0_dca->SetMarkerColor(kRed);
 	
 	//Marker Size	
 	h_dp->SetMarkerSize(1.8);
@@ -103,13 +103,43 @@ int write_topdf(const char* output_file_name = "new1ResoVsPhi_InDetTTT_hh4b")
 	h_z0->SetMarkerStyle(kFullTriangleDown);
 //	h_dca->SetMarkerStyle(kFullTriangleDown);
 
-	h0_dp->SetMarkerStyle(kFullTriangleDown);
-        h0_invpt->SetMarkerStyle(kFullTriangleDown);
-        h0_phi->SetMarkerStyle(kFullTriangleDown);
-        h0_theta->SetMarkerStyle(kFullTriangleDown);
-        h0_eta->SetMarkerStyle(kFullTriangleDown);
-        h0_z0->SetMarkerStyle(kFullTriangleDown);
-//        h0_dca->SetMarkerStyle(kFullTriangleDown);
+	h0_dp->SetMarkerStyle(kFullCircle);
+        h0_invpt->SetMarkerStyle(kFullCircle);
+        h0_phi->SetMarkerStyle(kFullCircle);
+        h0_theta->SetMarkerStyle(kFullCircle);
+        h0_eta->SetMarkerStyle(kFullCircle);
+        h0_z0->SetMarkerStyle(kFullCircle);
+//        h0_dca->SetMarkerStyle(kFullCircle);
+	h_dp->GetXaxis()->SetLabelFont(62);
+	h_invpt->GetXaxis()->SetLabelFont(62);
+	h_phi->GetXaxis()->SetLabelFont(62);
+	h_theta->GetXaxis()->SetLabelFont(62);
+	h_eta->GetXaxis()->SetLabelFont(62);
+	h_z0->GetXaxis()->SetLabelFont(62);
+//	h_dca->GetXaxis()->SetLabelFont(62);
+
+	h0_dp->GetXaxis()->SetLabelFont(62);
+        h0_invpt->GetXaxis()->SetLabelFont(62);
+        h0_phi->GetXaxis()->SetLabelFont(62);
+        h0_theta->GetXaxis()->SetLabelFont(62);
+        h0_eta->GetXaxis()->SetLabelFont(62);
+	h0_z0->GetXaxis()->SetLabelFont(62);
+        	
+	h_dp->GetYaxis()->SetLabelFont(62);
+	h_invpt->GetYaxis()->SetLabelFont(62);
+	h_phi->GetYaxis()->SetLabelFont(62);
+	h_theta->GetYaxis()->SetLabelFont(62);
+	h_eta->GetYaxis()->SetLabelFont(62);
+	h_z0->GetYaxis()->SetLabelFont(62);
+//	h_dca->GetYaxis()->SetLabelFont(62);
+
+	h0_dp->GetYaxis()->SetLabelFont(62);
+        h0_invpt->GetYaxis()->SetLabelFont(62);
+        h0_phi->GetYaxis()->SetLabelFont(62);
+        h0_theta->GetYaxis()->SetLabelFont(62);
+        h0_eta->GetYaxis()->SetLabelFont(62);
+        h0_z0->GetYaxis()->SetLabelFont(62);
+//        h0_dca->GetYaxis()->SetLabelFont(62);
 	
 	h_dp->GetYaxis()->SetTitleOffset(.85);
 	h_invpt->GetYaxis()->SetTitleOffset(.85);
@@ -126,6 +156,21 @@ int write_topdf(const char* output_file_name = "new1ResoVsPhi_InDetTTT_hh4b")
         h0_eta->GetYaxis()->SetTitleOffset(.85);
         h0_z0->GetYaxis()->SetTitleOffset(.85);
 //        h0_dca->GetYaxis()->SetTitleOffset(.85);
+	h_dp->GetYaxis()->CenterTitle();
+	h_invpt->GetYaxis()->CenterTitle();
+	h_phi->GetYaxis()->CenterTitle();
+	h_theta->GetYaxis()->CenterTitle();
+	h_eta->GetYaxis()->CenterTitle();
+	h_z0->GetYaxis()->CenterTitle();
+//	h_dca->GetYaxis()->CenterTitle();
+
+	h0_dp->GetYaxis()->CenterTitle();
+        h0_invpt->GetYaxis()->CenterTitle();
+        h0_phi->GetYaxis()->CenterTitle();
+        h0_theta->GetYaxis()->CenterTitle();
+        h0_eta->GetYaxis()->CenterTitle();
+        h0_z0->GetYaxis()->CenterTitle();
+//        h0_dca->GetYaxis()->CenterTitle();
 	
 	h_dp->GetYaxis()->SetTitleSize(.05);
 	h_invpt->GetYaxis()->SetTitleSize(.05);
@@ -175,6 +220,8 @@ int write_topdf(const char* output_file_name = "new1ResoVsPhi_InDetTTT_hh4b")
         h0_eta->GetXaxis()->SetTitleSize(.05);
         h0_z0->GetXaxis()->SetTitleSize(.05);
 //        h0_dca->GetXaxis()->SetTitleSize(.05);
+	h_invpt->GetYaxis()->SetTitle("#sigma_{#Delta(1/p_{t})} [MeV/c]^{-1}");
+        h0_invpt->GetYaxis()->SetTitle("#sigma_{#Delta(1/p_{t})} [MeV/c]^{-1}");
 	
 	h_dp->GetXaxis()->SetTitle("#phi_{gen}");
 	h_invpt->GetXaxis()->SetTitle("#phi_{gen}");
@@ -263,7 +310,7 @@ int write_topdf(const char* output_file_name = "new1ResoVsPhi_InDetTTT_hh4b")
 	leg2->Draw();
 	C->Print(out_file_,"pdf");
 
-	h_phi->GetYaxis()->SetRangeUser(0,0.003);
+	h_phi->GetYaxis()->SetRangeUser(0,0.0014);
 	h_phi->Draw();
 	h0_phi->Draw("same");
 	TLegend *leg3=new TLegend(x1,y1,x2,y2,"");
@@ -285,7 +332,7 @@ int write_topdf(const char* output_file_name = "new1ResoVsPhi_InDetTTT_hh4b")
         leg4->Draw();
 	C->Print(out_file_,"pdf");
 	
-	h_eta->GetYaxis()->SetRangeUser(0,0.0015);
+	h_eta->GetYaxis()->SetRangeUser(0,0.0014);
 	h_eta->Draw();
 	h0_eta->Draw("same");
 	TLegend *leg5=new TLegend(x1,y1,x2,y2,"");
@@ -305,15 +352,53 @@ int write_topdf(const char* output_file_name = "new1ResoVsPhi_InDetTTT_hh4b")
         leg6->AddEntry(h_z0,"InDet tracks");
         leg6->AddEntry(h0_z0,"TTT tracks");
         leg6->Draw();
-	/*C->Print(out_file_,"pdf");
+	C->Print(out_file_,"pdf");
 	
-	h_dca->GetYaxis()->SetRangeUser(10,40);
+	/*h_dca->GetYaxis()->SetRangeUser(10,40);
 	h_dca->Draw();
 	h0_dca->Draw("same");
 	TLegend *leg7=new TLegend(x1,y1,x2,y2,"");
         leg7->AddEntry(h_dca,"InDet tracks");
         leg7->AddEntry(h0_dca,"TTT tracks");
         leg7->Draw();*/
+
+	//two scales eta phi
+	C->SetTicky(0);
+	h_phi->SetLineColor(kBlack);
+	h0_phi->SetLineColor(kBlack);
+	h_phi->SetMarkerColor(kBlack);
+	h0_phi->SetMarkerColor(kBlack);	
+	h_phi->Draw();
+	h0_phi->Draw("same");
+	C->Update();
+	Float_t rightmax = 1*h_eta->GetMaximum();
+	Float_t scale = gPad->GetUymax()/rightmax;
+	h_eta->SetLineColor(kBlue);
+	h0_eta->SetLineColor(kBlack);
+	h_eta->SetMarkerColor(kBlue);
+	h0_eta->SetMarkerColor(kBlue);
+	h_eta->Scale(scale);
+	h_eta->Draw("same");
+	h0_eta->Draw("same");
+	//draw an axis on the right side
+	TGaxis *axis = new TGaxis(gPad->GetUxmax(),gPad->GetUymin(),
+	gPad->GetUxmax(), gPad->GetUymax(),0,rightmax,510,"+L");
+	axis->SetLineColor(kBlue);
+	axis->SetLabelColor(kBlue);
+//	axis->SetLabelSize(0.05);
+	axis->SetTitle("#sigma_{#Delta(#eta)}");
+	axis->SetTitleColor(kBlue);
+	axis->SetTitleSize(0.05);
+	axis->SetTitleOffset(1.08);
+	axis->SetMaxDigits(2);
+	axis->CenterTitle();
+	axis->Draw();
+	
+	C->Print(out_file_,"pdf");
+	C->Clear();
+	leg1->Draw();
+
+
 	C->Print(out_file_close,"pdf");
 return 0;
 }

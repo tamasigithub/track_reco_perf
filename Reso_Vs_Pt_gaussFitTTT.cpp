@@ -20,7 +20,8 @@
 TCut mu_cut = "abs(M_pdg)==13 && M_barcode > 0 && abs(M_Vz) < 200 && abs(M_Vx)<10 && abs(M_Vy)<10";
 TCut pi_cut = "abs(M_pdg)==211 && M_barcode > 0 && abs(M_Vz) < 200 && abs(M_Vx)<10 && abs(M_Vy)<10";
 TCut e_cut  = "abs(M_pdg)==11 && M_barcode > 0 && abs(M_Vz) < 200 && abs(M_Vx)<10 && abs(M_Vy)<10";
-TCut all_cut= "TTTTBarcode > 0 && abs(TTTTPt)>2000 && abs(TTTTEta)<1.4 && abs(TTTTZ0) < 150 && abs(TTTTVx) < 0.1 && abs(TTTTVy) < 0.1 && abs(TTTpt)>2000 && abs(TTTeta)<1.4";
+//! use this for TTT track resolution with dR matching
+TCut all_cut= "TTTTBarcode > 0 && abs(TTTTPt)>2000 && abs(TTTTEta)<1.4 && abs(TTTTZ0) < 100 && abs(TTTTVx) < 2 && abs(TTTTVy) < 2 ";
 //! path for input files
 const char* path = "./../test_ntuple1.root";
 char buf[4096];
@@ -57,7 +58,7 @@ int resolution_plots_Vs_pt
 (const char* output_file_name, /*const char* p_type = "muon",*/ bool save = false)
 {
 	TChain recTree("m_collectionTree");
-	recTree.Add("/media/tamasi/DriveT/tamasi/Desktop/PHD/work/mere_plots/athena/Analysis/user.tkar.hh4bsig5PU0_2_ntuples3_MYSTREAM/*.root");
+	recTree.Add("/media/tamasi/DriveT/tamasi/Desktop/PHD/work/mere_plots/athena/Analysis/user.tkar.hh4bsig5PU0_3_ntuples2_MYSTREAM/*.root");
 	TCut cut;
 	//const char* type = p_type;
 	const char* type = "all";
@@ -394,7 +395,7 @@ return 0;
 }
 int plot_reso_vs_pt()
 {
-	resolution_plots_Vs_pt("testResoVspt_all",true);
+	resolution_plots_Vs_pt("ResoVspt_dRMatched",true);
 	//resolution_plots_Vs_pt("testResoVspt_all1.4_5GeV",true);
 	return 0;
 }

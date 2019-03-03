@@ -132,7 +132,7 @@ int Njeteff(const char* output_file_name = "NjeteffcaloStd_501.5no0.6", bool deb
 			if(std::abs((*Pdg_truth)[it0]) == 5) 
 			{
 				if((*Pt_truth)[it0] < pt_cut) continue;
-				if(std::abs((*Eta_truth)[it0]) > eta_cut) continue;
+				if(std::fabs((*Eta_truth)[it0]) > eta_cut) continue;
 				Pt_b.push_back((*Pt_truth)[it0]);
 				Eta_b.push_back((*Eta_truth)[it0]);
 			}
@@ -190,7 +190,7 @@ int Njeteff(const char* output_file_name = "NjeteffcaloStd_501.5no0.6", bool deb
 			//! apply cuts on calo jets
 			if((*Pt_caloTTTjet)[it1] < pt_cut) continue;
 			if(debug)std::cout<<"pt selection passed!"<<std::endl;
-			if(std::abs((*Eta_caloTTTjet)[it1]) > eta_cut) continue;
+			if(std::fabs((*Eta_caloTTTjet)[it1]) > eta_cut) continue;
 			if(debug)std::cout<<"eta selection passed!"<<std::endl;
 			//if((*JVF_caloTTTjet)[it1] < jvf_cut) continue;
 			if(debug)std::cout<<"jvf selection passed!"<<std::endl;

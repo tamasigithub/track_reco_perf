@@ -17,17 +17,20 @@ const char* out_path = "./plots/efficiency";
 //////////////// efficiency for TTT tracks  barcode matched////////////////
 
 //int newTTTefficiency_Vs_etaphipt(const char* output_file_name = "prevefficiencyTTT_barcode_mu", bool save = false)
-int newTTTefficiency_Vs_etaphipt(const char* output_file_name = "prevefficiencyTTT_barcode", bool save = false)
+int newTTTefficiency_Vs_etaphipt(const char* output_file_name = "preveffRelaxedTTT_barcode2GeV1.4", bool save = false)
 {
 //! Define Cut
 //TCut num_select= "r_tid>0 && abs(Vz)<100 && abs(Vx)<15 && abs(Vy)<15 && abs(pt)>2000 && abs(eta)<1.4 && abs(truthPdg)==13";
 //TCut den_select= "r_tid>=0 && abs(Vz)<100 && abs(Vx)<15 && abs(Vy)<15 && abs(pt)>2000 && abs(eta)<1.4 && abs(truthPdg)==13";
 
-TCut num_select= "r_tid>0 && abs(Vz)<100 && abs(Vx)<15 && abs(Vy)<15 && abs(pt)>2000 && abs(eta)<1.4 ";
-TCut den_select= "r_tid>=0 && abs(Vz)<100 && abs(Vx)<15 && abs(Vy)<15 && abs(pt)>2000 && abs(eta)<1.4";
+TCut num_select= "r_tid>0 && abs(Vz)<100 && abs(Vx)<2 && abs(Vy)<2 && abs(pt)>2000 && abs(eta)<1.4 && abs(r_Dphi2)<1e-4 && abs(r_Dz2)<9e-2 && abs(r_Kappa_pull)<5";
+TCut den_select= "r_tid>=0 && abs(Vz)<100 && abs(Vx)<2 && abs(Vy)<2 && abs(pt)>2000 && abs(eta)<1.4 && abs(r_Dphi2)<1e-4 && abs(r_Dz2)<9e-2 && abs(r_Kappa_pull)<5";
 
-TChain recTree("m_truthTree");
-        recTree.Add("/media/tamasi/DriveT/tamasi/Desktop/PHD/work/mere_plots/athena/Analysis/user.tkar.hh4bsig5PU0_3_TTTSiOnly.hh4b.root/*.root");
+	TChain recTree("m_truthTree");
+        
+	//recTree.Add("/media/tamasi/DriveT/tamasi/Desktop/PHD/work/mere_plots/athena/Analysis/user.tkar.hh4bsig5PU0_3_TTTSiOnly.hh4b.root/*.root");
+        //! no constraint on the truth particles to have atleast made a hit in the outermost layer
+	recTree.Add("/media/tamasi/DriveT/tamasi/Desktop/PHD/work/mere_plots/athena/Analysis/user.tkar.tkar309527.hh4bRootWide_3_MYSTREAM/*.root");
 
 	int etabin = 13;
     	double etamin   = -1.3, etamax = 1.3;

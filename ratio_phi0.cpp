@@ -68,12 +68,12 @@ int ratio_phi0(const char* output_file_name = "ratio_phi0", bool debug = false)
 		if(i<20)std::cout<<"tttphi0 : " << (*tttphi0)[i] <<std::endl;
 		h1->Fill((*tttphi0)[i]);
 		h2->Fill(1);	
-		if(std::abs(sin((*inDettheta)[i])/(*inDetqOverP)[i]) > 2e3) 
-		{	std::cout <<"1success i, pt : " << i << ", " << std::abs(sin((*inDettheta)[i])/(*inDetqOverP)[i])<<std::endl;
-			if(std::abs(-log(tan((*inDettheta)[i]/2)))<1.5) 
+		if(std::fabs(sin((*inDettheta)[i])/(*inDetqOverP)[i]) > 2e3) 
+		{	std::cout <<"1success i, pt : " << i << ", " << std::fabs(sin((*inDettheta)[i])/(*inDetqOverP)[i])<<std::endl;
+			if(std::fabs(-log(tan((*inDettheta)[i]/2)))<1.5) 
 			{	
-				std::cout<<"2 success i, eta : " << i << ", " << std::abs(-log(tan((*inDettheta)[i]/2)))<<std::endl;
-				if(std::abs((*inDetz0)[i])<100)std::cout<<" all success \n";
+				std::cout<<"2 success i, eta : " << i << ", " << std::fabs(-log(tan((*inDettheta)[i]/2)))<<std::endl;
+				if(std::fabs((*inDetz0)[i])<100)std::cout<<" all success \n";
 			}
 		//h2->Fill(angle_positive((*inDetphi0)[i]));
 		}

@@ -13,12 +13,29 @@
 #include <fstream>
 #include <string>
 #include <math.h>
+#ifndef M_PI
+    #define M_PI 3.14159265358979323846
+#endif
+template<typename T>
+inline T angle_pos(T a)
+{
+	return a - static_cast<T>(2*M_PI) * std::floor(a / static_cast<T>(2*M_PI));
+}
+
+/** calculate the equivalent angle in the [-pi, pi] range */
+template<typename T>
+inline T angle_sym(T a)
+{
+	return a - static_cast<T>(2*M_PI) * std::floor((a + static_cast<T>(M_PI)) / static_cast<T>(2*M_PI));
+}
+
+
+
 //! Define Cut
-TCut mu_cut = "abs(M_pdg)==13 && M_barcode > 0 && abs(TTTTZ0) < 200 && abs(M_Vx)<10 && abs(M_Vy)<10";
-TCut pi_cut = "abs(M_pdg)==211 && M_barcode > 0 && abs(TTTTZ0) < 200 && abs(M_Vx)<10 && abs(M_Vy)<10";
-TCut e_cut  = "abs(M_pdg)==11 && M_barcode > 0 && abs(TTTTZ0) < 200 && abs(M_Vx)<10 && abs(M_Vy)<10";
-TCut all_cut= "TTTTBarcode > 0 && abs(TTTTPt)>2000 && abs(TTTTEta)<1.4 && abs(TTTTZ0) < 100 && abs(TTTTVx) < 2 && abs(TTTTVy) < 2 ";
-//TCut all_cut= "TTTTBarcode > 0 && abs(TTTTPt)>2000 && abs(TTTTEta)<1.4 && abs(TTTTZ0) < 100 && abs(TTTTVx) < 0.1 && abs(TTTTVy) < 0.1";
+TCut mu_cut = "abs(M_pdg)==13 && M_barcode > 0 && abs(mTTTTZ0) < 200 && abs(M_Vx)<10 && abs(M_Vy)<10";
+TCut pi_cut = "abs(M_pdg)==211 && M_barcode > 0 && abs(mTTTTZ0) < 200 && abs(M_Vx)<10 && abs(M_Vy)<10";
+TCut e_cut  = "abs(M_pdg)==11 && M_barcode > 0 && abs(mTTTTZ0) < 200 && abs(M_Vx)<10 && abs(M_Vy)<10";
+TCut all_cut= "mTTTTBarcode > 0 && abs(mTTTTPt)>2000 && abs(mTTTTEta)<1.4 && abs(mTTTTZ0) < 100 && abs(mTTTTVx) < 10 && abs(mTTTTVy) < 10 ";
 char buf[4096];
 //! User defined Gauss fit function to optimise the fit 
 void fit_Gauss(TH1F* h)
@@ -53,7 +70,7 @@ int resolution_plots_Vs_phi
 (const char* output_file_name, const char* p_type = "all", bool save = false)
 {
 	TChain recTree("m_collectionTree");
-	recTree.Add("/media/tamasi/DriveT/tamasi/Desktop/PHD/work/mere_plots/athena/Analysis/user.tkar.hh4bsig5PU0_3_ntuples1_MYSTREAM/*.root");
+	recTree.Add("/media/tamasi/DriveT/tamasi/Desktop/PHD/work/mere_plots/athena/Analysis/user.tkar.hh4bsig5PU0_3_ntuples2_MYSTREAM/*.root");
 	//recTree.Add("/media/tamasi/DriveT/tamasi/Desktop/PHD/work/mere_plots/athena/Analysis/user.tkar.hh4bsig5PU0_2_ntuples3_MYSTREAM/*.root");
 	TCut cut;
 	const char* type = p_type;
@@ -160,12 +177,12 @@ int resolution_plots_Vs_phi
 	char out_file_root[1023];
 	sprintf(out_file_root,"%s/%s.root",out_path,output_file_name);
 	TFile* output_file = new TFile(out_file_root, "RECREATE");	
-	relptmin     	= -0.2, relptmax    	= 0.2;
-	inv_ptmin    	= -2e-5, inv_ptmax 	= 2e-5;//4e-5
-	phimin		= -0.003, phimax     	= 0.003;
+	relptmin     	= -0.15, relptmax    	= 0.25;
+	inv_ptmin    	= -3e-5, inv_ptmax 	= 3e-5;//4e-5
+	phimin		= -0.005, phimax     	= 0.005;
 	zmin         	= -5, 	 zmax         	= 5;//10
-	thetamin     	= -0.003, thetamax  	= 0.003;
-	eta_min      	= -0.004,eta_max   	= 0.004;//0.01
+	thetamin     	= -0.006, thetamax  	= 0.006;
+	eta_min      	= -0.006,eta_max   	= 0.006;//0.01
 	dcamin	    	= -150, dcamax		= 150;
 	
 
@@ -183,10 +200,10 @@ int resolution_plots_Vs_phi
 		TH1F *h6 = new TH1F("h6", "Z0", binNum,zmin,zmax);
 		//TH1F *h7 = new TH1F("h7", "dca", binNum,dcamin,dcamax);
 		//h->SetDirectory(0);
-		sprintf(buffer, "abs(TTTTPhi-%f)<0.2 ", phi);
+		sprintf(buffer, "abs(angle_sym(mTTTTPhi)-%f)<0.2 ", phi);
 		C1->Clear();
 		h1->GetXaxis()->SetTitle("(pt_{rec} - pt_{gen})/pt_{gen} ");
-		recTree.Draw("(TTTpt - TTTTPt)/TTTTPt>>h1",cut && TCut(buffer));
+		recTree.Draw("(TTTpt - mTTTTPt)/mTTTTPt>>h1",cut && TCut(buffer));
 		fit_Gauss(h1);
 		//h1->Fit("gaus","L");
 		printf("phi = %.3f => mu = %.9f, sigma rel pt = %.9f, sigma err = %.9f\n", phi,h1->GetFunction("gaus")->GetParameter(1),h1->GetFunction("gaus")->GetParameter(2), h1->GetFunction("gaus")->GetParError(2));
@@ -200,7 +217,7 @@ int resolution_plots_Vs_phi
 	
 		C2->Clear();
 		h2->GetXaxis()->SetTitle("pt_inv_{rec} - pt_inv_{gen} ");
-		recTree.Draw("(1/TTTpt - 1/TTTTPt)>>h2",cut && TCut(buffer));
+		recTree.Draw("(1/TTTpt - 1/mTTTTPt)>>h2",cut && TCut(buffer));
 		fit_Gauss(h2);
 		//h2->Fit("gaus","L");
 
@@ -215,7 +232,7 @@ int resolution_plots_Vs_phi
 		
 		C3->Clear();
 		h3->GetXaxis()->SetTitle("phi_{rec} - phi_{gen} ");
-		recTree.Draw("TTTphi0 - TTTTPhi>>h3",cut && TCut(buffer));
+		recTree.Draw("TTTphi0 - angle_sym(mTTTTPhi)>>h3",cut && TCut(buffer));
 		fit_Gauss(h3);
 		//h3->Fit("gaus","L");
 
@@ -230,7 +247,7 @@ int resolution_plots_Vs_phi
 		
 		C4->Clear();
 		h4->GetXaxis()->SetTitle("theta_{rec} - theta_{gen} ");
-		recTree.Draw("TTTtheta - TTTTTheta>>h4",cut && TCut(buffer));
+		recTree.Draw("TTTtheta - mTTTTTheta>>h4",cut && TCut(buffer));
 		fit_Gauss(h4);
 		//h4->Fit("gaus","L");
 
@@ -245,7 +262,7 @@ int resolution_plots_Vs_phi
 	
 		C5->Clear();
 		h5->GetXaxis()->SetTitle("eta_{rec} - eta_{gen} ");
-		recTree.Draw("TTTeta - TTTTEta>>h5",cut && TCut(buffer));
+		recTree.Draw("TTTeta - mTTTTEta>>h5",cut && TCut(buffer));
 		fit_Gauss(h5);
 		//h5->Fit("gaus","L");
 
@@ -260,7 +277,7 @@ int resolution_plots_Vs_phi
 
 		C6->Clear();
 		h6->GetXaxis()->SetTitle("z0_{rec} - z0_{gen} ");
-		recTree.Draw("TTTz0 - TTTTZ0>>h6",cut && TCut(buffer));
+		recTree.Draw("TTTz0 - mTTTTZ0>>h6",cut && TCut(buffer));
 		fit_Gauss(h6);
 		//h6->Fit("gaus","L");
 
@@ -318,7 +335,7 @@ return 0;
 
 int plot_one()
 {
-resolution_plots_Vs_phi("new1ResoVsphiTTTdR0.1","all",true);
+resolution_plots_Vs_phi("ResoVsphi_barcodeMatchedVxVy10","all",true);
 //resolution_plots_Vs_phi("ResoVsphiTTT_all1.4_5GeV","all",true);
 return 0;
 }

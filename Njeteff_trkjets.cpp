@@ -114,7 +114,7 @@ int Njeteff_trkjets(const char* output_file_name = "Njeteffttt4trk_501.5", bool 
 			if(std::abs((*Pdg_truth)[it0]) == 5) 
 			{
 				if((*Pt_truth)[it0] < pt_cut) continue;
-				if(std::abs((*Eta_truth)[it0]) > eta_cut) continue;
+				if(std::fabs((*Eta_truth)[it0]) > eta_cut) continue;
 				Pt_b.push_back((*Pt_truth)[it0]);
 				Eta_b.push_back((*Eta_truth)[it0]);
 			}
@@ -172,7 +172,7 @@ int Njeteff_trkjets(const char* output_file_name = "Njeteffttt4trk_501.5", bool 
 			//! apply cuts on calo jets
 			if((*Pt_TTTtrkjet)[it1] < pt_cut) continue;
 			if(debug)std::cout<<"pt selection passed!"<<std::endl;
-			if(std::abs((*Eta_TTTtrkjet)[it1]) > eta_cut) continue;
+			if(std::fabs((*Eta_TTTtrkjet)[it1]) > eta_cut) continue;
 			if(debug)std::cout<<"eta selection passed!"<<std::endl;
 
 			if(debug) std::cout<<"selection passed" <<std::endl;

@@ -17,7 +17,7 @@
 TCut mu_cut = "abs(M_pdg)==13 && M_barcode > 0 && abs(InDetTZ0) < 200 && abs(M_Vx)<10 && abs(M_Vy)<10";
 TCut pi_cut = "abs(M_pdg)==211 && M_barcode > 0 && abs(InDetTZ0) < 200 && abs(M_Vx)<10 && abs(M_Vy)<10";
 TCut e_cut  = "abs(M_pdg)==11 && M_barcode > 0 && abs(InDetTZ0) < 200 && abs(M_Vx)<10 && abs(M_Vy)<10";
-TCut all_cut= "InDetTBarcode > 0 && abs(InDetTPt)>2000 && abs(InDetTEta)<1.4 && abs(InDetTZ0) < 100 && abs(InDetTVx) < 0.1 && abs(InDetTVy) < 0.1 && abs(InDetpt)>2000 && abs(InDeteta)<1.4";
+TCut all_cut= "InDetTBarcode > 0 && abs(InDetTPt)>2000 && abs(InDetTEta)<1.4 && abs(InDetTZ0) < 100 && abs(InDetTVx) < 2 && abs(InDetTVy) < 2";
 //TCut all_cut= "InDetTBarcode > 0 && abs(InDetTPt)>2000 && abs(InDetTEta)<1.4 && abs(InDetTZ0) < 100 && abs(InDetTVx) < 0.1 && abs(InDetTVy) < 0.1";
 //! path for input files
 char buf[4096];
@@ -54,7 +54,7 @@ int resolution_plots_Vs_phi
 (const char* output_file_name, const char* p_type = "all", bool save = false)
 {
 	TChain recTree("m_collectionTree");
-	recTree.Add("/media/tamasi/DriveT/tamasi/Desktop/PHD/work/mere_plots/athena/Analysis/user.tkar.hh4bsig5PU0_3_ntuples1_MYSTREAM/*.root");
+	recTree.Add("/media/tamasi/DriveT/tamasi/Desktop/PHD/work/mere_plots/athena/Analysis/user.tkar.hh4bsig5PU0_3_ntuples2_MYSTREAM/*.root");
 	//recTree.Add("/media/tamasi/DriveT/tamasi/Desktop/PHD/work/mere_plots/athena/Analysis/user.tkar.hh4bsig5PU0_2_ntuples3_MYSTREAM/*.root");
 	TCut cut;
 	const char* type = p_type;
@@ -319,7 +319,7 @@ return 0;
 
 int plot_one()
 {
-resolution_plots_Vs_phi("new1ResoVsphiInDetdR0.1","all",true);
+resolution_plots_Vs_phi("ResoVsphiInDet_dR0.01Matched","all",true);
 //resolution_plots_Vs_phi("ResoVsphiInDet_all1.4_5GeV","all",true);
 return 0;
 }
