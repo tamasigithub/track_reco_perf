@@ -13,133 +13,44 @@
 #include <fstream>
 #include <string>
 #include <math.h>
+#ifndef M_PI
+    #define M_PI 3.14159265358979323846
+#endif
+template<typename T>
+inline T angle_pos(T a)
+{
+        return a - static_cast<T>(2*M_PI) * std::floor(a / static_cast<T>(2*M_PI));
+}
+
+/** calculate the equivalent angle in the [-pi, pi] range */
+template<typename T>
+inline T angle_sym(T a)
+{
+        return a - static_cast<T>(2*M_PI) * std::floor((a + static_cast<T>(M_PI)) / static_cast<T>(2*M_PI));
+}
+
 const char* out_path = "./plots/purity"; 
 
-int InDetpurity_Vs_etaphipt(const char* output_file_name = "pur_InDetdR0.01_eta1.2", bool save = false)
-//int InDetpurity_Vs_etaphipt(const char* output_file_name = "newpurity_dR0.1", bool save = false)
-{
-//! Define Cut
-//TCut num_select= "InDetTBarcode > 0 && abs(InDetTPt)>2000 && abs(InDetTEta)<1.4 && abs(InDetpt)>2000 && abs(InDeteta)<1.4 && abs(InDetz0) < 100";
-//TCut num_select= "InDetTBarcode > 0 && abs(InDetpt)>2000 && abs(InDeteta)<1.4";
-//TCut den_select= "abs(InDetpt)>2000 && abs(InDeteta)<1.4 && abs(InDetz0)";
-TCut num_select= "InDetTBarcode > 0 && abs(InDetpt)>2000 && abs(InDeteta)<1.2 && abs(InDetz0) < 100";
-TCut den_select= "abs(InDetpt)>2000 && abs(InDeteta)<1.2 && abs(InDetz0) < 100 ";
-	
-	TChain recTree("m_collectionTree");
-        //recTree.Add("/media/tamasi/DriveT/tamasi/Desktop/PHD/work/mere_plots/athena/Analysis/user.tkar.hh4bsig5PU0_3_ntuples1_MYSTREAM/*.root");
-	//dR=0.01
-        //recTree.Add("/media/tamasi/DriveT/tamasi/Desktop/PHD/work/mere_plots/athena/Analysis/user.tkar.hh4bsig5PU0_3_ntuples2_MYSTREAM/*.root");
-        recTree.Add("/media/tamasi/DriveT/tamasi/Desktop/PHD/work/mere_plots/athena/Analysis/dpg2019/user.tkar.hh4bsig5PU0_4_ntuples2_MYSTREAM/*.root");
-
-	int etabin = 13;
-    	double etamin   = -1.3, etamax = 1.3;
-	
-	int phibin = 16;
-    	double phimin   = -3.2, phimax = 3.2;
-
-	//int ptbins = 12;
-	//double xbins[] = {1000, 3500, 7500, 15000, 25000, 35000, 45000, 55000, 65000, 75000, 85000, 95000, 105000 };	
-	/// LOG BINS
-	/// Variable bin width
-	const int ptbins = 40;//no. of bins
-	Double_t xbins[ptbins+1];//elements of this array are
-	double dx = 5./ptbins;//5 -> implies max until 10^5
-	double l10 = TMath::Log(10);
-	for (int i = 0; i<=ptbins; i++)
-	{
-	//        std::cout<<"i,dx : " <<i << ", "<<dx <<std::endl;
-	xbins[i] = TMath::Exp(l10*i*dx);
-	//        std::cout<<"xbin[i] : " <<xbins[i] <<std::endl;
-	}
-	TH1::SetDefaultSumw2(true);
-	
-	TH1* h_num_vs_etaPU = new TH1F("h_num_vs_etaPU", "Numerator Count vs #eta;#eta;Numerator Count"    , etabin, etamin, etamax);
-        TH1* h_den_vs_etaPU = new TH1F("h_den_vs_etaPU", "Denominator Count vs #eta;#eta;Denominator Count", etabin, etamin, etamax);
-	
-	TH1* h_num_vs_phiPU = new TH1F("h_num_vs_phiPU", "Numerator Count vs #eta;#phi [rad];Numerator Count"    , phibin, phimin, phimax);
-        TH1* h_den_vs_phiPU = new TH1F("h_den_vs_phiPU", "Denominator Count vs #eta;#phi [rad];Denominator Count", phibin, phimin, phimax);
-
-	TH1* h_num_vs_ptPU = new TH1F("h_num_vs_ptPU", "Numerator Count vs P_{t};P_{t} [MeV/c];Numerator Count"    , ptbins, xbins);
-	TH1* h_den_vs_ptPU = new TH1F("h_den_vs_ptPU", "Denominator Count vs P_{t};P_{t} [MeV/c];Denominator Count", ptbins, xbins);
-
-
-	recTree.Draw("InDeteta>>h_num_vs_etaPU",   num_select, "goff"/*, num_events*/);
-        recTree.Draw("InDeteta>>h_den_vs_etaPU",   den_select, "goff"/*, num_events*/);
-	h_num_vs_etaPU->Draw("e1");
-	h_den_vs_etaPU->Draw("e1");
-	TH1* h_pur_vs_etaPU = dynamic_cast<TH1*>(h_num_vs_etaPU->Clone("h_pur_vs_etaPU"));
-        h_pur_vs_etaPU->SetTitle("Purity vs #eta;#eta;Purity");
-        h_pur_vs_etaPU->Divide(h_num_vs_etaPU, h_den_vs_etaPU, 1.0, 1.0, "B");
-        h_pur_vs_etaPU->GetYaxis()->SetRangeUser(0.1, 1.1);
-        h_pur_vs_etaPU->SetMarkerSize(0.95);
-        h_pur_vs_etaPU->SetMarkerStyle(kOpenTriangleDown);
-        h_pur_vs_etaPU->SetMarkerColor(kBlack);
-
-	recTree.Draw("InDetphi0>>h_num_vs_phiPU",   num_select, "goff"/*, num_events*/);
-        recTree.Draw("InDetphi0>>h_den_vs_phiPU",   den_select, "goff"/*, num_events*/);
-	h_num_vs_phiPU->Draw("e1");
-	h_den_vs_phiPU->Draw("e1");
-	TH1* h_pur_vs_phiPU = dynamic_cast<TH1*>(h_num_vs_phiPU->Clone("h_pur_vs_phiPU"));
-        h_pur_vs_phiPU->SetTitle("Purity vs #phi;#phi [rad];Purity");
-        h_pur_vs_phiPU->Divide(h_num_vs_phiPU, h_den_vs_phiPU, 1.0, 1.0, "B");
-        h_pur_vs_phiPU->GetYaxis()->SetRangeUser(0.1, 1.1);
-        h_pur_vs_phiPU->SetMarkerSize(0.95);
-        h_pur_vs_phiPU->SetMarkerStyle(kOpenTriangleDown);
-        h_pur_vs_phiPU->SetMarkerColor(kBlack);
-
-	recTree.Draw("InDetpt>>h_num_vs_ptPU",   num_select, "goff"/*, num_events*/);
-	recTree.Draw("InDetpt>>h_den_vs_ptPU",   den_select, "goff"/*, num_events*/);
-	h_num_vs_ptPU->Draw("e1");
-	h_den_vs_ptPU->Draw("e1");
-	TH1* h_pur_vs_ptPU = dynamic_cast<TH1*>(h_num_vs_ptPU->Clone("h_pur_vs_ptPU"));
-	h_pur_vs_ptPU->SetTitle("Purity vs P_{t};P_{t} [MeV/c];Purity");
-	h_pur_vs_ptPU->Divide(h_num_vs_ptPU, h_den_vs_ptPU, 1.0, 1.0, "B");
-	h_pur_vs_ptPU->GetYaxis()->SetRangeUser(0.1, 1.1);
-	h_pur_vs_ptPU->GetXaxis()->SetRangeUser(2000.,106000.);
-	h_pur_vs_ptPU->SetMarkerSize(0.95);
-	h_pur_vs_ptPU->SetMarkerStyle(kOpenTriangleDown);
-	h_pur_vs_ptPU->SetMarkerColor(kBlack);	
-	
-	TCanvas* c1 = new TCanvas();	
-	h_pur_vs_etaPU->Draw("e1");
-
-	TCanvas* c2 = new TCanvas();	
-	h_pur_vs_phiPU->Draw("e1");
-	
-	TCanvas* c3 = new TCanvas();	
-	h_pur_vs_ptPU->Draw("e1");
-	char out_file_root[1023];
-        sprintf(out_file_root,"%s/%s.root",out_path,output_file_name);
-        TFile* output_file = new TFile(out_file_root, "RECREATE");
-
-	h_num_vs_etaPU->Write();
-	h_num_vs_phiPU->Write();
-	h_num_vs_ptPU->Write();
-	h_den_vs_etaPU->Write();
-	h_den_vs_phiPU->Write();
-	h_den_vs_ptPU->Write();
-	h_pur_vs_etaPU->Write();
-	h_pur_vs_phiPU->Write();
-	h_pur_vs_ptPU->Write();
-
-	output_file->Close();
-}
-
 //////////////// Purity for TTT tracks /////////////////
 
-int TTTpurity_Vs_etaphipt(const char* output_file_name = "pur_TTTdR0.01_eta1.4", bool save = false)
+int newTTTpurity_Vs_etaphipt(const char* output_file_name = "prev_pursig3_TTTBMatched_eta1.4final", bool save = false)
 {
 //! Define Cut
-//TCut num_select= "TTTTBarcode > 0 && abs(TTTTPt)>2000 && abs(TTTTEta)<1.4 && abs(TTTpt)>2000 && abs(TTTeta)<1.4  && abs(TTTz0) < 100";
-//TCut num_select= "TTTTBarcode > 0 && abs(TTTpt)>2000 && abs(TTTeta)<1.4";
-//TCut den_select= "abs(TTTpt)>2000 && abs(TTTeta)<1.4";
-TCut num_select= "TTTTBarcode > 0 && abs(TTTpt)>2000 && abs(TTTeta)<1.4  && abs(TTTz0) < 100";
-TCut den_select= "abs(TTTpt)>2000 && abs(TTTeta)<1.4 && abs(TTTz0) < 100";
+//TCut num_select= "M_barcode > 0 && abs(mTPt_n)>2000 && abs(mTEta13)<1.4 && abs(Pt_n)>2000 && abs(Eta13)<1.4  && abs(Z013) < 100";
+/*TCut num_select= "abs(dz2) < 0.09 && abs(dphi2) < 1e-4 && M_barcode > 0  && abs(Pt_n)>2000 && abs(Eta13)<1.4  && abs(Z013) < 100";
+TCut den_select= "abs(dz2) < 0.09 && abs(dphi2) < 1e-4 && M_barcode >= 0 && abs(Pt_n)>2000 && abs(Eta13)<1.4 && abs(Z013) < 100";
+*/TCut num_select= "M_barcode > 0  && abs(Pt_n)>2000 && abs(Eta13)<1.4  && abs(Z013) < 100";
+TCut den_select= "M_barcode >= 0 && abs(Pt_n)>2000 && abs(Eta13)<1.4 && abs(Z013) < 100";
 
-	TChain recTree("m_collectionTree");
-        //recTree.Add("/media/tamasi/DriveT/tamasi/Desktop/PHD/work/mere_plots/athena/Analysis/user.tkar.hh4bsig5PU0_3_ntuples1_MYSTREAM/*.root");
-	// dR=0.01
-        recTree.Add("/media/tamasi/DriveT/tamasi/Desktop/PHD/work/mere_plots/athena/Analysis/user.tkar.hh4bsig5PU0_3_ntuples2_MYSTREAM/*.root");
+	TChain recTree("m_recTree");
+	//! wide
+        //recTree.Add("/media/tamasi/DriveT/tamasi/Desktop/PHD/work/mere_plots/athena/Analysis/dpg2019/user.tkar.hh4bsig5PU0_4_wideL6B_1_TTTSiOnly.hh4b.root/*.root");
+	//! nokap
+        //recTree.Add("/media/tamasi/DriveT/tamasi/Desktop/PHD/work/mere_plots/athena/Analysis/dpg2019/user.tkar.hh4bsig5PU0_4_nokapL6B_1_TTTSiOnly.hh4b.root/*.root");
+	//! sig5
+        //recTree.Add("/media/tamasi/DriveT/tamasi/Desktop/PHD/work/mere_plots/athena/Analysis/dpg2019/user.tkar.hh4bsig5PU0_4_sig5L6B_1_TTTSiOnly.hh4b.root/*.root");
+	//! sig3
+        recTree.Add("/media/tamasi/DriveT/tamasi/Desktop/PHD/work/mere_plots/athena/Analysis/dpg2019/user.tkar.hh4bsig5PU0_4_sig3L6B_7_TTTSiOnly.hh4b.root/*.root");
 
 	int etabin = 13;
     	double etamin   = -1.3, etamax = 1.3;
@@ -173,8 +84,8 @@ TCut den_select= "abs(TTTpt)>2000 && abs(TTTeta)<1.4 && abs(TTTz0) < 100";
 	TH1* h_den_vs_ptPU = new TH1F("h_den_vs_ptPU", "Denominator Count vs P_{t};P_{t} [MeV/c];Denominator Count", ptbins, xbins);
 
 
-	recTree.Draw("TTTeta>>h_num_vs_etaPU",   num_select, "goff"/*, num_events*/);
-        recTree.Draw("TTTeta>>h_den_vs_etaPU",   den_select, "goff"/*, num_events*/);
+	recTree.Draw("Eta13>>h_num_vs_etaPU",   num_select, "goff"/*, num_events*/);
+        recTree.Draw("Eta13>>h_den_vs_etaPU",   den_select, "goff"/*, num_events*/);
 	h_num_vs_etaPU->Draw("e1");
 	h_den_vs_etaPU->Draw("e1");
 	TH1* h_pur_vs_etaPU = dynamic_cast<TH1*>(h_num_vs_etaPU->Clone("h_pur_vs_etaPU"));
@@ -185,8 +96,8 @@ TCut den_select= "abs(TTTpt)>2000 && abs(TTTeta)<1.4 && abs(TTTz0) < 100";
         h_pur_vs_etaPU->SetMarkerStyle(kOpenTriangleDown);
         h_pur_vs_etaPU->SetMarkerColor(kBlack);
 
-	recTree.Draw("TTTphi0>>h_num_vs_phiPU",   num_select, "goff"/*, num_events*/);
-        recTree.Draw("TTTphi0>>h_den_vs_phiPU",   den_select, "goff"/*, num_events*/);
+	recTree.Draw("angle_sym(Phi013)>>h_num_vs_phiPU",   num_select, "goff"/*, num_events*/);
+        recTree.Draw("angle_sym(Phi013)>>h_den_vs_phiPU",   den_select, "goff"/*, num_events*/);
 	h_num_vs_phiPU->Draw("e1");
 	h_den_vs_phiPU->Draw("e1");
 	TH1* h_pur_vs_phiPU = dynamic_cast<TH1*>(h_num_vs_phiPU->Clone("h_pur_vs_phiPU"));
@@ -197,112 +108,8 @@ TCut den_select= "abs(TTTpt)>2000 && abs(TTTeta)<1.4 && abs(TTTz0) < 100";
         h_pur_vs_phiPU->SetMarkerStyle(kOpenTriangleDown);
         h_pur_vs_phiPU->SetMarkerColor(kBlack);
 
-	recTree.Draw("TTTpt>>h_num_vs_ptPU",   num_select, "goff"/*, num_events*/);
-	recTree.Draw("TTTpt>>h_den_vs_ptPU",   den_select, "goff"/*, num_events*/);
-	h_num_vs_ptPU->Draw("e1");
-	h_den_vs_ptPU->Draw("e1");
-	TH1* h_pur_vs_ptPU = dynamic_cast<TH1*>(h_num_vs_ptPU->Clone("h_pur_vs_ptPU"));
-	h_pur_vs_ptPU->SetTitle("Purity vs P_{t};P_{t} [MeV/c];Purity");
-	h_pur_vs_ptPU->Divide(h_num_vs_ptPU, h_den_vs_ptPU, 1.0, 1.0, "B");
-	h_pur_vs_ptPU->GetYaxis()->SetRangeUser(0.1, 1.1);
-	h_pur_vs_ptPU->GetXaxis()->SetRangeUser(2000.,106000.);
-	h_pur_vs_ptPU->SetMarkerSize(0.95);
-	h_pur_vs_ptPU->SetMarkerStyle(kOpenTriangleDown);
-	h_pur_vs_ptPU->SetMarkerColor(kBlack);	
-	
-	
-	h_pur_vs_etaPU->Draw("e1");
-	h_pur_vs_phiPU->Draw("e1");
-	h_pur_vs_ptPU->Draw("e1");
-	char out_file_root[1023];
-        sprintf(out_file_root,"%s/%s.root",out_path,output_file_name);
-        TFile* output_file = new TFile(out_file_root, "RECREATE");
-
-	h_num_vs_etaPU->Write();
-	h_num_vs_phiPU->Write();
-	h_num_vs_ptPU->Write();
-	h_den_vs_etaPU->Write();
-	h_den_vs_phiPU->Write();
-	h_den_vs_ptPU->Write();
-	h_pur_vs_etaPU->Write();
-	h_pur_vs_phiPU->Write();
-	h_pur_vs_ptPU->Write();
-
-	output_file->Close();
-}
-
-
-//////////////// Purity for TTT tracks /////////////////
-
-int newTTTpurity_Vs_etaphipt(const char* output_file_name = "pur_TTTBMatched_eta1.2", bool save = false)
-{
-//! Define Cut
-//TCut num_select= "mTTTTBarcode > 0 && abs(mTTTTPt)>2000 && abs(mTTTTEta)<1.4 && abs(TTTpt)>2000 && abs(TTTeta)<1.4  && abs(TTTz0) < 100";
-TCut num_select= "mTTTTBarcode > 0  && abs(TTTpt)>2000 && abs(TTTeta)<1.2  && abs(TTTz0) < 100";
-TCut den_select= "mTTTTBarcode >= 0 && abs(TTTpt)>2000 && abs(TTTeta)<1.2 && abs(TTTz0) < 100";
-
-	TChain recTree("m_collectionTree");
-        //recTree.Add("/media/tamasi/DriveT/tamasi/Desktop/PHD/work/mere_plots/athena/Analysis/user.tkar.hh4bsig5PU0_3_ntuples2_MYSTREAM/*.root");
-        recTree.Add("/media/tamasi/DriveT/tamasi/Desktop/PHD/work/mere_plots/athena/Analysis/dpg2019/user.tkar.hh4bsig5PU0_4_ntuples2_MYSTREAM/*.root");
-
-	int etabin = 13;
-    	double etamin   = -1.3, etamax = 1.3;
-	
-	int phibin = 16;
-    	double phimin   = -3.2, phimax = 3.2;
-
-	//int ptbins = 12;
-	//double xbins[] = {1000, 3500, 7500, 15000, 25000, 35000, 45000, 55000, 65000, 75000, 85000, 95000, 105000 };
-	/// LOG BINS
-	/// Variable bin width
-	const int ptbins = 40;//no. of bins
-	Double_t xbins[ptbins+1];//elements of this array are
-	double dx = 5./ptbins;//5 -> implies max until 10^5
-	double l10 = TMath::Log(10);
-	for (int i = 0; i<=ptbins; i++)
-	{
-	//        std::cout<<"i,dx : " <<i << ", "<<dx <<std::endl;
-	xbins[i] = TMath::Exp(l10*i*dx);
-	//        std::cout<<"xbin[i] : " <<xbins[i] <<std::endl;
-	}
-
-	TH1::SetDefaultSumw2(true);
-	TH1* h_num_vs_etaPU = new TH1F("h_num_vs_etaPU", "Numerator Count vs #eta;#eta;Numerator Count"    , etabin, etamin, etamax);
-        TH1* h_den_vs_etaPU = new TH1F("h_den_vs_etaPU", "Denominator Count vs #eta;#eta;Denominator Count", etabin, etamin, etamax);
-	
-	TH1* h_num_vs_phiPU = new TH1F("h_num_vs_phiPU", "Numerator Count vs #phi;#phi [rad];Numerator Count"    , phibin, phimin, phimax);
-        TH1* h_den_vs_phiPU = new TH1F("h_den_vs_phiPU", "Denominator Count vs #phi;#phi [rad];Denominator Count", phibin, phimin, phimax);
-
-	TH1* h_num_vs_ptPU = new TH1F("h_num_vs_ptPU", "Numerator Count vs P_{t};P_{t} [MeV/c];Numerator Count"    , ptbins, xbins);
-	TH1* h_den_vs_ptPU = new TH1F("h_den_vs_ptPU", "Denominator Count vs P_{t};P_{t} [MeV/c];Denominator Count", ptbins, xbins);
-
-
-	recTree.Draw("TTTeta>>h_num_vs_etaPU",   num_select, "goff"/*, num_events*/);
-        recTree.Draw("TTTeta>>h_den_vs_etaPU",   den_select, "goff"/*, num_events*/);
-	h_num_vs_etaPU->Draw("e1");
-	h_den_vs_etaPU->Draw("e1");
-	TH1* h_pur_vs_etaPU = dynamic_cast<TH1*>(h_num_vs_etaPU->Clone("h_pur_vs_etaPU"));
-        h_pur_vs_etaPU->SetTitle("Purity vs #eta;#eta;Purity");
-        h_pur_vs_etaPU->Divide(h_num_vs_etaPU, h_den_vs_etaPU, 1.0, 1.0, "B");
-        h_pur_vs_etaPU->GetYaxis()->SetRangeUser(0.1, 1.1);
-        h_pur_vs_etaPU->SetMarkerSize(0.95);
-        h_pur_vs_etaPU->SetMarkerStyle(kOpenTriangleDown);
-        h_pur_vs_etaPU->SetMarkerColor(kBlack);
-
-	recTree.Draw("TTTphi0>>h_num_vs_phiPU",   num_select, "goff"/*, num_events*/);
-        recTree.Draw("TTTphi0>>h_den_vs_phiPU",   den_select, "goff"/*, num_events*/);
-	h_num_vs_phiPU->Draw("e1");
-	h_den_vs_phiPU->Draw("e1");
-	TH1* h_pur_vs_phiPU = dynamic_cast<TH1*>(h_num_vs_phiPU->Clone("h_pur_vs_phiPU"));
-        h_pur_vs_phiPU->SetTitle("Purity vs #phi;#phi [rad];Purity");
-        h_pur_vs_phiPU->Divide(h_num_vs_phiPU, h_den_vs_phiPU, 1.0, 1.0, "B");
-        h_pur_vs_phiPU->GetYaxis()->SetRangeUser(0.1, 1.1);
-        h_pur_vs_phiPU->SetMarkerSize(0.95);
-        h_pur_vs_phiPU->SetMarkerStyle(kOpenTriangleDown);
-        h_pur_vs_phiPU->SetMarkerColor(kBlack);
-
-	recTree.Draw("TTTpt>>h_num_vs_ptPU",   num_select, "goff"/*, num_events*/);
-	recTree.Draw("TTTpt>>h_den_vs_ptPU",   den_select, "goff"/*, num_events*/);
+	recTree.Draw("Pt_n>>h_num_vs_ptPU",   num_select, "goff"/*, num_events*/);
+	recTree.Draw("Pt_n>>h_den_vs_ptPU",   den_select, "goff"/*, num_events*/);
 	h_num_vs_ptPU->Draw("e1");
 	h_den_vs_ptPU->Draw("e1");
 	TH1* h_pur_vs_ptPU = dynamic_cast<TH1*>(h_num_vs_ptPU->Clone("h_pur_vs_ptPU"));

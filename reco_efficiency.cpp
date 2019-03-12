@@ -25,12 +25,17 @@ int eff_Vs_etaphipt_dR_barcode(const char* output_file_name = "eff_InDetTTTdR0.0
 	TChain recTree("m_collectionTree");
         //recTree.Add("/media/tamasi/DriveT/tamasi/Desktop/PHD/work/mere_plots/athena/Analysis/user.tkar.hh4bsig5PU0_3_ntuples1_MYSTREAM/*.root");
 	//dR=0.01
-        recTree.Add("/media/tamasi/DriveT/tamasi/Desktop/PHD/work/mere_plots/athena/Analysis/user.tkar.hh4bsig5PU0_3_ntuples2_MYSTREAM/*.root");
+        //recTree.Add("/media/tamasi/DriveT/tamasi/Desktop/PHD/work/mere_plots/athena/Analysis/user.tkar.hh4bsig5PU0_3_ntuples2_MYSTREAM/*.root");
+        //! final set used - 0.01
+	//recTree.Add("/media/tamasi/DriveT/tamasi/Desktop/PHD/work/mere_plots/athena/Analysis/dpg2019/user.tkar.hh4bsig5PU0_4_ntuples1_MYSTREAM/*.root");
+	recTree.Add("/media/tamasi/DriveT/tamasi/Desktop/PHD/work/mere_plots/athena/Analysis/dpg2019/user.tkar.hh4bsig5PU0_4_ntuples2_MYSTREAM/*.root");
+
 
 	//! define a local vector<double> to store the reconstructed pt values
 	//! always initialise a pointer!!
 	std::vector<int>   *tstatus = 0;
         std::vector<int>   *barcode = 0;	
+        std::vector<int>   *pdg = 0;	
         std::vector<float> *pt = 0;	
         std::vector<float> *phi = 0;	
         std::vector<float> *eta = 0;	
@@ -45,6 +50,7 @@ int eff_Vs_etaphipt_dR_barcode(const char* output_file_name = "eff_InDetTTTdR0.0
 	recTree.SetBranchStatus("*",            0);
 	recTree.SetBranchStatus("truthStatus",  1);
 	recTree.SetBranchStatus("truthBarcode", 1);
+	recTree.SetBranchStatus("truthPdg",     1);
 	recTree.SetBranchStatus("truthPt", 	1);
 	recTree.SetBranchStatus("truthPhi", 	1);
 	recTree.SetBranchStatus("truthEta", 	1);
@@ -57,6 +63,7 @@ int eff_Vs_etaphipt_dR_barcode(const char* output_file_name = "eff_InDetTTTdR0.0
 	//recTree.SetBranchStatus("r_TTTtid",     1);
 	recTree.SetBranchAddress("truthStatus",  &tstatus);
 	recTree.SetBranchAddress("truthBarcode", &barcode);
+	recTree.SetBranchAddress("truthPdg",     &pdg);
 	recTree.SetBranchAddress("truthPt", 	 &pt);
 	recTree.SetBranchAddress("truthPhi", 	 &phi);
 	recTree.SetBranchAddress("truthEta", 	 &eta);
@@ -120,7 +127,8 @@ int eff_Vs_etaphipt_dR_barcode(const char* output_file_name = "eff_InDetTTTdR0.0
 
 
 
-	for(int i = 0; i < recTree.GetEntries(); ++i)
+	//for(int i = 0; i < recTree.GetEntries(); ++i)
+	for(int i = 0; i < 10000; ++i)
 	{
 		
 		recTree.GetEntry(i);
@@ -137,6 +145,7 @@ int eff_Vs_etaphipt_dR_barcode(const char* output_file_name = "eff_InDetTTTdR0.0
 			if(std::fabs(Vx->at(i1)) > 2 )		continue;
 			if(std::fabs(Vy->at(i1)) > 2 )		continue;
 			if(barcode->at(i1) <= 0) 		continue;
+			//if(std::abs(pdg->at(i1)) != 321) 	continue;
 
 			//! loop over InDet tracks and the find the corresponding particle it was matched to
 			for(int i2 = 0; i2 < match_barcodeInDet->size(); ++i2)
