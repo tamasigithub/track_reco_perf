@@ -1,0 +1,7 @@
+git init
+git checkout -b FCC_macros
+git remote add My_Analysis <git_url>
+git add .
+git status
+git commit -m "commit message"
+git push My_Analysis FCC_macros
