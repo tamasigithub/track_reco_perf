@@ -238,6 +238,7 @@ protected:
 
 
 typedef BestMatcher<xAOD::IParticle, const xAOD::TruthParticle> DeltaRAssociator;
+typedef BestMatcher<xAOD::IParticle, xAOD::IParticle> DeltaRAssociatorII;
 
 
 ////////////////////////////////////////////////////////////////////////
@@ -271,6 +272,7 @@ private:
   std::string 	m_truthkey;
   std::string 	m_tpContainer;
   std::string 	m_tttContainer;
+  std::string 	m_ttttruthContainer;
   std::string 	m_jetSGkey;
   std::string 	m_jetTTTSGkey;
   std::string 	m_jetStdSGkey;
@@ -286,6 +288,7 @@ private:
   std::vector<const xAOD::TruthParticle *> findMyBaby(const xAOD::TruthParticle *part, const int myMommy, const int myBaby);
 
   DeltaRAssociator* m_associator;
+  DeltaRAssociatorII* m_associatorII;
 
   std::vector<float> 	vec_jetPars;// eta,phi,e,m,pt,px,py,pz
   TTree*		m_collectionTree;
@@ -356,6 +359,14 @@ private:
   std::vector<float>	m_TTTTZ0;
   std::vector<float>	m_TTTTVx;
   std::vector<float>	m_TTTTVy;
+  //! TTT truth particles
+  std::vector<float>	m_TTTtruthd0;
+  std::vector<float>	m_TTTtruthz0;
+  std::vector<float>	m_TTTtruthphi0;
+  std::vector<float>	m_TTTtruththeta;
+  std::vector<float>	m_TTTtruthqOverP;
+  std::vector<float>	m_TTTtruthPt;
+  std::vector<float>	m_TTTtruthEta;
   //! ttt tracks barcode matched to truth particles 
   std::vector<int>	mc_TTTTBarcode;
   std::vector<int>	mc_TTTTStatus;
