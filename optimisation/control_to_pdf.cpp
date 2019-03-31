@@ -15,12 +15,14 @@
 #include <string>
 #include <math.h>
 
-//const char* out_path = "/media/tamasi/DriveT/tamasi/Desktop/PHD/work/rec_data/Mar102k19/minBias/plots/optimisation";
-const char* out_path = "/media/tamasi/DriveT/tamasi/Desktop/PHD/talks_preps/ctd2k19/plots/optimisation";
+//const char* out_path = "/media/tamasi/DriveT1/tamasi/Desktop/PHD/work/rec_data/Mar102k19/minBias/plots/optimisation";
+const char* out_path = "/media/tamasi/DriveT1/tamasi/Desktop/PHD/talks_preps/ctd2k19/plots/optimisation";
 
-//int write_to_pdf(const char* input_file_name = "control_hh4b_PU200_1_30mm.root", const char* output_file_name = "control_hh4b_PU200_1_30mm")
-int write_to_pdf(const char* input_file_name = "control_hh4b_PU200_1_40mm.root", const char* output_file_name = "control_hh4b_PU200_1_40mm")
 //int write_to_pdf(const char* input_file_name = "control_hh4b_PU200_1_20mm.root", const char* output_file_name = "control_hh4b_PU200_1_20mm")
+//int write_to_pdf(const char* input_file_name = "control_hh4b_PU200_1_30mm.root", const char* output_file_name = "control_hh4b_PU200_1_30mm")
+//int write_to_pdf(const char* input_file_name = "control_hh4b_PU200_1_40mm.root", const char* output_file_name = "control_hh4b_PU200_1_40mm")
+//int write_to_pdf(const char* input_file_name = "control_hh4b_PU200_2_20mm.root", const char* output_file_name = "control_hh4b_PU200_2_20mm")
+int write_to_pdf(const char* input_file_name = "control_hh4b_PU1000_2_50mm.root", const char* output_file_name = "control_hh4b_PU1000_2_50mm")
 {
 
 	char out_file_open[1023];
@@ -77,6 +79,14 @@ int write_to_pdf(const char* input_file_name = "control_hh4b_PU200_1_40mm.root",
         TH2F* H28 = (TH2F*)f->Get("h28");
         TH2F* H28a= (TH2F*)f->Get("h28a");
         TH2F* H29 = (TH2F*)f->Get("h29");
+        TH2F* H_24 = (TH2F*)f->Get("h_24");
+        TH2F* H_25 = (TH2F*)f->Get("h_25");
+        TH2F* H_25a= (TH2F*)f->Get("h_25a");
+        TH2F* H_26 = (TH2F*)f->Get("h_26");
+        TH2F* H_27 = (TH2F*)f->Get("h_27");
+        TH2F* H_28 = (TH2F*)f->Get("h_28");
+        TH2F* H_28a= (TH2F*)f->Get("h_28a");
+        TH2F* H_29 = (TH2F*)f->Get("h_29");
         TH2F* H30 = (TH2F*)f->Get("h30");
         TH2F* H31 = (TH2F*)f->Get("h31");
         TH2F* H32 = (TH2F*)f->Get("h32");
@@ -504,6 +514,54 @@ int write_to_pdf(const char* input_file_name = "control_hh4b_PU200_1_40mm.root",
 	l25->Draw();
 	S->Print(out_file_, "pdf");
         S->cd(1);
+	H_24->Draw();
+	/*dphi2_l->Draw("same");
+        dphi2_m->Draw("same");
+        dphi2_t->Draw("same");*/
+	TLegend *l_22=new TLegend(x1,yy1,x2,y2,"fakes");
+	l_22->SetBorderSize(0);
+        l_22->SetTextAlign(32);
+        l_22->SetTextSize(0.035);
+	l_22->AddEntry(H_24,"#splitline{phibarrel, minpt, #kappa_{l}}{ maxeta, zbarrel, z0}");
+	l_22->Draw();
+	//S->Print(out_file_, "pdf");
+        S->cd(2);
+	H_25a->Draw();
+	/*dphi2_l->Draw("same");
+        dphi2_m->Draw("same");
+        dphi2_t->Draw("same");*/
+	TLegend *l_23=new TLegend(x1,yy1,x2,y2,"matched_rec");
+	l_23->SetBorderSize(0);
+        l_23->SetTextAlign(32);
+        l_23->SetTextSize(0.035);
+	l_23->AddEntry(H_25a,"#splitline{phibarrel, minpt, #kappa_{l}}{ maxeta, zbarrel, z0, no e's}");
+	l_23->Draw();
+	//S->Print(out_file_, "pdf");
+        S->cd(3);
+	H_25->Draw();
+	/*dphi2_l->Draw("same");
+        dphi2_m->Draw("same");
+        dphi2_t->Draw("same");*/
+	TLegend *l_24=new TLegend(x1,yy1,x2,y2,"matched_rec");
+	l_24->SetBorderSize(0);
+        l_24->SetTextAlign(32);
+        l_24->SetTextSize(0.035);
+	l_24->AddEntry(H_25,"#splitline{phibarrel, minpt, #kappa_{l}}{ maxeta, zbarrel, z0}");
+	l_24->Draw();
+	//S->Print(out_file_, "pdf");
+        S->cd(4);
+	H_26->Draw();
+	/*dphi2_l->Draw("same");
+	dphi2_m->Draw("same");
+	dphi2_t->Draw("same");*/
+	TLegend *l_25=new TLegend(x1,yy1,x2,y2,"truth");
+	l_25->SetBorderSize(0);
+        l_25->SetTextAlign(32);
+        l_25->SetTextSize(0.035);
+	l_25->AddEntry(H26,"#splitline{minpt, maxeta, #kappa_{l}}{ z0}");
+	l_25->Draw();
+	S->Print(out_file_, "pdf");
+        S->cd(1);
 	H27->Draw();
 	/*dz2_l->Draw("same");
         dz2_m->Draw("same");
@@ -550,6 +608,54 @@ int write_to_pdf(const char* input_file_name = "control_hh4b_PU200_1_40mm.root",
         l29->SetTextSize(0.035);
 	l29->AddEntry(H29,"#splitline{minpt, maxeta,}{ z0}");
 	l29->Draw();
+	S->Print(out_file_, "pdf");
+        S->cd(1);
+	H_27->Draw();
+	/*dz2_l->Draw("same");
+        dz2_m->Draw("same");
+        dz2_t->Draw("same");*/
+	TLegend *l_26=new TLegend(x1,yy1,x2,y2,"fakes");
+	l_26->SetBorderSize(0);
+        l_26->SetTextAlign(32);
+        l_26->SetTextSize(0.035);
+	l_26->AddEntry(H_27,"#splitline{phibarrel, mintpt, #kappa_{l}}{ maxeta, zbarrel, z0}");
+	l_26->Draw();
+	//S->Print(out_file_, "pdf");
+	S->cd(2);
+        H_28a->Draw();
+	/*dz2_l->Draw("same");
+        dz2_m->Draw("same");
+        dz2_t->Draw("same");*/
+	TLegend *l_27=new TLegend(x1,yy1,x2,y2,"matched_rec");
+	l_27->SetBorderSize(0);
+        l_27->SetTextAlign(32);
+        l_27->SetTextSize(0.035);
+	l_27->AddEntry(H_28a,"#splitline{phibarrel, minpt, #kappa_{l}}{ maxeta, zbarrel, z0, no e's}");
+	l_27->Draw();
+	//S->Print(out_file_, "pdf");
+        S->cd(3);
+	H_28->Draw();
+	/*dz2_l->Draw("same");
+        dz2_m->Draw("same");
+        dz2_t->Draw("same");*/
+	TLegend *l_28=new TLegend(x1,yy1,x2,y2,"matched_rec");
+	l_28->SetBorderSize(0);
+        l_28->SetTextAlign(32);
+        l_28->SetTextSize(0.035);
+	l_28->AddEntry(H_28,"#splitline{phibarrel, minpt, #kappa_{l}}{ maxeta, zbarrel, z0}");
+	l_28->Draw();
+	//S->Print(out_file_, "pdf");
+        S->cd(4);
+	H_29->Draw();
+	/*dz2_l->Draw("same");
+	dz2_m->Draw("same");
+	dz2_t->Draw("same");*/
+	TLegend *l_29=new TLegend(x1,yy1,x2,y2,"truth");
+	l_29->SetBorderSize(0);
+        l_29->SetTextAlign(32);
+        l_29->SetTextSize(0.035);
+	l_29->AddEntry(H_29,"#splitline{minpt, maxeta, #kappa_{l}}{ z0}");
+	l_29->Draw();
 	S->Print(out_file_, "pdf");
 	S->Clear();
 	S->Divide(1,2);
@@ -1991,15 +2097,42 @@ int write_to_pdf(const char* input_file_name = "control_hh4b_PU200_1_40mm.root",
         leg10->Draw();
         S->Print(out_file_, "pdf");
 	H27->Draw();
-        H29->Draw("same");
         H28->Draw("same");
-	H28a->Draw("same");
 	dz2->Draw("same");
 	dz2_->Draw("same");
 	/*
 	dz2_m->Draw("same");
 	dz2_t->Draw("same");
-	*/TLegend *leg11=new TLegend(x1,y1,x2,y2,"#splitline{phi Barrel = 0.02 +}{Zbarrel = 160 + Z0_{max} = 150}");
+	*/
+	TLegend *leg11_=new TLegend(0.1,0.8,0.3,0.9,"");
+	leg11_->SetFillStyle(10); 
+        leg11_->SetBorderSize(0);
+	leg11_->SetTextAlign(32);
+	leg11_->SetTextSize(0.035);
+        leg11_->AddEntry(H27,"fake tracks","lp");
+        leg11_->AddEntry(H28,"matched tracks","lp");
+        leg11_->Draw();
+        S->Print(out_file_, "pdf");
+	H27->Draw();
+        H29->Draw("same");
+	dz2->Draw("same");
+	dz2_->Draw("same");
+	TLegend *leg11__=new TLegend(0.1,0.8,0.3,0.9,"");
+	leg11__->SetFillStyle(10); 
+        leg11__->SetBorderSize(0);
+	leg11__->SetTextAlign(32);
+	leg11__->SetTextSize(0.035);
+        leg11__->AddEntry(H27,"fake tracks","lp");
+        leg11__->AddEntry(H29,"truth particles","lp");
+        leg11__->Draw();
+        S->Print(out_file_, "pdf");
+	H27->Draw();
+        H29->Draw("same");
+        H28->Draw("same");
+	H28a->Draw("same");
+	dz2->Draw("same");
+	dz2_->Draw("same");
+	TLegend *leg11=new TLegend(x1,y1,x2,y2,"#splitline{phi Barrel = 0.02 +}{Zbarrel = 160 + Z0_{max} = 150}");
 	//leg11->SetFillStyle(10); 
         leg11->SetBorderSize(0);
 	leg11->SetTextAlign(32);

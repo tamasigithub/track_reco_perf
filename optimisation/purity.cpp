@@ -13,65 +13,29 @@
 #include <fstream>
 #include <string>
 #include <math.h>
-#include <vector>
+//const char* out_path = "./plots/purity"; 
+//const char* out_path = "./plots"; 
 const char* out_path = "/media/tamasi/DriveT1/tamasi/Desktop/PHD/talks_preps/ctd2k19/plots/efficiency/hh4b"; 
-//const char* out_path = "/media/tamasi/DriveT1/tamasi/Desktop/PHD/talks_preps/ctd2k19/plots/efficiency/singleParticles; 
 
-int eff_Vs_etaphipt_dR_barcode(const char* output_file_name = "PU1000hh4b-eff_20mm", bool save = false)
-//int eff_Vs_etaphipt_dR_barcode(const char* output_file_name = "pi-effvxvy20secondary_30mm", bool save = false)
+//////////////// Purity for TTT tracks /////////////////
+
+int newTTTpurity_Vs_etaphipt(const char* output_file_name = "pur_PU1000_20mm", bool save = false)
 {
+	//! Define Cut
+TCut num_select    = "Tid>0";
+TCut den_select    = "Tid>-2";
+
 	TChain recTree("m_recTree");
-	TChain truthTree("tracks");
-	//! pileup 200 samples
-	/*recTree.Add("/media/tamasi/DriveT1/tamasi/Desktop/PHD/talks_preps/ctd2k19/data_files/hh4b/pileup_samples/rec-files/PU200hh4b_rec_003*.root");
-	truthTree.Add("/media/tamasi/DriveT1/tamasi/Desktop/PHD/talks_preps/ctd2k19/data_files/hh4b/pileup_samples/rec-files/PU200hh4b_rec_003*.root");*/
-	//! pileup 1000 samples
-	recTree.Add("/media/tamasi/DriveT1/tamasi/Desktop/PHD/talks_preps/ctd2k19/data_files/hh4b/pileup_samples/rec-files/PU1000hh4b_recOPTsig5_002*.root");
-	truthTree.Add("/media/tamasi/DriveT1/tamasi/Desktop/PHD/talks_preps/ctd2k19/data_files/hh4b/pileup_samples/rec-files/PU1000hh4b_recOPTsig5_002*.root");
-	//! single particles
-	/*recTree.Add("/media/tamasi/DriveT1/tamasi/Desktop/PHD/talks_preps/ctd2k19/data_files/single_particle/rec-files/pi-_rec_003*.root");
-	truthTree.Add("/media/tamasi/DriveT1/tamasi/Desktop/PHD/talks_preps/ctd2k19/data_files/single_particle/rec-files/pi-_rec_003*.root");
-*/
-
-	//! define a local vector<double> to store the reconstructed pt values
-	//! always initialise a pointer!!
-	std::vector<int>   *tinteraction = 0;
-        std::vector<int>   *barcode = 0;	
-        std::vector<int>   *pdg = 0;	
-        std::vector<double> *pt = 0;	
-        std::vector<double> *phi = 0;	
-        std::vector<double> *eta = 0;	
-        std::vector<double> *Vx = 0;	
-        std::vector<double> *Vy = 0;	
-        std::vector<double> *Vz = 0;	
-        std::vector<int>   *match_barcodeTTT_bc = 0;
-
-	truthTree.SetBranchStatus("*",          0);
-	truthTree.SetBranchStatus("type_traj", 	1);
-	truthTree.SetBranchStatus("tid", 	1);
-	truthTree.SetBranchStatus("pid",     	1);
-	truthTree.SetBranchStatus("pt", 	1);
-	truthTree.SetBranchStatus("phi", 	1);
-	truthTree.SetBranchStatus("eta", 	1);
-	truthTree.SetBranchStatus("vx", 	1);
-	truthTree.SetBranchStatus("vy", 	1);
-	truthTree.SetBranchStatus("vz", 	1);
-
-	recTree.SetBranchStatus("*",            0);
-	recTree.SetBranchStatus("Tid",  	1);
 	
-	truthTree.SetBranchAddress("type_traj", &tinteraction);
-	truthTree.SetBranchAddress("tid", 	&barcode);
-	truthTree.SetBranchAddress("pid", 	&pdg);
-	truthTree.SetBranchAddress("pt", 	&pt);
-	truthTree.SetBranchAddress("phi", 	&phi);
-	truthTree.SetBranchAddress("eta", 	&eta);
-	truthTree.SetBranchAddress("vx", 	&Vx);
-	truthTree.SetBranchAddress("vy", 	&Vy);
-	truthTree.SetBranchAddress("vz", 	&Vz);
-
-	recTree.SetBranchAddress("Tid", &match_barcodeTTT_bc);
-
+	//PU1000
+	//! 20mm
+	recTree.Add("/media/tamasi/DriveT1/tamasi/Desktop/PHD/talks_preps/ctd2k19/data_files/hh4b/pileup_samples/rec-files/PU1000hh4b_recOPTsig5_002*.root");
+	//! 30mm
+	//recTree.Add("/media/tamasi/DriveT1/tamasi/Desktop/PHD/talks_preps/ctd2k19/data_files/hh4b/pileup_samples/rec-files/PU1000hh4b_recOPTsig5_003*.root");
+	//! 40mm
+	//recTree.Add("/media/tamasi/DriveT1/tamasi/Desktop/PHD/talks_preps/ctd2k19/data_files/hh4b/pileup_samples/rec-files/PU1000hh4b_recOPTsig5_004*.root");
+	//! 50mm
+	//recTree.Add("/media/tamasi/DriveT1/tamasi/Desktop/PHD/talks_preps/ctd2k19/data_files/hh4b/pileup_samples/rec-files/PU1000hh4b_recOPTsig5_005*.root");
 	int etabin = 17;
     	double etamin   = -1.7, etamax = 1.7;
 	
@@ -79,10 +43,9 @@ int eff_Vs_etaphipt_dR_barcode(const char* output_file_name = "PU1000hh4b-eff_20
     	//double phimin   = -3.2, phimax = 3.2;
     	double phimin   = 0, phimax = 6.4;
 
-	// variable bin for single particles
-/*	int ptbins = 12;
-	double xbins[] = {1000, 3500, 7500, 15000, 25000, 35000, 45000, 55000, 65000, 75000, 85000, 95000, 105000 };	
-*/	/// LOG BINS for signal sample
+	//int ptbins = 12;
+	//double xbins[] = {1000, 3500, 7500, 15000, 25000, 35000, 45000, 55000, 65000, 75000, 85000, 95000, 105000 };
+	/// LOG BINS
 	/// Variable bin width
 	const int ptbins = 40;//no. of bins
 	Double_t xbins[ptbins+1];//elements of this array are
@@ -90,12 +53,12 @@ int eff_Vs_etaphipt_dR_barcode(const char* output_file_name = "PU1000hh4b-eff_20
 	double l10 = TMath::Log(10);
 	for (int i = 0; i<=ptbins; i++)
 	{
-	        //std::cout<<"i,dx : " <<i << ", "<<dx <<std::endl;
-		xbins[i] = TMath::Exp(l10*i*dx);
-	        //std::cout<<"xbin[i] : " <<xbins[i] <<std::endl;
+	//        std::cout<<"i,dx : " <<i << ", "<<dx <<std::endl;
+	xbins[i] = TMath::Exp(l10*i*dx);
+	//        std::cout<<"xbin[i] : " <<xbins[i] <<std::endl;
 	}
+
 	TH1::SetDefaultSumw2(true);
-	//! TTT barcode matched
 	TH1* h_num_vs_etaPU = new TH1F("h_num_vs_etaPU", "Numerator Count vs #eta;#eta;Numerator Count"    , etabin, etamin, etamax);
         TH1* h_den_vs_etaPU = new TH1F("h_den_vs_etaPU", "Denominator Count vs #eta;#eta;Denominator Count", etabin, etamin, etamax);
 	
@@ -106,119 +69,47 @@ int eff_Vs_etaphipt_dR_barcode(const char* output_file_name = "PU1000hh4b-eff_20
 	TH1* h_den_vs_ptPU = new TH1F("h_den_vs_ptPU", "Denominator Count vs P_{t};P_{t} [MeV/c];Denominator Count", ptbins, xbins);
 
 
-
-	for(int i = 0; i < truthTree.GetEntries(); ++i)
-	//for(int i = 0; i < 10000; ++i)
-	{
-		//! get entries for the ith event
-		truthTree.GetEntry(i);
-		recTree.GetEntry(i);
-		//! loop over the truth particles and select stable charge particles passing the selections
-		for(int i1 = 0; i1 < barcode->size(); ++i1)
-		{
-			int match_flagTTT_bc = -1;
-			if(std::fabs(pt->at(i1)) < 2e3 )	continue;
-			if(std::fabs(eta->at(i1)) > 1.6)	continue;
-			if(std::fabs(Vz->at(i1)) > 100 )	continue;
-			if(std::fabs(Vx->at(i1)) > 2 )		continue;
-			if(std::fabs(Vy->at(i1)) > 2 )		continue;
-			if(barcode->at(i1) <= 0) 		continue;
-			//if((*tinteraction)[i1] > 0)		continue;
-			//if(std::abs(pdg->at(i1)) != 321) 	continue;
-
-			//! loop over TTT tracks and the find the corresponding particle it was matched to (with barcode matching)
-			for(int i2 = 0; i2 < match_barcodeTTT_bc->size(); ++i2)
-			{
-				//! get rid of the fakes and double counted reconstructed tracks
-				if((*match_barcodeTTT_bc)[i2] < 0) 
-				{
-					match_flagTTT_bc = -1;
-					continue;
-				}
-				//! if a match is found fill truth variables both in numerator and denominator
-				//! else fill truth variables only in the denominator
-				if((*match_barcodeTTT_bc)[i2] == (*barcode)[i1])
-				{
-					match_flagTTT_bc = 1;
-					break;
-				}
-				else
-				{
-					match_flagTTT_bc = 0;
-				}
-			}
-			if(match_flagTTT_bc == 1)
-			{
-				h_num_vs_etaPU->Fill((*eta)[i1]);
-				h_num_vs_phiPU->Fill((*phi)[i1]);
-				h_num_vs_ptPU->Fill((*pt)[i1]);
-			}
-			if(match_flagTTT_bc > -1)
-			{
-				h_den_vs_etaPU->Fill((*eta)[i1]);
-				h_den_vs_phiPU->Fill((*phi)[i1]);
-				h_den_vs_ptPU->Fill((*pt)[i1]);
-			}
-		}
-	}
-
-	//! barcode matched TTT
- 	//recTree.Draw("truthPt>>h_num_vs_ptPU",   num_select, "goff");
- 	//recTree.Draw("truthPt>>h_den_vs_ptPU",   den_select, "goff");
+	recTree.Draw("Eta13>>h_num_vs_etaPU",   num_select, "goff"/*, num_events*/);
+        recTree.Draw("Eta13>>h_den_vs_etaPU",   den_select, "goff"/*, num_events*/);
 	h_num_vs_etaPU->Draw("e1");
 	h_den_vs_etaPU->Draw("e1");
-	TH1* h_eff_vs_etaPU = dynamic_cast<TH1*>(h_num_vs_etaPU->Clone("h_eff_vs_etaPU"));
-        h_eff_vs_etaPU->Divide(h_num_vs_etaPU, h_den_vs_etaPU, 1.0, 1.0, "B");
+	TH1* h_pur_vs_etaPU = dynamic_cast<TH1*>(h_num_vs_etaPU->Clone("h_pur_vs_etaPU"));
+        h_pur_vs_etaPU->SetTitle("Purity vs #eta;#eta;Purity");
+        h_pur_vs_etaPU->Divide(h_num_vs_etaPU, h_den_vs_etaPU, 1.0, 1.0, "B");
+        h_pur_vs_etaPU->GetYaxis()->SetRangeUser(0.1, 1.1);
+        h_pur_vs_etaPU->SetMarkerSize(0.95);
+        h_pur_vs_etaPU->SetMarkerStyle(kOpenTriangleDown);
+        h_pur_vs_etaPU->SetMarkerColor(kBlack);
+
+	recTree.Draw("Phi013>>h_num_vs_phiPU",   num_select, "goff"/*, num_events*/);
+        recTree.Draw("Phi013>>h_den_vs_phiPU",   den_select, "goff"/*, num_events*/);
 	h_num_vs_phiPU->Draw("e1");
 	h_den_vs_phiPU->Draw("e1");
-	TH1* h_eff_vs_phiPU = dynamic_cast<TH1*>(h_num_vs_phiPU->Clone("h_eff_vs_phiPU"));
-        h_eff_vs_phiPU->Divide(h_num_vs_phiPU, h_den_vs_phiPU, 1.0, 1.0, "B");
+	TH1* h_pur_vs_phiPU = dynamic_cast<TH1*>(h_num_vs_phiPU->Clone("h_pur_vs_phiPU"));
+        h_pur_vs_phiPU->SetTitle("Purity vs #phi;#phi [rad];Purity");
+        h_pur_vs_phiPU->Divide(h_num_vs_phiPU, h_den_vs_phiPU, 1.0, 1.0, "B");
+        h_pur_vs_phiPU->GetYaxis()->SetRangeUser(0.1, 1.1);
+        h_pur_vs_phiPU->SetMarkerSize(0.95);
+        h_pur_vs_phiPU->SetMarkerStyle(kOpenTriangleDown);
+        h_pur_vs_phiPU->SetMarkerColor(kBlack);
+
+	recTree.Draw("Pt_n>>h_num_vs_ptPU",   num_select, "goff"/*, num_events*/);
+	recTree.Draw("Pt_n>>h_den_vs_ptPU",   den_select, "goff"/*, num_events*/);
 	h_num_vs_ptPU->Draw("e1");
 	h_den_vs_ptPU->Draw("e1");
-	TH1* h_eff_vs_ptPU = dynamic_cast<TH1*>(h_num_vs_ptPU->Clone("h_eff_vs_ptPU"));
-	h_eff_vs_ptPU->Divide(h_num_vs_ptPU, h_den_vs_ptPU, 1.0, 1.0, "B");
-
-        h_eff_vs_etaPU->SetTitle("efficiency vs #eta;#eta;efficiency");
-        h_eff_vs_phiPU->SetTitle("efficiency vs #phi;#phi [rad];efficiency");
-	h_eff_vs_ptPU->SetTitle("efficiency vs P_{t};P_{t} [MeV/c];efficiency");
-        
-	h_eff_vs_ptPU->GetXaxis()->SetRangeUser(2000.,106000.);
+	TH1* h_pur_vs_ptPU = dynamic_cast<TH1*>(h_num_vs_ptPU->Clone("h_pur_vs_ptPU"));
+	h_pur_vs_ptPU->SetTitle("Purity vs P_{t};P_{t} [MeV/c];Purity");
+	h_pur_vs_ptPU->Divide(h_num_vs_ptPU, h_den_vs_ptPU, 1.0, 1.0, "B");
+	h_pur_vs_ptPU->GetYaxis()->SetRangeUser(0.1, 1.1);
+	h_pur_vs_ptPU->GetXaxis()->SetRangeUser(2000.,106000.);
+	h_pur_vs_ptPU->SetMarkerSize(0.95);
+	h_pur_vs_ptPU->SetMarkerStyle(kOpenTriangleDown);
+	h_pur_vs_ptPU->SetMarkerColor(kBlack);	
 	
-        h_eff_vs_etaPU->GetYaxis()->SetRangeUser(0.1, 1.1);
-        h_eff_vs_phiPU->GetYaxis()->SetRangeUser(0.1, 1.1);
-	h_eff_vs_ptPU->GetYaxis()->SetRangeUser(0.1, 1.1);
-        h_eff_vs_etaPU->GetYaxis()->SetTitleOffset(0.85);
-        h_eff_vs_phiPU->GetYaxis()->SetTitleOffset(0.85);
-	h_eff_vs_ptPU->GetYaxis()->SetTitleOffset(0.85);
-        h_eff_vs_etaPU->GetYaxis()->SetTitleSize(0.05);
-        h_eff_vs_phiPU->GetYaxis()->SetTitleSize(0.05);
-	h_eff_vs_ptPU->GetYaxis()->SetTitleSize(0.05);
-        h_eff_vs_etaPU->GetXaxis()->SetTitleOffset(0.85);
-        h_eff_vs_phiPU->GetXaxis()->SetTitleOffset(0.85);
-	h_eff_vs_ptPU->GetXaxis()->SetTitleOffset(0.85);
-        h_eff_vs_etaPU->GetXaxis()->SetTitleSize(0.05);
-        h_eff_vs_phiPU->GetXaxis()->SetTitleSize(0.05);
-	h_eff_vs_ptPU->GetXaxis()->SetTitleSize(0.05);
-        
-        h_eff_vs_etaPU->SetMarkerSize(1.8);
-        h_eff_vs_phiPU->SetMarkerSize(1.8);
-	h_eff_vs_ptPU->SetMarkerSize(1.8);
-        
-        h_eff_vs_etaPU->SetMarkerStyle(kFullTriangleDown);
-        h_eff_vs_phiPU->SetMarkerStyle(kFullTriangleDown);
-	h_eff_vs_ptPU->SetMarkerStyle(kFullTriangleDown);
-        
-        h_eff_vs_etaPU->SetMarkerColor(kBlack);
-        h_eff_vs_phiPU->SetMarkerColor(kBlack);
-	h_eff_vs_ptPU->SetMarkerColor(kBlack);	
 	
-
-	//! write 
-	TCanvas* c1 = new TCanvas();	
-
-	h_eff_vs_etaPU->Draw("e1");
-	h_eff_vs_phiPU->Draw("e1");
-	h_eff_vs_ptPU->Draw("e1");
+	h_pur_vs_etaPU->Draw("e1");
+	h_pur_vs_phiPU->Draw("e1");
+	h_pur_vs_ptPU->Draw("e1");
 	char out_file_root[1023];
         sprintf(out_file_root,"%s/%s.root",out_path,output_file_name);
         TFile* output_file = new TFile(out_file_root, "RECREATE");
@@ -229,15 +120,16 @@ int eff_Vs_etaphipt_dR_barcode(const char* output_file_name = "PU1000hh4b-eff_20
 	h_den_vs_etaPU->Write();
 	h_den_vs_phiPU->Write();
 	h_den_vs_ptPU->Write();
-	h_eff_vs_etaPU->Write();
-	h_eff_vs_phiPU->Write();
-	h_eff_vs_ptPU->Write();
-	
+	h_pur_vs_etaPU->Write();
+	h_pur_vs_phiPU->Write();
+	h_pur_vs_ptPU->Write();
+
 	output_file->Close();
+	return 0;
 }
 
-/////////////// write efficiency to pdf /////////////////
-int write_topdf(const char* output_file_name = "efficiency_InDetTTT_hh4b_dR0.1_noZ0")
+/////////////// write purity to pdf /////////////////
+int write_topdf(const char* output_file_name = "purity_InDetTTT_hh4b_dR0.1_noZ0")
 {
 
 	char out_file_open[1023];
@@ -247,20 +139,20 @@ int write_topdf(const char* output_file_name = "efficiency_InDetTTT_hh4b_dR0.1_n
         char out_file_close[1023];
         sprintf(out_file_close,"%s/%s.pdf)",out_path,output_file_name);
 	//!InDet tracks
-	//TFile* f = TFile::Open("./plots/efficiency/efficiency_dR0.1.root");
-	TFile* f = TFile::Open("./plots/efficiency/efficiency_dR0.1_noZ0.root");
-	//TFile* f = TFile::Open("./plots/efficiency/efficiency_dR0.01.root");
-	TH1D* h_eta 	= (TH1D*)f->Get("h_eff_vs_etaPU");
-	TH1D* h_pt 	= (TH1D*)f->Get("h_eff_vs_ptPU");
-	TH1D* h_phi	= (TH1D*)f->Get("h_eff_vs_phiPU");
+	//TFile* f = TFile::Open("./plots/purity/purity_dR0.1.root");
+	TFile* f = TFile::Open("./plots/purity/purity_dR0.1_noZ0.root");
+	//TFile* f = TFile::Open("./plots/purity/purity_dR0.01.root");
+	TH1D* h_eta 	= (TH1D*)f->Get("h_pur_vs_etaPU");
+	TH1D* h_pt 	= (TH1D*)f->Get("h_pur_vs_ptPU");
+	TH1D* h_phi	= (TH1D*)f->Get("h_pur_vs_phiPU");
 
 	//! TTT tracks
-	//TFile* f0 = TFile::Open("./plots/efficiency/efficiencyTTT_dR0.1.root");
-	TFile* f0 = TFile::Open("./plots/efficiency/efficiencyTTT_dR0.1_noZ0.root");
-	//TFile* f0 = TFile::Open("./plots/efficiency/efficiencyTTT_dR0.01.root");
-	TH1D* h0_eta 	= (TH1D*)f0->Get("h_eff_vs_etaPU");
-	TH1D* h0_pt 	= (TH1D*)f0->Get("h_eff_vs_ptPU");
-	TH1D* h0_phi	= (TH1D*)f0->Get("h_eff_vs_phiPU");
+	//TFile* f0 = TFile::Open("./plots/purity/purityTTT_dR0.1.root");
+	TFile* f0 = TFile::Open("./plots/purity/purityTTT_dR0.1_noZ0.root");
+	//TFile* f0 = TFile::Open("./plots/purity/purityTTT_dR0.01.root");
+	TH1D* h0_eta 	= (TH1D*)f0->Get("h_pur_vs_etaPU");
+	TH1D* h0_pt 	= (TH1D*)f0->Get("h_pur_vs_ptPU");
+	TH1D* h0_phi	= (TH1D*)f0->Get("h_pur_vs_phiPU");
 
 
 	h_eta->SetStats(0);
@@ -398,9 +290,9 @@ int write_topdf(const char* output_file_name = "efficiency_InDetTTT_hh4b_dR0.1_n
 	C->Print(out_file_close,"pdf");
 return 0;
 }
-/////////////// write efficiency to pdf different matching methods/////////////////
-//int newwrite_topdf(const char* output_file_name = "efficiency_InDetTTT_hh4b_all")
-int newwrite_topdf(const char* output_file_name = "newefficiency_InDetTTT_hh4b_all")
+/////////////// write purity to pdf different matching methods/////////////////
+//int newwrite_topdf(const char* output_file_name = "purity_InDetTTT_hh4b_all")
+int newwrite_topdf(const char* output_file_name = "newpurity_InDetTTT_hh4b_all")
 {
 
 	char out_file_open[1023];
@@ -410,32 +302,32 @@ int newwrite_topdf(const char* output_file_name = "newefficiency_InDetTTT_hh4b_a
         char out_file_close[1023];
         sprintf(out_file_close,"%s/%s.pdf)",out_path,output_file_name);
 	//!InDet tracks
-	TFile* fa = TFile::Open("./plots/efficiency/newefficiency_dR0.01.root");
-	TH1D* ha_eta 	= (TH1D*)fa->Get("h_eff_vs_etaPU");
-	TH1D* ha_pt 	= (TH1D*)fa->Get("h_eff_vs_ptPU");
-	TH1D* ha_phi	= (TH1D*)fa->Get("h_eff_vs_phiPU");
-	TFile* fb = TFile::Open("./plots/efficiency/newefficiency_dR0.1.root");
-	TH1D* hb_eta 	= (TH1D*)fb->Get("h_eff_vs_etaPU");
-	TH1D* hb_pt 	= (TH1D*)fb->Get("h_eff_vs_ptPU");
-	TH1D* hb_phi	= (TH1D*)fb->Get("h_eff_vs_phiPU");
-	/*TFile* fc = TFile::Open("./plots/efficiency/efficiency_barcode.root");
-	TH1D* hc_eta 	= (TH1D*)fc->Get("h_eff_vs_etaPU");
-	TH1D* hc_pt 	= (TH1D*)fc->Get("h_eff_vs_ptPU");
-	TH1D* hc_phi	= (TH1D*)fc->Get("h_eff_vs_phiPU");*/
+	TFile* fa = TFile::Open("./plots/purity/newpurity_dR0.01.root");
+	TH1D* ha_eta 	= (TH1D*)fa->Get("h_pur_vs_etaPU");
+	TH1D* ha_pt 	= (TH1D*)fa->Get("h_pur_vs_ptPU");
+	TH1D* ha_phi	= (TH1D*)fa->Get("h_pur_vs_phiPU");
+	TFile* fb = TFile::Open("./plots/purity/newpurity_dR0.1.root");
+	TH1D* hb_eta 	= (TH1D*)fb->Get("h_pur_vs_etaPU");
+	TH1D* hb_pt 	= (TH1D*)fb->Get("h_pur_vs_ptPU");
+	TH1D* hb_phi	= (TH1D*)fb->Get("h_pur_vs_phiPU");
+	/*TFile* fc = TFile::Open("./plots/purity/purity_barcode.root");
+	TH1D* hc_eta 	= (TH1D*)fc->Get("h_pur_vs_etaPU");
+	TH1D* hc_pt 	= (TH1D*)fc->Get("h_pur_vs_ptPU");
+	TH1D* hc_phi	= (TH1D*)fc->Get("h_pur_vs_phiPU");*/
 
 	//! TTT tracks
-	TFile* f0 = TFile::Open("./plots/efficiency/newefficiencyTTT_dR0.01.root");
-	TH1D* h0_eta 	= (TH1D*)f0->Get("h_eff_vs_etaPU");
-	TH1D* h0_pt 	= (TH1D*)f0->Get("h_eff_vs_ptPU");
-	TH1D* h0_phi	= (TH1D*)f0->Get("h_eff_vs_phiPU");
-	TFile* f1 = TFile::Open("./plots/efficiency/newefficiencyTTT_dR0.1.root");
-	TH1D* h1_eta 	= (TH1D*)f1->Get("h_eff_vs_etaPU");
-	TH1D* h1_pt 	= (TH1D*)f1->Get("h_eff_vs_ptPU");
-	TH1D* h1_phi	= (TH1D*)f1->Get("h_eff_vs_phiPU");
-	TFile* f2 = TFile::Open("./plots/efficiency/newefficiencyTTT_barcode.root");
-	TH1D* h2_eta 	= (TH1D*)f2->Get("h_eff_vs_etaPU");
-	TH1D* h2_pt 	= (TH1D*)f2->Get("h_eff_vs_ptPU");
-	TH1D* h2_phi	= (TH1D*)f2->Get("h_eff_vs_phiPU");
+	TFile* f0 = TFile::Open("./plots/purity/newpurityTTT_dR0.01.root");
+	TH1D* h0_eta 	= (TH1D*)f0->Get("h_pur_vs_etaPU");
+	TH1D* h0_pt 	= (TH1D*)f0->Get("h_pur_vs_ptPU");
+	TH1D* h0_phi	= (TH1D*)f0->Get("h_pur_vs_phiPU");
+	TFile* f1 = TFile::Open("./plots/purity/newpurityTTT_dR0.1.root");
+	TH1D* h1_eta 	= (TH1D*)f1->Get("h_pur_vs_etaPU");
+	TH1D* h1_pt 	= (TH1D*)f1->Get("h_pur_vs_ptPU");
+	TH1D* h1_phi	= (TH1D*)f1->Get("h_pur_vs_phiPU");
+	TFile* f2 = TFile::Open("./plots/purity/newpurityTTT_barcode.root");
+	TH1D* h2_eta 	= (TH1D*)f2->Get("h_pur_vs_etaPU");
+	TH1D* h2_pt 	= (TH1D*)f2->Get("h_pur_vs_ptPU");
+	TH1D* h2_phi	= (TH1D*)f2->Get("h_pur_vs_phiPU");
 
 
 	ha_eta->SetStats(0);
@@ -518,13 +410,13 @@ int newwrite_topdf(const char* output_file_name = "newefficiency_InDetTTT_hh4b_a
         h0_pt->SetMarkerStyle(kFullTriangleDown);
         h0_phi->SetMarkerStyle(kFullTriangleDown);
 	
-	hb_eta->SetMarkerStyle(kFullTriangleDown);
-	hb_pt->SetMarkerStyle(kFullTriangleDown);
-	hb_phi->SetMarkerStyle(kFullTriangleDown);
+	hb_eta->SetMarkerStyle(kOpenTriangleDown);
+	hb_pt->SetMarkerStyle(kOpenTriangleDown);
+	hb_phi->SetMarkerStyle(kOpenTriangleDown);
 
-	h1_eta->SetMarkerStyle(kFullTriangleDown);
-        h1_pt->SetMarkerStyle(kFullTriangleDown);
-        h1_phi->SetMarkerStyle(kFullTriangleDown);
+	h1_eta->SetMarkerStyle(kOpenTriangleDown);
+        h1_pt->SetMarkerStyle(kOpenTriangleDown);
+        h1_phi->SetMarkerStyle(kOpenTriangleDown);
 	
 	/*hc_eta->SetMarkerStyle(kFullCircle);
 	hc_pt->SetMarkerStyle(kFullCircle);

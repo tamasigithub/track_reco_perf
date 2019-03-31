@@ -1,4 +1,4 @@
-:////******* macro calculating the purity of the reconstructed tracks and contains all the relevant cuts *********//////
+////******* macro calculating the purity of the reconstructed tracks and contains all the relevant cuts *********//////
 /// p = #reconstructed(cut + matched)/#reconstructed(cut)
 /// here cut is applied on the reconstructed parameters both in the numerator and the denominator
 
@@ -17,49 +17,6 @@
 #include <fstream>
 #include <string>
 #include <math.h>
-
-//const char* out_path = "/media/tamasi/DriveT/tamasi/Desktop/PHD/work/rec_data/Mar102k19/minBias/plots/optimisation";
-const char* out_path = "/media/tamasi/DriveT/tamasi/Desktop/PHD/talks_preps/ctd2k19/plots/optimisation";
-//! number of points in the plots
-int num_events = 225;//1e5;
-//! DEFINE CUTS for numerator and denominator
-//! 20mm
-/*TCut num_select    = "Tid>0  && Pt_n > 2000  && abs(Z013) < 100 && abs(Eta13) < 1.6 && abs(Phi13)<0.014 && abs(Z13)<115";
-TCut den_select    = "Tid>-2 && Pt_n > 2000  && abs(Z013) < 100 && abs(Eta13) < 1.6 && abs(Phi13)<0.014 && abs(Z13)<115";*/
-//! 30mm
-/*TCut num_select    = "Tid>0  && Pt_n > 2000  && abs(Z013) < 100 && abs(Eta13) < 1.6 && abs(Phi13)<0.02 && abs(Z13)<160";
-TCut den_select    = "Tid>-2 && Pt_n > 2000  && abs(Z013) < 100 && abs(Eta13) < 1.6 && abs(Phi13)<0.02 && abs(Z13)<160";*/
-//! 40mm
-TCut num_select    = "Tid>0  && Pt_n > 2000  && abs(Z013) < 100 && abs(Eta13) < 1.6 && abs(Phi13)<0.026 && abs(Z13)<210";
-TCut den_select    = "Tid>-2 && Pt_n > 2000  && abs(Z013) < 100 && abs(Eta13) < 1.6 && abs(Phi13)<0.026 && abs(Z13)<210";
-TCut matched	= "Tid>0";
-TCut fakes	= "Tid ==-1";
-TCut minPt	= "Pt_n > 2e3 && abs(Eta13)<1.6";
-TCut minPt_t	= "M_pt > 2e3 && abs(M_eta)<1.6";
-TCut truth_m	= "M_pt < 20e3";
-TCut recon_m	= "Pt_n < 20e3";
-TCut pion	= "abs(M_pdg) == 211";
-TCut muon	= "abs(M_pdg) == 13";
-TCut electron	= "abs(M_pdg) == 11";
-TCut noelectron = "abs(M_pdg) != 11";
-TCut z0truthmax	= "abs(M_Vz)<100";//! depends on the luminous region along z
-TCut z0recmax	= "abs(Z013)<100";
-//! 20mm
-/*TCut phiBarrel	= "abs(Phi13)< 0.014";
-TCut zBarrel	= "abs(Z13)<115";
-TCut maxdphi2	= "abs(dphi2)<6.0e-4";
-TCut maxdz2	= "abs(dz2)<0.2";*/
-//! 30mm
-/*TCut phiBarrel	= "abs(Phi13)< 0.02";
-TCut zBarrel	= "abs(Z13)<160";
-TCut maxdphi2	= "abs(dphi2)<6e-4";
-TCut maxdz2	= "abs(dz2)<0.26";*/
-//! 40mm
-TCut phiBarrel	= "abs(Phi13)< 0.026";
-TCut zBarrel	= "abs(Z13)<210";
-TCut maxdphi2	= "abs(dphi2)<6.0e-4";
-TCut maxdz2	= "abs(dz2)<0.35";
-
 //! kappa cut based on hit uncertainty and MS formula
 //http://tkar.web.cern.ch/tkar/TTT/cuts_2.pdf
 //FCC setup 
@@ -72,26 +29,90 @@ TCut maxdz2	= "abs(dz2)<0.35";
 // 40mm
 // hit_c:3.125e-10
 // MS_c:0.00160556
+// 50mm
+// hit_c:1.28e-10
+// MS_c:0.00102756
 //ATLAS setup
 //hit_c:7.8125e-09
 //MS_c:0.0192667
 
+//const char* out_path = "/media/tamasi/DriveT1/tamasi/Desktop/PHD/work/rec_data/Mar102k19/minBias/plots/optimisation";
+const char* out_path = "/media/tamasi/DriveT1/tamasi/Desktop/PHD/talks_preps/ctd2k19/plots/optimisation";
+//! DEFINE CUTS for numerator and denominator
 //! 20mm
-/*TCut kapcut_l =  "abs(kappa-kap013)/sqrt(5e-9 + 0.00642222 * (1/sin(Theta13)) * kap013^2 ) < 5 ";
+/*TCut num_select    = "Tid>0  && Pt_n > 2000  && abs(Z013) < 100 && abs(Eta13) < 1.6 && abs(Phi13)<0.014 && abs(Z13)<120";
+TCut den_select    = "Tid>-2 && Pt_n > 2000  && abs(Z013) < 100 && abs(Eta13) < 1.6 && abs(Phi13)<0.014 && abs(Z13)<120";
+//! 
+TCut phiBarrel	= "abs(Phi13)< 0.014";
+TCut zBarrel	= "abs(Z13)<120";
+TCut maxdphi2	= "abs(dphi2)<1.0e-4";
+TCut maxdz2	= "abs(dz2)<0.17*(sin(Theta13)^(-1.1))";
+const float dz2_exp   = -1.1;
+const float dz2_const = 0.17;
+//! 
+TCut kapcut_l =  "abs(kappa-kap013)/sqrt(5e-9 + 0.00642222 * (1/sin(Theta13)) * kap013^2 ) < 5 ";
 TCut kapcut   =  "abs(kappa-kap013)/sqrt(5e-9 + 0.00642222 * (1/sin(Theta13)) * kap013^2 ) < 4 ";
 TCut kapcut_t =  "abs(kappa-kap013)/sqrt(5e-9 + 0.00642222 * (1/sin(Theta13)) * kap013^2 ) < 3 ";
 */
 //! 30mm
-/*TCut kapcut_l =  "abs(kappa-kap013)/sqrt(9.87654e-10 + 0.00285432 * (1/sin(Theta13)) * kap013^2 ) < 5 ";
+/*TCut num_select    = "Tid>0  && Pt_n > 2000  && abs(Z013) < 100 && abs(Eta13) < 1.6 && abs(Phi13)<0.02 && abs(Z13)<160";
+TCut den_select    = "Tid>-2 && Pt_n > 2000  && abs(Z013) < 100 && abs(Eta13) < 1.6 && abs(Phi13)<0.02 && abs(Z13)<160";
+//! 
+TCut phiBarrel	= "abs(Phi13)< 0.02";
+TCut zBarrel	= "abs(Z13)<160";
+TCut maxdphi2	= "abs(dphi2)<1.6e-4";
+TCut maxdz2	= "abs(dz2)<0.17*(sin(Theta13)^(-1.25))";
+const float dz2_exp   = -1.25;
+const float dz2_const = 0.17;
+//! 
+TCut kapcut_l =  "abs(kappa-kap013)/sqrt(9.87654e-10 + 0.00285432 * (1/sin(Theta13)) * kap013^2 ) < 5 ";
 TCut kapcut   =  "abs(kappa-kap013)/sqrt(9.87654e-10 + 0.00285432 * (1/sin(Theta13)) * kap013^2 ) < 4 ";
 TCut kapcut_t =  "abs(kappa-kap013)/sqrt(9.87654e-10 + 0.00285432 * (1/sin(Theta13)) * kap013^2 ) < 3 ";*/
 //! 40mm
+/*TCut num_select    = "Tid>0  && Pt_n > 2000  && abs(Z013) < 100 && abs(Eta13) < 1.6 && abs(Phi13)<0.026 && abs(Z13)<210";
+TCut den_select    = "Tid>-2 && Pt_n > 2000  && abs(Z013) < 100 && abs(Eta13) < 1.6 && abs(Phi13)<0.026 && abs(Z13)<210";
+//! 
+TCut phiBarrel	= "abs(Phi13)< 0.026";
+TCut zBarrel	= "abs(Z13)<210";
+TCut maxdphi2	= "abs(dphi2)<2.0e-4";
+TCut maxdz2	= "abs(dz2)<0.17*(sin(Theta13)^(-1.35))";
+const float dz2_exp   = -1.35;
+const float dz2_const = 0.17;
+//! 
 TCut kapcut_l =  "abs(kappa-kap013)/sqrt(3.125e-10 + 0.00160556 * (1/sin(Theta13)) * kap013^2 ) < 5 ";
 TCut kapcut   =  "abs(kappa-kap013)/sqrt(3.125e-10 + 0.00160556 * (1/sin(Theta13)) * kap013^2 ) < 4 ";
-TCut kapcut_t =  "abs(kappa-kap013)/sqrt(3.125e-10 + 0.00160556 * (1/sin(Theta13)) * kap013^2 ) < 3 ";
+TCut kapcut_t =  "abs(kappa-kap013)/sqrt(3.125e-10 + 0.00160556 * (1/sin(Theta13)) * kap013^2 ) < 3 ";*/
+//! 50mm
+TCut num_select    = "Tid>0  && Pt_n > 2000  && abs(Z013) < 100 && abs(Eta13) < 1.6 && abs(Phi13)<0.032 && abs(Z13)<260";
+TCut den_select    = "Tid>-2 && Pt_n > 2000  && abs(Z013) < 100 && abs(Eta13) < 1.6 && abs(Phi13)<0.032 && abs(Z13)<260";
+//! 
+TCut phiBarrel	= "abs(Phi13)< 0.032";
+TCut zBarrel	= "abs(Z13)< 260";
+TCut maxdphi2	= "abs(dphi2)<2.2e-4";
+TCut maxdz2	= "abs(dz2)<0.17*(sin(Theta13)^(-1.5))";
+const float dz2_exp   = -1.5;
+const float dz2_const = 0.17;
+//! 
+TCut kapcut_l =  "abs(kappa-kap013)/sqrt(1.28e-10 + 0.00102756 * (1/sin(Theta13)) * kap013^2 ) < 5 ";
+TCut kapcut   =  "abs(kappa-kap013)/sqrt(1.28e-10 + 0.00102756 * (1/sin(Theta13)) * kap013^2 ) < 4 ";
+TCut kapcut_t =  "abs(kappa-kap013)/sqrt(1.28e-10 + 0.00102756 * (1/sin(Theta13)) * kap013^2 ) < 3 ";
+
+
+TCut matched	= "Tid>0";
+TCut fakes	= "Tid ==-1";
+TCut minPt	= "Pt_n > 2e3 && abs(Eta13)<1.6";
+TCut minPt_t	= "M_pt > 2e3 && abs(M_eta)<1.6";
+TCut truth_m	= "M_pt < 20e3";
+TCut recon_m	= "Pt_n < 20e3";
+TCut pion	= "abs(M_pdg) == 211";
+TCut muon	= "abs(M_pdg) == 13";
+TCut electron	= "abs(M_pdg) == 11";
+TCut noelectron = "abs(M_pdg) != 11";
+TCut z0truthmax	= "abs(M_Vz)<100";//! depends on the luminous region along z
+TCut z0recmax	= "abs(Z013)<100";
 void newcontrol
 (
-	const char* output_file_name = "control_hh4b_PU200_1_40mm",//f-few
+	const char* output_file_name = "control_hh4b_PU1000_2_50mm",//f-few
 	//const char* output_file_name = "control_hh4b_final2",//f-few
 	const char* set = "C",
 	const bool verbose = true
@@ -100,22 +121,39 @@ void newcontrol
 	//Open a list of root files and get reconstructed tree
 	TChain rec("m_recTree");
 	//! minbias
-	//rec.Add("/media/tamasi/DriveT/tamasi/Desktop/PHD/work/rec_data/Mar102k19/minBias/*000010_1.root");
-	//rec.Add("/media/tamasi/DriveT/tamasi/Desktop/PHD/work/rec_data/Mar102k19/minBias/*000011_1.root");
+	//rec.Add("/media/tamasi/DriveT1/tamasi/Desktop/PHD/work/rec_data/Mar102k19/minBias/*000010_1.root");
+	//rec.Add("/media/tamasi/DriveT1/tamasi/Desktop/PHD/work/rec_data/Mar102k19/minBias/*000011_1.root");
 	TF1 *fdz2 = new TF1("fdz2", "[0]*(x)^[1]",0.4,1.05);
-	fdz2->SetParameter(0,1.7);
-	fdz2->SetParameter(1,-1.5);
+	fdz2->SetParameter(0,dz2_const);
+	fdz2->SetParameter(1,dz2_exp);
 	fdz2->SetLineColor(kBlack);
 	TF1 *fdz2_ = new TF1("fdz2_", "[0]*(x)^[1]",0.4,1.05);
-	fdz2_->SetParameter(0,-1.7);
-	fdz2_->SetParameter(1,-1.5);
+	fdz2_->SetParameter(0,-1*dz2_const);
+	fdz2_->SetParameter(1,dz2_exp);
 	fdz2_->SetLineColor(kBlack);
-	//! 30mm
-	//rec.Add("/media/tamasi/DriveT/tamasi/Desktop/PHD/talks_preps/ctd2k19/data_files/hh4b/pileup_samples/rec-files/*0000*_.root");
-	//! 40mm
-	rec.Add("/media/tamasi/DriveT/tamasi/Desktop/PHD/talks_preps/ctd2k19/data_files/hh4b/pileup_samples/rec-files/*rec_002*_.root");
 	//! 20mm
-	//rec.Add("/media/tamasi/DriveT/tamasi/Desktop/PHD/talks_preps/ctd2k19/data_files/hh4b/pileup_samples/rec-files/*rec_001*_.root");
+	//rec.Add("/media/tamasi/DriveT1/tamasi/Desktop/PHD/talks_preps/ctd2k19/data_files/hh4b/pileup_samples/rec-files/PU200*rec__002*_.root");
+	//! 30mm
+	//rec.Add("/media/tamasi/DriveT1/tamasi/Desktop/PHD/talks_preps/ctd2k19/data_files/hh4b/pileup_samples/rec-files/PU200*rec__003*_.root");
+	//! 40mm
+	//rec.Add("/media/tamasi/DriveT1/tamasi/Desktop/PHD/talks_preps/ctd2k19/data_files/hh4b/pileup_samples/rec-files/PU200*rec__004*_.root");
+	//! 50mm
+	//rec.Add("/media/tamasi/DriveT1/tamasi/Desktop/PHD/talks_preps/ctd2k19/data_files/hh4b/pileup_samples/rec-files/PU200hh4b_rec__005*_.root");
+
+	//PU1000
+	//! 20mm
+	//rec.Add("/media/tamasi/DriveT1/tamasi/Desktop/PHD/talks_preps/ctd2k19/data_files/hh4b/pileup_samples/rec-files/PU1000hh4b_recOPTsig5_002*.root");
+	//! 30mm
+	//rec.Add("/media/tamasi/DriveT1/tamasi/Desktop/PHD/talks_preps/ctd2k19/data_files/hh4b/pileup_samples/rec-files/PU1000hh4b_recOPTsig5_003*.root");
+	//! 40mm
+	//rec.Add("/media/tamasi/DriveT1/tamasi/Desktop/PHD/talks_preps/ctd2k19/data_files/hh4b/pileup_samples/rec-files/PU1000hh4b_recOPTsig5_004*.root");
+	//! 50mm
+	rec.Add("/media/tamasi/DriveT1/tamasi/Desktop/PHD/talks_preps/ctd2k19/data_files/hh4b/pileup_samples/rec-files/PU1000hh4b_recOPTsig5_005*.root");
+
+
+	//! number of points in the plots
+	//int num_events = 225;//1e5;
+	int num_events = rec.GetEntries();
 
 	int etabin = 29;
         double etamin =-1.7, etamax = 1.7;
@@ -146,20 +184,20 @@ void newcontrol
 	TH2F* h9 = new TH2F("h9","P_{trec} Vs P_{t};P_{t} [MeV/c];P_{trec}", 300,1000,25e3,300,1000,25e3); 	
 	TH2F* h10 = new TH2F("h10","P_{trec} Vs P_{t};P_{t} [MeV/c];P_{trec}", 300,1000,25e3,300,1000,25e3);
  	
-	TH2F* h11 = new TH2F("h11","P_{t} Vs Z_{13};Z_{13};P_{t} [MeV/c];", 300,-250,250,300,1000,25e3); 		
+	TH2F* h11 = new TH2F("h11","P_{t} Vs Z_{13};Z_{13};P_{t} [MeV/c];", 300,-300,300,300,1000,25e3); 		
 	
-	TH2F* h12 = new TH2F("h12","Z_{013} Vs dphi_{2};dphi_{2};Z_{013} [mm]", 300,-0.01,0.01,300,-125,125); 	
-	TH2F* h13 = new TH2F("h13","Z_{013} Vs dphi_{2};dphi_{2};Z_{013} [mm]", 300,-0.01,0.01,300,-125,125); 	
-	TH2F* h14 = new TH2F("h14","M_{vz}  Vs dphi_{2};dphi_{2};M_{Vz}  [mm]", 300,-0.005,0.005,300,-125,125); 	
-	TH1F* h14a= new TH1F("h14a","dphi_{2};dphi_{2}", 300,-2e-3,2e-3); 	
+	TH2F* h12 = new TH2F("h12","Z_{013} Vs dphi_{2};dphi_{2};Z_{013} [mm]", 300,-0.001,0.001,300,-125,125); 	
+	TH2F* h13 = new TH2F("h13","Z_{013} Vs dphi_{2};dphi_{2};Z_{013} [mm]", 300,-0.001,0.001,300,-125,125); 	
+	TH2F* h14 = new TH2F("h14","M_{vz}  Vs dphi_{2};dphi_{2};M_{Vz}  [mm]", 300,-0.001,0.001,300,-125,125); 	
+	TH1F* h14a= new TH1F("h14a","dphi_{2};dphi_{2}", 300,-5e-4,5e-4); 	
 	TH2F* h15 = new TH2F("h15","Z_{013} Vs dz_{2};dz_{2} [mm];Z_{013} [mm]", 300,-2,2,300,-125,125); 	
 	TH2F* h16 = new TH2F("h16","Z_{013} Vs dz_{2};dz_{2} [mm];Z_{013} [mm]", 300,-1,1,300,-125,125); 	
 	TH2F* h17 = new TH2F("h17","M_{vz}  Vs dz_{2};dz_{2} [mm];M_{Vz}  [mm]", 300,-1,1,300,-125,125); 
 	TH1F* h17a= new TH1F("h17a","dz_{2};dz_{2} [mm]", 300,-0.5,0.5); 
 	 
-	TH2F* h18 = new TH2F("h18","dphi_{2} Vs Theta_{13};Theta_{13};dphi_{2}", 300,0,3,300,-0.01,0.01);
-	TH2F* h19 = new TH2F("h19","dphi_{2} Vs Theta_{13};Theta_{13};dphi_{2}", 300,0,3,300,-0.01,0.01); 	
-	TH2F* h20 = new TH2F("h20","dphi_{2} Vs M_{theta};M_{theta};dphi_{2}", 300,0,3,300,-0.005,0.005); 	
+	TH2F* h18 = new TH2F("h18","dphi_{2} Vs Theta_{13};Theta_{13};dphi_{2}", 300,0,3,300,-0.001,0.001);
+	TH2F* h19 = new TH2F("h19","dphi_{2} Vs Theta_{13};Theta_{13};dphi_{2}", 300,0,3,300,-0.001,0.001); 	
+	TH2F* h20 = new TH2F("h20","dphi_{2} Vs M_{theta};M_{theta};dphi_{2}", 300,0,3,300,-0.001,0.001); 	
 	TH2F* h21 = new TH2F("h21","dz_{2} Vs Theta_{13};Theta_{13};dz_{2}", 300,0,3.0,300,-1,1);
 	TH2F* h22 = new TH2F("h22","dz_{2} Vs Theta_{13};Theta_{13};dz_{2}", 300,0,3.0,300,-1,1);
 	TH2F* h23 = new TH2F("h23","dz_{2} Vs M_{theta};M_{theta};dz_{2}", 300,0,3.0,300,-1,1);
@@ -167,27 +205,35 @@ void newcontrol
 	TH1F* th22 = new TH1F("th22","Theta_{13};Theta_{13}", 300,0,3.0);
 	TH1F* th23 = new TH1F("th23","M_{theta};M_{theta}", 300,0,3.0);
 
-	TH2F* th24 = new TH2F("th24","abs(dphi_{2}) Vs cos(Theta_{13});cos(Theta_{13});abs(dphi_{2})", 300,-1,1,300,0,0.002); 	
-	TH2F* th25a= new TH2F("th25a","abs(dphi_{2}) Vs cos(Theta_{13});cos(Theta_{13});abs(dphi_{2})", 300,-1,1,300,0,0.002); 	
-	TH2F* th25 = new TH2F("th25","abs(dphi_{2}) Vs cos(Theta_{13});cos(Theta_{13});abs(dphi_{2})", 300,-1,1,300,0,0.002); 	
-	TH2F* th26 = new TH2F("th26","abs(dphi_{2}) Vs cos(M_{theta});cos(M_{theta});abs(dphi_{2})", 300,-1,1,300,0,0.002); 	
+	TH2F* th24 = new TH2F("th24","abs(dphi_{2}) Vs cos(Theta_{13});cos(Theta_{13});abs(dphi_{2})", 300,-1,1,300,0,6e-4); 	
+	TH2F* th25a= new TH2F("th25a","abs(dphi_{2}) Vs cos(Theta_{13});cos(Theta_{13});abs(dphi_{2})", 300,-1,1,300,0,6e-4); 	
+	TH2F* th25 = new TH2F("th25","abs(dphi_{2}) Vs cos(Theta_{13});cos(Theta_{13});abs(dphi_{2})", 300,-1,1,300,0,6e-4); 	
+	TH2F* th26 = new TH2F("th26","abs(dphi_{2}) Vs cos(M_{theta});cos(M_{theta});abs(dphi_{2})", 300,-1,1,300,0,6e-4); 	
 	TH2F* th27 = new TH2F("th27","dz_{2} Vs cos(Theta_{13});cos(Theta_{13});dz_{2}", 300,-1,1,300,-1,1); 	
 	TH2F* th28a= new TH2F("th28a","dz_{2} Vs cos(Theta_{13});cos(Theta_{13});dz_{2}", 300,-1,1,300,-1,1); 	
 	TH2F* th28 = new TH2F("th28","dz_{2} Vs cos(Theta_{13});cos(Theta_{13});dz_{2}", 300,-1,1,300,-1,1); 	
 	TH2F* th29 = new TH2F("th29","dz_{2} Vs cos(M_{theta});cos(M_{theta});dz_{2}", 300,-1,1,300,-1,1);
 
-	TH2F* h24 = new TH2F("h24","abs(dphi_{2}) Vs sin(Theta_{13});sin(Theta_{13});abs(dphi_{2})", 300,0.5,1.1,300,0,0.0009); 	
-	TH2F* h25a= new TH2F("h25a","abs(dphi_{2}) Vs sin(Theta_{13});sin(Theta_{13});abs(dphi_{2})", 300,0.5,1.1,300,0,0.0009); 	
-	TH2F* h25 = new TH2F("h25","abs(dphi_{2}) Vs sin(Theta_{13});sin(Theta_{13});abs(dphi_{2})", 300,0.5,1.1,300,0,0.0009); 	
-	TH2F* h26 = new TH2F("h26","abs(dphi_{2}) Vs sin(M_{theta});sin(M_{theta});abs(dphi_{2})", 300,0.5,1.1,300,0,0.0009); 	
+	TH2F* h24 = new TH2F("h24","abs(dphi_{2}) Vs sin(Theta_{13});sin(Theta_{13});abs(dphi_{2})", 300,0.5,1.1,300,0,0.0006); 	
+	TH2F* h25a= new TH2F("h25a","abs(dphi_{2}) Vs sin(Theta_{13});sin(Theta_{13});abs(dphi_{2})", 300,0.5,1.1,300,0,0.0006); 	
+	TH2F* h25 = new TH2F("h25","abs(dphi_{2}) Vs sin(Theta_{13});sin(Theta_{13});abs(dphi_{2})", 300,0.5,1.1,300,0,0.0006); 	
+	TH2F* h26 = new TH2F("h26","abs(dphi_{2}) Vs sin(M_{theta});sin(M_{theta});abs(dphi_{2})", 300,0.5,1.1,300,0,0.0006); 	
+	TH2F* h_24 = new TH2F("h_24","abs(dphi_{2}) Vs sin(Theta_{13});sin(Theta_{13});abs(dphi_{2})", 300,0.5,1.1,300,0,0.0006); 	
+	TH2F* h_25a= new TH2F("h_25a","abs(dphi_{2}) Vs sin(Theta_{13});sin(Theta_{13});abs(dphi_{2})", 300,0.5,1.1,300,0,0.0006); 	
+	TH2F* h_25 = new TH2F("h_25","abs(dphi_{2}) Vs sin(Theta_{13});sin(Theta_{13});abs(dphi_{2})", 300,0.5,1.1,300,0,0.0006); 	
+	TH2F* h_26 = new TH2F("h_26","abs(dphi_{2}) Vs sin(M_{theta});sin(M_{theta});abs(dphi_{2})", 300,0.5,1.1,300,0,0.0006); 	
 	TH2F* h27 = new TH2F("h27","dz_{2} Vs sin(Theta_{13});sin(Theta_{13});dz_{2}", 300,0,1.1,300,-1,1); 	
 	TH2F* h28a= new TH2F("h28a","dz_{2} Vs sin(Theta_{13});sin(Theta_{13});dz_{2}", 300,0,1.1,300,-1,1); 	
 	TH2F* h28 = new TH2F("h28","dz_{2} Vs sin(Theta_{13});sin(Theta_{13});dz_{2}", 300,0,1.1,300,-1,1); 	
-	TH2F* h29 = new TH2F("h29","abs(dz_{2}) Vs sin(M_{theta});sin(M_{theta});abs(dz_{2})", 300,0,1.1,300,-1,1);
+	TH2F* h29 = new TH2F("h29","dz_{2} Vs sin(M_{theta});sin(M_{theta});dz_{2}", 300,0,1.1,300,-1,1);
+	TH2F* h_27 = new TH2F("h_27","dz_{2} Vs sin(Theta_{13});sin(Theta_{13});dz_{2}", 300,0,1.1,300,-1,1); 	
+	TH2F* h_28a= new TH2F("h_28a","dz_{2} Vs sin(Theta_{13});sin(Theta_{13});dz_{2}", 300,0,1.1,300,-1,1); 	
+	TH2F* h_28 = new TH2F("h_28","dz_{2} Vs sin(Theta_{13});sin(Theta_{13});dz_{2}", 300,0,1.1,300,-1,1); 	
+	TH2F* h_29 = new TH2F("h_29","dz_{2} Vs sin(M_{theta});sin(M_{theta});dz_{2}", 300,0,1.1,300,-1,1);
 
-	TH2F* h30 = new TH2F("h30","P_{t} Vs dphi_{2};dphi_{2};P_{t} [MeV/c]", 300,-0.01,0.01,300,1000,25e3); 	
-	TH2F* h31 = new TH2F("h31","P_{t} Vs dphi_{2};dphi_{2};P_{t} [MeV/c]", 300,-0.01,0.01,300,1000,25e3); 	
-	TH2F* h32 = new TH2F("h32","P_{t} Vs dphi_{2};dphi_{2};P_{t} [MeV/c]", 300,-0.01,0.01,300,1000,25e3); 	
+	TH2F* h30 = new TH2F("h30","P_{t} Vs dphi_{2};dphi_{2};P_{t} [MeV/c]", 300,-6e-4,6e-4,300,1000,25e3); 	
+	TH2F* h31 = new TH2F("h31","P_{t} Vs dphi_{2};dphi_{2};P_{t} [MeV/c]", 300,-6e-4,6e-4,300,1000,25e3); 	
+	TH2F* h32 = new TH2F("h32","P_{t} Vs dphi_{2};dphi_{2};P_{t} [MeV/c]", 300,-6e-4,6e-4,300,1000,25e3); 	
 	TH2F* h33 = new TH2F("h33","P_{t} Vs dz_{2};dz_{2};P_{t} [MeV/c]", 300,-1,1,300,1000,25e3); 	
 	TH2F* h34 = new TH2F("h34","P_{t} Vs dz_{2};dz_{2};P_{t} [MeV/c]", 300,-1,1,300,1000,25e3); 	
 	TH2F* h35 = new TH2F("h35","P_{t} Vs dz_{2};dz_{2};P_{t} [MeV/c]", 300,-1,1,300,1000,25e3);
@@ -380,7 +426,7 @@ void newcontrol
 	h21->SetMarkerColor(kRed);
         h22->SetMarkerColor(kBlue);
         h23->SetMarkerColor(kGreen);
-	
+ 		
 	h24->SetMarkerColor(kRed);
         h25->SetMarkerColor(kBlue);
         h25a->SetMarkerColor(kCyan);
@@ -390,6 +436,16 @@ void newcontrol
         h28->SetMarkerColor(kBlue);
         h28a->SetMarkerColor(kCyan);
         h29->SetMarkerColor(kGreen);
+
+	h_24->SetMarkerColor(kRed);
+        h_25->SetMarkerColor(kBlue);
+        h_25a->SetMarkerColor(kCyan);
+        h_26->SetMarkerColor(kGreen);
+
+	h_27->SetMarkerColor(kRed);
+        h_28->SetMarkerColor(kBlue);
+        h_28a->SetMarkerColor(kCyan);
+        h_29->SetMarkerColor(kGreen);
 
         th22->SetMarkerColor(kBlue);
         th23->SetMarkerColor(kGreen);
@@ -569,6 +625,16 @@ void newcontrol
         h28->SetLineColor(kBlue);
         h28a->SetLineColor(kCyan);
         h29->SetLineColor(kGreen);
+	
+	h_24->SetLineColor(kRed);
+        h_25->SetLineColor(kBlue);
+        h_25a->SetLineColor(kCyan);
+        h_26->SetLineColor(kGreen);
+
+	h_27->SetLineColor(kRed);
+        h_28->SetLineColor(kBlue);
+        h_28a->SetLineColor(kCyan);
+        h_29->SetLineColor(kGreen);
 
         th22->SetLineColor(kBlue);
         th23->SetLineColor(kGreen);
@@ -767,12 +833,22 @@ void newcontrol
         rec.Draw("dphi2:sin(Theta13)>>h25",matched && minPt && phiBarrel && zBarrel && z0recmax,"same",num_events);
         rec.Draw("dphi2:sin(Theta13)>>h25a",matched && minPt && phiBarrel && zBarrel && z0recmax && noelectron,"same",num_events);
         rec.Draw("dphi2:sin(M_theta)>>h26",matched && minPt_t /*&& phiBarrel && zBarrel*/ && z0truthmax,"same",num_events);
+	//! dphi2 Vs sin(theta) w/o dphi2 and dz2 cut
+        rec.Draw("dphi2:sin(Theta13)>>h_24", fakes && minPt && phiBarrel && zBarrel && z0recmax && kapcut_l,"",num_events);
+        rec.Draw("dphi2:sin(Theta13)>>h_25",matched && minPt && phiBarrel && zBarrel && z0recmax && kapcut_l,"same",num_events);
+        rec.Draw("dphi2:sin(Theta13)>>h_25a",matched && minPt && phiBarrel && zBarrel && z0recmax && kapcut_l && noelectron,"same",num_events);
+        rec.Draw("dphi2:sin(M_theta)>>h_26",matched && minPt_t /*&& phiBarrel && zBarrel*/ && z0truthmax && kapcut_l,"same",num_events);
 
         //! sin(theta) Vs dz2
         rec.Draw("dz2:sin(Theta13)>>h27", fakes && minPt && phiBarrel && zBarrel && z0recmax,"",num_events);
         rec.Draw("dz2:sin(Theta13)>>h28",matched && minPt && phiBarrel && zBarrel && z0recmax,"same",num_events);
         rec.Draw("dz2:sin(Theta13)>>h28a",matched && minPt && phiBarrel && zBarrel && z0recmax && noelectron,"same",num_events);
         rec.Draw("dz2:sin(M_theta)>>h29",matched && minPt_t /*&& phiBarrel && zBarrel*/ && z0truthmax,"same",num_events);
+        //! dz2 Vs sin(theta) w/o dz2 cut and with kappa cut
+        rec.Draw("dz2:sin(Theta13)>>h_27", fakes && minPt && phiBarrel && zBarrel && z0recmax && kapcut_l,"",num_events);
+        rec.Draw("dz2:sin(Theta13)>>h_28",matched && minPt && phiBarrel && zBarrel && z0recmax && kapcut_l,"same",num_events);
+        rec.Draw("dz2:sin(Theta13)>>h_28a",matched && minPt && phiBarrel && zBarrel && z0recmax && kapcut_l && noelectron,"same",num_events);
+        rec.Draw("dz2:sin(M_theta)>>h_29",matched && minPt_t /*&& phiBarrel && zBarrel*/ && z0truthmax && kapcut_l,"same",num_events);
 
 	//! cos(theta) vs dphi2
         rec.Draw("dphi2:cos(Theta13)>>th24", fakes && minPt && phiBarrel && zBarrel && z0recmax,"",num_events);
@@ -1071,6 +1147,14 @@ rec.Draw("Eta13>>h_num_vs_eta_m",   matched && minPt && phiBarrel && zBarrel && 
 	h28->Draw();
 	h28a->Draw();
 	h29->Draw();
+	h_24->Draw();
+	h_25->Draw();
+	h_25a->Draw();
+	h_26->Draw();
+	h_27->Draw();
+	h_28->Draw();
+	h_28a->Draw();
+	h_29->Draw();
 	th22->Draw();
 	th23->Draw();
 	th24->Draw();
@@ -1287,6 +1371,10 @@ rec.Draw("Eta13>>h_num_vs_eta_m",   matched && minPt && phiBarrel && zBarrel && 
 	h25->Write();
 	h25a->Write();
 	h26->Write();
+	h_24->Write();
+	h_25->Write();
+	h_25a->Write();
+	h_26->Write();
 	
 	/*fdphi2_l->Write();
 	fdphi2_m->Write();
@@ -1301,6 +1389,10 @@ rec.Draw("Eta13>>h_num_vs_eta_m",   matched && minPt && phiBarrel && zBarrel && 
 	h28->Write();
 	h28a->Write();
 	h29->Write();
+	h_27->Write();
+	h_28->Write();
+	h_28a->Write();
+	h_29->Write();
 	fdz2->Write();	
 	fdz2_->Write();	
 	/*fdz2_l->Write();

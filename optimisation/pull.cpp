@@ -25,29 +25,35 @@
 
 	//const char* out_path = "/media/tamasi/DriveT/tamasi/Desktop/PHD/work/rec_data/Mar102k19/minBias/plots/optimisation";
 const char* out_path = "/media/tamasi/DriveT/tamasi/Desktop/PHD/talks_preps/ctd2k19/plots/optimisation";
-//! 30mm
-TCut cut = "Tid>0 && Pt_n>2e3 && abs(Z013)<100 && abs(Eta13)<1.6 && abs(Phi13)<0.02 && abs(Z13)<160 && abs(dphi2)<6e-4 && abs(dz2)<0.26";
-TCut MS_r = "Tid>0 && Pt_n>2e3 && Pt_n<4e3 && abs(Z013)<100 && abs(Eta13)<1.6 && abs(Phi13)<0.02 && abs(Z13)<160 && abs(dphi2)<6e-4 && abs(dz2)<0.26";
-TCut Hit_r = "Tid>0 && Pt_n>20e3 && abs(Z013)<100 && abs(Eta13)<1.6 && abs(Phi13)<0.02 && abs(Z13)<160 && abs(dphi2)<6e-4 && abs(dz2)<0.26";
-//! 40mm
-/*TCut cut = "Tid>0 && Pt_n>2e3 && abs(Z013)<100 && abs(Eta13)<1.6 && abs(Phi13)<0.026 && abs(Z13)<210 && abs(dphi2)<7e-4 && abs(dz2)<1.7*(sin(Theta13)^(-1.5))";
-TCut MS_r = "Tid>0 && Pt_n>2e3 && Pt_n<4e3 && abs(Z013)<100 && abs(Eta13)<1.6 && abs(Phi13)<0.026 && abs(Z13)<210 && abs(dphi2)<7e-4 && abs(dz2)<1.7*(sin(Theta13)^(-1.5))";
-TCut Hit_r = "Tid>0 && Pt_n>20e3 && abs(Z013)<100 && abs(Eta13)<1.6 && abs(Phi13)<0.026 && abs(Z13)<210 && abs(dphi2)<7e-4 && abs(dz2)<1.7*(sin(Theta13)^(-1.5))";*/
 //! 20mm
 /*TCut cut = "Tid>0 && Pt_n>2e3 && abs(Z013)<100 && abs(Eta13)<1.6 && abs(Phi13)<0.014 && abs(Z13)<115 && abs(dphi2)<7e-4 && abs(dz2)<1.7*(sin(Theta13)^(-1.5))";
 TCut MS_r = "Tid>0 && Pt_n>2e3 && Pt_n<4e3 && abs(Z013)<100 && abs(Eta13)<1.6 && abs(Phi13)<0.014 && abs(Z13)<115 && abs(dphi2)<7e-4 && abs(dz2)<1.7*(sin(Theta13)^(-1.5))";
 TCut Hit_r = "Tid>0 && Pt_n>20e3 && abs(Z013)<100 && abs(Eta13)<1.6 && abs(Phi13)<0.014 && abs(Z13)<115 && abs(dphi2)<7e-4 && abs(dz2)<1.7*(sin(Theta13)^(-1.5))";*/
-int pull(const char* output_file_name = "pullPU200hh4b_30mm", const char* constants ="B")
+//! 30mm
+/*TCut cut = "Tid>0 && Pt_n>2e3 && abs(Z013)<100 && abs(Eta13)<1.6 && abs(Phi13)<0.02 && abs(Z13)<160 && abs(dphi2)<6e-4 && abs(dz2)<0.26";
+TCut MS_r = "Tid>0 && Pt_n>2e3 && Pt_n<4e3 && abs(Z013)<100 && abs(Eta13)<1.6 && abs(Phi13)<0.02 && abs(Z13)<160 && abs(dphi2)<6e-4 && abs(dz2)<0.26";
+TCut Hit_r = "Tid>0 && Pt_n>20e3 && abs(Z013)<100 && abs(Eta13)<1.6 && abs(Phi13)<0.02 && abs(Z13)<160 && abs(dphi2)<6e-4 && abs(dz2)<0.26";*/
+//! 40mm
+/*TCut cut = "Tid>0 && Pt_n>2e3 && abs(Z013)<100 && abs(Eta13)<1.6 && abs(Phi13)<0.026 && abs(Z13)<210 && abs(dphi2)<7e-4 && abs(dz2)<1.7*(sin(Theta13)^(-1.5))";
+TCut MS_r = "Tid>0 && Pt_n>2e3 && Pt_n<4e3 && abs(Z013)<100 && abs(Eta13)<1.6 && abs(Phi13)<0.026 && abs(Z13)<210 && abs(dphi2)<7e-4 && abs(dz2)<1.7*(sin(Theta13)^(-1.5))";
+TCut Hit_r = "Tid>0 && Pt_n>20e3 && abs(Z013)<100 && abs(Eta13)<1.6 && abs(Phi13)<0.026 && abs(Z13)<210 && abs(dphi2)<7e-4 && abs(dz2)<1.7*(sin(Theta13)^(-1.5))";*/
+//! 50mm
+TCut cut = "Tid>0 && Pt_n>2e3 && abs(Z013)<100 && abs(Eta13)<1.6 && abs(Phi13)<0.032 && abs(Z13)<260 && abs(dphi2)<6e-4 && abs(dz2)<0.17*(sin(Theta13)^(-1.5))";
+TCut MS_r = "Tid>0 && Pt_n>2e3 && Pt_n<4e3 && abs(Z013)<100 && abs(Eta13)<1.6 && abs(Phi13)<0.032 && abs(Z13)<260 && abs(dphi2)<6e-4 && abs(dz2)<0.17*(sin(Theta13)^(-1.5))";
+TCut Hit_r = "Tid>0 && Pt_n>20e3 && abs(Z013)<100 && abs(Eta13)<1.6 && abs(Phi13)<0.032 && abs(Z13)<260 && abs(dphi2)<6e-4 && abs(dz2)<0.17*(sin(Theta13)^(-1.5))";
+int pull(const char* output_file_name = "pullPU200hh4b_50mm", const char* constants ="B")
 {
 	TChain rec("m_recTree");
 	//rec.Add("/media/tamasi/DriveT/tamasi/Desktop/PHD/work/rec_data/Mar102k19/minBias/*000010_1.root");
 	//rec.Add("/media/tamasi/DriveT/tamasi/Desktop/PHD/work/rec_data/Mar102k19/minBias/*000011_1.root");
-	//! 30mm
-	rec.Add("/media/tamasi/DriveT/tamasi/Desktop/PHD/talks_preps/ctd2k19/data_files/hh4b/pileup_samples/rec-files/*0000*_.root");
-	//! 40mm
-	//rec.Add("/media/tamasi/DriveT/tamasi/Desktop/PHD/talks_preps/ctd2k19/data_files/hh4b/pileup_samples/rec-files/*rec_002*_.root");
 	//! 20mm
 	//rec.Add("/media/tamasi/DriveT/tamasi/Desktop/PHD/talks_preps/ctd2k19/data_files/hh4b/pileup_samples/rec-files/*rec_001*_.root");
+	//! 30mm
+	//rec.Add("/media/tamasi/DriveT/tamasi/Desktop/PHD/talks_preps/ctd2k19/data_files/hh4b/pileup_samples/rec-files/*0000*_.root");
+	//! 40mm
+	//rec.Add("/media/tamasi/DriveT/tamasi/Desktop/PHD/talks_preps/ctd2k19/data_files/hh4b/pileup_samples/rec-files/*rec_002*_.root");
+	//! 50mm
+	rec.Add("/media/tamasi/DriveT/tamasi/Desktop/PHD/talks_preps/ctd2k19/data_files/hh4b/pileup_samples/rec-files/PU200hh4b_rec__005*_.root");
 /*	//! define a local vector<double> to store the reconstructed pt values
 	//! always initialise a pointer!!
 	std::vector<double> *theta013 = 0;
@@ -72,7 +78,7 @@ int pull(const char* output_file_name = "pullPU200hh4b_30mm", const char* consta
 	rec.Draw("Theta13>>h",cut,"",1e5);
 	
 	const double w  = 40e-3;//mm
-	const double d	= 30;// gap between the layers in the triplet in mm
+	const double d	= 50;// gap between the layers in the triplet in mm
 	const double B	= 4;// magnetic field in Tesla
 	const double X_0= 0.02;// relative radiation length t/X_0  = 2%
 	/*const double w = 50e-6;//m
@@ -176,7 +182,7 @@ int pull(const char* output_file_name = "pullPU200hh4b_30mm", const char* consta
 return 0;
 }
 
-int write_to_pdf(const char* input_file_name = "pullPU200hh4b_30mm.root", const char* output_file_name = "pullPU200hh4b_30mm")
+int write_to_pdf(const char* input_file_name = "pullPU200hh4b_50mm.root", const char* output_file_name = "pullPU200hh4b_50mm")
 {
 	
 	char in_file[1023];
