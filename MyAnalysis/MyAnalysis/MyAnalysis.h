@@ -309,7 +309,20 @@ private:
   std::vector<int>      m_truthStatus;
   std::vector<int>      m_truthBarcode;
 
-
+  //! TTT truth particles
+  std::vector<float>	m_TTTtruthD0;
+  std::vector<float>	m_TTTtruthZ0;
+  std::vector<float>	m_TTTtruthPhi0;
+  std::vector<float>	m_TTTtruthTheta;
+  std::vector<float>	m_TTTtruthQOverP;
+  std::vector<float>	m_TTTtruthPt;
+  std::vector<float>	m_TTTtruthEta;
+  std::vector<int>      m_TTTtruthBarcode;
+  std::vector<int>      m_TTTtruthStatus;
+  std::vector<int>      m_TTTtruthPdg;
+  std::vector<float>	m_TTTtruthVx;
+  std::vector<float>	m_TTTtruthVy;
+  std::vector<float>	m_TTTtruthVz;
 
   std::vector<float>	m_truthjetEta;
   std::vector<float>	m_truthjetPhi;
@@ -359,14 +372,6 @@ private:
   std::vector<float>	m_TTTTZ0;
   std::vector<float>	m_TTTTVx;
   std::vector<float>	m_TTTTVy;
-  //! TTT truth particles
-  std::vector<float>	m_TTTtruthd0;
-  std::vector<float>	m_TTTtruthz0;
-  std::vector<float>	m_TTTtruthphi0;
-  std::vector<float>	m_TTTtruththeta;
-  std::vector<float>	m_TTTtruthqOverP;
-  std::vector<float>	m_TTTtruthPt;
-  std::vector<float>	m_TTTtruthEta;
   //! ttt tracks barcode matched to truth particles 
   std::vector<int>	mc_TTTTBarcode;
   std::vector<int>	mc_TTTTStatus;

@@ -30,11 +30,11 @@ m_associator(0), m_associatorII(0),
 vec_jetPars(0),m_collectionTree(0),m_event(0), 
 m_weight(0),
 m_truthM(0), m_truthPt(0), m_truthEta(0), m_truthPhi(0), m_truthVx(0), m_truthVy(0), m_truthVz(0), m_truthPdg(0), m_truthStatus(0), m_truthBarcode(0),
+m_TTTtruthD0(0),m_TTTtruthZ0(0),m_TTTtruthPhi0(0),m_TTTtruthTheta(0),m_TTTtruthQOverP(0), m_TTTtruthPt(0), m_TTTtruthEta(0), m_TTTtruthBarcode(0), m_TTTtruthStatus(0), m_TTTtruthPdg(0), m_TTTtruthVx(0), m_TTTtruthVy(0), m_TTTtruthVz(0),
 m_truthjetEta(0),m_truthjetPhi(0),m_truthjetE(0),m_truthjetM(0),m_truthjetPt(0),m_truthjetPx(0),m_truthjetPy(0),m_truthjetPz(0),
 m_StdPVx(0), m_StdPVy(0), m_StdPVz(0), m_TTTPVz(0),
 m_InDetd0(0),m_InDetz0(0),m_InDetphi0(0),m_InDettheta(0),m_InDetqOverP(0), m_InDetPt(0), m_InDetEta(0), m_InDetTBarcode(0), m_InDetTPdg(0), m_InDetTPt(0), m_InDetTP(0), m_InDetTEta(0), m_InDetTTheta(0), m_InDetTPhi(0), m_InDetTZ0(0), m_InDetTVx(0), m_InDetTVy(0),
 m_TTTd0(0),m_TTTz0(0),m_TTTphi0(0),m_TTTtheta(0),m_TTTqOverP(0), m_TTTPt(0), m_TTTEta(0), m_TTTTBarcode(0), m_TTTTPdg(0), m_TTTTPt(0), m_TTTTP(0), m_TTTTEta(0), m_TTTTTheta(0), m_TTTTPhi(0), m_TTTTZ0(0), m_TTTTVx(0), m_TTTTVy(0),
-m_TTTtruthd0(0),m_TTTtruthz0(0),m_TTTtruthphi0(0),m_TTTtruththeta(0),m_TTTtruthqOverP(0), m_TTTtruthPt(0), m_TTTtruthEta(0),
 mc_TTTTBarcode(0) ,mc_TTTTStatus(0) ,mc_TTTTPdg(0) ,mc_TTTTPt(0) ,mc_TTTTP(0) ,mc_TTTTEta(0) ,mc_TTTTTheta(0) ,mc_TTTTPhi(0) ,mc_TTTTZ0(0) ,mc_TTTTVx(0) ,mc_TTTTVy(0),
 m_calojetJVF(0), m_calojetJVT(0), m_calojetEta(0),m_calojetPhi(0),m_calojetE(0),m_calojetM(0),m_calojetPt(0),m_calojetPx(0),m_calojetPy(0),m_calojetPz(0),
 m_caloTTTjetJVF(0), m_caloTTTjetJVT(0), m_caloTTTjetEta(0),m_caloTTTjetPhi(0),m_caloTTTjetE(0),m_caloTTTjetM(0),m_caloTTTjetPt(0),m_caloTTTjetPx(0),m_caloTTTjetPy(0),m_caloTTTjetPz(0),
@@ -153,6 +153,20 @@ StatusCode MyAnalysis::initialize()
   m_collectionTree->Branch("truthStatus",  &m_truthStatus);     
   m_collectionTree->Branch("truthBarcode", &m_truthBarcode);     
 
+  m_collectionTree->Branch("TTTtruthD0",        &m_TTTtruthD0);        
+  m_collectionTree->Branch("TTTtruthZ0",        &m_TTTtruthZ0);        
+  m_collectionTree->Branch("TTTtruthPhi0",      &m_TTTtruthPhi0);      
+  m_collectionTree->Branch("TTTtruthTheta",     &m_TTTtruthTheta);     
+  m_collectionTree->Branch("TTTtruthQOverP",    &m_TTTtruthQOverP);    
+  m_collectionTree->Branch("TTTtruthPt",        &m_TTTtruthPt);    
+  m_collectionTree->Branch("TTTtruthEta",       &m_TTTtruthEta);
+  m_collectionTree->Branch("TTTtruthBarcode",   &m_TTTtruthBarcode);
+  m_collectionTree->Branch("TTTtruthStatus",    &m_TTTtruthStatus);
+  m_collectionTree->Branch("TTTtruthPdg",       &m_TTTtruthPdg);
+  m_collectionTree->Branch("TTTtruthVx",        &m_TTTtruthVx);
+  m_collectionTree->Branch("TTTtruthVy",        &m_TTTtruthVy);
+  m_collectionTree->Branch("TTTtruthVz",        &m_TTTtruthVz);
+  
   m_collectionTree->Branch("truthjetEta",   &m_truthjetEta);   
   m_collectionTree->Branch("truthjetPhi",   &m_truthjetPhi);   
   m_collectionTree->Branch("truthjetE",     &m_truthjetE);     
@@ -203,13 +217,8 @@ StatusCode MyAnalysis::initialize()
   m_collectionTree->Branch("TTTTZ0",       &m_TTTTZ0);
   m_collectionTree->Branch("TTTTVx",       &m_TTTTVx);
   m_collectionTree->Branch("TTTTVy",       &m_TTTTVy);
-  m_collectionTree->Branch("TTTtruthd0",        &m_TTTtruthd0);        
-  m_collectionTree->Branch("TTTtruthz0",        &m_TTTtruthz0);        
-  m_collectionTree->Branch("TTTtruthphi0",      &m_TTTtruthphi0);      
-  m_collectionTree->Branch("TTTtruththeta",     &m_TTTtruththeta);     
-  m_collectionTree->Branch("TTTtruthqOverP",    &m_TTTtruthqOverP);    
-  m_collectionTree->Branch("TTTtruthpt",        &m_TTTtruthPt);    
-  m_collectionTree->Branch("TTTtrutheta",       &m_TTTtruthEta);
+
+
   m_collectionTree->Branch("mTTTTBarcode",&mc_TTTTBarcode);
   m_collectionTree->Branch("mTTTTStatus", &mc_TTTTStatus);
   m_collectionTree->Branch("mTTTTPdg",	   &mc_TTTTPdg);
@@ -356,6 +365,20 @@ StatusCode MyAnalysis::execute()
   m_truthStatus.clear();
   m_truthBarcode.clear();
 
+  m_TTTtruthD0.clear();
+  m_TTTtruthZ0.clear();
+  m_TTTtruthPhi0.clear();
+  m_TTTtruthTheta.clear();
+  m_TTTtruthQOverP.clear();
+  m_TTTtruthPt.clear();
+  m_TTTtruthEta.clear();
+  m_TTTtruthBarcode.clear();
+  m_TTTtruthStatus.clear();
+  m_TTTtruthPdg.clear();
+  m_TTTtruthVx.clear();
+  m_TTTtruthVy.clear();
+  m_TTTtruthVz.clear();
+
   m_truthjetEta.clear();
   m_truthjetPhi.clear();
   m_truthjetE.clear();
@@ -400,13 +423,6 @@ StatusCode MyAnalysis::execute()
   m_TTTTZ0.clear();
   m_TTTTVx.clear();
   m_TTTTVy.clear();
-  m_TTTtruthd0.clear();
-  m_TTTtruthz0.clear();
-  m_TTTtruthphi0.clear();
-  m_TTTtruththeta.clear();
-  m_TTTtruthqOverP.clear();
-  m_TTTtruthPt.clear();
-  m_TTTtruthEta.clear();
   mc_TTTTBarcode.clear();
   mc_TTTTStatus.clear();
   mc_TTTTPdg.clear();
@@ -716,13 +732,19 @@ StatusCode MyAnalysis::execute()
   {
 	const xAOD::TrackParticle* particle1 = *nextTrktruth1;
 	const xAOD::IParticle* iparticle1 = particle1;
-	m_TTTtruthd0.push_back(particle1->d0());
-	m_TTTtruthz0.push_back(particle1->z0());
-	m_TTTtruthphi0.push_back(particle1->phi0());
-	m_TTTtruththeta.push_back(particle1->theta());
-	m_TTTtruthqOverP.push_back(particle1->qOverP());
+	m_TTTtruthD0.push_back(particle1->d0());
+	m_TTTtruthZ0.push_back(particle1->z0());
+	m_TTTtruthPhi0.push_back(particle1->phi0());
+	m_TTTtruthTheta.push_back(particle1->theta());
+	m_TTTtruthQOverP.push_back(particle1->qOverP());
 	m_TTTtruthPt.push_back(particle1->pt());
 	m_TTTtruthEta.push_back(particle1->eta());
+	m_TTTtruthBarcode.push_back(particle1->auxdata<int>("TTTtruth_barcode"));
+	m_TTTtruthStatus.push_back(particle1->auxdata<int>("TTTtruth_status"));
+	m_TTTtruthPdg.push_back(particle1->auxdata<int>("TTTtruth_pdg"));
+	m_TTTtruthVx.push_back(particle1->auxdata<float>("TTTtruth_Vx"));
+	m_TTTtruthVy.push_back(particle1->auxdata<float>("TTTtruth_Vy"));
+	m_TTTtruthVz.push_back(particle1->auxdata<float>("TTTtruth_Vz"));
 	//! print track particles
 	//ATH_MSG_INFO("printing TTTtruth track particles... ");
 	if (m_debug) printTrackPcle( *particle1 );
