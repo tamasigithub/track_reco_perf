@@ -14,6 +14,36 @@
 #include <math.h>
 //const char* out_path = "/eos/user/t/tkar/www/TTT/plots/resolution"; 
 const char* out_path = "./plots/purity"; 
+void ScaleAxis(TAxis *a, Double_t Scale)
+{
+  if (!a) return; // just a precaution
+  if (a->GetXbins()->GetSize())
+    {
+      // an axis with variable bins
+      // note: bins must remain in increasing order, hence the "Scale"
+      // function must be strictly (monotonically) increasing
+      TArrayD X(*(a->GetXbins()));
+      for(Int_t i = 0; i < X.GetSize(); i++) X[i] = X[i]*Scale;
+      a->Set((X.GetSize() - 1), X.GetArray()); // new Xbins
+    }
+  else
+    {
+      // an axis with fix bins
+      // note: we modify Xmin and Xmax only, hence the "Scale" function
+      // must be linear (and Xmax must remain greater than Xmin)
+      a->Set( a->GetNbins(),
+              a->GetXmin()*Scale, // new Xmin
+              a->GetXmax()*Scale ); // new Xmax
+    }
+  return;
+}
+
+void ScaleXaxis(TH1 *h, Double_t Scale)
+{
+  if (!h) return; // just a precaution
+  ScaleAxis(h->GetXaxis(), Scale);
+  return;
+}
 int write_topdf(const char* output_file_name = "PurVsEtaPtPhi_cutCompBmatched")
 {
 
@@ -222,20 +252,24 @@ int write_topdf(const char* output_file_name = "PurVsEtaPtPhi_cutCompBmatched")
         h1_phi->GetXaxis()->SetTitleSize(.05);
         h1_eta->GetXaxis()->SetTitleSize(.05);
 	
-	h2_pt->GetXaxis()->SetTitle("p_{t} [MeV/c]");
+	h2_pt->GetXaxis()->SetTitle("p_{t} [GeV/c]");
 	h2_phi->GetXaxis()->SetTitle("#phi [rad]");
 	h2_eta->GetXaxis()->SetTitle("#eta");
-        h0_pt->GetXaxis()->SetTitle("p_{t} [MeV/c]");
+        h0_pt->GetXaxis()->SetTitle("p_{t} [GeV/c]");
         h0_phi->GetXaxis()->SetTitle("#phi [rad]");
         h0_eta->GetXaxis()->SetTitle("#eta");
 	
-	h3_pt->GetXaxis()->SetTitle("p_{t} [MeV/c]");
+	h3_pt->GetXaxis()->SetTitle("p_{t} [GeV/c]");
 	h3_phi->GetXaxis()->SetTitle("#phi [rad]");
 	h3_eta->GetXaxis()->SetTitle("#eta");
-        h1_pt->GetXaxis()->SetTitle("p_{t} [MeV/c]");
+        h1_pt->GetXaxis()->SetTitle("p_{t} [GeV/c]");
         h1_phi->GetXaxis()->SetTitle("#phi [rad]");
         h1_eta->GetXaxis()->SetTitle("#eta");
 	
+	ScaleXaxis(h0_pt,1e-3);
+	ScaleXaxis(h1_pt,1e-3);
+	ScaleXaxis(h2_pt,1e-3);
+	ScaleXaxis(h3_pt,1e-3);
 	
 	TCanvas * C = new TCanvas();
 	gStyle->SetOptStat(0);

@@ -20,7 +20,8 @@ const char* out_path = "./plots/efficiency";
 //TCut num_select= "r_TTTtid > 0  && truthBarcode > 0 && truthStatus == 1 && abs(truthPt) > 2000 && abs(truthEta)<1.4 && abs(truthVz) < 100 && abs(truthVx) < 2 && abs(truthVy) < 2 ";
 //TCut den_select= "r_TTTtid >= 0 && truthBarcode > 0 && truthStatus == 1 && abs(truthPt) > 2000 && abs(truthEta)<1.4 && abs(truthVz) < 100 && abs(truthVx) < 2 && abs(truthVy) < 2 ";
 
-int eff_Vs_etaphipt_dR_barcode(const char* output_file_name = "eff_InDetTTTdR0.01_eta1.4B", bool save = false)
+int eff_Vs_etaphipt_dR_barcode(const char* output_file_name = "effm1000_3ntuples2_InDetTTTdR0.01_eta1.4B_1", bool save = false)
+//int eff_Vs_etaphipt_dR_barcode(const char* output_file_name = "eff_InDetTTTdR0.01_eta1.4B", bool save = false)
 {
 	TChain recTree("m_collectionTree");
         //recTree.Add("/media/tamasi/DriveT/tamasi/Desktop/PHD/work/mere_plots/athena/Analysis/user.tkar.hh4bsig5PU0_3_ntuples1_MYSTREAM/*.root");
@@ -28,7 +29,10 @@ int eff_Vs_etaphipt_dR_barcode(const char* output_file_name = "eff_InDetTTTdR0.0
         //recTree.Add("/media/tamasi/DriveT/tamasi/Desktop/PHD/work/mere_plots/athena/Analysis/user.tkar.hh4bsig5PU0_3_ntuples2_MYSTREAM/*.root");
         //! final set used - 0.01
 	//recTree.Add("/media/tamasi/DriveT/tamasi/Desktop/PHD/work/mere_plots/athena/Analysis/dpg2019/user.tkar.hh4bsig5PU0_4_ntuples1_MYSTREAM/*.root");
-	recTree.Add("/media/tamasi/DriveT/tamasi/Desktop/PHD/work/mere_plots/athena/Analysis/dpg2019/user.tkar.hh4bsig5PU0_4_ntuples2_MYSTREAM/*.root");
+	//recTree.Add("/media/tamasi/DriveT/tamasi/Desktop/PHD/work/mere_plots/athena/Analysis/dpg2019/user.tkar.hh4bsig5PU0_4_ntuples2_MYSTREAM/*.root");
+	//! for the fair comparison (truth container contains only those particles that leave a hit in the outermost layer of the triplet)
+	//recTree.Add("/media/tamasi/DriveT1/tamasi/Desktop/PHD/work/mere_plots/athena/Analysis/dpg2019/user.tkar.hh4b_m1000sig5PU0_3_ntuples1_MYSTREAM/*.root");
+	recTree.Add("/media/tamasi/DriveT1/tamasi/Desktop/PHD/work/mere_plots/athena/Analysis/dpg2019/user.tkar.hh4b_m1000sig5PU0_3_ntuples2_MYSTREAM/*.root");
 
 
 	//! define a local vector<double> to store the reconstructed pt values
@@ -43,12 +47,12 @@ int eff_Vs_etaphipt_dR_barcode(const char* output_file_name = "eff_InDetTTTdR0.0
         std::vector<float> *Vy = 0;	
         std::vector<float> *Vz = 0;	
         std::vector<int>   *match_barcodeInDet = 0;
-        std::vector<int>   *match_barcodeTTT = 0;
-        std::vector<int>   *match_barcodeTTT_bc = 0;
+        std::vector<int>   *match_barcodeTTT   = 0;
+        std::vector<int>   *match_barcodeTTT_bc= 0;
         //std::vector<int>   *rtid = 0;
 
 	recTree.SetBranchStatus("*",            0);
-	recTree.SetBranchStatus("truthStatus",  1);
+	/*recTree.SetBranchStatus("truthStatus",  1);
 	recTree.SetBranchStatus("truthBarcode", 1);
 	recTree.SetBranchStatus("truthPdg",     1);
 	recTree.SetBranchStatus("truthPt", 	1);
@@ -56,12 +60,21 @@ int eff_Vs_etaphipt_dR_barcode(const char* output_file_name = "eff_InDetTTTdR0.0
 	recTree.SetBranchStatus("truthEta", 	1);
 	recTree.SetBranchStatus("truthVx", 	1);
 	recTree.SetBranchStatus("truthVy", 	1);
-	recTree.SetBranchStatus("truthVz", 	1);
-	recTree.SetBranchStatus("InDetTBarcode",1);
-	recTree.SetBranchStatus("TTTTBarcode",  1);
-	recTree.SetBranchStatus("mTTTTBarcode", 1);
+	recTree.SetBranchStatus("truthVz", 	1);*/
+	recTree.SetBranchStatus("TTTtruthStatus",  1);
+	recTree.SetBranchStatus("TTTtruthBarcode", 1);
+	recTree.SetBranchStatus("TTTtruthPdg",     1);
+	recTree.SetBranchStatus("TTTtruthPt", 	   1);
+	recTree.SetBranchStatus("TTTtruthPhi0",	   1);
+	recTree.SetBranchStatus("TTTtruthEta", 	   1);
+	recTree.SetBranchStatus("TTTtruthVx", 	   1);
+	recTree.SetBranchStatus("TTTtruthVy", 	   1);
+	recTree.SetBranchStatus("TTTtruthVz", 	   1);
+	recTree.SetBranchStatus("InDetTBarcode",   1);
+	recTree.SetBranchStatus("TTTTBarcode",     1);
+	recTree.SetBranchStatus("mTTTTBarcode",    1);
 	//recTree.SetBranchStatus("r_TTTtid",     1);
-	recTree.SetBranchAddress("truthStatus",  &tstatus);
+	/*recTree.SetBranchAddress("truthStatus",  &tstatus);
 	recTree.SetBranchAddress("truthBarcode", &barcode);
 	recTree.SetBranchAddress("truthPdg",     &pdg);
 	recTree.SetBranchAddress("truthPt", 	 &pt);
@@ -69,10 +82,19 @@ int eff_Vs_etaphipt_dR_barcode(const char* output_file_name = "eff_InDetTTTdR0.0
 	recTree.SetBranchAddress("truthEta", 	 &eta);
 	recTree.SetBranchAddress("truthVx", 	 &Vx);
 	recTree.SetBranchAddress("truthVy", 	 &Vy);
-	recTree.SetBranchAddress("truthVz", 	 &Vz);
-	recTree.SetBranchAddress("InDetTBarcode",&match_barcodeInDet);
-	recTree.SetBranchAddress("TTTTBarcode",  &match_barcodeTTT);
-	recTree.SetBranchAddress("mTTTTBarcode", &match_barcodeTTT_bc);
+	recTree.SetBranchAddress("truthVz", 	 &Vz);*/
+	recTree.SetBranchAddress("TTTtruthStatus",  &tstatus);
+	recTree.SetBranchAddress("TTTtruthBarcode", &barcode);
+	recTree.SetBranchAddress("TTTtruthPdg",     &pdg);
+	recTree.SetBranchAddress("TTTtruthPt", 	    &pt);
+	recTree.SetBranchAddress("TTTtruthPhi0",    &phi);
+	recTree.SetBranchAddress("TTTtruthEta",     &eta);
+	recTree.SetBranchAddress("TTTtruthVx", 	    &Vx);
+	recTree.SetBranchAddress("TTTtruthVy", 	    &Vy);
+	recTree.SetBranchAddress("TTTtruthVz", 	    &Vz);
+	recTree.SetBranchAddress("InDetTBarcode",   &match_barcodeInDet);
+	recTree.SetBranchAddress("TTTTBarcode",     &match_barcodeTTT);
+	recTree.SetBranchAddress("mTTTTBarcode",    &match_barcodeTTT_bc);
 	//recTree.SetBranchAddress("r_TTTtid",     &rtid);
 
 	int etabin = 13;
@@ -125,7 +147,7 @@ int eff_Vs_etaphipt_dR_barcode(const char* output_file_name = "eff_InDetTTTdR0.0
 	TH1* h_num_vs_ptPU = new TH1F("h_num_vs_ptPU", "Numerator Count vs P_{t};P_{t} [MeV/c];Numerator Count"    , ptbins, xbins);
 	TH1* h_den_vs_ptPU = new TH1F("h_den_vs_ptPU", "Denominator Count vs P_{t};P_{t} [MeV/c];Denominator Count", ptbins, xbins);
 
-
+	std::cout<<"total number of entries: " << recTree.GetEntries()<<std::endl;
 
 	//for(int i = 0; i < recTree.GetEntries(); ++i)
 	for(int i = 0; i < 10000; ++i)
@@ -147,7 +169,7 @@ int eff_Vs_etaphipt_dR_barcode(const char* output_file_name = "eff_InDetTTTdR0.0
 			if(barcode->at(i1) <= 0) 		continue;
 			//if(std::abs(pdg->at(i1)) != 321) 	continue;
 
-			//! loop over InDet tracks and the find the corresponding particle it was matched to
+			//! loop over InDet tracks and then find the corresponding particle it was matched to
 			for(int i2 = 0; i2 < match_barcodeInDet->size(); ++i2)
 			{
 				//! if a match is found fill truth variables both in numerator and denominator
@@ -180,16 +202,19 @@ int eff_Vs_etaphipt_dR_barcode(const char* output_file_name = "eff_InDetTTTdR0.0
 			//! loop over TTT tracks and the find the corresponding particle it was matched to (with barcode matching)
 			for(int i2 = 0; i2 < match_barcodeTTT_bc->size(); ++i2)
 			{
+				//std::cout<<"truth barcode: " << (*barcode)[i1] << ",  matched barcode: " << (*match_barcodeTTT_bc)[i2] <<std::endl;
 				//! if a match is found fill truth variables both in numerator and denominator
 				//! else fill truth variables only in the denominator
 				if((*match_barcodeTTT_bc)[i2] == (*barcode)[i1])
 				{
 					match_flagTTT_bc = true;
+					//std::cout<<"match track!"<<std::endl;
 					break;
 				}
 				else
 				{
 					match_flagTTT_bc = false;
+					//std::cout<<"fake track!"<<std::endl;
 				}
 			}
 			if(match_flagInDet)

@@ -12,8 +12,50 @@
 #include <fstream>
 #include <string>
 #include <math.h>
+#include "TAxis.h"
+#include "TH1.h"
+#include "TArrayD.h"
 //const char* out_path = "/eos/user/t/tkar/www/TTT/plots/resolution"; 
 const char* out_path = "./plots/reso_plots"; 
+void ScaleAxis(TAxis *a, Double_t Scale)
+{
+  if (!a) return; // just a precaution
+  if (a->GetXbins()->GetSize())
+    {
+      // an axis with variable bins
+      // note: bins must remain in increasing order, hence the "Scale"
+      // function must be strictly (monotonically) increasing
+      std::cout<<"variable bin\n";
+      TArrayD X(*(a->GetXbins()));
+      for(Int_t i = 0; i < X.GetSize(); i++) X[i] = X[i]*Scale;
+      a->Set((X.GetSize() - 1), X.GetArray()); // new Xbins
+    }
+  else
+    {
+      // an axis with fix bins
+      // note: we modify Xmin and Xmax only, hence the "Scale" function
+      // must be linear (and Xmax must remain greater than Xmin)
+      std::cout<<"fixed bin\n";
+      a->Set( a->GetNbins(),
+              (a->GetXmin())*Scale, // new Xmin
+              (a->GetXmax())*Scale ); // new Xmax
+    }
+  return;
+}
+
+void ScaleXaxis(TH1 *h, Double_t Scale)
+{
+  if (!h) return; // just a precaution
+  ScaleAxis(h->GetXaxis(), Scale);
+  return;
+}
+
+void ScaleYaxis(TH1 *h, Double_t Scale)
+{
+  if (!h) return; // just a precaution
+  ScaleAxis(h->GetYaxis(), Scale);
+  return;
+}
 int write_topdf(const char* output_file_name = "ResoVsPt_InDetTTTBMatched")
 {
 
@@ -42,6 +84,7 @@ int write_topdf(const char* output_file_name = "ResoVsPt_InDetTTTBMatched")
 	TH1D* h0_eta	= (TH1D*)f0->Get("h_sigma_eta");
 	TH1D* h0_z0	= (TH1D*)f0->Get("h_sigma_z0");
 //	TH1D* h0_dca	= (TH1D*)f0->Get("h_sigma_dca");
+
 
 
 	h_dp->SetStats(0);
@@ -219,26 +262,44 @@ int write_topdf(const char* output_file_name = "ResoVsPt_InDetTTTBMatched")
         h0_theta->GetXaxis()->SetTitleSize(.05);
         h0_eta->GetXaxis()->SetTitleSize(.05);
         h0_z0->GetXaxis()->SetTitleSize(.05);
-//        h0_dca->GetXaxis()->SetTitleSize(.05);
-	h_invpt->GetYaxis()->SetTitle("#sigma_{#Delta(1/p_{t})} [MeV/c]^{-1}");
-        h0_invpt->GetYaxis()->SetTitle("#sigma_{#Delta(1/p_{t})} [MeV/c]^{-1}");
+//        h0_dca->GetXaxis()->SetTitleSize(.05);	
+	h_invpt->GetYaxis()->SetTitle("#sigma_{#Delta(1/p_{t})} [GeV/c]^{-1}");
+        h0_invpt->GetYaxis()->SetTitle("#sigma_{#Delta(1/p_{t})} [GeV/c]^{-1}");
 	
-	h_dp->GetXaxis()->SetTitle("p_{t_gen} [MeV/c]");
-	h_invpt->GetXaxis()->SetTitle("p_{t_gen} [MeV/c]");
-	h_phi->GetXaxis()->SetTitle("p_{t_gen} [MeV/c]");
-	h_theta->GetXaxis()->SetTitle("p_{t_gen} [MeV/c]");
-	h_eta->GetXaxis()->SetTitle("p_{t_gen} [MeV/c]");
-	h_z0->GetXaxis()->SetTitle("p_{t_gen} [MeV/c]");
-//	h_dca->GetXaxis()->SetTitle("P_{t_gen} [MeV/c]");
+	h_dp->GetXaxis()->SetTitle("p_{t_gen} [GeV/c]");
+	h_invpt->GetXaxis()->SetTitle("p_{t_gen} [GeV/c]");
+	h_phi->GetXaxis()->SetTitle("p_{t_gen} [GeV/c]");
+	h_theta->GetXaxis()->SetTitle("p_{t_gen} [GeV/c]");
+	h_eta->GetXaxis()->SetTitle("p_{t_gen} [GeV/c]");
+	h_z0->GetXaxis()->SetTitle("p_{t_gen} [GeV/c]");
+//	h_dca->GetXaxis()->SetTitle("P_{t_gen} [GeV/c]");
 
-	h0_dp->GetXaxis()->SetTitle("p_{t_gen} [MeV/c]");
-        h0_invpt->GetXaxis()->SetTitle("p_{t_gen} [MeV/c]");
-        h0_phi->GetXaxis()->SetTitle("p_{t_gen} [MeV/c]");
-        h0_theta->GetXaxis()->SetTitle("p_{t_gen} [MeV/c]");
-        h0_eta->GetXaxis()->SetTitle("p_{t_gen} [MeV/c]");
-        h0_z0->GetXaxis()->SetTitle("p_{t_gen} [MeV/c]");
-//        h0_dca->GetXaxis()->SetTitle("P_{t_gen} [MeV/c]");
-	
+	h0_dp->GetXaxis()->SetTitle("p_{t_gen} [GeV/c]");
+        h0_invpt->GetXaxis()->SetTitle("p_{t_gen} [GeV/c]");
+        h0_phi->GetXaxis()->SetTitle("p_{t_gen} [GeV/c]");
+        h0_theta->GetXaxis()->SetTitle("p_{t_gen} [GeV/c]");
+        h0_eta->GetXaxis()->SetTitle("p_{t_gen} [GeV/c]");
+        h0_z0->GetXaxis()->SetTitle("p_{t_gen} [GeV/c]");
+//        h0_dca->GetXaxis()->SetTitle("P_{t_gen} [GeV/c]");
+
+	h_invpt->Scale(1.0e3);
+        h0_invpt->Scale(1.0e3);
+	h_invpt->GetYaxis()->SetRangeUser(0,8e-3);
+	h0_invpt->GetYaxis()->SetRangeUser(0,8e-3);
+	//ScaleYaxis(h_invpt,1.0e3);
+        //ScaleYaxis(h0_invpt,1.0e3);
+	ScaleXaxis(h_invpt,1.0e-3);
+        ScaleXaxis(h0_invpt,1.0e-3);
+	ScaleXaxis(h_dp,1e-3);
+	ScaleXaxis(h_phi,1e-3);
+	ScaleXaxis(h_theta,1e-3);
+	ScaleXaxis(h_eta,1e-3);
+	ScaleXaxis(h_z0,1e-3);
+	ScaleXaxis(h0_dp,1e-3);
+        ScaleXaxis(h0_phi,1e-3);
+        ScaleXaxis(h0_theta,1e-3);
+        ScaleXaxis(h0_eta,1e-3);
+        ScaleXaxis(h0_z0,1e-3);
 	
 	TCanvas * C = new TCanvas();
 	gStyle->SetOptStat(0);
@@ -293,17 +354,17 @@ int write_topdf(const char* output_file_name = "ResoVsPt_InDetTTTBMatched")
 	TLegend *leg1=new TLegend(x1,y1,x2,y2,"");
 	leg1->SetFillColor(kWhite);
 	leg1->SetBorderSize(0);
-        leg1->AddEntry(h_dp,"InDet tracks");
+        leg1->AddEntry(h_dp,"ITK tracks");
         leg1->AddEntry(h0_dp,"TTT tracks");
         leg1->Draw();
 	C->Print(out_file_,"pdf");
-	h_invpt->GetYaxis()->SetRangeUser(0,8e-6);
+	//h_invpt->GetYaxis()->SetRangeUser(0,8e-6);
 	h_invpt->Draw();
 	h0_invpt->Draw("same");
 	TLegend *leg2=new TLegend(x1,y1,x2,y2,"");
 	leg2->SetFillColor(kWhite);
 	leg2->SetBorderSize(0);
-	leg2->AddEntry(h_invpt,"InDet tracks");
+	leg2->AddEntry(h_invpt,"ITK tracks");
 	leg2->AddEntry(h0_invpt,"TTT tracks");
 	leg2->Draw();
 	C->Print(out_file_,"pdf");
@@ -314,7 +375,7 @@ int write_topdf(const char* output_file_name = "ResoVsPt_InDetTTTBMatched")
 	TLegend *leg3=new TLegend(x1,y1,x2,y2,"");
 	leg3->SetFillColor(kWhite);
 	leg3->SetBorderSize(0);
-        leg3->AddEntry(h_phi,"InDet tracks");
+        leg3->AddEntry(h_phi,"ITK tracks");
         leg3->AddEntry(h0_phi,"TTT tracks");
         leg3->Draw();
 	C->Print(out_file_,"pdf");
@@ -325,7 +386,7 @@ int write_topdf(const char* output_file_name = "ResoVsPt_InDetTTTBMatched")
 	TLegend *leg4=new TLegend(x1,y1,x2,y2,"");
 	leg4->SetFillColor(kWhite);
 	leg4->SetBorderSize(0);
-        leg4->AddEntry(h_theta,"InDet tracks");
+        leg4->AddEntry(h_theta,"ITK tracks");
         leg4->AddEntry(h0_theta,"TTT tracks");
         leg4->Draw();
 	C->Print(out_file_,"pdf");
@@ -336,7 +397,7 @@ int write_topdf(const char* output_file_name = "ResoVsPt_InDetTTTBMatched")
 	TLegend *leg5=new TLegend(x1,y1,x2,y2,"");
 	leg5->SetFillColor(kWhite);
 	leg5->SetBorderSize(0);
-        leg5->AddEntry(h_eta,"InDet tracks");
+        leg5->AddEntry(h_eta,"ITK tracks");
         leg5->AddEntry(h0_eta,"TTT tracks");
         leg5->Draw();
 	C->Print(out_file_,"pdf");
@@ -347,7 +408,7 @@ int write_topdf(const char* output_file_name = "ResoVsPt_InDetTTTBMatched")
 	TLegend *leg6=new TLegend(x1,y1,x2,y2,"");
 	leg6->SetFillColor(kWhite);
 	leg6->SetBorderSize(0);
-        leg6->AddEntry(h_z0,"InDet tracks");
+        leg6->AddEntry(h_z0,"ITK tracks");
         leg6->AddEntry(h0_z0,"TTT tracks");
         leg6->Draw();
 	C->Print(out_file_,"pdf");
@@ -356,7 +417,7 @@ int write_topdf(const char* output_file_name = "ResoVsPt_InDetTTTBMatched")
 	h_dca->Draw();
 	h0_dca->Draw("same");
 	TLegend *leg7=new TLegend(x1,y1,x2,y2,"");
-        leg7->AddEntry(h_dca,"InDet tracks");
+        leg7->AddEntry(h_dca,"ITK tracks");
         leg7->AddEntry(h0_dca,"TTT tracks");
         leg7->Draw();*/
 

@@ -32,13 +32,13 @@ inline T angle_sym(T a)
 const char* out_path = "./plots/efficiency"; 
 //////////////// efficiency for TTT tracks  barcode matched////////////////
 
-int newTTTefficiency_Vs_etaphipt(const char* output_file_name = "inEffinvest_TTTSiOnly_HptCentraleta", bool save = false)
+int newTTTefficiency_Vs_etaphipt(const char* output_file_name = "preveffmsig5_3TTTSiOnly_Eta1.2B", bool save = false)
 //int newTTTefficiency_Vs_etaphipt(const char* output_file_name = "inEffinvest_TTTSiOnlysig5L6B_HptCentraleta", bool save = false)
 //int newTTTefficiency_Vs_etaphipt(const char* output_file_name = "preveffRelaxedTTT_barcode2GeV1.4final", bool save = false)
 {
 //! Define Cut
-TCut num_select= "r_tid>0 && abs(Vz)<100 && abs(Vx)<2 && abs(Vy)<2 && abs(pt)>10000 && abs(eta)<1.0 ";
-TCut den_select= "r_tid>=0 && abs(Vz)<100 && abs(Vx)<2 && abs(Vy)<2 && abs(pt)>10000 && abs(eta)<1.0 ";
+TCut num_select= "r_tid>0 && abs(Vz)<100 && abs(Vx)<2 && abs(Vy)<2 && abs(pt)>2000 && abs(eta)<1.2";
+TCut den_select= "r_tid>=0 && abs(Vz)<100 && abs(Vx)<2 && abs(Vy)<2 && abs(pt)>2000 && abs(eta)<1.2";
 
 //TCut num_select= "r_tid>0 && abs(Vz)<100 && abs(Vx)<2 && abs(Vy)<2 && abs(pt)>2000 && abs(eta)<1.4 && abs(r_Dphi2)<1e-4 && abs(r_Dz2)<9e-2 && abs(r_Kappa_pull)<5";
 //TCut den_select= "r_tid>=0 && abs(Vz)<100 && abs(Vx)<2 && abs(Vy)<2 && abs(pt)>2000 && abs(eta)<1.4 && abs(r_Dphi2)<1e-4 && abs(r_Dz2)<9e-2 && abs(r_Kappa_pull)<5";
@@ -49,9 +49,10 @@ TCut den_select= "r_tid>=0 && abs(Vz)<100 && abs(Vx)<2 && abs(Vy)<2 && abs(pt)>1
         //! no constraint on the truth particles to have atleast made a hit in the outermost layer
 	//recTree.Add("/media/tamasi/DriveT/tamasi/Desktop/PHD/work/mere_plots/athena/Analysis/user.tkar.tkar309527.hh4bRootWide_3_MYSTREAM/*.root");
 	//! Final sets used : 
-//	recTree.Add("/media/tamasi/DriveT/tamasi/Desktop/PHD/work/mere_plots/athena/Analysis/dpg2019/user.tkar.hh4bsig5PU0_4_sig5L6B_1_TTTSiOnly.hh4b.root/*.root");
+	//recTree.Add("/media/tamasi/DriveT/tamasi/Desktop/PHD/work/mere_plots/athena/Analysis/dpg2019/user.tkar.hh4bsig5PU0_4_sig5L6B_1_TTTSiOnly.hh4b.root/*.root");
 	//! investigation set used : 
-	recTree.Add("/media/tamasi/DriveT/tamasi/Desktop/PHD/work/mere_plots/athena/Analysis/user.tkar.hh4bsig5PU0_4_TTTSiOnly.hh4b.root/*.root");
+//	recTree.Add("/media/tamasi/DriveT/tamasi/Desktop/PHD/work/mere_plots/athena/Analysis/user.tkar.hh4bsig5PU0_4_TTTSiOnly.hh4b.root/*.root");
+	recTree.Add("/media/tamasi/DriveT1/tamasi/Desktop/PHD/work/mere_plots/athena/Analysis/dpg2019/user.tkar.hh4b_m1000sig5PU0_3_TTTSiOnly.hh4b.root/*.root");
 	int num_events = 10000;
 	int etabin = 13;
     	double etamin   = -1.3, etamax = 1.3;
