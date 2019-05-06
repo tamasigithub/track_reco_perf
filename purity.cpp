@@ -15,21 +15,26 @@
 #include <math.h>
 const char* out_path = "./plots/purity"; 
 
-int InDetpurity_Vs_etaphipt(const char* output_file_name = "pur_InDetdR0.01_eta1.2", bool save = false)
+int InDetpurity_Vs_etaphipt(const char* output_file_name = "purm1000_3ntuple3InDetdR0.01_eta1.4", bool save = false)
 //int InDetpurity_Vs_etaphipt(const char* output_file_name = "newpurity_dR0.1", bool save = false)
 {
 //! Define Cut
 //TCut num_select= "InDetTBarcode > 0 && abs(InDetTPt)>2000 && abs(InDetTEta)<1.4 && abs(InDetpt)>2000 && abs(InDeteta)<1.4 && abs(InDetz0) < 100";
 //TCut num_select= "InDetTBarcode > 0 && abs(InDetpt)>2000 && abs(InDeteta)<1.4";
 //TCut den_select= "abs(InDetpt)>2000 && abs(InDeteta)<1.4 && abs(InDetz0)";
-TCut num_select= "InDetTBarcode > 0 && abs(InDetpt)>2000 && abs(InDeteta)<1.2 && abs(InDetz0) < 100";
-TCut den_select= "abs(InDetpt)>2000 && abs(InDeteta)<1.2 && abs(InDetz0) < 100 ";
+TCut num_select= "InDetTBarcode > 0 && abs(InDetpt)>2000 && abs(InDeteta)<1.4 && abs(InDetz0) < 100 ";
+TCut den_select= "abs(InDetpt)>2000 && abs(InDeteta)<1.4 && abs(InDetz0) < 100 ";
+TCut num1_select= "InDetTTTtruthBarcode > 0 && abs(InDetpt)>2000 && abs(InDeteta)<1.4 && abs(InDetz0) < 100 ";
 	
 	TChain recTree("m_collectionTree");
         //recTree.Add("/media/tamasi/DriveT/tamasi/Desktop/PHD/work/mere_plots/athena/Analysis/user.tkar.hh4bsig5PU0_3_ntuples1_MYSTREAM/*.root");
 	//dR=0.01
         //recTree.Add("/media/tamasi/DriveT/tamasi/Desktop/PHD/work/mere_plots/athena/Analysis/user.tkar.hh4bsig5PU0_3_ntuples2_MYSTREAM/*.root");
-        recTree.Add("/media/tamasi/DriveT/tamasi/Desktop/PHD/work/mere_plots/athena/Analysis/dpg2019/user.tkar.hh4bsig5PU0_4_ntuples2_MYSTREAM/*.root");
+        //recTree.Add("/media/tamasi/DriveT/tamasi/Desktop/PHD/work/mere_plots/athena/Analysis/dpg2019/user.tkar.hh4bsig5PU0_4_ntuples2_MYSTREAM/*.root");
+	//! for the fair comparison (truth container contains only those particles that leave a hit in the outermost layer of the triplet)
+	//recTree.Add("/media/tamasi/DriveT1/tamasi/Desktop/PHD/work/mere_plots/athena/Analysis/dpg2019/user.tkar.hh4b_m1000sig5PU0_3_ntuples1_MYSTREAM/*.root");
+	//recTree.Add("/media/tamasi/DriveT1/tamasi/Desktop/PHD/work/mere_plots/athena/Analysis/dpg2019/user.tkar.hh4b_m1000sig5PU0_3_ntuples2_MYSTREAM/*.root");
+	recTree.Add("/media/tamasi/DriveT1/tamasi/Desktop/PHD/work/mere_plots/athena/Analysis/dpg2019/user.tkar.hh4b_m1000sig5PU0_3_ntuples3_MYSTREAM/*.root");
 
 	int etabin = 13;
     	double etamin   = -1.3, etamax = 1.3;
@@ -65,6 +70,8 @@ TCut den_select= "abs(InDetpt)>2000 && abs(InDeteta)<1.2 && abs(InDetz0) < 100 "
 
 	recTree.Draw("InDeteta>>h_num_vs_etaPU",   num_select, "goff"/*, num_events*/);
         recTree.Draw("InDeteta>>h_den_vs_etaPU",   den_select, "goff"/*, num_events*/);
+	//recTree.Draw("InDetTEta>>h_num_vs_etaPU",   num_select, "goff"/*, num_events*/);
+        //recTree.Draw("InDetTEta>>h_den_vs_etaPU",   den_select, "goff"/*, num_events*/);
 	h_num_vs_etaPU->Draw("e1");
 	h_den_vs_etaPU->Draw("e1");
 	TH1* h_pur_vs_etaPU = dynamic_cast<TH1*>(h_num_vs_etaPU->Clone("h_pur_vs_etaPU"));
@@ -72,11 +79,13 @@ TCut den_select= "abs(InDetpt)>2000 && abs(InDeteta)<1.2 && abs(InDetz0) < 100 "
         h_pur_vs_etaPU->Divide(h_num_vs_etaPU, h_den_vs_etaPU, 1.0, 1.0, "B");
         h_pur_vs_etaPU->GetYaxis()->SetRangeUser(0.1, 1.1);
         h_pur_vs_etaPU->SetMarkerSize(0.95);
-        h_pur_vs_etaPU->SetMarkerStyle(kOpenTriangleDown);
+        h_pur_vs_etaPU->SetMarkerStyle(kFullTriangleDown);
         h_pur_vs_etaPU->SetMarkerColor(kBlack);
 
 	recTree.Draw("InDetphi0>>h_num_vs_phiPU",   num_select, "goff"/*, num_events*/);
         recTree.Draw("InDetphi0>>h_den_vs_phiPU",   den_select, "goff"/*, num_events*/);
+//	recTree.Draw("InDetTPhi0>>h_num_vs_phiPU",   num_select, "goff"/*, num_events*/);
+//      recTree.Draw("InDetTPhi0>>h_den_vs_phiPU",   den_select, "goff"/*, num_events*/);
 	h_num_vs_phiPU->Draw("e1");
 	h_den_vs_phiPU->Draw("e1");
 	TH1* h_pur_vs_phiPU = dynamic_cast<TH1*>(h_num_vs_phiPU->Clone("h_pur_vs_phiPU"));
@@ -84,11 +93,13 @@ TCut den_select= "abs(InDetpt)>2000 && abs(InDeteta)<1.2 && abs(InDetz0) < 100 "
         h_pur_vs_phiPU->Divide(h_num_vs_phiPU, h_den_vs_phiPU, 1.0, 1.0, "B");
         h_pur_vs_phiPU->GetYaxis()->SetRangeUser(0.1, 1.1);
         h_pur_vs_phiPU->SetMarkerSize(0.95);
-        h_pur_vs_phiPU->SetMarkerStyle(kOpenTriangleDown);
+        h_pur_vs_phiPU->SetMarkerStyle(kFullTriangleDown);
         h_pur_vs_phiPU->SetMarkerColor(kBlack);
 
 	recTree.Draw("InDetpt>>h_num_vs_ptPU",   num_select, "goff"/*, num_events*/);
 	recTree.Draw("InDetpt>>h_den_vs_ptPU",   den_select, "goff"/*, num_events*/);
+	//recTree.Draw("InDetTPt>>h_num_vs_ptPU",   num_select, "goff"/*, num_events*/);
+	//recTree.Draw("InDetTPt>>h_den_vs_ptPU",   den_select, "goff"/*, num_events*/);
 	h_num_vs_ptPU->Draw("e1");
 	h_den_vs_ptPU->Draw("e1");
 	TH1* h_pur_vs_ptPU = dynamic_cast<TH1*>(h_num_vs_ptPU->Clone("h_pur_vs_ptPU"));
@@ -97,17 +108,75 @@ TCut den_select= "abs(InDetpt)>2000 && abs(InDeteta)<1.2 && abs(InDetz0) < 100 "
 	h_pur_vs_ptPU->GetYaxis()->SetRangeUser(0.1, 1.1);
 	h_pur_vs_ptPU->GetXaxis()->SetRangeUser(2000.,106000.);
 	h_pur_vs_ptPU->SetMarkerSize(0.95);
-	h_pur_vs_ptPU->SetMarkerStyle(kOpenTriangleDown);
+	h_pur_vs_ptPU->SetMarkerStyle(kFullTriangleDown);
 	h_pur_vs_ptPU->SetMarkerColor(kBlack);	
+	
+	//! TTT truth matched	
+	TH1* h_num1_vs_etaPU = new TH1F("h_num1_vs_etaPU", "Numerator Count vs #eta;#eta;Numerator Count"    , etabin, etamin, etamax);
+        TH1* h_den1_vs_etaPU = new TH1F("h_den1_vs_etaPU", "Denominator Count vs #eta;#eta;Denominator Count", etabin, etamin, etamax);
+	
+	TH1* h_num1_vs_phiPU = new TH1F("h_num1_vs_phiPU", "Numerator Count vs #eta;#phi [rad];Numerator Count"    , phibin, phimin, phimax);
+        TH1* h_den1_vs_phiPU = new TH1F("h_den1_vs_phiPU", "Denominator Count vs #eta;#phi [rad];Denominator Count", phibin, phimin, phimax);
+
+	TH1* h_num1_vs_ptPU = new TH1F("h_num1_vs_ptPU", "Numerator Count vs P_{t};P_{t} [MeV/c];Numerator Count"    , ptbins, xbins);
+	TH1* h_den1_vs_ptPU = new TH1F("h_den1_vs_ptPU", "Denominator Count vs P_{t};P_{t} [MeV/c];Denominator Count", ptbins, xbins);
+
+
+	recTree.Draw("InDeteta>>h_num1_vs_etaPU",   num1_select, "goff"/*, num1_events*/);
+        recTree.Draw("InDeteta>>h_den1_vs_etaPU",   den_select, "goff"/*, num1_events*/);
+	//recTree.Draw("InDetTEta>>h_num1_vs_etaPU",   num1_select, "goff"/*, num1_events*/);
+        //recTree.Draw("InDetTEta>>h_den1_vs_etaPU",   den1_select, "goff"/*, num1_events*/);
+	h_num1_vs_etaPU->Draw("e1");
+	h_den1_vs_etaPU->Draw("e1");
+	TH1* h_pur1_vs_etaPU = dynamic_cast<TH1*>(h_num1_vs_etaPU->Clone("h_pur1_vs_etaPU"));
+        h_pur1_vs_etaPU->SetTitle("Purity vs #eta;#eta;Purity");
+        h_pur1_vs_etaPU->Divide(h_num1_vs_etaPU, h_den1_vs_etaPU, 1.0, 1.0, "B");
+        h_pur1_vs_etaPU->GetYaxis()->SetRangeUser(0.1, 1.1);
+        h_pur1_vs_etaPU->SetMarkerSize(0.95);
+        h_pur1_vs_etaPU->SetMarkerStyle(kOpenTriangleDown);
+        h_pur1_vs_etaPU->SetMarkerColor(kBlack);
+
+	recTree.Draw("InDetphi0>>h_num1_vs_phiPU",   num1_select, "goff"/*, num1_events*/);
+        recTree.Draw("InDetphi0>>h_den1_vs_phiPU",   den_select, "goff"/*, num1_events*/);
+//	recTree.Draw("InDetTPhi0>>h_num1_vs_phiPU",   num1_select, "goff"/*, num1_events*/);
+//      recTree.Draw("InDetTPhi0>>h_den1_vs_phiPU",   den1_select, "goff"/*, num1_events*/);
+	h_num1_vs_phiPU->Draw("e1");
+	h_den1_vs_phiPU->Draw("e1");
+	TH1* h_pur1_vs_phiPU = dynamic_cast<TH1*>(h_num1_vs_phiPU->Clone("h_pur1_vs_phiPU"));
+        h_pur1_vs_phiPU->SetTitle("Purity vs #phi;#phi [rad];Purity");
+        h_pur1_vs_phiPU->Divide(h_num1_vs_phiPU, h_den1_vs_phiPU, 1.0, 1.0, "B");
+        h_pur1_vs_phiPU->GetYaxis()->SetRangeUser(0.1, 1.1);
+        h_pur1_vs_phiPU->SetMarkerSize(0.95);
+        h_pur1_vs_phiPU->SetMarkerStyle(kOpenTriangleDown);
+        h_pur1_vs_phiPU->SetMarkerColor(kBlack);
+
+	recTree.Draw("InDetpt>>h_num1_vs_ptPU",   num1_select, "goff"/*, num1_events*/);
+	recTree.Draw("InDetpt>>h_den1_vs_ptPU",   den_select, "goff"/*, num1_events*/);
+	//recTree.Draw("InDetTPt>>h_num1_vs_ptPU",   num1_select, "goff"/*, num1_events*/);
+	//recTree.Draw("InDetTPt>>h_den1_vs_ptPU",   den1_select, "goff"/*, num1_events*/);
+	h_num1_vs_ptPU->Draw("e1");
+	h_den1_vs_ptPU->Draw("e1");
+	TH1* h_pur1_vs_ptPU = dynamic_cast<TH1*>(h_num1_vs_ptPU->Clone("h_pur1_vs_ptPU"));
+	h_pur1_vs_ptPU->SetTitle("Purity vs P_{t};P_{t} [MeV/c];Purity");
+	h_pur1_vs_ptPU->Divide(h_num1_vs_ptPU, h_den1_vs_ptPU, 1.0, 1.0, "B");
+	h_pur1_vs_ptPU->GetYaxis()->SetRangeUser(0.1, 1.1);
+	h_pur1_vs_ptPU->GetXaxis()->SetRangeUser(2000.,106000.);
+	h_pur1_vs_ptPU->SetMarkerSize(0.95);
+	h_pur1_vs_ptPU->SetMarkerStyle(kOpenTriangleDown);
+	h_pur1_vs_ptPU->SetMarkerColor(kBlack);	
 	
 	TCanvas* c1 = new TCanvas();	
 	h_pur_vs_etaPU->Draw("e1");
+	h_pur1_vs_etaPU->Draw("e1");
 
 	TCanvas* c2 = new TCanvas();	
 	h_pur_vs_phiPU->Draw("e1");
+	h_pur1_vs_phiPU->Draw("e1");
 	
 	TCanvas* c3 = new TCanvas();	
 	h_pur_vs_ptPU->Draw("e1");
+	h_pur1_vs_ptPU->Draw("e1");
+	
 	char out_file_root[1023];
         sprintf(out_file_root,"%s/%s.root",out_path,output_file_name);
         TFile* output_file = new TFile(out_file_root, "RECREATE");
@@ -121,25 +190,38 @@ TCut den_select= "abs(InDetpt)>2000 && abs(InDeteta)<1.2 && abs(InDetz0) < 100 "
 	h_pur_vs_etaPU->Write();
 	h_pur_vs_phiPU->Write();
 	h_pur_vs_ptPU->Write();
+	//! TTT truth matched
+	h_num1_vs_etaPU->Write();
+	h_num1_vs_phiPU->Write();
+	h_num1_vs_ptPU->Write();
+	h_den1_vs_etaPU->Write();
+	h_den1_vs_phiPU->Write();
+	h_den1_vs_ptPU->Write();
+	h_pur1_vs_etaPU->Write();
+	h_pur1_vs_phiPU->Write();
+	h_pur1_vs_ptPU->Write();
 
 	output_file->Close();
 }
 
 //////////////// Purity for TTT tracks /////////////////
 
-int TTTpurity_Vs_etaphipt(const char* output_file_name = "pur_TTTdR0.01_eta1.4", bool save = false)
+int TTTpurity_Vs_etaphipt(const char* output_file_name = "purm1000_3ntuple1_TTTdR0.01_eta1.2", bool save = false)
 {
 //! Define Cut
 //TCut num_select= "TTTTBarcode > 0 && abs(TTTTPt)>2000 && abs(TTTTEta)<1.4 && abs(TTTpt)>2000 && abs(TTTeta)<1.4  && abs(TTTz0) < 100";
 //TCut num_select= "TTTTBarcode > 0 && abs(TTTpt)>2000 && abs(TTTeta)<1.4";
 //TCut den_select= "abs(TTTpt)>2000 && abs(TTTeta)<1.4";
-TCut num_select= "TTTTBarcode > 0 && abs(TTTpt)>2000 && abs(TTTeta)<1.4  && abs(TTTz0) < 100";
-TCut den_select= "abs(TTTpt)>2000 && abs(TTTeta)<1.4 && abs(TTTz0) < 100";
+TCut num_select= "TTTTBarcode > 0 && abs(TTTpt)>2000 && abs(TTTeta)<1.2  && abs(TTTz0) < 100";
+TCut den_select= "abs(TTTpt)>2000 && abs(TTTeta)<1.2 && abs(TTTz0) < 100";
 
 	TChain recTree("m_collectionTree");
         //recTree.Add("/media/tamasi/DriveT/tamasi/Desktop/PHD/work/mere_plots/athena/Analysis/user.tkar.hh4bsig5PU0_3_ntuples1_MYSTREAM/*.root");
 	// dR=0.01
-        recTree.Add("/media/tamasi/DriveT/tamasi/Desktop/PHD/work/mere_plots/athena/Analysis/user.tkar.hh4bsig5PU0_3_ntuples2_MYSTREAM/*.root");
+        //recTree.Add("/media/tamasi/DriveT/tamasi/Desktop/PHD/work/mere_plots/athena/Analysis/user.tkar.hh4bsig5PU0_3_ntuples2_MYSTREAM/*.root");
+        //recTree.Add("/media/tamasi/DriveT/tamasi/Desktop/PHD/work/mere_plots/athena/Analysis/dpg2019/user.tkar.hh4bsig5PU0_4_ntuples2_MYSTREAM/*.root");
+	//! for the fair comparison (truth container contains only those particles that leave a hit in the outermost layer of the triplet)
+	recTree.Add("/media/tamasi/DriveT1/tamasi/Desktop/PHD/work/mere_plots/athena/Analysis/dpg2019/user.tkar.hh4b_m1000sig5PU0_3_ntuples1_MYSTREAM/*.root");
 
 	int etabin = 13;
     	double etamin   = -1.3, etamax = 1.3;
@@ -175,6 +257,8 @@ TCut den_select= "abs(TTTpt)>2000 && abs(TTTeta)<1.4 && abs(TTTz0) < 100";
 
 	recTree.Draw("TTTeta>>h_num_vs_etaPU",   num_select, "goff"/*, num_events*/);
         recTree.Draw("TTTeta>>h_den_vs_etaPU",   den_select, "goff"/*, num_events*/);
+	//recTree.Draw("TTTTEta>>h_num_vs_etaPU",   num_select, "goff"/*, num_events*/);
+        //recTree.Draw("TTTTEta>>h_den_vs_etaPU",   den_select, "goff"/*, num_events*/);
 	h_num_vs_etaPU->Draw("e1");
 	h_den_vs_etaPU->Draw("e1");
 	TH1* h_pur_vs_etaPU = dynamic_cast<TH1*>(h_num_vs_etaPU->Clone("h_pur_vs_etaPU"));
@@ -187,6 +271,8 @@ TCut den_select= "abs(TTTpt)>2000 && abs(TTTeta)<1.4 && abs(TTTz0) < 100";
 
 	recTree.Draw("TTTphi0>>h_num_vs_phiPU",   num_select, "goff"/*, num_events*/);
         recTree.Draw("TTTphi0>>h_den_vs_phiPU",   den_select, "goff"/*, num_events*/);
+	//recTree.Draw("TTTTPhi0>>h_num_vs_phiPU",   num_select, "goff"/*, num_events*/);
+        //recTree.Draw("TTTTPhi0>>h_den_vs_phiPU",   den_select, "goff"/*, num_events*/);
 	h_num_vs_phiPU->Draw("e1");
 	h_den_vs_phiPU->Draw("e1");
 	TH1* h_pur_vs_phiPU = dynamic_cast<TH1*>(h_num_vs_phiPU->Clone("h_pur_vs_phiPU"));
@@ -199,6 +285,8 @@ TCut den_select= "abs(TTTpt)>2000 && abs(TTTeta)<1.4 && abs(TTTz0) < 100";
 
 	recTree.Draw("TTTpt>>h_num_vs_ptPU",   num_select, "goff"/*, num_events*/);
 	recTree.Draw("TTTpt>>h_den_vs_ptPU",   den_select, "goff"/*, num_events*/);
+//	recTree.Draw("TTTTPt>>h_num_vs_ptPU",   num_select, "goff"/*, num_events*/);
+//	recTree.Draw("TTTTPt>>h_den_vs_ptPU",   den_select, "goff"/*, num_events*/);
 	h_num_vs_ptPU->Draw("e1");
 	h_den_vs_ptPU->Draw("e1");
 	TH1* h_pur_vs_ptPU = dynamic_cast<TH1*>(h_num_vs_ptPU->Clone("h_pur_vs_ptPU"));
@@ -234,7 +322,7 @@ TCut den_select= "abs(TTTpt)>2000 && abs(TTTeta)<1.4 && abs(TTTz0) < 100";
 
 //////////////// Purity for TTT tracks /////////////////
 
-int newTTTpurity_Vs_etaphipt(const char* output_file_name = "pur_TTTBMatched_eta1.2", bool save = false)
+int newTTTpurity_Vs_etaphipt(const char* output_file_name = "purm1000_3ntuple1_TTTBMatched_eta1.2", bool save = false)
 {
 //! Define Cut
 //TCut num_select= "mTTTTBarcode > 0 && abs(mTTTTPt)>2000 && abs(mTTTTEta)<1.4 && abs(TTTpt)>2000 && abs(TTTeta)<1.4  && abs(TTTz0) < 100";
@@ -243,7 +331,9 @@ TCut den_select= "mTTTTBarcode >= 0 && abs(TTTpt)>2000 && abs(TTTeta)<1.2 && abs
 
 	TChain recTree("m_collectionTree");
         //recTree.Add("/media/tamasi/DriveT/tamasi/Desktop/PHD/work/mere_plots/athena/Analysis/user.tkar.hh4bsig5PU0_3_ntuples2_MYSTREAM/*.root");
-        recTree.Add("/media/tamasi/DriveT/tamasi/Desktop/PHD/work/mere_plots/athena/Analysis/dpg2019/user.tkar.hh4bsig5PU0_4_ntuples2_MYSTREAM/*.root");
+        //recTree.Add("/media/tamasi/DriveT/tamasi/Desktop/PHD/work/mere_plots/athena/Analysis/dpg2019/user.tkar.hh4bsig5PU0_4_ntuples2_MYSTREAM/*.root");
+	//! for the fair comparison (truth container contains only those particles that leave a hit in the outermost layer of the triplet)
+	recTree.Add("/media/tamasi/DriveT1/tamasi/Desktop/PHD/work/mere_plots/athena/Analysis/dpg2019/user.tkar.hh4b_m1000sig5PU0_3_ntuples1_MYSTREAM/*.root");
 
 	int etabin = 13;
     	double etamin   = -1.3, etamax = 1.3;
