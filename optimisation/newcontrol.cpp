@@ -22,10 +22,10 @@
 //FCC setup 
 // 20mm
 // hit_c:5e-09
-// MS_c:0.00642222
+// MS_c:0.00481667
 // 30mm
-//hit_c:9.87654e-10
-//MS_c:0.00285432
+// hit_c:9.87654e-10
+// MS_c:0.00214074
 // 40mm
 // hit_c:3.125e-10
 // MS_c:0.00160556
@@ -36,38 +36,39 @@
 //hit_c:7.8125e-09
 //MS_c:0.0192667
 
-//const char* out_path = "/media/tamasi/DriveT1/tamasi/Desktop/PHD/work/rec_data/Mar102k19/minBias/plots/optimisation";
-const char* out_path = "/media/tamasi/DriveT1/tamasi/Desktop/PHD/talks_preps/ctd2k19/plots/optimisation";
+const char* out_path = "./plots/optimisation";
 //! DEFINE CUTS for numerator and denominator
-//! 20mm
-/*TCut num_select    = "Tid>0  && Pt_n > 2000  && abs(Z013) < 100 && abs(Eta13) < 1.6 && abs(Phi13)<0.014 && abs(Z13)<120";
-TCut den_select    = "Tid>-2 && Pt_n > 2000  && abs(Z013) < 100 && abs(Eta13) < 1.6 && abs(Phi13)<0.014 && abs(Z13)<120";
-//! 
-TCut phiBarrel	= "abs(Phi13)< 0.014";
-TCut zBarrel	= "abs(Z13)<120";
-TCut maxdphi2	= "abs(dphi2)<1.0e-4";
-TCut maxdz2	= "abs(dz2)<0.17*(sin(Theta13)^(-1.1))";
-const float dz2_exp   = -1.1;
-const float dz2_const = 0.17;
-//! 
-TCut kapcut_l =  "abs(kappa-kap013)/sqrt(5e-9 + 0.00642222 * (1/sin(Theta13)) * kap013^2 ) < 5 ";
-TCut kapcut   =  "abs(kappa-kap013)/sqrt(5e-9 + 0.00642222 * (1/sin(Theta13)) * kap013^2 ) < 4 ";
-TCut kapcut_t =  "abs(kappa-kap013)/sqrt(5e-9 + 0.00642222 * (1/sin(Theta13)) * kap013^2 ) < 3 ";
-*/
+////! 20mm
+//TCut num_select    = "Tid>0  && Pt_n > 2000  && abs(Z013) < 100 && abs(Eta13) < 1.6 && abs(Phi13)<0.015 && abs(Z13)<120";
+//TCut den_select    = "Tid>-2 && Pt_n > 2000  && abs(Z013) < 100 && abs(Eta13) < 1.6 && abs(Phi13)<0.015 && abs(Z13)<120";
+////! 
+//TCut phiBarrel	= "abs(Phi13)< 0.015";
+//TCut zBarrel	= "abs(Z13)<120";
+//TCut maxdphi2	= "abs(dphi2)<1.1e-4";
+//TCut maxdz2	= "abs(dz2)<0.15*(sin(Theta13)^(-0.9))";
+//const float dz2_exp   = -0.9;
+//const float dz2_const = 0.15;
+////! 
+//TCut kapcut_l =  "abs(kappa-kap013)/sqrt(5e-9 + 0.00481667 * (1/sin(Theta13)) * kap013^2 ) < 5 ";
+//TCut kapcut   =  "abs(kappa-kap013)/sqrt(5e-9 + 0.00481667 * (1/sin(Theta13)) * kap013^2 ) < 4 ";
+//TCut kapcut_t =  "abs(kappa-kap013)/sqrt(5e-9 + 0.00481667 * (1/sin(Theta13)) * kap013^2 ) < 3 ";
+
+
 //! 30mm
-/*TCut num_select    = "Tid>0  && Pt_n > 2000  && abs(Z013) < 100 && abs(Eta13) < 1.6 && abs(Phi13)<0.02 && abs(Z13)<160";
+TCut num_select    = "Tid>0  && Pt_n > 2000  && abs(Z013) < 100 && abs(Eta13) < 1.6 && abs(Phi13)<0.02 && abs(Z13)<160";
 TCut den_select    = "Tid>-2 && Pt_n > 2000  && abs(Z013) < 100 && abs(Eta13) < 1.6 && abs(Phi13)<0.02 && abs(Z13)<160";
 //! 
 TCut phiBarrel	= "abs(Phi13)< 0.02";
 TCut zBarrel	= "abs(Z13)<160";
-TCut maxdphi2	= "abs(dphi2)<1.6e-4";
-TCut maxdz2	= "abs(dz2)<0.17*(sin(Theta13)^(-1.25))";
-const float dz2_exp   = -1.25;
-const float dz2_const = 0.17;
+TCut maxdphi2	= "abs(dphi2)<1.4e-4";
+TCut maxdz2	= "abs(dz2)<0.13*(sin(Theta13)^(-1.15))";
+const float dz2_exp   = -1.15;
+const float dz2_const = 0.13;
 //! 
-TCut kapcut_l =  "abs(kappa-kap013)/sqrt(9.87654e-10 + 0.00285432 * (1/sin(Theta13)) * kap013^2 ) < 5 ";
-TCut kapcut   =  "abs(kappa-kap013)/sqrt(9.87654e-10 + 0.00285432 * (1/sin(Theta13)) * kap013^2 ) < 4 ";
-TCut kapcut_t =  "abs(kappa-kap013)/sqrt(9.87654e-10 + 0.00285432 * (1/sin(Theta13)) * kap013^2 ) < 3 ";*/
+TCut kapcut_l =  "abs(kappa-kap013)/sqrt(9.87654e-10 + 0.00214074 * (1/sin(Theta13)) * kap013^2 ) < 5 ";
+TCut kapcut   =  "abs(kappa-kap013)/sqrt(9.87654e-10 + 0.00214074 * (1/sin(Theta13)) * kap013^2 ) < 4 ";
+TCut kapcut_t =  "abs(kappa-kap013)/sqrt(9.87654e-10 + 0.00214074 * (1/sin(Theta13)) * kap013^2 ) < 3 ";
+
 //! 40mm
 /*TCut num_select    = "Tid>0  && Pt_n > 2000  && abs(Z013) < 100 && abs(Eta13) < 1.6 && abs(Phi13)<0.026 && abs(Z13)<210";
 TCut den_select    = "Tid>-2 && Pt_n > 2000  && abs(Z013) < 100 && abs(Eta13) < 1.6 && abs(Phi13)<0.026 && abs(Z13)<210";
@@ -82,20 +83,21 @@ const float dz2_const = 0.17;
 TCut kapcut_l =  "abs(kappa-kap013)/sqrt(3.125e-10 + 0.00160556 * (1/sin(Theta13)) * kap013^2 ) < 5 ";
 TCut kapcut   =  "abs(kappa-kap013)/sqrt(3.125e-10 + 0.00160556 * (1/sin(Theta13)) * kap013^2 ) < 4 ";
 TCut kapcut_t =  "abs(kappa-kap013)/sqrt(3.125e-10 + 0.00160556 * (1/sin(Theta13)) * kap013^2 ) < 3 ";*/
-//! 50mm
-TCut num_select    = "Tid>0  && Pt_n > 2000  && abs(Z013) < 100 && abs(Eta13) < 1.6 && abs(Phi13)<0.032 && abs(Z13)<260";
-TCut den_select    = "Tid>-2 && Pt_n > 2000  && abs(Z013) < 100 && abs(Eta13) < 1.6 && abs(Phi13)<0.032 && abs(Z13)<260";
-//! 
-TCut phiBarrel	= "abs(Phi13)< 0.032";
-TCut zBarrel	= "abs(Z13)< 260";
-TCut maxdphi2	= "abs(dphi2)<2.2e-4";
-TCut maxdz2	= "abs(dz2)<0.17*(sin(Theta13)^(-1.5))";
-const float dz2_exp   = -1.5;
-const float dz2_const = 0.17;
-//! 
-TCut kapcut_l =  "abs(kappa-kap013)/sqrt(1.28e-10 + 0.00102756 * (1/sin(Theta13)) * kap013^2 ) < 5 ";
-TCut kapcut   =  "abs(kappa-kap013)/sqrt(1.28e-10 + 0.00102756 * (1/sin(Theta13)) * kap013^2 ) < 4 ";
-TCut kapcut_t =  "abs(kappa-kap013)/sqrt(1.28e-10 + 0.00102756 * (1/sin(Theta13)) * kap013^2 ) < 3 ";
+
+////! 50mm
+//TCut num_select    = "Tid>0  && Pt_n > 2000  && abs(Z013) < 100 && abs(Eta13) < 1.6 && abs(Phi13)<0.032 && abs(Z13)<260";
+//TCut den_select    = "Tid>-2 && Pt_n > 2000  && abs(Z013) < 100 && abs(Eta13) < 1.6 && abs(Phi13)<0.032 && abs(Z13)<260";
+////! 
+//TCut phiBarrel	= "abs(Phi13)< 0.032";
+//TCut zBarrel	= "abs(Z13)< 260";
+//TCut maxdphi2	= "abs(dphi2)<2.2e-4";
+//TCut maxdz2	= "abs(dz2)<0.17*(sin(Theta13)^(-1.5))";
+//const float dz2_exp   = -1.5;
+//const float dz2_const = 0.17;
+////! 
+//TCut kapcut_l =  "abs(kappa-kap013)/sqrt(1.28e-10 + 0.00102756 * (1/sin(Theta13)) * kap013^2 ) < 5 ";
+//TCut kapcut   =  "abs(kappa-kap013)/sqrt(1.28e-10 + 0.00102756 * (1/sin(Theta13)) * kap013^2 ) < 4 ";
+//TCut kapcut_t =  "abs(kappa-kap013)/sqrt(1.28e-10 + 0.00102756 * (1/sin(Theta13)) * kap013^2 ) < 3 ";
 
 
 TCut matched	= "Tid>0";
@@ -112,8 +114,8 @@ TCut z0truthmax	= "abs(M_Vz)<100";//! depends on the luminous region along z
 TCut z0recmax	= "abs(Z013)<100";
 void newcontrol
 (
-	const char* output_file_name = "control_hh4b_PU1000_2_50mm",//f-few
-	//const char* output_file_name = "control_hh4b_final2",//f-few
+	const char* output_file_name = "control_MB_30mm_samelad",//f-few
+	//const char* output_file_name = "control_hh4b_final3",//f-few
 	const char* set = "C",
 	const bool verbose = true
 )
@@ -132,30 +134,30 @@ void newcontrol
 	fdz2_->SetParameter(1,dz2_exp);
 	fdz2_->SetLineColor(kBlack);
 	//! 20mm
-	//rec.Add("/media/tamasi/DriveT1/tamasi/Desktop/PHD/talks_preps/ctd2k19/data_files/hh4b/pileup_samples/rec-files/PU200*rec__002*_.root");
+	//rec.Add("/home/tamasi/repo_tamasi/rec_files/PU0hh4b_m260_recTree_200001_wide.root");
 	//! 30mm
-	//rec.Add("/media/tamasi/DriveT1/tamasi/Desktop/PHD/talks_preps/ctd2k19/data_files/hh4b/pileup_samples/rec-files/PU200*rec__003*_.root");
+	rec.Add("/home/tamasi/repo_tamasi/rec_files/MB_recTree_30000*_samelad.root");
 	//! 40mm
-	//rec.Add("/media/tamasi/DriveT1/tamasi/Desktop/PHD/talks_preps/ctd2k19/data_files/hh4b/pileup_samples/rec-files/PU200*rec__004*_.root");
+	//rec.Add("/home/tamasi/repo_tamasi/rec_files/PU200*rec__004*_.root");
 	//! 50mm
-	//rec.Add("/media/tamasi/DriveT1/tamasi/Desktop/PHD/talks_preps/ctd2k19/data_files/hh4b/pileup_samples/rec-files/PU200hh4b_rec__005*_.root");
+	//rec.Add("/home/tamasi/repo_tamasi/rec_files/PU200hh4b_rec__005*_.root");
 
 	//PU1000
 	//! 20mm
-	//rec.Add("/media/tamasi/DriveT1/tamasi/Desktop/PHD/talks_preps/ctd2k19/data_files/hh4b/pileup_samples/rec-files/PU1000hh4b_recOPTsig5_002*.root");
+	//rec.Add("/home/tamasi/repo_tamasi/rec_files/PU1000hh4b_recOPTsig5_002*.root");
 	//! 30mm
-	//rec.Add("/media/tamasi/DriveT1/tamasi/Desktop/PHD/talks_preps/ctd2k19/data_files/hh4b/pileup_samples/rec-files/PU1000hh4b_recOPTsig5_003*.root");
+	//rec.Add("/home/tamasi/repo_tamasi/rec_files/PU1000hh4b_recOPTsig5_003*.root");
 	//! 40mm
-	//rec.Add("/media/tamasi/DriveT1/tamasi/Desktop/PHD/talks_preps/ctd2k19/data_files/hh4b/pileup_samples/rec-files/PU1000hh4b_recOPTsig5_004*.root");
+	//rec.Add("/home/tamasi/repo_tamasi/rec_files/PU1000hh4b_recOPTsig5_004*.root");
 	//! 50mm
-	rec.Add("/media/tamasi/DriveT1/tamasi/Desktop/PHD/talks_preps/ctd2k19/data_files/hh4b/pileup_samples/rec-files/PU1000hh4b_recOPTsig5_005*.root");
+	//rec.Add("/home/tamasi/repo_tamasi/rec_files/PU1000hh4b_recOPTsig5_005*.root");
 
 
 	//! number of points in the plots
 	//int num_events = 225;//1e5;
 	int num_events = rec.GetEntries();
 
-	int etabin = 29;
+	int etabin = 21;
         double etamin =-1.7, etamax = 1.7;
 	std::cout<<"rec tree opened with " << rec.GetEntries() <<"entries\n";
 	/// LOG BINS

@@ -23,37 +23,34 @@
 
 
 
-	//const char* out_path = "/media/tamasi/DriveT/tamasi/Desktop/PHD/work/rec_data/Mar102k19/minBias/plots/optimisation";
-const char* out_path = "/media/tamasi/DriveT/tamasi/Desktop/PHD/talks_preps/ctd2k19/plots/optimisation";
-//! 20mm
-/*TCut cut = "Tid>0 && Pt_n>2e3 && abs(Z013)<100 && abs(Eta13)<1.6 && abs(Phi13)<0.014 && abs(Z13)<115 && abs(dphi2)<7e-4 && abs(dz2)<1.7*(sin(Theta13)^(-1.5))";
-TCut MS_r = "Tid>0 && Pt_n>2e3 && Pt_n<4e3 && abs(Z013)<100 && abs(Eta13)<1.6 && abs(Phi13)<0.014 && abs(Z13)<115 && abs(dphi2)<7e-4 && abs(dz2)<1.7*(sin(Theta13)^(-1.5))";
-TCut Hit_r = "Tid>0 && Pt_n>20e3 && abs(Z013)<100 && abs(Eta13)<1.6 && abs(Phi13)<0.014 && abs(Z13)<115 && abs(dphi2)<7e-4 && abs(dz2)<1.7*(sin(Theta13)^(-1.5))";*/
+const char* out_path = "./plots/optimisation";
+////! 20mm
+//TCut cut = "Tid>0 && Pt_n>2e3 && abs(Z013)<100 && abs(Eta13)<1.7 && abs(Phi13)<0.015 && abs(Z13)<115 && abs(dphi2)<1e-4 && abs(dz2)<1.3*(sin(Theta13)^(-0.9))";
+//TCut MS_r = "Tid>0 && Pt_n>2e3 && Pt_n<4e3 && abs(Z013)<100 && abs(Eta13)<1.7 && abs(Phi13)<0.015 && abs(Z13)<115 && abs(dphi2)<1e-4 && abs(dz2)<1.3*(sin(Theta13)^(-0.9))";
+//TCut Hit_r = "Tid>0 && Pt_n>20e3 && abs(Z013)<100 && abs(Eta13)<1.7 && abs(Phi13)<0.015 && abs(Z13)<115 && abs(dphi2)<1e-4 && abs(dz2)<1.3*(sin(Theta13)^(-0.9))";
 //! 30mm
-/*TCut cut = "Tid>0 && Pt_n>2e3 && abs(Z013)<100 && abs(Eta13)<1.6 && abs(Phi13)<0.02 && abs(Z13)<160 && abs(dphi2)<6e-4 && abs(dz2)<0.26";
-TCut MS_r = "Tid>0 && Pt_n>2e3 && Pt_n<4e3 && abs(Z013)<100 && abs(Eta13)<1.6 && abs(Phi13)<0.02 && abs(Z13)<160 && abs(dphi2)<6e-4 && abs(dz2)<0.26";
-TCut Hit_r = "Tid>0 && Pt_n>20e3 && abs(Z013)<100 && abs(Eta13)<1.6 && abs(Phi13)<0.02 && abs(Z13)<160 && abs(dphi2)<6e-4 && abs(dz2)<0.26";*/
+TCut cut = "Tid>0 && Pt_n>2e3 && abs(Z013)<100 && abs(Eta13)<1.6 && abs(Phi13)<0.02 && abs(Z13)<160 && abs(dphi2)<1.4e-4 && abs(dz2)<1.3*(sin(Theta13)^(-1.15))";
+TCut MS_r = "Tid>0 && Pt_n>2e3 && Pt_n<4e3 && abs(Z013)<100 && abs(Eta13)<1.6 && abs(Phi13)<0.02 && abs(Z13)<160 && abs(dphi2)<1.4e-4 && abs(dz2)<1.3*(sin(Theta13)^(-1.15))";
+TCut Hit_r = "Tid>0 && Pt_n>20e3 && abs(Z013)<100 && abs(Eta13)<1.6 && abs(Phi13)<0.02 && abs(Z13)<160 && abs(dphi2)<1.4e-4 && abs(dz2)<1.3*(sin(Theta13)^(-1.15))";
 //! 40mm
 /*TCut cut = "Tid>0 && Pt_n>2e3 && abs(Z013)<100 && abs(Eta13)<1.6 && abs(Phi13)<0.026 && abs(Z13)<210 && abs(dphi2)<7e-4 && abs(dz2)<1.7*(sin(Theta13)^(-1.5))";
 TCut MS_r = "Tid>0 && Pt_n>2e3 && Pt_n<4e3 && abs(Z013)<100 && abs(Eta13)<1.6 && abs(Phi13)<0.026 && abs(Z13)<210 && abs(dphi2)<7e-4 && abs(dz2)<1.7*(sin(Theta13)^(-1.5))";
 TCut Hit_r = "Tid>0 && Pt_n>20e3 && abs(Z013)<100 && abs(Eta13)<1.6 && abs(Phi13)<0.026 && abs(Z13)<210 && abs(dphi2)<7e-4 && abs(dz2)<1.7*(sin(Theta13)^(-1.5))";*/
-//! 50mm
-TCut cut = "Tid>0 && Pt_n>2e3 && abs(Z013)<100 && abs(Eta13)<1.6 && abs(Phi13)<0.032 && abs(Z13)<260 && abs(dphi2)<6e-4 && abs(dz2)<0.17*(sin(Theta13)^(-1.5))";
-TCut MS_r = "Tid>0 && Pt_n>2e3 && Pt_n<4e3 && abs(Z013)<100 && abs(Eta13)<1.6 && abs(Phi13)<0.032 && abs(Z13)<260 && abs(dphi2)<6e-4 && abs(dz2)<0.17*(sin(Theta13)^(-1.5))";
-TCut Hit_r = "Tid>0 && Pt_n>20e3 && abs(Z013)<100 && abs(Eta13)<1.6 && abs(Phi13)<0.032 && abs(Z13)<260 && abs(dphi2)<6e-4 && abs(dz2)<0.17*(sin(Theta13)^(-1.5))";
-int pull(const char* output_file_name = "pullPU200hh4b_50mm", const char* constants ="B")
+////! 50mm
+//TCut cut = "Tid>0 && Pt_n>2e3 && abs(Z013)<100 && abs(Eta13)<1.6 && abs(Phi13)<0.032 && abs(Z13)<260 && abs(dphi2)<6e-4 && abs(dz2)<0.17*(sin(Theta13)^(-1.5))";
+//TCut MS_r = "Tid>0 && Pt_n>2e3 && Pt_n<4e3 && abs(Z013)<100 && abs(Eta13)<1.6 && abs(Phi13)<0.032 && abs(Z13)<260 && abs(dphi2)<6e-4 && abs(dz2)<0.17*(sin(Theta13)^(-1.5))";
+//TCut Hit_r = "Tid>0 && Pt_n>20e3 && abs(Z013)<100 && abs(Eta13)<1.6 && abs(Phi13)<0.032 && abs(Z13)<260 && abs(dphi2)<6e-4 && abs(dz2)<0.17*(sin(Theta13)^(-1.5))";
+int pull(const char* output_file_name = "pullMB_30mm", const char* constants ="B")
 {
 	TChain rec("m_recTree");
-	//rec.Add("/media/tamasi/DriveT/tamasi/Desktop/PHD/work/rec_data/Mar102k19/minBias/*000010_1.root");
-	//rec.Add("/media/tamasi/DriveT/tamasi/Desktop/PHD/work/rec_data/Mar102k19/minBias/*000011_1.root");
 	//! 20mm
-	//rec.Add("/media/tamasi/DriveT/tamasi/Desktop/PHD/talks_preps/ctd2k19/data_files/hh4b/pileup_samples/rec-files/*rec_001*_.root");
+	//rec.Add("/home/tamasi/repo_tamasi/rec_files/MB_recTree_20000*_samelad.root");
 	//! 30mm
-	//rec.Add("/media/tamasi/DriveT/tamasi/Desktop/PHD/talks_preps/ctd2k19/data_files/hh4b/pileup_samples/rec-files/*0000*_.root");
+	rec.Add("/home/tamasi/repo_tamasi/rec_files/MB_recTree_30000*_samelad.root");
 	//! 40mm
-	//rec.Add("/media/tamasi/DriveT/tamasi/Desktop/PHD/talks_preps/ctd2k19/data_files/hh4b/pileup_samples/rec-files/*rec_002*_.root");
+	//rec.Add("/home/tamasi/repo_tamasi/rec_files/MB_recTree_40000*.root");
 	//! 50mm
-	rec.Add("/media/tamasi/DriveT/tamasi/Desktop/PHD/talks_preps/ctd2k19/data_files/hh4b/pileup_samples/rec-files/PU200hh4b_rec__005*_.root");
+	//rec.Add("/home/tamasi/repo_tamasi/rec_files/MB_recTree_50000*.root");
 /*	//! define a local vector<double> to store the reconstructed pt values
 	//! always initialise a pointer!!
 	std::vector<double> *theta013 = 0;
@@ -68,9 +65,10 @@ int pull(const char* output_file_name = "pullPU200hh4b_50mm", const char* consta
         Long64_t n_entries = rec.GetEntries();	
 */
 
+	std::cout<<"rec tree entries: "<< rec.GetEntries() << std::endl;
 	 gStyle->SetOptFit(1011);
 	//! bin quantities
-	int nbins = 150;
+	int nbins = 50;
 	double xmin = 0.4, xmax = 2.8;
 	double xmin1,xmax1;
 	//! Book histograms
@@ -78,9 +76,9 @@ int pull(const char* output_file_name = "pullPU200hh4b_50mm", const char* consta
 	rec.Draw("Theta13>>h",cut,"",1e5);
 	
 	const double w  = 40e-3;//mm
-	const double d	= 50;// gap between the layers in the triplet in mm
+	const double d	= 30;// gap between the layers in the triplet in mm
 	const double B	= 4;// magnetic field in Tesla
-	const double X_0= 0.02;// relative radiation length t/X_0  = 2%
+	const double X_0= 0.015;// relative radiation length t/X_0  = 2%
 	/*const double w = 50e-6;//m
 	const double d	= 20e-3;// gap between the layers in the triplet in m
 	const double B	= 2;// magnetic field in Tesla
@@ -182,7 +180,7 @@ int pull(const char* output_file_name = "pullPU200hh4b_50mm", const char* consta
 return 0;
 }
 
-int write_to_pdf(const char* input_file_name = "pullPU200hh4b_50mm.root", const char* output_file_name = "pullPU200hh4b_50mm")
+int write_to_pdf(const char* input_file_name = "pullMB_20mm.root", const char* output_file_name = "pullMB_20mm")
 {
 	
 	char in_file[1023];

@@ -15,14 +15,12 @@
 #include <string>
 #include <math.h>
 
-//const char* out_path = "/media/tamasi/DriveT1/tamasi/Desktop/PHD/work/rec_data/Mar102k19/minBias/plots/optimisation";
-const char* out_path = "/media/tamasi/DriveT1/tamasi/Desktop/PHD/talks_preps/ctd2k19/plots/optimisation";
+const char* out_path = "./plots/optimisation";
 
-//int write_to_pdf(const char* input_file_name = "control_hh4b_PU200_1_20mm.root", const char* output_file_name = "control_hh4b_PU200_1_20mm")
-//int write_to_pdf(const char* input_file_name = "control_hh4b_PU200_1_30mm.root", const char* output_file_name = "control_hh4b_PU200_1_30mm")
-//int write_to_pdf(const char* input_file_name = "control_hh4b_PU200_1_40mm.root", const char* output_file_name = "control_hh4b_PU200_1_40mm")
-//int write_to_pdf(const char* input_file_name = "control_hh4b_PU200_2_20mm.root", const char* output_file_name = "control_hh4b_PU200_2_20mm")
-int write_to_pdf(const char* input_file_name = "control_hh4b_PU1000_2_50mm.root", const char* output_file_name = "control_hh4b_PU1000_2_50mm")
+//int write_to_pdf(const char* input_file_name = "control_PU0hh4b_20mm_wide.root", const char* output_file_name = "control_PU0hh4b_20mm_wide")
+int write_to_pdf(const char* input_file_name = "control_MB_30mm_samelad.root", const char* output_file_name = "control_MB_30mm_samelad")
+//int write_to_pdf(const char* input_file_name = "control_MB_40mm.root", const char* output_file_name = "control_MB_40mm")
+//int write_to_pdf(const char* input_file_name = "control_MB_50mm.root", const char* output_file_name = "control_MB_50mm")
 {
 
 	char out_file_open[1023];
@@ -2239,7 +2237,7 @@ int write_to_pdf(const char* input_file_name = "control_hh4b_PU1000_2_50mm.root"
         leg17->Draw();
 	S->SetLogx();
 	S->Print(out_file_, "pdf");
-	H_pur_vs_pt_->GetYaxis()->SetRangeUser(0.3,1.05);
+	H_pur_vs_pt_->GetYaxis()->SetRangeUser(0.8,1.05);
 	H_pur_vs_pt_->Draw();
 	H_pur_vs_pt_l->Draw("same");
 	H_pur_vs_pt_m->Draw("same");

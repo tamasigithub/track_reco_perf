@@ -14,29 +14,38 @@
 #include <string>
 #include <math.h>
 #include <vector>
-const char* out_path = "/media/tamasi/DriveT1/tamasi/Desktop/PHD/talks_preps/ctd2k19/plots/efficiency/hh4b"; 
+const char* out_path = "./plots"; 
 //const char* out_path = "/media/tamasi/DriveT1/tamasi/Desktop/PHD/talks_preps/ctd2k19/plots/efficiency/singleParticles; 
 
-int eff_Vs_etaphipt_dR_barcode(const char* output_file_name = "PU1000hh4b-eff_20mm", bool save = false)
-//int eff_Vs_etaphipt_dR_barcode(const char* output_file_name = "pi-effvxvy20secondary_30mm", bool save = false)
+//int eff_Vs_etaphipt_dR_barcode(const char* output_file_name = "PU1000hh4b-eff_20mm", bool save = false)
+int eff_Vs_etaphipt_dR_barcode(const char* output_file_name = "PU0hh4b_effVxVy2_300002_N1lad_opt_pi", bool save = false)
+//int eff_Vs_etaphipt_dR_barcode(const char* output_file_name = "hh4b_m260effvxvy20_20mm200001_opt", bool save = false)
+//int eff_Vs_etaphipt_dR_barcode(const char* output_file_name = "MB_effvxvy2_20mm200001_6_opt_3", bool save = false)
+//int eff_Vs_etaphipt_dR_barcode(const char* output_file_name = "mu-effvxvy20_20mm210000_opt", bool save = false)
 {
 	TChain recTree("m_recTree");
 	TChain truthTree("tracks");
-	//! pileup 200 samples
-	/*recTree.Add("/media/tamasi/DriveT1/tamasi/Desktop/PHD/talks_preps/ctd2k19/data_files/hh4b/pileup_samples/rec-files/PU200hh4b_rec_003*.root");
-	truthTree.Add("/media/tamasi/DriveT1/tamasi/Desktop/PHD/talks_preps/ctd2k19/data_files/hh4b/pileup_samples/rec-files/PU200hh4b_rec_003*.root");*/
-	//! pileup 1000 samples
-	recTree.Add("/media/tamasi/DriveT1/tamasi/Desktop/PHD/talks_preps/ctd2k19/data_files/hh4b/pileup_samples/rec-files/PU1000hh4b_recOPTsig5_002*.root");
-	truthTree.Add("/media/tamasi/DriveT1/tamasi/Desktop/PHD/talks_preps/ctd2k19/data_files/hh4b/pileup_samples/rec-files/PU1000hh4b_recOPTsig5_002*.root");
-	//! single particles
-	/*recTree.Add("/media/tamasi/DriveT1/tamasi/Desktop/PHD/talks_preps/ctd2k19/data_files/single_particle/rec-files/pi-_rec_003*.root");
-	truthTree.Add("/media/tamasi/DriveT1/tamasi/Desktop/PHD/talks_preps/ctd2k19/data_files/single_particle/rec-files/pi-_rec_003*.root");
-*/
+	
+	//! MinBias
+	//recTree.Add("/home/tamasi/repo_tamasi/rec_files/MB_recTree_20000*_opt.root");
+	//truthTree.Add("/home/tamasi/repo_tamasi/rec_files/MB_recTree_20000*_opt.root");
+	//! hh4b
+	//recTree.Add("/home/tamasi/repo_tamasi/rec_files/PU200hh4b_m260_recTree_200002_opt.root");
+	//truthTree.Add("/home/tamasi/repo_tamasi/rec_files/PU200hh4b_m260_recTree_200002_opt.root");
+	recTree.Add("/home/tamasi/repo_tamasi/rec_files/PU0hh4b_recTree_300002_N1lad_opt.root");
+	truthTree.Add("/home/tamasi/repo_tamasi/rec_files/PU0hh4b_recTree_300002_N1lad_opt.root");
+	//recTree.Add("/home/tamasi/repo_tamasi/rec_files/PU1000hh4b_recTree_30000*_samelad_opt.root");
+	//truthTree.Add("/home/tamasi/repo_tamasi/rec_files/PU1000hh4b_recTree_30000*_samelad_opt.root");
+	////! single particles
+	//recTree.Add("/home/tamasi/repo_tamasi/rec_files/mu-_recTree_210000_opt.root");
+	//truthTree.Add("/home/tamasi/repo_tamasi/rec_files/mu-_recTree_210000_opt.root");
 
+	std::cout<<"rec Tree : " <<recTree.GetEntries() << " , truth tree: " << truthTree.GetEntries() <<std::endl;
 	//! define a local vector<double> to store the reconstructed pt values
 	//! always initialise a pointer!!
 	std::vector<int>   *tinteraction = 0;
         std::vector<int>   *barcode = 0;	
+        std::vector<int>   *charge = 0;	
         std::vector<int>   *pdg = 0;	
         std::vector<double> *pt = 0;	
         std::vector<double> *phi = 0;	
@@ -47,6 +56,7 @@ int eff_Vs_etaphipt_dR_barcode(const char* output_file_name = "PU1000hh4b-eff_20
         std::vector<int>   *match_barcodeTTT_bc = 0;
 
 	truthTree.SetBranchStatus("*",          0);
+	truthTree.SetBranchStatus("charge", 	1);
 	truthTree.SetBranchStatus("type_traj", 	1);
 	truthTree.SetBranchStatus("tid", 	1);
 	truthTree.SetBranchStatus("pid",     	1);
@@ -60,6 +70,7 @@ int eff_Vs_etaphipt_dR_barcode(const char* output_file_name = "PU1000hh4b-eff_20
 	recTree.SetBranchStatus("*",            0);
 	recTree.SetBranchStatus("Tid",  	1);
 	
+	truthTree.SetBranchAddress("charge",    &charge);
 	truthTree.SetBranchAddress("type_traj", &tinteraction);
 	truthTree.SetBranchAddress("tid", 	&barcode);
 	truthTree.SetBranchAddress("pid", 	&pdg);
@@ -86,7 +97,7 @@ int eff_Vs_etaphipt_dR_barcode(const char* output_file_name = "PU1000hh4b-eff_20
 	/// Variable bin width
 	const int ptbins = 40;//no. of bins
 	Double_t xbins[ptbins+1];//elements of this array are
-	double dx = 5./ptbins;//5 -> implies max until 10^5
+	double dx = 7./ptbins;//5 -> implies max until 10^5
 	double l10 = TMath::Log(10);
 	for (int i = 0; i<=ptbins; i++)
 	{
@@ -117,14 +128,31 @@ int eff_Vs_etaphipt_dR_barcode(const char* output_file_name = "PU1000hh4b-eff_20
 		for(int i1 = 0; i1 < barcode->size(); ++i1)
 		{
 			int match_flagTTT_bc = -1;
+			if(std::abs(charge->at(i1)) != 1)	continue;
 			if(std::fabs(pt->at(i1)) < 2e3 )	continue;
 			if(std::fabs(eta->at(i1)) > 1.6)	continue;
 			if(std::fabs(Vz->at(i1)) > 100 )	continue;
-			if(std::fabs(Vx->at(i1)) > 2 )		continue;
-			if(std::fabs(Vy->at(i1)) > 2 )		continue;
+			if(std::fabs(Vx->at(i1)) > 5 )		continue;
+			if(std::fabs(Vy->at(i1)) > 5 )		continue;
 			if(barcode->at(i1) <= 0) 		continue;
-			//if((*tinteraction)[i1] > 0)		continue;
-			//if(std::abs(pdg->at(i1)) != 321) 	continue;
+			if(std::abs(pdg->at(i1)) != 211) 	continue;
+			//if((*tinteraction)[i1] == 6)		continue;
+			//else if(std::abs(pdg->at(i1)) == 313) 	continue;
+			//else if(std::abs(pdg->at(i1)) == 421) 	continue;
+			//else if(std::abs(pdg->at(i1)) == 423) 	continue;
+			//else if(std::abs(pdg->at(i1)) == 511) 	continue;
+			//else if(std::abs(pdg->at(i1)) == 111) 	continue;
+			//else if(std::abs(pdg->at(i1)) == 113) 	continue;
+			//else if(std::abs(pdg->at(i1)) == 221) 	continue;
+			//else if(std::abs(pdg->at(i1)) == 223) 	continue;
+			//else if(std::abs(pdg->at(i1)) == 331) 	continue;
+			//else if(std::abs(pdg->at(i1)) == 333) 	continue;
+			//else if(std::abs(pdg->at(i1)) == 441) 	continue;
+			//else if(std::abs(pdg->at(i1)) == 443) 	continue;
+			//else if(std::abs(pdg->at(i1)) == 551) 	continue;
+			//else if(std::abs(pdg->at(i1)) == 553) 	continue;
+			//else if(std::abs(pdg->at(i1)) == 130) 	continue;
+			//else if(std::abs(pdg->at(i1)) == 310) 	continue;
 
 			//! loop over TTT tracks and the find the corresponding particle it was matched to (with barcode matching)
 			for(int i2 = 0; i2 < match_barcodeTTT_bc->size(); ++i2)
@@ -234,6 +262,7 @@ int eff_Vs_etaphipt_dR_barcode(const char* output_file_name = "PU1000hh4b-eff_20
 	h_eff_vs_ptPU->Write();
 	
 	output_file->Close();
+return 0;
 }
 
 /////////////// write efficiency to pdf /////////////////

@@ -16,7 +16,8 @@
 #include <string>
 #include <math.h>
 #include "TChain.h"
-const char* out_path = "/media/tamasi/DriveT/tamasi/Desktop/PHD/talks_preps/ctd2k19/plots/resolution";
+//const char* out_path = "/media/tamasi/DriveT/tamasi/Desktop/PHD/talks_preps/ctd2k19/plots/resolution";
+const char* out_path = "./plots";
 //! Define Cut
 TCut mu_cut = "abs(M_pdg)==13 && M_barcode > 0 && abs(M_Vz) < 100 && abs(M_Vx)<10 && abs(M_Vy)<10";
 TCut pi_cut = "abs(M_pdg)==211 && M_barcode > 0 && abs(M_Vz) < 100 && abs(M_Vx)<10 && abs(M_Vy)<10";
@@ -59,8 +60,8 @@ int resolution_plots_Vs_pt
 (const char* output_file_name, /*const char* p_type = "muon",*/ bool save = false)
 {
 	TChain recTree("m_recTree");
-	//! PU200 30mm
-	recTree.Add("/media/tamasi/DriveT/tamasi/Desktop/PHD/talks_preps/ctd2k19/data_files/hh4b/pileup_samples/rec-files/PU200hh4b_rec_003*.root");
+	//! PU0 20mm
+	recTree.Add("/home/tamasi/repo_tamasi/rec_files/PU0hh4b_m260_recTree_200001_opt.root");
 	TCut cut;
 	//const char* type = p_type;
 	const char* type = "all";
@@ -396,7 +397,7 @@ return 0;
 }
 int plot_reso_vs_pt()
 {
-	resolution_plots_Vs_pt("ResoVspt_VxVy10_PU20030mm",true);
+	resolution_plots_Vs_pt("ResoVspt_VxVy10_PU020mm",true);
 	//resolution_plots_Vs_pt("testResoVspt_all1.4_5GeV",true);
 	return 0;
 }

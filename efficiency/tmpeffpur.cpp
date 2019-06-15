@@ -1,3 +1,4 @@
+////////////////////Effeciency and purity as a function of pt, eta, phi////////////////////
 #include <iostream>
 #include "TROOT.h"
 #include "TFile.h"
@@ -48,9 +49,9 @@ void ScaleXaxis(TH1 *h, Double_t Scale)
 
 //const char* out_path = "/eos/user/t/tkar/www/TTT/plots/resolution"; 
 //const char* out_path = "./plots/purity"; 
-//const char* out_path = "./plots"; 
-const char* out_path = "/media/tamasi/DriveT1/tamasi/Desktop/PHD/talks_preps/ctd2k19/plots/efficiency/hh4b"; 
-int write_topdf(const char* output_file_name = "EffPurVsEtaPtPhi_PU1000_50mm")
+const char* out_path = "./plots"; 
+//const char* out_path = "/media/tamasi/DriveT1/tamasi/Desktop/PHD/talks_preps/ctd2k19/plots/efficiency/hh4b"; 
+int write_topdf(const char* output_file_name = "EffPurVsEtaPtPhi_PU200hh4b_m260opt20mm200002")
 {
 
 	char out_file_open[1023];
@@ -60,7 +61,7 @@ int write_topdf(const char* output_file_name = "EffPurVsEtaPtPhi_PU1000_50mm")
         char out_file_close[1023];
         sprintf(out_file_close,"%s/%s.pdf)",out_path,output_file_name);
 	//!efficiency Indet and TTT tracks barcode matched
-	TFile* f_ = TFile::Open("/media/tamasi/DriveT1/tamasi/Desktop/PHD/talks_preps/ctd2k19/plots/efficiency/hh4b/PU1000hh4b-eff_50mm.root");
+	TFile* f_ = TFile::Open("./plots/PU200hh4b_m260effvxvy20_20mm200002_opt.root");
 	/*TH1D* h__pt 	= (TH1D*)f_->Get("h_eff_vs_ptInDet");
 	TH1D* h__phi	= (TH1D*)f_->Get("h_eff_vs_phiInDet");
 	TH1D* h__eta	= (TH1D*)f_->Get("h_eff_vs_etaInDet");
@@ -81,7 +82,7 @@ int write_topdf(const char* output_file_name = "EffPurVsEtaPtPhi_PU1000_50mm")
 	TH1D* h0_phi	= (TH1D*)f0->Get("h_pur_vs_phiPU");
 	TH1D* h0_eta	= (TH1D*)f0->Get("h_pur_vs_etaPU");*/
 	//! purity TTT barcode matched tracks
-	TFile* f0t = TFile::Open("/media/tamasi/DriveT1/tamasi/Desktop/PHD/talks_preps/ctd2k19/plots/efficiency/hh4b/pur_PU1000_50mm.root");
+	TFile* f0t = TFile::Open("../optimisation/plots/pur_PU200hh4b_m260_20mm200002.root");
 	TH1D* ht0_pt    = (TH1D*)f0t->Get("h_pur_vs_ptPU");
 	TH1D* ht0_phi	= (TH1D*)f0t->Get("h_pur_vs_phiPU");
 	TH1D* ht0_eta	= (TH1D*)f0t->Get("h_pur_vs_etaPU");
@@ -342,7 +343,7 @@ int write_topdf(const char* output_file_name = "EffPurVsEtaPtPhi_PU1000_50mm")
         ht0dR_pt->GetYaxis()->SetRangeUser(0.7,1.04);
         ht0dR_phi->GetYaxis()->SetRangeUser(0.7,1.04);
         ht0dR_eta->GetYaxis()->SetRangeUser(0.7,1.04);*/
-        ht0_pt->GetYaxis()->SetRangeUser(0.3,1.04);
+        ht0_pt->GetYaxis()->SetRangeUser(0.8,1.04);
         ht0_phi->GetYaxis()->SetRangeUser(0.9,1.04);
         ht0_eta->GetYaxis()->SetRangeUser(0.9,1.04);
 	/*
@@ -728,8 +729,8 @@ int write_topdf(const char* output_file_name = "EffPurVsEtaPtPhi_PU1000_50mm")
 	
 	C->Print(out_file_, "pdf");
 
-	h_t_pt->GetYaxis()->SetRangeUser(0.3,1.04);
-	ht0_pt->GetYaxis()->SetRangeUser(0.3,1.04);
+	h_t_pt->GetYaxis()->SetRangeUser(0.8,1.04);
+	ht0_pt->GetYaxis()->SetRangeUser(0.8,1.04);
 	h_t_pt->GetYaxis()->SetAxisColor(kBlue);
 	h_t_pt->GetYaxis()->SetTitleColor(kBlue);
 	h_t_pt->GetYaxis()->SetTitleSize(0.05);
@@ -746,7 +747,7 @@ int write_topdf(const char* output_file_name = "EffPurVsEtaPtPhi_PU1000_50mm")
 	ht0_pt->Draw("same");
 	//draw an axis on the right side
 	TGaxis *axis2 = new TGaxis(gPad->GetUxmax(),gPad->GetUymin(),
-	gPad->GetUxmax(), gPad->GetUymax(),0.3,rightmax,510,"+L");
+	gPad->GetUxmax(), gPad->GetUymax(),0.8,rightmax,510,"+L");
 	axis2->SetLineColor(kRed);
 	axis2->SetLabelColor(kRed);
 //	axis->SetLabelSize(0.05);
