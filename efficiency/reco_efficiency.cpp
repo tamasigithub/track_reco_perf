@@ -17,8 +17,9 @@
 const char* out_path = "./plots"; 
 //const char* out_path = "/media/tamasi/DriveT1/tamasi/Desktop/PHD/talks_preps/ctd2k19/plots/efficiency/singleParticles; 
 
-//int eff_Vs_etaphipt_dR_barcode(const char* output_file_name = "PU1000hh4b-eff_20mm", bool save = false)
-int eff_Vs_etaphipt_dR_barcode(const char* output_file_name = "PU0hh4b_effVxVy2_300002_N1lad_opt_pi", bool save = false)
+//int eff_Vs_etaphipt_dR_barcode(const char* output_file_name = "PU1000MB-eff_30mm_samelad_opt5GeV", bool save = false)
+int eff_Vs_etaphipt_dR_barcode(const char* output_file_name = "PU1000hh4b-eff_30mm_samelad_opt5GeVp", bool save = false)
+//int eff_Vs_etaphipt_dR_barcode(const char* output_file_name = "PU0hh4b_effVxVy2_300002_N1lad_opt_pi", bool save = false)
 //int eff_Vs_etaphipt_dR_barcode(const char* output_file_name = "hh4b_m260effvxvy20_20mm200001_opt", bool save = false)
 //int eff_Vs_etaphipt_dR_barcode(const char* output_file_name = "MB_effvxvy2_20mm200001_6_opt_3", bool save = false)
 //int eff_Vs_etaphipt_dR_barcode(const char* output_file_name = "mu-effvxvy20_20mm210000_opt", bool save = false)
@@ -29,13 +30,19 @@ int eff_Vs_etaphipt_dR_barcode(const char* output_file_name = "PU0hh4b_effVxVy2_
 	//! MinBias
 	//recTree.Add("/home/tamasi/repo_tamasi/rec_files/MB_recTree_20000*_opt.root");
 	//truthTree.Add("/home/tamasi/repo_tamasi/rec_files/MB_recTree_20000*_opt.root");
+	//recTree.Add("/media/tamasi/Z/PhD/FCC/Castellated/rec_files/PU1000MB_recTree_3*_samelad_opt.root");
+	//truthTree.Add("/media/tamasi/Z/PhD/FCC/Castellated/rec_files/PU1000MB_recTree_3*_samelad_opt.root");
 	//! hh4b
 	//recTree.Add("/home/tamasi/repo_tamasi/rec_files/PU200hh4b_m260_recTree_200002_opt.root");
 	//truthTree.Add("/home/tamasi/repo_tamasi/rec_files/PU200hh4b_m260_recTree_200002_opt.root");
-	recTree.Add("/home/tamasi/repo_tamasi/rec_files/PU0hh4b_recTree_300002_N1lad_opt.root");
-	truthTree.Add("/home/tamasi/repo_tamasi/rec_files/PU0hh4b_recTree_300002_N1lad_opt.root");
+	//recTree.Add("/home/tamasi/repo_tamasi/rec_files/PU0hh4b_recTree_300002_N1lad_opt.root");
+	//truthTree.Add("/home/tamasi/repo_tamasi/rec_files/PU0hh4b_recTree_300002_N1lad_opt.root");
 	//recTree.Add("/home/tamasi/repo_tamasi/rec_files/PU1000hh4b_recTree_30000*_samelad_opt.root");
 	//truthTree.Add("/home/tamasi/repo_tamasi/rec_files/PU1000hh4b_recTree_30000*_samelad_opt.root");
+	//recTree.Add("/media/tamasi/Z/PhD/FCC/Castellated/rec_files/PU1000hh4b_recTree_3*_samelad_opt.root");
+	//truthTree.Add("/media/tamasi/Z/PhD/FCC/Castellated/rec_files/PU1000hh4b_recTree_3*_samelad_opt.root");
+	recTree.Add("/media/tamasi/Z/PhD/FCC/Castellated/rec_files/PU1K_hh4bm260_30mm_sig5/*.root");
+	truthTree.Add("/media/tamasi/Z/PhD/FCC/Castellated/rec_files/PU1K_hh4bm260_30mm_sig5/*.root");
 	////! single particles
 	//recTree.Add("/home/tamasi/repo_tamasi/rec_files/mu-_recTree_210000_opt.root");
 	//truthTree.Add("/home/tamasi/repo_tamasi/rec_files/mu-_recTree_210000_opt.root");
@@ -97,7 +104,7 @@ int eff_Vs_etaphipt_dR_barcode(const char* output_file_name = "PU0hh4b_effVxVy2_
 	/// Variable bin width
 	const int ptbins = 40;//no. of bins
 	Double_t xbins[ptbins+1];//elements of this array are
-	double dx = 7./ptbins;//5 -> implies max until 10^5
+	double dx = 6./ptbins;//5 -> implies max until 10^5
 	double l10 = TMath::Log(10);
 	for (int i = 0; i<=ptbins; i++)
 	{
@@ -129,13 +136,13 @@ int eff_Vs_etaphipt_dR_barcode(const char* output_file_name = "PU0hh4b_effVxVy2_
 		{
 			int match_flagTTT_bc = -1;
 			if(std::abs(charge->at(i1)) != 1)	continue;
-			if(std::fabs(pt->at(i1)) < 2e3 )	continue;
+			if(std::fabs(pt->at(i1)) < 5e3 )	continue;
 			if(std::fabs(eta->at(i1)) > 1.6)	continue;
 			if(std::fabs(Vz->at(i1)) > 100 )	continue;
 			if(std::fabs(Vx->at(i1)) > 5 )		continue;
 			if(std::fabs(Vy->at(i1)) > 5 )		continue;
 			if(barcode->at(i1) <= 0) 		continue;
-			if(std::abs(pdg->at(i1)) != 211) 	continue;
+			//if(std::abs(pdg->at(i1)) != 2212) 	continue;
 			//if((*tinteraction)[i1] == 6)		continue;
 			//else if(std::abs(pdg->at(i1)) == 313) 	continue;
 			//else if(std::abs(pdg->at(i1)) == 421) 	continue;

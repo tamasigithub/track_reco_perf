@@ -18,19 +18,23 @@ const char* out_path = "./plots";
 
 //////////////// Purity for TTT tracks /////////////////
 
-int newTTTpurity_Vs_etaphipt(const char* output_file_name = "pur_PU200hh4b_m260_20mm200002", bool save = false)
+//int newTTTpurity_Vs_etaphipt(const char* output_file_name = "pur_PU1000MB_30mm_samelad_opt5GeV", bool save = false)
+int newTTTpurity_Vs_etaphipt(const char* output_file_name = "pur_PU1000hh4b_m260_30mm_samelad_opt5GeV", bool save = false)
 {
 	//! Define Cut
-TCut num_select    = "Tid>0";
-TCut den_select    = "Tid>-2";
+TCut num_select    = "Tid>0 && abs(Pt_n)>5e3";
+TCut den_select    = "Tid>-2 && abs(Pt_n)>5e3";
 
 	TChain recTree("m_recTree");
 	
 	//PU1000
 	//! 20mm
-	recTree.Add("/home/tamasi/repo_tamasi/rec_files/PU200hh4b_m260_recTree_200002_opt.root");
+	//recTree.Add("/home/tamasi/repo_tamasi/rec_files/PU200hh4b_m260_recTree_200002_opt.root");
 	//! 30mm
 	//recTree.Add("/media/tamasi/DriveT1/tamasi/Desktop/PHD/talks_preps/ctd2k19/data_files/hh4b/pileup_samples/rec-files/PU1000hh4b_recOPTsig5_003*.root");
+	//recTree.Add("/media/tamasi/Z/PhD/FCC/Castellated/rec_files/PU1000MB_recTree_3*_samelad_opt.root");
+	//recTree.Add("/media/tamasi/Z/PhD/FCC/Castellated/rec_files/PU1000hh4b_recTree_3*_samelad_opt.root");
+	recTree.Add("/media/tamasi/Z/PhD/FCC/Castellated/rec_files/PU1K_hh4bm260_30mm_sig5/*.root");
 	//! 40mm
 	//recTree.Add("/media/tamasi/DriveT1/tamasi/Desktop/PHD/talks_preps/ctd2k19/data_files/hh4b/pileup_samples/rec-files/PU1000hh4b_recOPTsig5_004*.root");
 	//! 50mm
@@ -48,7 +52,7 @@ TCut den_select    = "Tid>-2";
 	/// Variable bin width
 	const int ptbins = 40;//no. of bins
 	Double_t xbins[ptbins+1];//elements of this array are
-	double dx = 7./ptbins;//5 -> implies max until 10^5
+	double dx = 6./ptbins;//5 -> implies max until 10^5
 	double l10 = TMath::Log(10);
 	for (int i = 0; i<=ptbins; i++)
 	{

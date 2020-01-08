@@ -51,9 +51,11 @@ void ScaleXaxis(TH1 *h, Double_t Scale)
 //const char* out_path = "./plots/purity"; 
 const char* out_path = "./plots"; 
 //const char* out_path = "/media/tamasi/DriveT1/tamasi/Desktop/PHD/talks_preps/ctd2k19/plots/efficiency/hh4b"; 
-int write_topdf(const char* output_file_name = "EffPurVsEtaPtPhi_PU200hh4b_m260opt20mm200002")
+//int write_topdf(const char* output_file_name = "EffPurVsEtaPtPhi_PU1000MB_30mm_samelad")
+int write_topdf(const char* output_file_name = "EffPurVsEtaPtPhi_PU1000hh4b_m26030mm_samelad_1")
 {
 
+	Double_t pt_min = 4.9e3, pt_max = 110e3;
 	char out_file_open[1023];
         sprintf(out_file_open,"%s/%s.pdf(",out_path,output_file_name);
         char out_file_[1023];
@@ -61,7 +63,8 @@ int write_topdf(const char* output_file_name = "EffPurVsEtaPtPhi_PU200hh4b_m260o
         char out_file_close[1023];
         sprintf(out_file_close,"%s/%s.pdf)",out_path,output_file_name);
 	//!efficiency Indet and TTT tracks barcode matched
-	TFile* f_ = TFile::Open("./plots/PU200hh4b_m260effvxvy20_20mm200002_opt.root");
+	//TFile* f_ = TFile::Open("./plots/PU1000MB-eff_30mm_samelad_opt5GeV.root");
+	TFile* f_ = TFile::Open("./plots/PU1000hh4b-eff_30mm_samelad_opt5GeVp.root");
 	/*TH1D* h__pt 	= (TH1D*)f_->Get("h_eff_vs_ptInDet");
 	TH1D* h__phi	= (TH1D*)f_->Get("h_eff_vs_phiInDet");
 	TH1D* h__eta	= (TH1D*)f_->Get("h_eff_vs_etaInDet");
@@ -82,7 +85,8 @@ int write_topdf(const char* output_file_name = "EffPurVsEtaPtPhi_PU200hh4b_m260o
 	TH1D* h0_phi	= (TH1D*)f0->Get("h_pur_vs_phiPU");
 	TH1D* h0_eta	= (TH1D*)f0->Get("h_pur_vs_etaPU");*/
 	//! purity TTT barcode matched tracks
-	TFile* f0t = TFile::Open("../optimisation/plots/pur_PU200hh4b_m260_20mm200002.root");
+	//TFile* f0t = TFile::Open("../optimisation/plots/pur_PU1000MB_30mm_samelad_opt5GeV.root");
+	TFile* f0t = TFile::Open("../optimisation/plots/pur_PU1000hh4b_m260_30mm_samelad_opt5GeV.root");
 	TH1D* ht0_pt    = (TH1D*)f0t->Get("h_pur_vs_ptPU");
 	TH1D* ht0_phi	= (TH1D*)f0t->Get("h_pur_vs_phiPU");
 	TH1D* ht0_eta	= (TH1D*)f0t->Get("h_pur_vs_etaPU");
@@ -232,28 +236,28 @@ int write_topdf(const char* output_file_name = "EffPurVsEtaPtPhi_PU200hh4b_m260o
         ht0_phi->GetYaxis()->SetLabelFont(62);
         ht0_eta->GetYaxis()->SetLabelFont(62);
 	/*
-	h__pt->GetYaxis()->SetTitleOffset(.85);
-	h__phi->GetYaxis()->SetTitleOffset(.85);
-	h__eta->GetYaxis()->SetTitleOffset(.85);
-	h_tdR_pt->GetYaxis()->SetTitleOffset(.85);
-	h_tdR_phi->GetYaxis()->SetTitleOffset(.85);
-	h_tdR_eta->GetYaxis()->SetTitleOffset(.85);*/
-	h_t_pt->GetYaxis()->SetTitleOffset(.85);
-	h_t_phi->GetYaxis()->SetTitleOffset(.85);
-	h_t_eta->GetYaxis()->SetTitleOffset(.85);/*
-	h_3t_pt->GetYaxis()->SetTitleOffset(.85);
-	h_3t_phi->GetYaxis()->SetTitleOffset(.85);
-	h_3t_eta->GetYaxis()->SetTitleOffset(.85);*/
+	h__pt->GetYaxis()->SetTitleOffset(1.2);
+	h__phi->GetYaxis()->SetTitleOffset(1.2);
+	h__eta->GetYaxis()->SetTitleOffset(1.2);
+	h_tdR_pt->GetYaxis()->SetTitleOffset(1.2);
+	h_tdR_phi->GetYaxis()->SetTitleOffset(1.2);
+	h_tdR_eta->GetYaxis()->SetTitleOffset(1.2);*/
+	h_t_pt->GetYaxis()->SetTitleOffset(1.2);
+	h_t_phi->GetYaxis()->SetTitleOffset(1.2);
+	h_t_eta->GetYaxis()->SetTitleOffset(1.2);/*
+	h_3t_pt->GetYaxis()->SetTitleOffset(1.2);
+	h_3t_phi->GetYaxis()->SetTitleOffset(1.2);
+	h_3t_eta->GetYaxis()->SetTitleOffset(1.2);*/
         /*
-	h0_pt->GetYaxis()->SetTitleOffset(.85);
-        h0_phi->GetYaxis()->SetTitleOffset(.85);
-        h0_eta->GetYaxis()->SetTitleOffset(.85);*//*
-        ht0dR_pt->GetYaxis()->SetTitleOffset(.85);
-        ht0dR_phi->GetYaxis()->SetTitleOffset(.85);
-        ht0dR_eta->GetYaxis()->SetTitleOffset(.85);*/
-        ht0_pt->GetYaxis()->SetTitleOffset(.85);
-        ht0_phi->GetYaxis()->SetTitleOffset(.85);
-        ht0_eta->GetYaxis()->SetTitleOffset(.85);
+	h0_pt->GetYaxis()->SetTitleOffset(1.2);
+        h0_phi->GetYaxis()->SetTitleOffset(1.2);
+        h0_eta->GetYaxis()->SetTitleOffset(1.2);*//*
+        ht0dR_pt->GetYaxis()->SetTitleOffset(1.2);
+        ht0dR_phi->GetYaxis()->SetTitleOffset(1.2);
+        ht0dR_eta->GetYaxis()->SetTitleOffset(1.2);*/
+        ht0_pt->GetYaxis()->SetTitleOffset(1.2);
+        ht0_phi->GetYaxis()->SetTitleOffset(1.2);
+        ht0_eta->GetYaxis()->SetTitleOffset(1.2);
 	/*
 	h__pt->GetYaxis()->CenterTitle();
 	h__phi->GetYaxis()->CenterTitle();
@@ -301,28 +305,28 @@ int write_topdf(const char* output_file_name = "EffPurVsEtaPtPhi_PU200hh4b_m260o
         ht0_phi->GetXaxis()->CenterTitle();
         ht0_eta->GetXaxis()->CenterTitle();
 	/*
-	h__pt->GetYaxis()->SetTitleSize(.05);
-	h__phi->GetYaxis()->SetTitleSize(.05);
-	h__eta->GetYaxis()->SetTitleSize(.05);
-	h_tdR_pt->GetYaxis()->SetTitleSize(.05);
-	h_tdR_phi->GetYaxis()->SetTitleSize(.05);
-	h_tdR_eta->GetYaxis()->SetTitleSize(.05);*/
-	h_t_pt->GetYaxis()->SetTitleSize(.05);
-	h_t_phi->GetYaxis()->SetTitleSize(.05);
-	h_t_eta->GetYaxis()->SetTitleSize(.05);/*
-	h_3t_pt->GetYaxis()->SetTitleSize(.05);
-	h_3t_phi->GetYaxis()->SetTitleSize(.05);
-	h_3t_eta->GetYaxis()->SetTitleSize(.05);*/
+	h__pt->GetYaxis()->SetTitleSize(0.04);
+	h__phi->GetYaxis()->SetTitleSize(0.04);
+	h__eta->GetYaxis()->SetTitleSize(0.04);
+	h_tdR_pt->GetYaxis()->SetTitleSize(0.04);
+	h_tdR_phi->GetYaxis()->SetTitleSize(0.04);
+	h_tdR_eta->GetYaxis()->SetTitleSize(0.04);*/
+	h_t_pt->GetYaxis()->SetTitleSize(0.04);
+	h_t_phi->GetYaxis()->SetTitleSize(0.04);
+	h_t_eta->GetYaxis()->SetTitleSize(0.04);/*
+	h_3t_pt->GetYaxis()->SetTitleSize(0.04);
+	h_3t_phi->GetYaxis()->SetTitleSize(0.04);
+	h_3t_eta->GetYaxis()->SetTitleSize(0.04);*/
         /*
-	h0_pt->GetYaxis()->SetTitleSize(.05);
-        h0_phi->GetYaxis()->SetTitleSize(.05);
-        h0_eta->GetYaxis()->SetTitleSize(.05);*//*
-        ht0dR_pt->GetYaxis()->SetTitleSize(.05);
-        ht0dR_phi->GetYaxis()->SetTitleSize(.05);
-        ht0dR_eta->GetYaxis()->SetTitleSize(.05);*/
-        ht0_pt->GetYaxis()->SetTitleSize(.05);
-        ht0_phi->GetYaxis()->SetTitleSize(.05);
-        ht0_eta->GetYaxis()->SetTitleSize(.05);
+	h0_pt->GetYaxis()->SetTitleSize(0.04);
+        h0_phi->GetYaxis()->SetTitleSize(0.04);
+        h0_eta->GetYaxis()->SetTitleSize(0.04);*//*
+        ht0dR_pt->GetYaxis()->SetTitleSize(0.04);
+        ht0dR_phi->GetYaxis()->SetTitleSize(0.04);
+        ht0dR_eta->GetYaxis()->SetTitleSize(0.04);*/
+        ht0_pt->GetYaxis()->SetTitleSize(0.04);
+        ht0_phi->GetYaxis()->SetTitleSize(0.04);
+        ht0_eta->GetYaxis()->SetTitleSize(0.04);
 	/*
 	h__pt->GetYaxis()->SetRangeUser(0.7,1.04);
 	h__phi->GetYaxis()->SetRangeUser(0.7,1.04);
@@ -330,12 +334,14 @@ int write_topdf(const char* output_file_name = "EffPurVsEtaPtPhi_PU200hh4b_m260o
 	h_tdR_pt->GetYaxis()->SetRangeUser(0.7,1.04);
 	h_tdR_phi->GetYaxis()->SetRangeUser(0.7,1.04);
 	h_tdR_eta->GetYaxis()->SetRangeUser(0.5,1.04);*/
-	h_t_pt->GetYaxis()->SetRangeUser(0.7,1.04);
-	h_t_phi->GetYaxis()->SetRangeUser(0.7,1.04);
-	h_t_eta->GetYaxis()->SetRangeUser(0.5,1.04);/*
+	h_t_pt->GetYaxis()->SetRangeUser(0.6,1.04);
+	h_t_phi->GetYaxis()->SetRangeUser(0.6,1.04);
+	h_t_eta->GetYaxis()->SetRangeUser(0.6,1.04);/*
 	h_3t_pt->GetYaxis()->SetRangeUser(0.7,1.04);
 	h_3t_phi->GetYaxis()->SetRangeUser(0.7,1.04);
 	h_3t_eta->GetYaxis()->SetRangeUser(0.5,1.04);*/
+	h_t_pt->GetXaxis()->SetRangeUser(pt_min,pt_max);
+        ht0_pt->GetXaxis()->SetRangeUser(pt_min,pt_max);
         /*
 	h0_pt->GetYaxis()->SetRangeUser(0.9,1.04);
         h0_phi->GetYaxis()->SetRangeUser(0.9,1.04);
@@ -343,56 +349,56 @@ int write_topdf(const char* output_file_name = "EffPurVsEtaPtPhi_PU200hh4b_m260o
         ht0dR_pt->GetYaxis()->SetRangeUser(0.7,1.04);
         ht0dR_phi->GetYaxis()->SetRangeUser(0.7,1.04);
         ht0dR_eta->GetYaxis()->SetRangeUser(0.7,1.04);*/
-        ht0_pt->GetYaxis()->SetRangeUser(0.8,1.04);
-        ht0_phi->GetYaxis()->SetRangeUser(0.9,1.04);
-        ht0_eta->GetYaxis()->SetRangeUser(0.9,1.04);
+        ht0_pt->GetYaxis()->SetRangeUser(0.6,1.04);
+        ht0_phi->GetYaxis()->SetRangeUser(0.6,1.04);
+        ht0_eta->GetYaxis()->SetRangeUser(0.6,1.04);
 	/*
-	h__pt->GetXaxis()->SetTitleOffset(.85);
-	h__phi->GetXaxis()->SetTitleOffset(.85);
-	h__eta->GetXaxis()->SetTitleOffset(.85);
-	h_tdR_pt->GetXaxis()->SetTitleOffset(.85);
-	h_tdR_phi->GetXaxis()->SetTitleOffset(.85);
-	h_tdR_eta->GetXaxis()->SetTitleOffset(.85);*/
-	h_t_pt->GetXaxis()->SetTitleOffset(.85);
-	h_t_phi->GetXaxis()->SetTitleOffset(.85);
-	h_t_eta->GetXaxis()->SetTitleOffset(.85);/*
-	h_3t_pt->GetXaxis()->SetTitleOffset(.85);
-	h_3t_phi->GetXaxis()->SetTitleOffset(.85);
-	h_3t_eta->GetXaxis()->SetTitleOffset(.85);*/
+	h__pt->GetXaxis()->SetTitleOffset(1.2);
+	h__phi->GetXaxis()->SetTitleOffset(1.2);
+	h__eta->GetXaxis()->SetTitleOffset(1.2);
+	h_tdR_pt->GetXaxis()->SetTitleOffset(1.2);
+	h_tdR_phi->GetXaxis()->SetTitleOffset(1.2);
+	h_tdR_eta->GetXaxis()->SetTitleOffset(1.2);*/
+	h_t_pt->GetXaxis()->SetTitleOffset(1.2);
+	h_t_phi->GetXaxis()->SetTitleOffset(1.2);
+	h_t_eta->GetXaxis()->SetTitleOffset(1.2);/*
+	h_3t_pt->GetXaxis()->SetTitleOffset(1.2);
+	h_3t_phi->GetXaxis()->SetTitleOffset(1.2);
+	h_3t_eta->GetXaxis()->SetTitleOffset(1.2);*/
         /*
-	h0_pt->GetXaxis()->SetTitleOffset(.85);
-        h0_phi->GetXaxis()->SetTitleOffset(.85);
-        h0_eta->GetXaxis()->SetTitleOffset(.85);*//*
-        ht0dR_pt->GetXaxis()->SetTitleOffset(.85);
-        ht0dR_phi->GetXaxis()->SetTitleOffset(.85);
-        ht0dR_eta->GetXaxis()->SetTitleOffset(.85);*/
-        ht0_pt->GetXaxis()->SetTitleOffset(.85);
-        ht0_phi->GetXaxis()->SetTitleOffset(.85);
-        ht0_eta->GetXaxis()->SetTitleOffset(.85);
+	h0_pt->GetXaxis()->SetTitleOffset(1.2);
+        h0_phi->GetXaxis()->SetTitleOffset(1.2);
+        h0_eta->GetXaxis()->SetTitleOffset(1.2);*//*
+        ht0dR_pt->GetXaxis()->SetTitleOffset(1.2);
+        ht0dR_phi->GetXaxis()->SetTitleOffset(1.2);
+        ht0dR_eta->GetXaxis()->SetTitleOffset(1.2);*/
+        ht0_pt->GetXaxis()->SetTitleOffset(1.2);
+        ht0_phi->GetXaxis()->SetTitleOffset(1.2);
+        ht0_eta->GetXaxis()->SetTitleOffset(1.2);
 	
 	/*
-	h__pt->GetXaxis()->SetTitleSize(.05);
-	h__phi->GetXaxis()->SetTitleSize(.05);
-	h__eta->GetXaxis()->SetTitleSize(.05);
-	h_tdR_pt->GetXaxis()->SetTitleSize(.05);
-	h_tdR_phi->GetXaxis()->SetTitleSize(.05);
-	h_tdR_eta->GetXaxis()->SetTitleSize(.05);*/
-	h_t_pt->GetXaxis()->SetTitleSize(.05);
-	h_t_phi->GetXaxis()->SetTitleSize(.05);
-	h_t_eta->GetXaxis()->SetTitleSize(.05);/*
-	h_3t_pt->GetXaxis()->SetTitleSize(.05);
-	h_3t_phi->GetXaxis()->SetTitleSize(.05);
-	h_3t_eta->GetXaxis()->SetTitleSize(.05);*/
+	h__pt->GetXaxis()->SetTitleSize(0.04);
+	h__phi->GetXaxis()->SetTitleSize(0.04);
+	h__eta->GetXaxis()->SetTitleSize(0.04);
+	h_tdR_pt->GetXaxis()->SetTitleSize(0.04);
+	h_tdR_phi->GetXaxis()->SetTitleSize(0.04);
+	h_tdR_eta->GetXaxis()->SetTitleSize(0.04);*/
+	h_t_pt->GetXaxis()->SetTitleSize(0.04);
+	h_t_phi->GetXaxis()->SetTitleSize(0.04);
+	h_t_eta->GetXaxis()->SetTitleSize(0.04);/*
+	h_3t_pt->GetXaxis()->SetTitleSize(0.04);
+	h_3t_phi->GetXaxis()->SetTitleSize(0.04);
+	h_3t_eta->GetXaxis()->SetTitleSize(0.04);*/
         /*
-	h0_pt->GetXaxis()->SetTitleSize(.05);
-        h0_phi->GetXaxis()->SetTitleSize(.05);
-        h0_eta->GetXaxis()->SetTitleSize(.05);*//*
-        ht0dR_pt->GetXaxis()->SetTitleSize(.05);
-        ht0dR_phi->GetXaxis()->SetTitleSize(.05);
-        ht0dR_eta->GetXaxis()->SetTitleSize(.05);*/
-        ht0_pt->GetXaxis()->SetTitleSize(.05);
-        ht0_phi->GetXaxis()->SetTitleSize(.05);
-        ht0_eta->GetXaxis()->SetTitleSize(.05);
+	h0_pt->GetXaxis()->SetTitleSize(0.04);
+        h0_phi->GetXaxis()->SetTitleSize(0.04);
+        h0_eta->GetXaxis()->SetTitleSize(0.04);*//*
+        ht0dR_pt->GetXaxis()->SetTitleSize(0.04);
+        ht0dR_phi->GetXaxis()->SetTitleSize(0.04);
+        ht0dR_eta->GetXaxis()->SetTitleSize(0.04);*/
+        ht0_pt->GetXaxis()->SetTitleSize(0.04);
+        ht0_phi->GetXaxis()->SetTitleSize(0.04);
+        ht0_eta->GetXaxis()->SetTitleSize(0.04);
 	/*
 	h__pt->GetXaxis()->SetTitle("p_{t} [GeV/c]");
 	h__phi->GetXaxis()->SetTitle("#phi [rad]");
@@ -428,7 +434,8 @@ int write_topdf(const char* output_file_name = "EffPurVsEtaPtPhi_PU200hh4b_m260o
         ScaleXaxis(ht0_pt,1e-3);
 	
 	
-	TCanvas * C = new TCanvas();
+	//TCanvas * C = new TCanvas();
+	TCanvas * C = new TCanvas("C","C",800,800);
 	gStyle->SetOptStat(0);
 	TGaxis::SetMaxDigits(2);
 	C->SetGridx();
@@ -671,7 +678,7 @@ int write_topdf(const char* output_file_name = "EffPurVsEtaPtPhi_PU200hh4b_m260o
 	C->SetTicky(0);
 	h_t_eta->GetYaxis()->SetAxisColor(kBlue);
 	h_t_eta->GetYaxis()->SetTitleColor(kBlue);
-	h_t_eta->GetYaxis()->SetTitleSize(0.05);
+	h_t_eta->GetYaxis()->SetTitleSize(0.04);
 	h_t_eta->GetYaxis()->SetLabelColor(kBlue);
 	h_t_eta->SetLineColor(kBlue);
 	h_t_eta->SetMarkerColor(kBlue);
@@ -688,11 +695,12 @@ int write_topdf(const char* output_file_name = "EffPurVsEtaPtPhi_PU200hh4b_m260o
 	gPad->GetUxmax(), gPad->GetUymax(),0.5,rightmax,510,"+L");
 	axis->SetLineColor(kRed);
 	axis->SetLabelColor(kRed);
+	axis->SetLabelFont(62);
 //	axis->SetLabelSize(0.05);
 	axis->SetTitle("purity");
 	axis->SetTitleColor(kRed);
-	axis->SetTitleSize(0.05);
-	axis->SetTitleOffset(1.08);
+	axis->SetTitleSize(0.04);
+	axis->SetTitleOffset(1.2);
 	axis->SetMaxDigits(2);
 	axis->CenterTitle();
 	axis->Draw();
@@ -700,7 +708,7 @@ int write_topdf(const char* output_file_name = "EffPurVsEtaPtPhi_PU200hh4b_m260o
 	C->Print(out_file_open,"pdf");
 	h_t_phi->GetYaxis()->SetAxisColor(kBlue);
 	h_t_phi->GetYaxis()->SetTitleColor(kBlue);
-	h_t_phi->GetYaxis()->SetTitleSize(0.05);
+	h_t_phi->GetYaxis()->SetTitleSize(0.04);
 	h_t_phi->GetYaxis()->SetLabelColor(kBlue);
 	h_t_phi->SetLineColor(kBlue);
 	h_t_phi->SetMarkerColor(kBlue);
@@ -721,19 +729,20 @@ int write_topdf(const char* output_file_name = "EffPurVsEtaPtPhi_PU200hh4b_m260o
 //	axis->SetLabelSize(0.05);
 	axis1->SetTitle("purity");
 	axis1->SetTitleColor(kRed);
-	axis1->SetTitleSize(0.05);
-	axis1->SetTitleOffset(1.08);
+	axis1->SetLabelFont(62);
+	axis1->SetTitleSize(0.04);
+	axis1->SetTitleOffset(1.2);
 	axis1->SetMaxDigits(2);
 	axis1->CenterTitle();
 	axis1->Draw();
 	
 	C->Print(out_file_, "pdf");
 
-	h_t_pt->GetYaxis()->SetRangeUser(0.8,1.04);
-	ht0_pt->GetYaxis()->SetRangeUser(0.8,1.04);
+	h_t_pt->GetYaxis()->SetRangeUser(0.6,1.04);
+	ht0_pt->GetYaxis()->SetRangeUser(0.6,1.04);
 	h_t_pt->GetYaxis()->SetAxisColor(kBlue);
 	h_t_pt->GetYaxis()->SetTitleColor(kBlue);
-	h_t_pt->GetYaxis()->SetTitleSize(0.05);
+	h_t_pt->GetYaxis()->SetTitleSize(0.04);
 	h_t_pt->GetYaxis()->SetLabelColor(kBlue);
 	h_t_pt->SetLineColor(kBlue);
 	h_t_pt->SetMarkerColor(kBlue);	
@@ -747,14 +756,15 @@ int write_topdf(const char* output_file_name = "EffPurVsEtaPtPhi_PU200hh4b_m260o
 	ht0_pt->Draw("same");
 	//draw an axis on the right side
 	TGaxis *axis2 = new TGaxis(gPad->GetUxmax(),gPad->GetUymin(),
-	gPad->GetUxmax(), gPad->GetUymax(),0.8,rightmax,510,"+L");
+	gPad->GetUxmax(), gPad->GetUymax(),0.6,rightmax,510,"+L");
 	axis2->SetLineColor(kRed);
 	axis2->SetLabelColor(kRed);
 //	axis->SetLabelSize(0.05);
+	axis2->SetLabelFont(62);
 	axis2->SetTitle("purity");
 	axis2->SetTitleColor(kRed);
-	axis2->SetTitleSize(0.05);
-	axis2->SetTitleOffset(1.08);
+	axis2->SetTitleSize(0.04);
+	axis2->SetTitleOffset(1.2);
 	axis2->SetMaxDigits(2);
 	axis2->CenterTitle();
 	axis2->Draw();
@@ -764,7 +774,7 @@ int write_topdf(const char* output_file_name = "EffPurVsEtaPtPhi_PU200hh4b_m260o
 	C->SetLogx(0);
 	h_t_pt->GetYaxis()->SetAxisColor(kBlue);
 	h_t_pt->GetYaxis()->SetTitleColor(kBlue);
-	h_t_pt->GetYaxis()->SetTitleSize(0.05);
+	h_t_pt->GetYaxis()->SetTitleSize(0.04);
 	h_t_pt->GetYaxis()->SetLabelColor(kBlue);
 	h_t_pt->SetLineColor(kBlue);
 	h_t_pt->SetMarkerColor(kBlue);	
@@ -786,8 +796,8 @@ int write_topdf(const char* output_file_name = "EffPurVsEtaPtPhi_PU200hh4b_m260o
 //	axis->SetLabelSize(0.05);
 	axis3->SetTitle("purity");
 	axis3->SetTitleColor(kRed);
-	axis3->SetTitleSize(0.05);
-	axis3->SetTitleOffset(1.08);
+	axis3->SetTitleSize(0.04);
+	axis3->SetTitleOffset(1.2);
 	axis3->SetMaxDigits(2);
 	axis3->CenterTitle();*/
 	axis2->Draw();
@@ -919,18 +929,18 @@ int writeEff_topdf(const char* output_file_name = "EffVsEtaPtPhi_TTTsig5L6BMatch
         ht0_phi->GetYaxis()->SetLabelFont(62);
         ht0_eta->GetYaxis()->SetLabelFont(62);
 */	
-	h_pt->GetYaxis()->SetTitleOffset(.85);
-	h_phi->GetYaxis()->SetTitleOffset(.85);
-	h_eta->GetYaxis()->SetTitleOffset(.85);
-/*        h0_pt->GetYaxis()->SetTitleOffset(.85);
-        h0_phi->GetYaxis()->SetTitleOffset(.85);
-        h0_eta->GetYaxis()->SetTitleOffset(.85);
-*/	ht_pt->GetYaxis()->SetTitleOffset(.85);
-	ht_phi->GetYaxis()->SetTitleOffset(.85);
-	ht_eta->GetYaxis()->SetTitleOffset(.85);
-/*        ht0_pt->GetYaxis()->SetTitleOffset(.85);
-        ht0_phi->GetYaxis()->SetTitleOffset(.85);
-        ht0_eta->GetYaxis()->SetTitleOffset(.85);
+	h_pt->GetYaxis()->SetTitleOffset(1.2);
+	h_phi->GetYaxis()->SetTitleOffset(1.2);
+	h_eta->GetYaxis()->SetTitleOffset(1.2);
+/*        h0_pt->GetYaxis()->SetTitleOffset(1.2);
+        h0_phi->GetYaxis()->SetTitleOffset(1.2);
+        h0_eta->GetYaxis()->SetTitleOffset(1.2);
+*/	ht_pt->GetYaxis()->SetTitleOffset(1.2);
+	ht_phi->GetYaxis()->SetTitleOffset(1.2);
+	ht_eta->GetYaxis()->SetTitleOffset(1.2);
+/*        ht0_pt->GetYaxis()->SetTitleOffset(1.2);
+        ht0_phi->GetYaxis()->SetTitleOffset(1.2);
+        ht0_eta->GetYaxis()->SetTitleOffset(1.2);
 */	
 	h_pt->GetYaxis()->CenterTitle();
 	h_phi->GetYaxis()->CenterTitle();
@@ -957,60 +967,60 @@ int writeEff_topdf(const char* output_file_name = "EffVsEtaPtPhi_TTTsig5L6BMatch
         ht0_phi->GetXaxis()->CenterTitle();
         ht0_eta->GetXaxis()->CenterTitle();
 */	
-	h_pt->GetYaxis()->SetTitleSize(.05);
-	h_phi->GetYaxis()->SetTitleSize(.05);
-	h_eta->GetYaxis()->SetTitleSize(.05);
-/*        h0_pt->GetYaxis()->SetTitleSize(.05);
-        h0_phi->GetYaxis()->SetTitleSize(.05);
-        h0_eta->GetYaxis()->SetTitleSize(.05);
-*/	ht_pt->GetYaxis()->SetTitleSize(.05);
-	ht_phi->GetYaxis()->SetTitleSize(.05);
-	ht_eta->GetYaxis()->SetTitleSize(.05);
-/*        ht0_pt->GetYaxis()->SetTitleSize(.05);
-        ht0_phi->GetYaxis()->SetTitleSize(.05);
-        ht0_eta->GetYaxis()->SetTitleSize(.05);
+	h_pt->GetYaxis()->SetTitleSize(0.04);
+	h_phi->GetYaxis()->SetTitleSize(0.04);
+	h_eta->GetYaxis()->SetTitleSize(0.04);
+/*        h0_pt->GetYaxis()->SetTitleSize(0.04);
+        h0_phi->GetYaxis()->SetTitleSize(0.04);
+        h0_eta->GetYaxis()->SetTitleSize(0.04);
+*/	ht_pt->GetYaxis()->SetTitleSize(0.04);
+	ht_phi->GetYaxis()->SetTitleSize(0.04);
+	ht_eta->GetYaxis()->SetTitleSize(0.04);
+/*        ht0_pt->GetYaxis()->SetTitleSize(0.04);
+        ht0_phi->GetYaxis()->SetTitleSize(0.04);
+        ht0_eta->GetYaxis()->SetTitleSize(0.04);
 */
-	h_pt->GetYaxis()->SetRangeUser(0.7,1.04);
-	h_phi->GetYaxis()->SetRangeUser(0.7,1.04);
-	h_eta->GetYaxis()->SetRangeUser(0.5,1.04);
+	h_pt->GetYaxis()->SetRangeUser(0.6,1.04);
+	h_phi->GetYaxis()->SetRangeUser(0.6,1.04);
+	h_eta->GetYaxis()->SetRangeUser(0.6,1.04);
 /*        h0_pt->GetYaxis()->SetRangeUser(0.9,1.04);
         h0_phi->GetYaxis()->SetRangeUser(0.9,1.04);
         h0_eta->GetYaxis()->SetRangeUser(0.9,1.04);
-*/	ht_pt->GetYaxis()->SetRangeUser(0.7,1.04);
-	ht_phi->GetYaxis()->SetRangeUser(0.7,1.04);
-	ht_eta->GetYaxis()->SetRangeUser(0.5,1.04);
+*/	ht_pt->GetYaxis()->SetRangeUser(0.6,1.04);
+	ht_phi->GetYaxis()->SetRangeUser(0.6,1.04);
+	ht_eta->GetYaxis()->SetRangeUser(0.6,1.04);
 /*        ht0_pt->GetYaxis()->SetRangeUser(0.9,1.04);
         ht0_phi->GetYaxis()->SetRangeUser(0.9,1.04);
         ht0_eta->GetYaxis()->SetRangeUser(0.9,1.04);
 */
-	h_pt->GetXaxis()->SetTitleOffset(.85);
-	h_phi->GetXaxis()->SetTitleOffset(.85);
-	h_eta->GetXaxis()->SetTitleOffset(.85);
-/*        h0_pt->GetXaxis()->SetTitleOffset(.85);
-        h0_phi->GetXaxis()->SetTitleOffset(.85);
-        h0_eta->GetXaxis()->SetTitleOffset(.85);
+	h_pt->GetXaxis()->SetTitleOffset(1.2);
+	h_phi->GetXaxis()->SetTitleOffset(1.2);
+	h_eta->GetXaxis()->SetTitleOffset(1.2);
+/*        h0_pt->GetXaxis()->SetTitleOffset(1.2);
+        h0_phi->GetXaxis()->SetTitleOffset(1.2);
+        h0_eta->GetXaxis()->SetTitleOffset(1.2);
 */	
-	ht_pt->GetXaxis()->SetTitleOffset(.85);
-	ht_phi->GetXaxis()->SetTitleOffset(.85);
-	ht_eta->GetXaxis()->SetTitleOffset(.85);
-/*        ht0_pt->GetXaxis()->SetTitleOffset(.85);
-        ht0_phi->GetXaxis()->SetTitleOffset(.85);
-        ht0_eta->GetXaxis()->SetTitleOffset(.85);
+	ht_pt->GetXaxis()->SetTitleOffset(1.2);
+	ht_phi->GetXaxis()->SetTitleOffset(1.2);
+	ht_eta->GetXaxis()->SetTitleOffset(1.2);
+/*        ht0_pt->GetXaxis()->SetTitleOffset(1.2);
+        ht0_phi->GetXaxis()->SetTitleOffset(1.2);
+        ht0_eta->GetXaxis()->SetTitleOffset(1.2);
 */	
 
-	h_pt->GetXaxis()->SetTitleSize(.05);
-	h_phi->GetXaxis()->SetTitleSize(.05);
-	h_eta->GetXaxis()->SetTitleSize(.05);
-/*        h0_pt->GetXaxis()->SetTitleSize(.05);
-        h0_phi->GetXaxis()->SetTitleSize(.05);
-        h0_eta->GetXaxis()->SetTitleSize(.05);
+	h_pt->GetXaxis()->SetTitleSize(0.04);
+	h_phi->GetXaxis()->SetTitleSize(0.04);
+	h_eta->GetXaxis()->SetTitleSize(0.04);
+/*        h0_pt->GetXaxis()->SetTitleSize(0.04);
+        h0_phi->GetXaxis()->SetTitleSize(0.04);
+        h0_eta->GetXaxis()->SetTitleSize(0.04);
 */	
-	ht_pt->GetXaxis()->SetTitleSize(.05);
-	ht_phi->GetXaxis()->SetTitleSize(.05);
-	ht_eta->GetXaxis()->SetTitleSize(.05);
-/*        ht0_pt->GetXaxis()->SetTitleSize(.05);
-        ht0_phi->GetXaxis()->SetTitleSize(.05);
-        ht0_eta->GetXaxis()->SetTitleSize(.05);
+	ht_pt->GetXaxis()->SetTitleSize(0.04);
+	ht_phi->GetXaxis()->SetTitleSize(0.04);
+	ht_eta->GetXaxis()->SetTitleSize(0.04);
+/*        ht0_pt->GetXaxis()->SetTitleSize(0.04);
+        ht0_phi->GetXaxis()->SetTitleSize(0.04);
+        ht0_eta->GetXaxis()->SetTitleSize(0.04);
 */	
 	h_pt->GetXaxis()->SetTitle("p_{t} [GeV/c]");
 	h_phi->GetXaxis()->SetTitle("#phi [rad]");
@@ -1142,7 +1152,7 @@ int writeEff_topdf(const char* output_file_name = "EffVsEtaPtPhi_TTTsig5L6BMatch
 	C->SetTicky(0);
 	h_eta->GetYaxis()->SetAxisColor(kBlue);
 	h_eta->GetYaxis()->SetTitleColor(kBlue);
-	h_eta->GetYaxis()->SetTitleSize(0.05);
+	h_eta->GetYaxis()->SetTitleSize(0.04);
 	h_eta->GetYaxis()->SetLabelColor(kBlue);
 	h_eta->SetLineColor(kBlue);
 	ht_eta->SetLineColor(kBlue);
@@ -1168,8 +1178,8 @@ int writeEff_topdf(const char* output_file_name = "EffVsEtaPtPhi_TTTsig5L6BMatch
 //	axis->SetLabelSize(0.05);
 	axis->SetTitle("purity");
 	axis->SetTitleColor(kRed);
-	axis->SetTitleSize(0.05);
-	axis->SetTitleOffset(1.08);
+	axis->SetTitleSize(0.04);
+	axis->SetTitleOffset(1.2);
 	axis->SetMaxDigits(2);
 	axis->CenterTitle();
 	axis->Draw();
@@ -1177,7 +1187,7 @@ int writeEff_topdf(const char* output_file_name = "EffVsEtaPtPhi_TTTsig5L6BMatch
 	C->Print(out_file_,"pdf");
 	h_phi->GetYaxis()->SetAxisColor(kBlue);
 	h_phi->GetYaxis()->SetTitleColor(kBlue);
-	h_phi->GetYaxis()->SetTitleSize(0.05);
+	h_phi->GetYaxis()->SetTitleSize(0.04);
 	h_phi->GetYaxis()->SetLabelColor(kBlue);
 	h_phi->SetLineColor(kBlue);
 	ht_phi->SetLineColor(kBlue);
@@ -1203,8 +1213,8 @@ int writeEff_topdf(const char* output_file_name = "EffVsEtaPtPhi_TTTsig5L6BMatch
 //	axis->SetLabelSize(0.05);
 	axis1->SetTitle("purity");
 	axis1->SetTitleColor(kRed);
-	axis1->SetTitleSize(0.05);
-	axis1->SetTitleOffset(1.08);
+	axis1->SetTitleSize(0.04);
+	axis1->SetTitleOffset(1.2);
 	axis1->SetMaxDigits(2);
 	axis1->CenterTitle();
 	axis1->Draw();
@@ -1212,7 +1222,7 @@ int writeEff_topdf(const char* output_file_name = "EffVsEtaPtPhi_TTTsig5L6BMatch
 	C->Print(out_file_,"pdf");
 	h_pt->GetYaxis()->SetAxisColor(kBlue);
 	h_pt->GetYaxis()->SetTitleColor(kBlue);
-	h_pt->GetYaxis()->SetTitleSize(0.05);
+	h_pt->GetYaxis()->SetTitleSize(0.04);
 	h_pt->GetYaxis()->SetLabelColor(kBlue);
 	h_pt->SetLineColor(kBlue);
 	ht_pt->SetLineColor(kBlue);
@@ -1238,8 +1248,8 @@ int writeEff_topdf(const char* output_file_name = "EffVsEtaPtPhi_TTTsig5L6BMatch
 //	axis->SetLabelSize(0.05);
 	axis2->SetTitle("purity");
 	axis2->SetTitleColor(kRed);
-	axis2->SetTitleSize(0.05);
-	axis2->SetTitleOffset(1.08);
+	axis2->SetTitleSize(0.04);
+	axis2->SetTitleOffset(1.2);
 	axis2->SetMaxDigits(2);
 	axis2->CenterTitle();
 	axis2->Draw();
