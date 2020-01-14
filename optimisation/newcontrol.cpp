@@ -23,9 +23,15 @@
 // 20mm
 // hit_c:5e-09
 // MS_c:0.00481667
+// 25mm
+// hit_c:2.048e-09
+// MS_c:0.00308267
 // 30mm
 // hit_c:9.87654e-10
 // MS_c:0.00214074
+// 35mm
+// hit_c:5.33111e-10
+// MS_c:0.00157279
 // 40mm
 // hit_c:3.125e-10
 // MS_c:0.00160556
@@ -39,8 +45,8 @@
 const char* out_path = "./plots/optimisation";
 //! DEFINE CUTS for numerator and denominator
 ////! 20mm
-//TCut num_select    = "Tid>0  && Pt_n > 2000  && abs(Z013) < 100 && abs(Eta13) < 1.6 && abs(Phi13)<0.015 && abs(Z13)<120";
-//TCut den_select    = "Tid>-2 && Pt_n > 2000  && abs(Z013) < 100 && abs(Eta13) < 1.6 && abs(Phi13)<0.015 && abs(Z13)<120";
+//TCut num_select    = "Tid>0  && Pt_n > 2000  && abs(Z013) < 100 && abs(Eta13) < 2.5 && abs(Phi13)<0.015 && abs(Z13)<120";
+//TCut den_select    = "Tid>-2 && Pt_n > 2000  && abs(Z013) < 100 && abs(Eta13) < 2.5 && abs(Phi13)<0.015 && abs(Z13)<120";
 ////! 
 //TCut phiBarrel	= "abs(Phi13)< 0.015";
 //TCut zBarrel	= "abs(Z13)<120";
@@ -53,40 +59,69 @@ const char* out_path = "./plots/optimisation";
 //TCut kapcut   =  "abs(kappa-kap013)/sqrt(5e-9 + 0.00481667 * (1/sin(Theta13)) * kap013^2 ) < 4 ";
 //TCut kapcut_t =  "abs(kappa-kap013)/sqrt(5e-9 + 0.00481667 * (1/sin(Theta13)) * kap013^2 ) < 3 ";
 
+//! 25mm
+TCut num_select    = "Tid>0  && Pt_n > 2000  && abs(Z013) < 100 && abs(Eta13) < 2.5 && abs(Phi13)<0.018 && abs(Z13)<320";
+TCut den_select    = "Tid>-2 && Pt_n > 2000  && abs(Z013) < 100 && abs(Eta13) < 2.5 && abs(Phi13)<0.018 && abs(Z13)<320";
+//! 
+TCut phiBarrel	= "abs(Phi13)< 0.018";
+TCut zBarrel	= "abs(Z13)<320";
+TCut maxdphi2	= "abs(dphi2)<3.0e-4";
+TCut maxdz2	= "abs(dz2)<0.16*(sin(Theta13)^(-1.1))";
+const float dz2_exp   = -1.1;
+const float dz2_const = 0.16;
+//! 
+TCut kapcut_l =  "abs(kappa-kap013)/sqrt(2.048e-09 + 0.00308267 * (1/sin(Theta13)) * kap013^2 ) < 5 ";
+TCut kapcut   =  "abs(kappa-kap013)/sqrt(2.048e-09 + 0.00308267 * (1/sin(Theta13)) * kap013^2 ) < 4 ";
+TCut kapcut_t =  "abs(kappa-kap013)/sqrt(2.048e-09 + 0.00308267 * (1/sin(Theta13)) * kap013^2 ) < 3 ";
 
-//! 30mm
-TCut num_select    = "Tid>0  && Pt_n > 2000  && abs(Z013) < 100 && abs(Eta13) < 1.6 && abs(Phi13)<0.02 && abs(Z13)<160";
-TCut den_select    = "Tid>-2 && Pt_n > 2000  && abs(Z013) < 100 && abs(Eta13) < 1.6 && abs(Phi13)<0.02 && abs(Z13)<160";
-//! 
-TCut phiBarrel	= "abs(Phi13)< 0.02";
-TCut zBarrel	= "abs(Z13)<160";
-TCut maxdphi2	= "abs(dphi2)<1.4e-4";
-TCut maxdz2	= "abs(dz2)<0.13*(sin(Theta13)^(-1.15))";
-const float dz2_exp   = -1.15;
-const float dz2_const = 0.13;
-//! 
-TCut kapcut_l =  "abs(kappa-kap013)/sqrt(9.87654e-10 + 0.00214074 * (1/sin(Theta13)) * kap013^2 ) < 5 ";
-TCut kapcut   =  "abs(kappa-kap013)/sqrt(9.87654e-10 + 0.00214074 * (1/sin(Theta13)) * kap013^2 ) < 4 ";
-TCut kapcut_t =  "abs(kappa-kap013)/sqrt(9.87654e-10 + 0.00214074 * (1/sin(Theta13)) * kap013^2 ) < 3 ";
+////! 30mm
+//TCut num_select    = "Tid>0  && Pt_n > 2000  && abs(Z013) < 100 && abs(Eta13) < 2.5 && abs(Phi13)<0.021 && abs(Z13)<380";
+//TCut den_select    = "Tid>-2 && Pt_n > 2000  && abs(Z013) < 100 && abs(Eta13) < 2.5 && abs(Phi13)<0.021 && abs(Z13)<380";
+////! 
+//TCut phiBarrel	= "abs(Phi13)< 0.021";
+//TCut zBarrel	= "abs(Z13)<380";
+//TCut maxdphi2	= "abs(dphi2)<3.0e-4";
+//TCut maxdz2	= "abs(dz2)<0.17*(sin(Theta13)^(-1.15))";
+//const float dz2_exp   = -1.15;
+//const float dz2_const = 0.17;
+////! 
+//TCut kapcut_l =  "abs(kappa-kap013)/sqrt(9.87654e-10 + 0.00214074 * (1/sin(Theta13)) * kap013^2 ) < 5 ";
+//TCut kapcut   =  "abs(kappa-kap013)/sqrt(9.87654e-10 + 0.00214074 * (1/sin(Theta13)) * kap013^2 ) < 4 ";
+//TCut kapcut_t =  "abs(kappa-kap013)/sqrt(9.87654e-10 + 0.00214074 * (1/sin(Theta13)) * kap013^2 ) < 3 ";
 
-//! 40mm
-/*TCut num_select    = "Tid>0  && Pt_n > 2000  && abs(Z013) < 100 && abs(Eta13) < 1.6 && abs(Phi13)<0.026 && abs(Z13)<210";
-TCut den_select    = "Tid>-2 && Pt_n > 2000  && abs(Z013) < 100 && abs(Eta13) < 1.6 && abs(Phi13)<0.026 && abs(Z13)<210";
-//! 
-TCut phiBarrel	= "abs(Phi13)< 0.026";
-TCut zBarrel	= "abs(Z13)<210";
-TCut maxdphi2	= "abs(dphi2)<2.0e-4";
-TCut maxdz2	= "abs(dz2)<0.17*(sin(Theta13)^(-1.35))";
-const float dz2_exp   = -1.35;
-const float dz2_const = 0.17;
-//! 
-TCut kapcut_l =  "abs(kappa-kap013)/sqrt(3.125e-10 + 0.00160556 * (1/sin(Theta13)) * kap013^2 ) < 5 ";
-TCut kapcut   =  "abs(kappa-kap013)/sqrt(3.125e-10 + 0.00160556 * (1/sin(Theta13)) * kap013^2 ) < 4 ";
-TCut kapcut_t =  "abs(kappa-kap013)/sqrt(3.125e-10 + 0.00160556 * (1/sin(Theta13)) * kap013^2 ) < 3 ";*/
+////! 35mm
+//TCut num_select    = "Tid>0  && Pt_n > 2000  && abs(Z013) < 100 && abs(Eta13) < 2.5 && abs(Phi13)<0.025 && abs(Z13)<430";
+//TCut den_select    = "Tid>-2 && Pt_n > 2000  && abs(Z013) < 100 && abs(Eta13) < 2.5 && abs(Phi13)<0.025 && abs(Z13)<430";
+////! 
+//TCut phiBarrel	= "abs(Phi13)< 0.025";
+//TCut zBarrel	= "abs(Z13)<430";
+//TCut maxdphi2	= "abs(dphi2)<3.0e-4";
+//TCut maxdz2	= "abs(dz2)<0.19*(sin(Theta13)^(-1.25))";
+//const float dz2_exp   = -1.25;
+//const float dz2_const = 0.19;
+////! 
+//TCut kapcut_l =  "abs(kappa-kap013)/sqrt(5.33111e-10 + 0.00157531 * (1/sin(Theta13)) * kap013^2 ) < 5 ";
+//TCut kapcut   =  "abs(kappa-kap013)/sqrt(5.33111e-10 + 0.00157531 * (1/sin(Theta13)) * kap013^2 ) < 4 ";
+//TCut kapcut_t =  "abs(kappa-kap013)/sqrt(5.33111e-10 + 0.00157531 * (1/sin(Theta13)) * kap013^2 ) < 3 ";
+
+////! 40mm
+//TCut num_select    = "Tid>0  && Pt_n > 2000  && abs(Z013) < 100 && abs(Eta13) < 2.5 && abs(Phi13)<0.028 && abs(Z13)<480";
+//TCut den_select    = "Tid>-2 && Pt_n > 2000  && abs(Z013) < 100 && abs(Eta13) < 2.5 && abs(Phi13)<0.028 && abs(Z13)<480";
+////! 
+//TCut phiBarrel	= "abs(Phi13)< 0.028";
+//TCut zBarrel	= "abs(Z13)<480";
+//TCut maxdphi2	= "abs(dphi2)<3.0e-4";
+//TCut maxdz2	= "abs(dz2)<0.2*(sin(Theta13)^(-1.3))";
+//const float dz2_exp   = -1.3;
+//const float dz2_const = 0.2;
+////! 
+//TCut kapcut_l =  "abs(kappa-kap013)/sqrt(3.125e-10 + 0.00120609 * (1/sin(Theta13)) * kap013^2 ) < 5 ";
+//TCut kapcut   =  "abs(kappa-kap013)/sqrt(3.125e-10 + 0.00120609 * (1/sin(Theta13)) * kap013^2 ) < 4 ";
+//TCut kapcut_t =  "abs(kappa-kap013)/sqrt(3.125e-10 + 0.00120609 * (1/sin(Theta13)) * kap013^2 ) < 3 ";
 
 ////! 50mm
-//TCut num_select    = "Tid>0  && Pt_n > 2000  && abs(Z013) < 100 && abs(Eta13) < 1.6 && abs(Phi13)<0.032 && abs(Z13)<260";
-//TCut den_select    = "Tid>-2 && Pt_n > 2000  && abs(Z013) < 100 && abs(Eta13) < 1.6 && abs(Phi13)<0.032 && abs(Z13)<260";
+//TCut num_select    = "Tid>0  && Pt_n > 2000  && abs(Z013) < 100 && abs(Eta13) < 2.5 && abs(Phi13)<0.032 && abs(Z13)<260";
+//TCut den_select    = "Tid>-2 && Pt_n > 2000  && abs(Z013) < 100 && abs(Eta13) < 2.5 && abs(Phi13)<0.032 && abs(Z13)<260";
 ////! 
 //TCut phiBarrel	= "abs(Phi13)< 0.032";
 //TCut zBarrel	= "abs(Z13)< 260";
@@ -102,8 +137,8 @@ TCut kapcut_t =  "abs(kappa-kap013)/sqrt(3.125e-10 + 0.00160556 * (1/sin(Theta13
 
 TCut matched	= "Tid>0";
 TCut fakes	= "Tid ==-1";
-TCut minPt	= "Pt_n > 2e3 && abs(Eta13)<1.6";
-TCut minPt_t	= "M_pt > 2e3 && abs(M_eta)<1.6";
+TCut minPt	= "Pt_n > 2e3 && abs(Eta13)<2.5";
+TCut minPt_t	= "M_pt > 2e3 && abs(M_eta)<2.5";
 TCut truth_m	= "M_pt < 20e3";
 TCut recon_m	= "Pt_n < 20e3";
 TCut pion	= "abs(M_pdg) == 211";
@@ -114,7 +149,7 @@ TCut z0truthmax	= "abs(M_Vz)<100";//! depends on the luminous region along z
 TCut z0recmax	= "abs(Z013)<100";
 void newcontrol
 (
-	const char* output_file_name = "control_MB_30mm_samelad",//f-few
+	const char* output_file_name = "control_25mm_ggF",//f-few
 	//const char* output_file_name = "control_hh4b_final3",//f-few
 	const char* set = "C",
 	const bool verbose = true
@@ -125,20 +160,26 @@ void newcontrol
 	//! minbias
 	//rec.Add("/media/tamasi/DriveT1/tamasi/Desktop/PHD/work/rec_data/Mar102k19/minBias/*000010_1.root");
 	//rec.Add("/media/tamasi/DriveT1/tamasi/Desktop/PHD/work/rec_data/Mar102k19/minBias/*000011_1.root");
-	TF1 *fdz2 = new TF1("fdz2", "[0]*(x)^[1]",0.4,1.05);
+	TF1 *fdz2 = new TF1("fdz2", "[0]*(x)^[1]",0.16,1.05);
 	fdz2->SetParameter(0,dz2_const);
 	fdz2->SetParameter(1,dz2_exp);
 	fdz2->SetLineColor(kBlack);
-	TF1 *fdz2_ = new TF1("fdz2_", "[0]*(x)^[1]",0.4,1.05);
+	TF1 *fdz2_ = new TF1("fdz2_", "[0]*(x)^[1]",0.16,1.05);
 	fdz2_->SetParameter(0,-1*dz2_const);
 	fdz2_->SetParameter(1,dz2_exp);
 	fdz2_->SetLineColor(kBlack);
 	//! 20mm
 	//rec.Add("/home/tamasi/repo_tamasi/rec_files/PU0hh4b_m260_recTree_200001_wide.root");
+	//! 25mm
+	rec.Add("/home/tamasi/repo_tamasi/rec_files/for_optimization/25mm/ggFhh4b_SM/*.root");
 	//! 30mm
-	rec.Add("/home/tamasi/repo_tamasi/rec_files/MB_recTree_30000*_samelad.root");
+	//rec.Add("/home/tamasi/repo_tamasi/rec_files/MB_recTree_30000*_samelad.root");
+	//rec.Add("/media/tamasi/Elements/PhD/FCC/data_files/rec_files/30mm/ggFhh4b_SM/*.root");
+	//! 35mm
+	//rec.Add("/media/tamasi/Elements/PhD/FCC/data_files/rec_files/35mm/ggFhh4b_SM/*.root");
 	//! 40mm
 	//rec.Add("/home/tamasi/repo_tamasi/rec_files/PU200*rec__004*_.root");
+	//rec.Add("/media/tamasi/Elements/PhD/FCC/data_files/rec_files/40mm/ggFhh4b_SM/*.root");
 	//! 50mm
 	//rec.Add("/home/tamasi/repo_tamasi/rec_files/PU200hh4b_rec__005*_.root");
 
@@ -155,10 +196,11 @@ void newcontrol
 
 	//! number of points in the plots
 	//int num_events = 225;//1e5;
-	int num_events = rec.GetEntries();
+	//int num_events = rec.GetEntries();
+	int num_events = 2000;
 
-	int etabin = 21;
-        double etamin =-1.7, etamax = 1.7;
+	int etabin = 31;
+        double etamin =-2.6, etamax = 2.6;
 	std::cout<<"rec tree opened with " << rec.GetEntries() <<"entries\n";
 	/// LOG BINS
 	/// Variable bin width
@@ -186,7 +228,7 @@ void newcontrol
 	TH2F* h9 = new TH2F("h9","P_{trec} Vs P_{t};P_{t} [MeV/c];P_{trec}", 300,1000,25e3,300,1000,25e3); 	
 	TH2F* h10 = new TH2F("h10","P_{trec} Vs P_{t};P_{t} [MeV/c];P_{trec}", 300,1000,25e3,300,1000,25e3);
  	
-	TH2F* h11 = new TH2F("h11","P_{t} Vs Z_{13};Z_{13};P_{t} [MeV/c];", 300,-300,300,300,1000,25e3); 		
+	TH2F* h11 = new TH2F("h11","P_{t} Vs Z_{13};Z_{13};P_{t} [MeV/c];", 300,-520,520,300,1000,25e3); 		
 	
 	TH2F* h12 = new TH2F("h12","Z_{013} Vs dphi_{2};dphi_{2};Z_{013} [mm]", 300,-0.001,0.001,300,-125,125); 	
 	TH2F* h13 = new TH2F("h13","Z_{013} Vs dphi_{2};dphi_{2};Z_{013} [mm]", 300,-0.001,0.001,300,-125,125); 	
@@ -881,7 +923,7 @@ void newcontrol
 	//rec.Draw("kap013^2:kappa-kap013>>h40",matched && minPt && phiBarrel && zBarrel && z0recmax && maxdphi2 && maxdz2 /*dphi2max_l && dz2max_l*/ && muon,"same"/*,num_events*/);
 	//rec.Draw("kap013^2:kappa-kap013>>h41","Tid>0 && abs(M_Vz)<100 && abs(M_Vx)<15 && abs(M_Vy)<15 && abs(M_eta)<1.5 && abs(M_pt)>2e3","same",num_events);
 
-	rec.Draw("kap013:kappa-kap013>>th36","Tid>0 && abs(M_Vz)<100 && abs(M_Vx)<2 && abs(M_Vy)<2 && abs(M_eta)<1.6 && abs(M_pt)>2e3","",num_events);
+	rec.Draw("kap013:kappa-kap013>>th36","Tid>0 && abs(M_Vz)<100 && abs(M_Vx)<2 && abs(M_Vy)<2 && abs(M_eta)<2.5 && abs(M_pt)>2e3","",num_events);
 	rec.Draw("kap013:kappa-kap013>>th37",matched && minPt && phiBarrel && zBarrel && z0recmax && maxdphi2 && maxdz2 /*dphi2max_l && dz2max_l*/,"",num_events);
 	rec.Draw("kap013:kappa-kap013>>th38",matched && minPt && phiBarrel && zBarrel && z0recmax && maxdphi2 && maxdz2 /*dphi2max_l && dz2max_l*/ && noelectron,"same",num_events);
 	rec.Draw("kap013:kappa-kap013>>th39",matched && minPt && phiBarrel && zBarrel && z0recmax && maxdphi2 && maxdz2 /*dphi2max_l && dz2max_l*/ && kapcut_l,"same",num_events);

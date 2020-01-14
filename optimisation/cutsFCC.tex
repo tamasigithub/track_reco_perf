@@ -1,0 +1,84 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage{diagbox}
+
+\title{Track reconstruction optimization}
+
+\author{for Triplet Track Trigger.}
+\date{}
+%\date{\today}
+
+\begin{document}
+\maketitle
+
+\section*{Pre-Selection Cuts}
+
+\begin{enumerate}\item Transverse barrel cut : $|\phi_{13}| < \phi_{13 \_ cut}  \: \: rad $ 
+
+\item Longitudinal barrel cut  : $|z_{13}| < z_{13 \_ cut}  \: \: mm$ 
+\item Transverse residual cut : $|d\phi_{2}| < d\phi_{2 \_ cut}  \: \: rad$
+\item Longitudinal residual cut : $|dz_{2}| <  dz_{2 \_const}* sin(\theta_{013})^{dz_{2 \_exp}} \: \: mm$
+\end{enumerate}
+\section*{Final - Selection Cuts}
+\begin{enumerate}
+\item Minimum momentum : $ pt_{013} > 2 GeV/c$\
+\item Longitudinal acceptance : $|\eta_{013}| < 2.5$
+\item Luminous region : $|Z_{013}| < 100mm$
+%\item Momentum consistency : $ \kappa_{013}^2 > a * (\kappa_{123} - \kappa_{013})^2 - b $ where,\\
+%\\$a = 0.5 \:, b = 1.2 * 10^{-7}\quad  \rightarrow$   loose cut\\
+%$a = 0.8 \:, b = 0.8 * 10^{-7}\quad  \rightarrow$   medium cut\\
+%$a = 1.1 \:, b = 0.5 * 10^{-7}\quad  \rightarrow$   tight cut
+\item Momentum consistency : \\\\
+$|\kappa_{123} - \kappa_{013}| / \sigma_{\kappa} < 5*\sigma \quad \rightarrow$ loose cut \\
+$|\kappa_{123} - \kappa_{013}| / \sigma_{\kappa} < 4*\sigma \quad \rightarrow $ medium cut \\
+$|\kappa_{123} - \kappa_{013}| / \sigma_{\kappa} < 3*\sigma \quad \rightarrow$ tight cut \\
+where, $\sigma \sim 1 $ and $\sigma_{\kappa}$ is defined below.
+\end{enumerate}
+\section*{Pull distribution}
+\begin{equation}
+\begin{split}
+Pull &= \frac{\kappa_{123}-\kappa_{013}}{\sigma_{\kappa}} 
+\end{split}
+\end{equation}
+\begin{equation}
+\begin{split}
+\sigma_{\kappa}^2 &= (\frac {\sqrt{6} * \sigma_t} { d^2 })^2 + \frac{t}{X_0 * sin(\theta_{013})} * (\frac {13.6 MeV* \kappa_{013} }{0.3 * B * d})^2 
+\end{split}
+\end{equation}
+\\ substituting the uncertainty in the transverse direction, $\sigma_t = \frac {w}{\sqrt{12}}  $
+\begin{equation}
+\begin{split}
+\sigma_{\kappa}^2 &= 0.5 * (\frac{w}{ d^2 })^2 + \frac{t}{X_0 * sin(\theta_{013})}  * (\frac {13.6 MeV * \kappa_{013}}{0.3 * B * d})^2
+\end{split}
+\end{equation}
+where, $\kappa_{013} \quad \& \quad \kappa_{123} $ are in mm, \\
+$w \: \:= 40*10^{-3} mm $ is the pixel width,\\
+$d \: \: \: = 20/25/30/35/40 mm$ is the spacing between the layers in the triplet, \\
+$\frac{t}{X_0} = 0.015$ relative radiation length in the middle layer \& \\
+$B \:  \: = 4T$ is the magnetic field \\ 
+$hit_{const} \: = 0.5 * (\frac{w}{ d^2 })^2 $ \\
+$ MS_{const} \: = \frac{t}{X_0 * sin(\theta_{013})}  * (\frac {13.6 MeV * \kappa_{013}}{0.3 * B * d})^2$ \\ \\
+
+%I have used $R_{3D} = R_{2D}/sin(\theta)$
+%\end{equation}
+
+\begin{tabular}{|l||*{5}{c|}}\hline
+\diagbox{Cuts}{gap size}
+&\makebox[4em]{20mm}&\makebox[4em]{25mm}&\makebox[4em]{30mm}
+&\makebox[4em]{35mm}&\makebox[4em]{40mm}\\\hline\hline
+$\phi_{13\_ cut}$ & - & 0.018 & 0.021 & 0.025 & 0.028 \\\hline
+$z_{13 \_ cut}$ & - & 320 & 380 & 430 & 480\\\hline
+$d\phi_{2 \_ cut}$ & - & 3.0e-4 & 3.0e-4 & 3.0e-4 & 3.0e-4\\\hline
+$ dz_{2 \_ exp}$ & - & -1.1 & -1.15 & -1.25 & -1.3\\\hline
+$ dz_{2 \_ const}$ & - & 0.16 & 0.17 & 0.19 & 0.2 \\\hline
+$hit_{const}$ & - & 2.048e-09 & 9.87654e-10 & 5.33111e-10&3.125e-10 \\\hline
+$MS_{const}$ & - &0.00308267 & 0.00214074 & 0.00157531 & 0.00120609 \\\hline
+
+\end{tabular}
+
+\end{document}
