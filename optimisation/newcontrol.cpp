@@ -66,13 +66,13 @@ TCut den_select    = "Tid>-2 && Pt_n > 2000  && abs(Z013) < 100 && abs(Eta13) < 
 TCut phiBarrel	= "abs(Phi13)< 0.018";
 TCut zBarrel	= "abs(Z13)<320";
 TCut maxdphi2	= "abs(dphi2)<3.0e-4";
-TCut maxdz2	= "abs(dz2)<0.16*(sin(Theta13)^(-1.1))";
+TCut maxdz2	= "abs(dz2)<0.12*(sin(Theta13)^(-1.1))";
 const float dz2_exp   = -1.1;
-const float dz2_const = 0.16;
+const float dz2_const = 0.12;
 //! 
-TCut kapcut_l =  "abs(kappa-kap013)/sqrt(2.048e-09 + 0.00308267 * (1/sin(Theta13)) * kap013^2 ) < 5 ";
-TCut kapcut   =  "abs(kappa-kap013)/sqrt(2.048e-09 + 0.00308267 * (1/sin(Theta13)) * kap013^2 ) < 4 ";
-TCut kapcut_t =  "abs(kappa-kap013)/sqrt(2.048e-09 + 0.00308267 * (1/sin(Theta13)) * kap013^2 ) < 3 ";
+TCut kapcut_l =  "abs(kappa-kap013)/sqrt(2.048e-09 + 0.0030876 * (1/sin(Theta13)) * kap013^2 ) < 5 ";
+TCut kapcut   =  "abs(kappa-kap013)/sqrt(2.048e-09 + 0.0030876 * (1/sin(Theta13)) * kap013^2 ) < 4 ";
+TCut kapcut_t =  "abs(kappa-kap013)/sqrt(2.048e-09 + 0.0030876 * (1/sin(Theta13)) * kap013^2 ) < 3 ";
 
 ////! 30mm
 //TCut num_select    = "Tid>0  && Pt_n > 2000  && abs(Z013) < 100 && abs(Eta13) < 2.5 && abs(Phi13)<0.021 && abs(Z13)<380";
@@ -81,13 +81,13 @@ TCut kapcut_t =  "abs(kappa-kap013)/sqrt(2.048e-09 + 0.00308267 * (1/sin(Theta13
 //TCut phiBarrel	= "abs(Phi13)< 0.021";
 //TCut zBarrel	= "abs(Z13)<380";
 //TCut maxdphi2	= "abs(dphi2)<3.0e-4";
-//TCut maxdz2	= "abs(dz2)<0.17*(sin(Theta13)^(-1.15))";
-//const float dz2_exp   = -1.15;
-//const float dz2_const = 0.17;
+//TCut maxdz2	= "abs(dz2)<0.13*(sin(Theta13)^(-1.13))";
+//const float dz2_exp   = -1.13;
+//const float dz2_const = 0.13;
 ////! 
-//TCut kapcut_l =  "abs(kappa-kap013)/sqrt(9.87654e-10 + 0.00214074 * (1/sin(Theta13)) * kap013^2 ) < 5 ";
-//TCut kapcut   =  "abs(kappa-kap013)/sqrt(9.87654e-10 + 0.00214074 * (1/sin(Theta13)) * kap013^2 ) < 4 ";
-//TCut kapcut_t =  "abs(kappa-kap013)/sqrt(9.87654e-10 + 0.00214074 * (1/sin(Theta13)) * kap013^2 ) < 3 ";
+//TCut kapcut_l =  "abs(kappa-kap013)/sqrt(9.87654e-10 + 0.00214417 * (1/sin(Theta13)) * kap013^2 ) < 5 ";
+//TCut kapcut   =  "abs(kappa-kap013)/sqrt(9.87654e-10 + 0.00214417 * (1/sin(Theta13)) * kap013^2 ) < 4 ";
+//TCut kapcut_t =  "abs(kappa-kap013)/sqrt(9.87654e-10 + 0.00214417 * (1/sin(Theta13)) * kap013^2 ) < 3 ";
 
 ////! 35mm
 //TCut num_select    = "Tid>0  && Pt_n > 2000  && abs(Z013) < 100 && abs(Eta13) < 2.5 && abs(Phi13)<0.025 && abs(Z13)<430";
@@ -96,9 +96,9 @@ TCut kapcut_t =  "abs(kappa-kap013)/sqrt(2.048e-09 + 0.00308267 * (1/sin(Theta13
 //TCut phiBarrel	= "abs(Phi13)< 0.025";
 //TCut zBarrel	= "abs(Z13)<430";
 //TCut maxdphi2	= "abs(dphi2)<3.0e-4";
-//TCut maxdz2	= "abs(dz2)<0.19*(sin(Theta13)^(-1.25))";
-//const float dz2_exp   = -1.25;
-//const float dz2_const = 0.19;
+//TCut maxdz2	= "abs(dz2)<0.15*(sin(Theta13)^(-1.18))";
+//const float dz2_exp   = -1.18;
+//const float dz2_const = 0.15;
 ////! 
 //TCut kapcut_l =  "abs(kappa-kap013)/sqrt(5.33111e-10 + 0.00157531 * (1/sin(Theta13)) * kap013^2 ) < 5 ";
 //TCut kapcut   =  "abs(kappa-kap013)/sqrt(5.33111e-10 + 0.00157531 * (1/sin(Theta13)) * kap013^2 ) < 4 ";
@@ -111,9 +111,9 @@ TCut kapcut_t =  "abs(kappa-kap013)/sqrt(2.048e-09 + 0.00308267 * (1/sin(Theta13
 //TCut phiBarrel	= "abs(Phi13)< 0.028";
 //TCut zBarrel	= "abs(Z13)<480";
 //TCut maxdphi2	= "abs(dphi2)<3.0e-4";
-//TCut maxdz2	= "abs(dz2)<0.2*(sin(Theta13)^(-1.3))";
+//TCut maxdz2	= "abs(dz2)<0.16*(sin(Theta13)^(-1.3))";
 //const float dz2_exp   = -1.3;
-//const float dz2_const = 0.2;
+//const float dz2_const = 0.16;
 ////! 
 //TCut kapcut_l =  "abs(kappa-kap013)/sqrt(3.125e-10 + 0.00120609 * (1/sin(Theta13)) * kap013^2 ) < 5 ";
 //TCut kapcut   =  "abs(kappa-kap013)/sqrt(3.125e-10 + 0.00120609 * (1/sin(Theta13)) * kap013^2 ) < 4 ";
