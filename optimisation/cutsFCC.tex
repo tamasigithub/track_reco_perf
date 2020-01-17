@@ -56,13 +56,24 @@ Pull &= \frac{\kappa_{123}-\kappa_{013}}{\sigma_{\kappa}}
 \sigma_{\kappa}^2 &= 0.5 * (\frac{w}{ d^2 })^2 + \frac{t}{X_0 * sin(\theta_{013})}  * (\frac {13.6 MeV * \kappa_{013}}{0.3 * B * d})^2
 \end{split}
 \end{equation}
-where, $\kappa_{013} \quad \& \quad \kappa_{123} $ are in mm, \\
-$w \: \:= 40*10^{-3} mm $ is the pixel width,\\
-$d \: \: \: = 20/25/30/35/40 mm$ is the spacing between the layers in the triplet, \\
-$\frac{t}{X_0} = 0.015$ relative radiation length in the middle layer \& \\
-$B \:  \: = 4T$ is the magnetic field \\ 
-$hit_{const} \: = 0.5 * (\frac{w}{ d^2 })^2 $ \\
-$ MS_{const} \: = \frac{t}{X_0 * sin(\theta_{013})}  * (\frac {13.6 MeV * \kappa_{013}}{0.3 * B * d})^2$ \\ \\
+$\text{where, } \kappa_{013} \quad \& \quad \kappa_{123} \text{ are in mm,}$
+\begin{flalign}
+\nonumber
+w &= 40*10^{-3} \text{ mm  is the pixel width,} &&\\
+\nonumber
+d &= 20/25/30/35/40 \text{ mm is the spacing between the layers in the triplet,} &&\\
+\nonumber
+\frac{t}{X_0} &= 0.015 \text{ relative radiation length in the middle layer \&} &&\\
+\nonumber
+B &= 4T \text{ is the magnetic field } &&\\ 
+\nonumber
+hit_{const} &= 0.5 * (\frac{w}{ d^2 })^2 &&\\
+\nonumber
+\sigma_{MS}^2  &= \frac{t}{X_0 * sin(\theta_{013})}  * (\frac {13.6 MeV * \kappa_{013}}{0.3 * B * d})^2 &&\\
+\nonumber
+ &= MS_{const} * \frac{\kappa_{013}^2}{sin(\theta_{013})} &&
+\end{flalign}
+
 
 %I have used $R_{3D} = R_{2D}/sin(\theta)$
 %\end{equation}
