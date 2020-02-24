@@ -52,7 +52,7 @@ TCut mu_cut = "abs(M_pdg)==13 && M_barcode > 0 && abs(M_Vz) < 100 && abs(M_Vx)<5
 TCut pi_cut = "abs(M_pdg)==211 && M_barcode > 0 && abs(M_Vz) < 100 && abs(M_Vx)<5 && abs(M_Vy)<5";
 TCut e_cut  = "abs(M_pdg)==11 && M_barcode > 0 && abs(M_Vz) < 100 && abs(M_Vx)<5 && abs(M_Vy)<5";
 //! use this for TTT track resolution with barcode matching
-TCut all_cut= "Tid > 0 && abs(M_pt)>2000 && abs(M_eta)<1.7 && abs(M_Vz) < 100 && abs(M_Vx) < 5 && abs(M_Vy) < 5 ";
+TCut all_cut= "Tid > 0 && abs(kappa_pull)<=3 && abs(M_pt)>2000 && abs(M_eta)<1.7 && abs(M_Vz) < 100 && abs(M_Vx) < 5 && abs(M_Vy) < 5 ";
 //! path for input files
 const char* path = "";
 char buf[4096];
@@ -96,7 +96,10 @@ int resolution_plots_Vs_pt
 	//! PU0 hh4b 30mm
 	//recTree.Add("/media/tamasi/Z/PhD/FCC/Castellated/rec_files/MB_recTree_3*");
 	//recTree.Add("/media/tamasi/Z/PhD/FCC/Castellated/rec_files/PU1000*");
-	recTree.Add("/media/tamasi/Z/PhD/FCC/Castellated/rec_files/PU1K_hh4bm260_30mm_sig5/*.root");
+	//recTree.Add("/media/tamasi/Z/PhD/FCC/Castellated/rec_files/PU1K_hh4bm260_30mm_sig5/*.root");
+        recTree.Add("/home/tamasi/repo_tamasi/rec_files/rec_files/30mm/PU1k/ggFhh4b_SM/*.root");
+        recTree.Add("/home/tamasi/repo_tamasi/rec_files/rec_files/30mm/PU0/ggFhh4b_SM/*.root");
+	
 	std::cout<<"rec entries:"<<recTree.GetEntries()<<std::endl;
 	TCut cut;
 	//const char* type = p_type;
@@ -113,10 +116,14 @@ int resolution_plots_Vs_pt
 	//double bincenter[] = {2000, 5000, 10000, 20000, 30000, 40000, 50000, 60000, 70000, 80000, 90000, 100000};
 	//double binlow[] = {0, 2000, 5000, 10000, 20000, 30000, 40000, 50000, 60000, 70000, 80000, 90000, 100000};
 	//double binhigh[] = {0, 2000, 5000, 10000, 20000, 30000, 40000, 50000, 60000, 70000, 80000, 90000, 100000};
-	int ptbin = 7;
-	double bincenter[] = {2000, 5000, 10000, 15000, 30000, 50000, 80000};
-	double binlow[] = {0, 2000, 5000, 10000, 15000, 30000, 50000, 80000};
-	double binhigh[] = {0, 2000, 5000, 10000,15000, 30000, 50000, 80000};
+	int ptbin = 9;
+	double bincenter[] = {2000, 5000, 10000, 20000, 30000, 40000, 50000, 70000, 100000};
+	double binlow[] = {0, 2000, 5000, 10000, 20000, 30000, 40000, 50000, 70000, 100000};
+	double binhigh[] = {0, 2000, 5000, 10000,20000, 30000, 40000, 50000, 70000, 100000};
+	//int ptbin = 7;
+	//double bincenter[] = {2000, 5000, 10000, 15000, 30000, 50000, 80000};
+	//double binlow[] = {0, 2000, 5000, 10000, 15000, 30000, 50000, 80000};
+	//double binhigh[] = {0, 2000, 5000, 10000,15000, 30000, 50000, 80000};
 	std::cout<<"size :" << sizeof(bincenter)/sizeof(double) <<std::endl;
 	for (unsigned ik = 0; ik < sizeof(bincenter)/sizeof(double); ++ik)
 	{
@@ -298,7 +305,7 @@ int resolution_plots_Vs_pt
 		TH1F *h4 = new TH1F("h4", "Theta", binNum,thetamin,thetamax);
 		TH1F *h5 = new TH1F("h5", "Eta", binNum,eta_min,eta_max);
 		TH1F *h6 = new TH1F("h6", "Z0", binNum,zmin,zmax);
-		//TH1F *h7 = new TH1F("h7", "dca", binNum,dcamin,dcamax);
+		TH1F *h7 = new TH1F("h7", "dca", binNum,dcamin,dcamax);
 		//h->SetDirectory(0);
 		//! define pt range in which you want to fit a gauss function
 		sprintf(buffer, "((M_pt > %f) && (M_pt < %f))", binlow[k+1], binhigh[k+1]);// corresponds to a binwidth of 1000MeV/c i.e. +- 500 MeV/c about the bincenter
@@ -391,9 +398,10 @@ int resolution_plots_Vs_pt
           	C6->Update();
                 //delete h6;
             	
-		/*C7->Clear();  
+		C7->Clear();  
                 h7->GetXaxis()->SetTitle("dca_{rec}");
-                recTree.Draw("hypot(h-M_Vx,k-M_Vy) - abs(radius)>>h7",cut && TCut(buffer));
+                //recTree.Draw("hypot(h-M_Vx,k-M_Vy) - abs(radius)>>h7",cut && TCut(buffer));
+                recTree.Draw("dca-M_dca>>h7",cut && TCut(buffer));
                 fit_Gauss(h7);
                 //h7->Fit("gaus","L");
 
@@ -405,7 +413,7 @@ int resolution_plots_Vs_pt
                 //h7->Draw();
 	      	C7->Update();
                 //delete h7;
-		*/
+		
 		if(save)
 		{
 			h1->Write();
@@ -414,7 +422,7 @@ int resolution_plots_Vs_pt
 			h4->Write();
 			h5->Write();
 			h6->Write();
-			//h7->Write();
+			h7->Write();
 		}
 		delete h1;
 		delete h2;
@@ -422,43 +430,47 @@ int resolution_plots_Vs_pt
 		delete h4;
 		delete h5;
 		delete h6;
-		//delete h7;
+		delete h7;
 	}
 ScaleXaxis(h_sigmadp,1e-3);
-h_sigmadp->GetXaxis()->SetTitle("P_{t} [GeV/c]");
-h_sigmadp->Scale(1e2);
-h_sigmadp->GetYaxis()->SetTitle("#sigma_{#Delta(p_{t})/gen_p_{t}} [%]");
+h_sigmadp->GetXaxis()->SetTitle("p_{T} [GeV/c]");
+h_sigmadp->Scale(1e2);// for %
+h_sigmadp->GetYaxis()->SetTitle("#sigma_{#Delta(p_{T})/gen_p_{T}} [%]");
 h_sigmadp->Write();
 
 ScaleXaxis(h_sigma_invPt,1e-3);
-h_sigma_invPt->GetXaxis()->SetTitle("P_{t} [GeV/c]");
-h_sigma_invPt->Scale(1e3);
-h_sigma_invPt->GetYaxis()->SetTitle("#sigma_{#Delta(1/p_{t})} [GeV^{-1}/c]");
+h_sigma_invPt->GetXaxis()->SetTitle("p_{T} [GeV/c]");
+h_sigma_invPt->Scale(1e3);// for GeV-1
+h_sigma_invPt->GetYaxis()->SetTitle("#sigma_{#Delta(1/p_{T})} [GeV^{-1}/c]");
 h_sigma_invPt->Write();
 
 ScaleXaxis(h_sigma_phi,1e-3);
-h_sigma_phi->GetXaxis()->SetTitle("P_{t} [GeV/c]");
+h_sigma_phi->GetXaxis()->SetTitle("p_{T} [GeV/c]");
 h_sigma_phi->Write();
 
 ScaleXaxis(h_sigma_theta,1e-3);
-h_sigma_theta->GetXaxis()->SetTitle("P_{t} [GeV/c]");
+h_sigma_theta->GetXaxis()->SetTitle("p_{T} [GeV/c]");
 h_sigma_theta->Write();
 
 ScaleXaxis(h_sigma_eta,1e-3);
-h_sigma_eta->GetXaxis()->SetTitle("P_{t} [GeV/c]");
+h_sigma_eta->GetXaxis()->SetTitle("p_{T} [GeV/c]");
 h_sigma_eta->Write();
 
 ScaleXaxis(h_sigma_z0,1e-3);
-h_sigma_z0->GetXaxis()->SetTitle("P_{t} [GeV/c]");
+h_sigma_z0->GetXaxis()->SetTitle("p_{T} [GeV/c]");
 h_sigma_z0->Write();
-//h_sigma_dca->Write();	
+
+ScaleXaxis(h_sigma_dca,1e-3);
+h_sigma_dca->GetXaxis()->SetTitle("p_{T} [GeV/c]");
+h_sigma_dca->Write();	
 output_file->Close();
 	
 return 0;
 }
 int plot_reso_vs_pt()
 {
-	resolution_plots_Vs_pt("ResoVspt_VxVy5_PU0_100030mm_1",true);
+	resolution_plots_Vs_pt("ResoVspt_VxVy5_ggFhh4bPU1k_30mm_eta1.7_1",true);
+	//resolution_plots_Vs_pt("ResoVspt_VxVy5_PU0_100030mm_1",true);
 	//resolution_plots_Vs_pt("testResoVspt_all1.4_5GeV",true);
 	return 0;
 }
