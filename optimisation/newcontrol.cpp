@@ -59,35 +59,35 @@ const char* out_path = "./plots/optimisation";
 //TCut kapcut   =  "abs(kappa-kap013)/sqrt(5e-9 + 0.00481667 * (1/sin(Theta13)) * kap013^2 ) < 4 ";
 //TCut kapcut_t =  "abs(kappa-kap013)/sqrt(5e-9 + 0.00481667 * (1/sin(Theta13)) * kap013^2 ) < 3 ";
 
-//! 25mm
-TCut num_select    = "Tid>0  && Pt_n > 2000  && abs(Z013) < 100 && abs(Eta13) < 2.5 && abs(Phi13)<0.018 && abs(Z13)<320";
-TCut den_select    = "Tid>-2 && Pt_n > 2000  && abs(Z013) < 100 && abs(Eta13) < 2.5 && abs(Phi13)<0.018 && abs(Z13)<320";
-//! 
-TCut phiBarrel	= "abs(Phi13)< 0.018";
-TCut zBarrel	= "abs(Z13)<320";
-TCut maxdphi2	= "abs(dphi2)<3.0e-4";
-TCut maxdz2	= "abs(dz2)<0.12*(sin(Theta13)^(-1.1))";
-const float dz2_exp   = -1.1;
-const float dz2_const = 0.12;
-//! 
-TCut kapcut_l =  "abs(kappa-kap013)/sqrt(2.048e-09 + 0.0030876 * (1/sin(Theta13)) * kap013^2 ) < 5 ";
-TCut kapcut   =  "abs(kappa-kap013)/sqrt(2.048e-09 + 0.0030876 * (1/sin(Theta13)) * kap013^2 ) < 4 ";
-TCut kapcut_t =  "abs(kappa-kap013)/sqrt(2.048e-09 + 0.0030876 * (1/sin(Theta13)) * kap013^2 ) < 3 ";
-
-////! 30mm
-//TCut num_select    = "Tid>0  && Pt_n > 2000  && abs(Z013) < 100 && abs(Eta13) < 2.5 && abs(Phi13)<0.021 && abs(Z13)<380";
-//TCut den_select    = "Tid>-2 && Pt_n > 2000  && abs(Z013) < 100 && abs(Eta13) < 2.5 && abs(Phi13)<0.021 && abs(Z13)<380";
+////! 25mm
+//TCut num_select    = "Tid>0  && Pt_n > 2000  && abs(Z013) < 100 && abs(Eta13) < 2.5 && abs(Phi13)<0.018 && abs(Z13)<320";
+//TCut den_select    = "Tid>-2 && Pt_n > 2000  && abs(Z013) < 100 && abs(Eta13) < 2.5 && abs(Phi13)<0.018 && abs(Z13)<320";
 ////! 
-//TCut phiBarrel	= "abs(Phi13)< 0.021";
-//TCut zBarrel	= "abs(Z13)<380";
+//TCut phiBarrel	= "abs(Phi13)< 0.018";
+//TCut zBarrel	= "abs(Z13)<320";
 //TCut maxdphi2	= "abs(dphi2)<3.0e-4";
-//TCut maxdz2	= "abs(dz2)<0.13*(sin(Theta13)^(-1.13))";
-//const float dz2_exp   = -1.13;
-//const float dz2_const = 0.13;
+//TCut maxdz2	= "abs(dz2)<0.12*(sin(Theta13)^(-1.1))";
+//const float dz2_exp   = -1.1;
+//const float dz2_const = 0.12;
 ////! 
-//TCut kapcut_l =  "abs(kappa-kap013)/sqrt(9.87654e-10 + 0.00214417 * (1/sin(Theta13)) * kap013^2 ) < 5 ";
-//TCut kapcut   =  "abs(kappa-kap013)/sqrt(9.87654e-10 + 0.00214417 * (1/sin(Theta13)) * kap013^2 ) < 4 ";
-//TCut kapcut_t =  "abs(kappa-kap013)/sqrt(9.87654e-10 + 0.00214417 * (1/sin(Theta13)) * kap013^2 ) < 3 ";
+//TCut kapcut_l =  "abs(kappa-kap013)/sqrt(2.048e-09 + 0.0030876 * (1/sin(Theta13)) * kap013^2 ) < 5 ";
+//TCut kapcut   =  "abs(kappa-kap013)/sqrt(2.048e-09 + 0.0030876 * (1/sin(Theta13)) * kap013^2 ) < 4 ";
+//TCut kapcut_t =  "abs(kappa-kap013)/sqrt(2.048e-09 + 0.0030876 * (1/sin(Theta13)) * kap013^2 ) < 3 ";
+
+//! 30mm
+TCut num_select    = "Tid>0  && Pt_n > 2000  && abs(Z013) < 100 && abs(Eta13) < 2.5 && abs(Phi13)<0.021 && abs(Z13)<380";
+TCut den_select    = "Tid>-2 && Pt_n > 2000  && abs(Z013) < 100 && abs(Eta13) < 2.5 && abs(Phi13)<0.021 && abs(Z13)<380";
+//! 
+TCut phiBarrel	= "abs(Phi13)< 0.021";
+TCut zBarrel	= "abs(Z13)<380";
+TCut maxdphi2	= "abs(dphi2)<3.0e-4";
+TCut maxdz2	= "abs(dz2)<0.13*(sin(Theta13)^(-1.13))";
+const float dz2_exp   = -1.13;
+const float dz2_const = 0.13;
+//! 
+TCut kapcut_l =  "abs(kappa-kap013)/sqrt(9.87654e-10 + 0.00214417 * (1/sin(Theta13)) * kap013^2 ) < 5 ";
+TCut kapcut   =  "abs(kappa-kap013)/sqrt(9.87654e-10 + 0.00214417 * (1/sin(Theta13)) * kap013^2 ) < 4 ";
+TCut kapcut_t =  "abs(kappa-kap013)/sqrt(9.87654e-10 + 0.00214417 * (1/sin(Theta13)) * kap013^2 ) < 3 ";
 
 ////! 35mm
 //TCut num_select    = "Tid>0  && Pt_n > 2000  && abs(Z013) < 100 && abs(Eta13) < 2.5 && abs(Phi13)<0.025 && abs(Z13)<430";
@@ -149,7 +149,7 @@ TCut z0truthmax	= "abs(M_Vz)<100";//! depends on the luminous region along z
 TCut z0recmax	= "abs(Z013)<100";
 void newcontrol
 (
-	const char* output_file_name = "control_25mm_ggF",//f-few
+	const char* output_file_name = "control_30mm_ggF_3",//f-few
 	//const char* output_file_name = "control_hh4b_final3",//f-few
 	const char* set = "C",
 	const bool verbose = true
@@ -171,7 +171,8 @@ void newcontrol
 	//! 20mm
 	//rec.Add("/home/tamasi/repo_tamasi/rec_files/PU0hh4b_m260_recTree_200001_wide.root");
 	//! 25mm
-	rec.Add("/home/tamasi/repo_tamasi/rec_files/for_optimization/25mm/ggFhh4b_SM/*.root");
+	//rec.Add("/home/tamasi/repo_tamasi/rec_files/rec_files/40mm/PU1k/ggFhh4b_SM/*.root");
+	rec.Add("/home/tamasi/repo_tamasi/rec_files/for_optimization/30mm/ggFhh4b_SM/*.root");
 	//! 30mm
 	//rec.Add("/home/tamasi/repo_tamasi/rec_files/MB_recTree_30000*_samelad.root");
 	//rec.Add("/media/tamasi/Elements/PhD/FCC/data_files/rec_files/30mm/ggFhh4b_SM/*.root");
@@ -195,9 +196,9 @@ void newcontrol
 
 
 	//! number of points in the plots
-	//int num_events = 225;//1e5;
+	int num_events = 100;//1e5;
 	//int num_events = rec.GetEntries();
-	int num_events = 2000;
+	//int num_events = 2000;
 
 	int etabin = 31;
         double etamin =-2.6, etamax = 2.6;
@@ -258,14 +259,14 @@ void newcontrol
 	TH2F* th28 = new TH2F("th28","dz_{2} Vs cos(Theta_{13});cos(Theta_{13});dz_{2}", 300,-1,1,300,-1,1); 	
 	TH2F* th29 = new TH2F("th29","dz_{2} Vs cos(M_{theta});cos(M_{theta});dz_{2}", 300,-1,1,300,-1,1);
 
-	TH2F* h24 = new TH2F("h24","abs(dphi_{2}) Vs sin(Theta_{13});sin(Theta_{13});abs(dphi_{2})", 300,0.5,1.1,300,0,0.0006); 	
-	TH2F* h25a= new TH2F("h25a","abs(dphi_{2}) Vs sin(Theta_{13});sin(Theta_{13});abs(dphi_{2})", 300,0.5,1.1,300,0,0.0006); 	
-	TH2F* h25 = new TH2F("h25","abs(dphi_{2}) Vs sin(Theta_{13});sin(Theta_{13});abs(dphi_{2})", 300,0.5,1.1,300,0,0.0006); 	
-	TH2F* h26 = new TH2F("h26","abs(dphi_{2}) Vs sin(M_{theta});sin(M_{theta});abs(dphi_{2})", 300,0.5,1.1,300,0,0.0006); 	
-	TH2F* h_24 = new TH2F("h_24","abs(dphi_{2}) Vs sin(Theta_{13});sin(Theta_{13});abs(dphi_{2})", 300,0.5,1.1,300,0,0.0006); 	
-	TH2F* h_25a= new TH2F("h_25a","abs(dphi_{2}) Vs sin(Theta_{13});sin(Theta_{13});abs(dphi_{2})", 300,0.5,1.1,300,0,0.0006); 	
-	TH2F* h_25 = new TH2F("h_25","abs(dphi_{2}) Vs sin(Theta_{13});sin(Theta_{13});abs(dphi_{2})", 300,0.5,1.1,300,0,0.0006); 	
-	TH2F* h_26 = new TH2F("h_26","abs(dphi_{2}) Vs sin(M_{theta});sin(M_{theta});abs(dphi_{2})", 300,0.5,1.1,300,0,0.0006); 	
+	TH2F* h24 = new TH2F("h24","abs(dphi_{2}) Vs sin(Theta_{13});sin(Theta_{13});abs(dphi_{2})", 300,0,1.1,300,0,0.0006); 	
+	TH2F* h25a= new TH2F("h25a","abs(dphi_{2}) Vs sin(Theta_{13});sin(Theta_{13});abs(dphi_{2})", 300,0,1.1,300,0,0.0006); 	
+	TH2F* h25 = new TH2F("h25","abs(dphi_{2}) Vs sin(Theta_{13});sin(Theta_{13});abs(dphi_{2})", 300,0,1.1,300,0,0.0006); 	
+	TH2F* h26 = new TH2F("h26","abs(dphi_{2}) Vs sin(M_{theta});sin(M_{theta});abs(dphi_{2})", 300,0,1.1,300,0,0.0006); 	
+	TH2F* h_24 = new TH2F("h_24","abs(dphi_{2}) Vs sin(Theta_{13});sin(Theta_{13});abs(dphi_{2})", 300,0,1.1,300,0,0.0006); 	
+	TH2F* h_25a= new TH2F("h_25a","abs(dphi_{2}) Vs sin(Theta_{13});sin(Theta_{13});abs(dphi_{2})", 300,0,1.1,300,0,0.0006); 	
+	TH2F* h_25 = new TH2F("h_25","abs(dphi_{2}) Vs sin(Theta_{13});sin(Theta_{13});abs(dphi_{2})", 300,0,1.1,300,0,0.0006); 	
+	TH2F* h_26 = new TH2F("h_26","abs(dphi_{2}) Vs sin(M_{theta});sin(M_{theta});abs(dphi_{2})", 300,0,1.1,300,0,0.0006); 	
 	TH2F* h27 = new TH2F("h27","dz_{2} Vs sin(Theta_{13});sin(Theta_{13});dz_{2}", 300,0,1.1,300,-1,1); 	
 	TH2F* h28a= new TH2F("h28a","dz_{2} Vs sin(Theta_{13});sin(Theta_{13});dz_{2}", 300,0,1.1,300,-1,1); 	
 	TH2F* h28 = new TH2F("h28","dz_{2} Vs sin(Theta_{13});sin(Theta_{13});dz_{2}", 300,0,1.1,300,-1,1); 	
@@ -1014,41 +1015,41 @@ void newcontrol
 	rec.Draw("kappa-kap013>>h115",matched && minPt && phiBarrel && zBarrel && z0recmax && maxdphi2 && maxdz2 && kapcut_t && electron,"",num_events);
 	rec.Draw("kappa-kap013>>h116",matched && minPt && phiBarrel && zBarrel && z0recmax && maxdphi2 && maxdz2 && kapcut_t && muon/*,"",num_events*/);
 
-	rec.Draw("M_kap>>h117",matched && minPt_t && phiBarrel && zBarrel && z0truthmax,"",num_events);
-	rec.Draw("kap013>>h118",matched && minPt && phiBarrel && zBarrel && z0recmax,"",num_events);
-	rec.Draw("kappa>>h119",matched && minPt && phiBarrel && zBarrel && z0recmax,"",num_events);
+	rec.Draw("M_kap>>h117",matched && minPt_t && phiBarrel && zBarrel && z0truthmax /*&& maxdphi2 && maxdz2 */,"",num_events);
+	rec.Draw("kap013>>h118",matched && minPt && phiBarrel && zBarrel && z0recmax /*&& maxdphi2 && maxdz2 */,"",num_events);
+	rec.Draw("kappa>>h119",matched && minPt && phiBarrel && zBarrel && z0recmax /*&& maxdphi2 && maxdz2 */,"",num_events);
 
-	rec.Draw("kap013:M_kap>>h120",matched && minPt_t && minPt && phiBarrel && zBarrel && z0recmax && z0truthmax,"",num_events);
-	rec.Draw("kap013:M_kap>>h121",matched && minPt_t && minPt && phiBarrel && zBarrel && z0recmax && z0truthmax && pion,"",num_events);
-	rec.Draw("kap013:M_kap>>h122",matched && minPt_t && minPt && phiBarrel && zBarrel && z0recmax && z0truthmax && electron,"",num_events);
-	rec.Draw("kap013:M_kap>>h123",matched && minPt_t && minPt && phiBarrel && zBarrel && z0recmax && z0truthmax && muon,"",num_events);
-	rec.Draw("kappa:M_kap>>h124",matched && minPt_t && minPt && phiBarrel && zBarrel && z0recmax && z0truthmax,"",num_events);
-	rec.Draw("kappa:M_kap>>h125",matched && minPt_t && minPt && phiBarrel && zBarrel && z0recmax && z0truthmax && pion,"",num_events);
-	rec.Draw("kappa:M_kap>>h126",matched && minPt_t && minPt && phiBarrel && zBarrel && z0recmax && z0truthmax && electron,"",num_events);
-	rec.Draw("kappa:M_kap>>h127",matched && minPt_t && minPt && phiBarrel && zBarrel && z0recmax && z0truthmax && muon,"",num_events);
+	rec.Draw("kap013:M_kap>>h120",matched && minPt_t && minPt && phiBarrel && zBarrel && z0recmax && z0truthmax /*&& maxdphi2 && maxdz2 */,"",num_events);
+	rec.Draw("kap013:M_kap>>h121",matched && minPt_t && minPt && phiBarrel && zBarrel && z0recmax && z0truthmax && pion /*&& maxdphi2 && maxdz2 */,"",num_events);
+	rec.Draw("kap013:M_kap>>h122",matched && minPt_t && minPt && phiBarrel && zBarrel && z0recmax && z0truthmax && electron /*&& maxdphi2 && maxdz2 */,"",num_events);
+	rec.Draw("kap013:M_kap>>h123",matched && minPt_t && minPt && phiBarrel && zBarrel && z0recmax && z0truthmax && muon /*&& maxdphi2 && maxdz2 */,"",num_events);
+	rec.Draw("kappa:M_kap>>h124",matched && minPt_t && minPt && phiBarrel && zBarrel && z0recmax && z0truthmax /*&& maxdphi2 && maxdz2 */,"",num_events);
+	rec.Draw("kappa:M_kap>>h125",matched && minPt_t && minPt && phiBarrel && zBarrel && z0recmax && z0truthmax && pion /*&& maxdphi2 && maxdz2 */,"",num_events);
+	rec.Draw("kappa:M_kap>>h126",matched && minPt_t && minPt && phiBarrel && zBarrel && z0recmax && z0truthmax && electron /*&& maxdphi2 && maxdz2 */,"",num_events);
+	rec.Draw("kappa:M_kap>>h127",matched && minPt_t && minPt && phiBarrel && zBarrel && z0recmax && z0truthmax && muon /*&& maxdphi2 && maxdz2 */,"",num_events);
 
-	rec.Draw("kap013:kappa>>h128",matched && minPt && phiBarrel && zBarrel && z0recmax,"",num_events);
-	rec.Draw("kap013:kappa>>h129",matched && minPt && phiBarrel && zBarrel && z0recmax && pion,"",num_events);
-	rec.Draw("kap013:kappa>>h130",matched && minPt && phiBarrel && zBarrel && z0recmax && electron,"",num_events);
-	rec.Draw("kap013:kappa>>h131",matched && minPt && phiBarrel && zBarrel && z0recmax && muon,"",num_events);
+	rec.Draw("kap013:kappa>>h128",matched && minPt && phiBarrel && zBarrel && z0recmax /*&& maxdphi2 && maxdz2 */,"",num_events);
+	rec.Draw("kap013:kappa>>h129",matched && minPt && phiBarrel && zBarrel && z0recmax && pion /*&& maxdphi2 && maxdz2 */,"",num_events);
+	rec.Draw("kap013:kappa>>h130",matched && minPt && phiBarrel && zBarrel && z0recmax && electron /*&& maxdphi2 && maxdz2 */,"",num_events);
+	rec.Draw("kap013:kappa>>h131",matched && minPt && phiBarrel && zBarrel && z0recmax && muon /*&& maxdphi2 && maxdz2 */,"",num_events);
 
-	rec.Draw("kap013/M_kap>>h132",matched && minPt && phiBarrel && zBarrel && z0recmax,"",num_events);
-	rec.Draw("kap013/M_kap>>h133",matched && minPt && phiBarrel && zBarrel && z0recmax && pion,"",num_events);
-	rec.Draw("kap013/M_kap>>h134",matched && minPt && phiBarrel && zBarrel && z0recmax && electron,"",num_events);
-	rec.Draw("kap013/M_kap>>h135",matched && minPt && phiBarrel && zBarrel && z0recmax && muon,"",num_events);
-	rec.Draw("kappa/M_kap>>h136",matched && minPt && phiBarrel && zBarrel && z0recmax,"",num_events);
-	rec.Draw("kappa/M_kap>>h137",matched && minPt && phiBarrel && zBarrel && z0recmax && pion,"",num_events);
-	rec.Draw("kappa/M_kap>>h138",matched && minPt && phiBarrel && zBarrel && z0recmax && electron,"",num_events);
-	rec.Draw("kappa/M_kap>>h139",matched && minPt && phiBarrel && zBarrel && z0recmax && muon,"",num_events);
+	rec.Draw("kap013/M_kap>>h132",matched && minPt && phiBarrel && zBarrel && z0recmax /*&& maxdphi2 && maxdz2 */,"",num_events);
+	rec.Draw("kap013/M_kap>>h133",matched && minPt && phiBarrel && zBarrel && z0recmax && pion /*&& maxdphi2 && maxdz2 */,"",num_events);
+	rec.Draw("kap013/M_kap>>h134",matched && minPt && phiBarrel && zBarrel && z0recmax && electron /*&& maxdphi2 && maxdz2 */,"",num_events);
+	rec.Draw("kap013/M_kap>>h135",matched && minPt && phiBarrel && zBarrel && z0recmax && muon /*&& maxdphi2 && maxdz2 */,"",num_events);
+	rec.Draw("kappa/M_kap>>h136",matched && minPt && phiBarrel && zBarrel && z0recmax /*&& maxdphi2 && maxdz2 */,"",num_events);
+	rec.Draw("kappa/M_kap>>h137",matched && minPt && phiBarrel && zBarrel && z0recmax && pion /*&& maxdphi2 && maxdz2 */,"",num_events);
+	rec.Draw("kappa/M_kap>>h138",matched && minPt && phiBarrel && zBarrel && z0recmax && electron /*&& maxdphi2 && maxdz2 */,"",num_events);
+	rec.Draw("kappa/M_kap>>h139",matched && minPt && phiBarrel && zBarrel && z0recmax && muon /*&& maxdphi2 && maxdz2 */,"",num_events);
 
-	rec.Draw("kap013-kappa:sqrt((M_Vx*M_Vx) + (M_Vy*M_Vy))>>h140",matched && minPt_t && minPt && phiBarrel && zBarrel && z0recmax && z0truthmax,"",num_events);
-	rec.Draw("kap013-kappa:sqrt((M_Vx*M_Vx) + (M_Vy*M_Vy))>>h141",matched && minPt_t && minPt && phiBarrel && zBarrel && z0recmax && z0truthmax && pion,"",num_events);
-	rec.Draw("kap013-kappa:sqrt((M_Vx*M_Vx) + (M_Vy*M_Vy))>>h142",matched && minPt_t && minPt && phiBarrel && zBarrel && z0recmax && z0truthmax && electron,"",num_events);
-	rec.Draw("kap013-kappa:sqrt((M_Vx*M_Vx) + (M_Vy*M_Vy))>>h143",matched && minPt_t && minPt && phiBarrel && zBarrel && z0recmax && z0truthmax && muon,"",num_events);
-	rec.Draw("kap013/M_kap:sqrt((M_Vx*M_Vx) + (M_Vy*M_Vy))>>h144",matched && minPt_t && minPt && phiBarrel && zBarrel && z0recmax && z0truthmax,"",num_events);
-	rec.Draw("kap013/M_kap:sqrt((M_Vx*M_Vx) + (M_Vy*M_Vy))>>h145",matched && minPt_t && minPt && phiBarrel && zBarrel && z0recmax && z0truthmax && pion,"",num_events);
-	rec.Draw("kap013/M_kap:sqrt((M_Vx*M_Vx) + (M_Vy*M_Vy))>>h146",matched && minPt_t && minPt && phiBarrel && zBarrel && z0recmax && z0truthmax && electron,"",num_events);
-	rec.Draw("kap013/M_kap:sqrt((M_Vx*M_Vx) + (M_Vy*M_Vy))>>h147",matched && minPt_t && minPt && phiBarrel && zBarrel && z0recmax && z0truthmax && muon,"",num_events);
+	rec.Draw("kap013-kappa:sqrt((M_Vx*M_Vx) + (M_Vy*M_Vy))>>h140",matched && minPt_t && minPt && phiBarrel && zBarrel && z0recmax && z0truthmax /*&& maxdphi2 && maxdz2 */,"",num_events);
+	rec.Draw("kap013-kappa:sqrt((M_Vx*M_Vx) + (M_Vy*M_Vy))>>h141",matched && minPt_t && minPt && phiBarrel && zBarrel && z0recmax && z0truthmax && pion /*&& maxdphi2 && maxdz2 */,"",num_events);
+	rec.Draw("kap013-kappa:sqrt((M_Vx*M_Vx) + (M_Vy*M_Vy))>>h142",matched && minPt_t && minPt && phiBarrel && zBarrel && z0recmax && z0truthmax && electron /*&& maxdphi2 && maxdz2 */,"",num_events);
+	rec.Draw("kap013-kappa:sqrt((M_Vx*M_Vx) + (M_Vy*M_Vy))>>h143",matched && minPt_t && minPt && phiBarrel && zBarrel && z0recmax && z0truthmax && muon /*&& maxdphi2 && maxdz2 */,"",num_events);
+	rec.Draw("kap013/M_kap:sqrt((M_Vx*M_Vx) + (M_Vy*M_Vy))>>h144",matched && minPt_t && minPt && phiBarrel && zBarrel && z0recmax && z0truthmax /*&& maxdphi2 && maxdz2 */,"",num_events);
+	rec.Draw("kap013/M_kap:sqrt((M_Vx*M_Vx) + (M_Vy*M_Vy))>>h145",matched && minPt_t && minPt && phiBarrel && zBarrel && z0recmax && z0truthmax && pion /*&& maxdphi2 && maxdz2 */,"",num_events);
+	rec.Draw("kap013/M_kap:sqrt((M_Vx*M_Vx) + (M_Vy*M_Vy))>>h146",matched && minPt_t && minPt && phiBarrel && zBarrel && z0recmax && z0truthmax && electron /*&& maxdphi2 && maxdz2 */,"",num_events);
+	rec.Draw("kap013/M_kap:sqrt((M_Vx*M_Vx) + (M_Vy*M_Vy))>>h147",matched && minPt_t && minPt && phiBarrel && zBarrel && z0recmax && z0truthmax && muon /*&& maxdphi2 && maxdz2 */,"",num_events);
 
 	rec.Draw("Eta13>>h_num_vs_etaPU",   num_select, "goff"/*, num_events*/);
         rec.Draw("Eta13>>h_den_vs_etaPU",   den_select, "goff"/*, num_events*/);
