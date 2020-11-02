@@ -1,6 +1,6 @@
 Float_t LINE_WIDTH = 2.5;
 Float_t TITLE_SIZE = 0.04;
-Float_t MARKER_SIZE = 1.2;
+Float_t MARKER_SIZE = 1.4;
 Float_t AXISTITLE_OFFSET = 1.0;
 Float_t YAXISTITLE_OFFSET = 1.1;
 Float_t max_range;

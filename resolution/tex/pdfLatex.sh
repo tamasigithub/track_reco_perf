@@ -1,0 +1,14 @@
+pdflatex reso_dca.tex
+pdflatex reso_dpt.tex
+pdflatex resoEta_dca.tex
+pdflatex resoEta_dpt.tex
+pdflatex resoEta_eta.tex
+pdflatex resoEta_invpt.tex
+pdflatex resoEta_phi.tex
+pdflatex reso_eta.tex
+pdflatex resoEta_theta.tex
+pdflatex resoEta_z0.tex
+pdflatex reso_invpt.tex
+pdflatex reso_phi.tex
+pdflatex reso_theta.tex
+pdflatex reso_z0.tex

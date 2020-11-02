@@ -66,7 +66,7 @@ void ScaleYaxis(TH1 *h, Double_t Scale)
   return;
 }
 //int write_topdf(const char* output_file_name = "ResoVsPt_FCC_PU0hh4b_m260_20mm")
-int write_topdf(const char* output_file_name = "ResoVspt_VxVy5_ggFhh4bPU1k_30mm_eta1.7_1")
+int write_topdf(const char* output_file_name = "ResoVseta_VxVy5_ggFhh4bPU1k_30mm_eta1.7_1")
 {
 
 	char out_file_open[1023];
@@ -87,7 +87,7 @@ int write_topdf(const char* output_file_name = "ResoVspt_VxVy5_ggFhh4bPU1k_30mm_
 
 	//! TTT tracks/ TTT barcode matched
 	//TFile* f0 = TFile::Open("./plots/ResoVspt_VxVy10_PU020mm.root");
-	TFile* f0 = TFile::Open("./plots/ResoVspt_VxVy5_ggFhh4bPU1k_30mm_eta1.7_1.root");
+	TFile* f0 = TFile::Open("./plots/ResoVseta_VxVy5_ggFhh4bPU1k_30mm_eta1.7_1.root");
 	TH1D* h0_dp 	= (TH1D*)f0->Get("h_sigmadp");
 	TH1D* h0_invpt 	= (TH1D*)f0->Get("h_sigma_invPt");
 	TH1D* h0_phi	= (TH1D*)f0->Get("h_sigma_phi");
@@ -95,6 +95,12 @@ int write_topdf(const char* output_file_name = "ResoVspt_VxVy5_ggFhh4bPU1k_30mm_
 	TH1D* h0_eta	= (TH1D*)f0->Get("h_sigma_eta");
 	TH1D* h0_z0	= (TH1D*)f0->Get("h_sigma_z0");
 	TH1D* h0_dca	= (TH1D*)f0->Get("h_sigma_dca");
+	h0_dp->Scale(1e2);// for %
+	h0_invpt->Scale(1e3);// for GeV-1
+	h0_phi->Scale(1.0e3);
+	h0_theta->Scale(1.0e3);
+	h0_phi->GetYaxis()->SetRangeUser(0,1.6);
+	h0_theta->GetYaxis()->SetRangeUser(0,1.5);
 
 	TGaxis::SetMaxDigits(3);
 	gStyle->SetOptTitle(0);
@@ -298,7 +304,7 @@ int write_topdf(const char* output_file_name = "ResoVspt_VxVy5_ggFhh4bPU1k_30mm_
         h0_phi->GetYaxis()->SetTitle("#sigma_{#delta#phi} [mrad]");
         h0_theta->GetYaxis()->SetTitle("#sigma_{#delta#theta} [mrad]");
         h0_eta->GetYaxis()->SetTitle("#sigma_{#delta#eta}");
-        h0_z0->GetYaxis()->SetTitle("#sigma_{#deltaz_0} [mm]");
+        h0_z0->GetYaxis()->SetTitle("#sigma_{#deltaz_{0}} [mm]");
         h0_dca->GetYaxis()->SetTitle("#sigma_{#deltadca} [mm]");
 //        h0_dca->GetYaxis()->SetTitle("P_{t_gen} [GeV/c]");       h0_invpt->GetYaxis()->SetTitle("#sigma_{#Delta(1/p_{t})} [GeV/c]^{-1}");
 	//
@@ -310,18 +316,23 @@ int write_topdf(const char* output_file_name = "ResoVspt_VxVy5_ggFhh4bPU1k_30mm_
 	//h_z0->GetXaxis()->SetTitle("p_{t_gen} [GeV/c]");
 //	//h_dca->GetXaxis()->SetTitle("P_{t_gen} [GeV/c]");
 
-	h0_dp->GetXaxis()->SetTitle("p_{T} [GeV/c]");
-        h0_invpt->GetXaxis()->SetTitle("p_{T} [GeV/c]");
-        h0_phi->GetXaxis()->SetTitle("p_{T} [GeV/c]");
-        h0_theta->GetXaxis()->SetTitle("p_{T} [GeV/c]");
-        h0_eta->GetXaxis()->SetTitle("p_{T} [GeV/c]");
-        h0_z0->GetXaxis()->SetTitle("p_{T} [GeV/c]");
-        h0_dca->GetXaxis()->SetTitle("p_{T} [GeV/c]");
+	h0_dp->GetXaxis()->SetTitle("#eta");
+        h0_invpt->GetXaxis()->SetTitle("#eta");
+        h0_phi->GetXaxis()->SetTitle("#eta");
+        h0_theta->GetXaxis()->SetTitle("#eta");
+        h0_eta->GetXaxis()->SetTitle("#eta");
+        h0_z0->GetXaxis()->SetTitle("#eta");
+        h0_dca->GetXaxis()->SetTitle("#eta");
 
-	h0_phi->Scale(1.0e3);
-	h0_theta->Scale(1.0e3);
-	h0_phi->GetYaxis()->SetRangeUser(0,1.5);
-	h0_theta->GetYaxis()->SetRangeUser(0,1.5);
+	h0_dp->GetYaxis()->SetRangeUser(0.45,0.83);
+        h0_invpt->GetYaxis()->SetRangeUser(1.5e-3,2.5e-3);
+	h0_phi->GetYaxis()->SetRangeUser(0.86,1.6);
+	h0_theta->GetYaxis()->SetRangeUser(0.8,1.5);
+        //h0_phi->GetYaxis()->SetRangeUser(0.86e-3,1.58e-3);
+        //h0_theta->GetYaxis()->SetRangeUser(0.8e-3,1.44e-3);
+        h0_eta->GetYaxis()->SetRangeUser(1.2e-3,2.5e-3);
+        h0_z0->GetYaxis()->SetRangeUser(0.4,3.0);
+        h0_dca->GetYaxis()->SetRangeUser(14,16.4);
 	////h_invpt->Scale(1.0e3);
         //h0_invpt->Scale(1.0e3);
 	////h_invpt->GetYaxis()->SetRangeUser(0,8e-3);
@@ -358,7 +369,7 @@ int write_topdf(const char* output_file_name = "ResoVspt_VxVy5_ggFhh4bPU1k_30mm_
 	leg2->Draw();
 	leg5->Draw();
 	C->Print(out_file_open,"pdf");
-	C->SaveAs("./tex/reso_dpt.tex");
+	C->SaveAs("./tex/resoEta_dpt.tex");
 
 	//h_invpt->Draw();
 	//C->Print(out_file_, "pdf");
@@ -367,7 +378,7 @@ int write_topdf(const char* output_file_name = "ResoVspt_VxVy5_ggFhh4bPU1k_30mm_
 	leg2->Draw();
 	leg5->Draw();
 	C->Print(out_file_,"pdf");
-	C->SaveAs("./tex/reso_invpt.tex");
+	C->SaveAs("./tex/resoEta_invpt.tex");
 	
 	//h_phi->Draw();
 	//C->Print(out_file_, "pdf");
@@ -376,7 +387,7 @@ int write_topdf(const char* output_file_name = "ResoVspt_VxVy5_ggFhh4bPU1k_30mm_
 	leg2->Draw();
 	leg5->Draw();
 	C->Print(out_file_,"pdf");
-	C->SaveAs("./tex/reso_phi.tex");
+	C->SaveAs("./tex/resoEta_phi.tex");
 
 	//h_theta->Draw();
 	//C->Print(out_file_, "pdf");
@@ -385,7 +396,7 @@ int write_topdf(const char* output_file_name = "ResoVspt_VxVy5_ggFhh4bPU1k_30mm_
 	leg2->Draw();
 	leg5->Draw();
 	C->Print(out_file_,"pdf");
-	C->SaveAs("./tex/reso_theta.tex");
+	C->SaveAs("./tex/resoEta_theta.tex");
 	
 	//h_eta->Draw();
 	//C->Print(out_file_, "pdf");
@@ -394,7 +405,7 @@ int write_topdf(const char* output_file_name = "ResoVspt_VxVy5_ggFhh4bPU1k_30mm_
 	leg2->Draw();
 	leg5->Draw();
 	C->Print(out_file_,"pdf");
-	C->SaveAs("./tex/reso_eta.tex");
+	C->SaveAs("./tex/resoEta_eta.tex");
 	
 	//h_z0->Draw();
 	//C->Print(out_file_, "pdf");
@@ -403,7 +414,7 @@ int write_topdf(const char* output_file_name = "ResoVspt_VxVy5_ggFhh4bPU1k_30mm_
 	leg2->Draw();
 	leg5->Draw();
 	C->Print(out_file_,"pdf");
-	C->SaveAs("./tex/reso_z0.tex");
+	C->SaveAs("./tex/resoEta_z0.tex");
 	
 	//h_dca->Draw();
 	//C->Print(out_file_, "pdf");
@@ -411,7 +422,7 @@ int write_topdf(const char* output_file_name = "ResoVspt_VxVy5_ggFhh4bPU1k_30mm_
 	leg1->Draw();
 	leg2->Draw();
 	leg5->Draw();
-	C->SaveAs("./tex/reso_dca.tex");
+	C->SaveAs("./tex/resoEta_dca.tex");
 	//C->Print(out_file_,"pdf");
 	
 

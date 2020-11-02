@@ -21,10 +21,10 @@
 #include<math.h>
 //! the selection cuts below are only to select tracks correctly reconstructed and fakes
 //! assumes the files fed are reconstructed with optimised cuts already
-TCut num_select    = "Tid>0 ";
-TCut den_select    = "Tid>-2 ";
+TCut num_select    = "Tid>0 && abs(Eta13) < 1.7 && abs(kappa_pull) < 3";
+TCut den_select    = "Tid>-2 && abs(Eta13) < 1.7 && abs(kappa_pull) < 3";
 //! use the cut below to calculate single particle resolution for 10GeV pions
-TCut all_cut= "Tid > 0 && abs(M_pt)>9e3 && abs(M_pt)<11e3 && abs(M_eta)<1.6 && abs(M_Vz) < 100 && abs(M_Vx) < 2 && abs(M_Vy) < 2 && abs(M_pdg)==211";
+TCut all_cut= "Tid > 0 && abs(Eta13) < 1.7 && abs(kappa_pull) < 3 && abs(M_pt)>9e3 && abs(M_pt)<11e3 && abs(M_eta)<1.7 && abs(M_Vz) < 100 && abs(M_Vx) < 2 && abs(M_Vy) < 2 && abs(M_pdg)==211";
 TCanvas *c1 = new TCanvas();
 char buf[4096];
 //! User defined Gauss fit function to optimise the fit 
@@ -70,7 +70,7 @@ void write_file(const char* gapsize, const char* pileup, double purity , double 
     std::cout<<"Writing to txt file...." <<std::endl;
     const char* txt_path = "./txt_files";
     char txt_file[1023];
-    sprintf(txt_file,"%s/summary10-100_rmsVspurityNo30mm_PU%s.txt",txt_path, pileup);
+    sprintf(txt_file,"%s/FCCsummary5-100_rmsVspurity_PU%s.txt",txt_path, pileup);
     std::ofstream ofs;
     ofs.open (txt_file, std::ofstream::out | std::ofstream::app);
     ofs<<gapsize<<" "<<purity<<" "<<rms<<" "<<error<<"\n";
@@ -82,7 +82,7 @@ void write_file_Zvtx(const char* gapsize, const char* pileup, double purity , do
     std::cout<<"Writing to txt file...." <<std::endl;
     const char* txt_path = "./txt_files";
     char txt_file[1023];
-    sprintf(txt_file,"%s/summary10-100_rmsZvtxVspurityNo30mm_PU%s.txt",txt_path, pileup);
+    sprintf(txt_file,"%s/FCCsummary5-100_rmsZvtxVspurity_PU%s.txt",txt_path, pileup);
     std::ofstream ofs;
     ofs.open (txt_file, std::ofstream::out | std::ofstream::app);
     ofs<<gapsize<<" "<<purity<<" "<<rms<<" "<<error<<"\n";
@@ -103,9 +103,11 @@ void rmsVspurity(const char *run_no, const char *pileup, const char *gapsize)
 {
 	Int_t num_events = 425;
 	//! calculate track purity
-	const char *file_path = "/media/tamasi/DriveT1/tamasi/Desktop/PHD/talks_preps/ctd2k19/data_files/hh4b/pileup_samples/rec-files";
+	//const char *file_path = "/media/tamasi/DriveT1/tamasi/Desktop/PHD/talks_preps/ctd2k19/data_files/hh4b/pileup_samples/rec-files";
+	const char *file_path = "/home/tamasi/repo_tamasi/rec_files/rec_files";
 	char signal_file_names[1023];//e.g. PU200hh4b_recOPTsig5_005004.root
-	sprintf(signal_file_names, "%s/PU%shh4b_recOPTsig5_00%s*.root",file_path,pileup,gapsize);
+	//sprintf(signal_file_names, "%s/PU%shh4b_recOPTsig5_00%s*.root",file_path,pileup,gapsize);
+	sprintf(signal_file_names, "%s/%smm/PU%s/ggFhh4b_SM/*.root",file_path,gapsize,pileup);
 	TChain rec("m_recTree");
 	rec.Add(signal_file_names);
 	std::cout<<"rec tree opened with " << rec.GetEntries() <<"entries\n";
@@ -140,7 +142,7 @@ void rmsVspurity(const char *run_no, const char *pileup, const char *gapsize)
 	//! calculate integral of purity in the high pt region
 	//! https://root.cern.ch/root/roottalk/roottalk03/2211.html
 	//double integral = h_pur_vs_ptPU->Integral();
-	double xmin = 10e3, xmax = 100e3;
+	double xmin = 5e3, xmax = 100e3;
 	TAxis *axis = h_pur_vs_ptPU->GetXaxis();
 	int bmin = axis->FindBin(xmin); 
 	int bmax = axis->FindBin(xmax); 
@@ -162,18 +164,21 @@ void rmsVspurity(const char *run_no, const char *pileup, const char *gapsize)
 	std::cout<<"purity in the pt range [" <<xmin << "," << xmax <<"] = " <<integral/norm << std::endl;
 	
 	//! calculate rel pt resolution using single pions
-	const char *file_path1 = "/media/tamasi/DriveT1/tamasi/Desktop/PHD/talks_preps/ctd2k19/data_files/single_particle/rec-files";
-	char rec_file_name[1023];//e.g. pi-_recOPTsig5_005010.root
-	sprintf(rec_file_name, "%s/pi-_recOPTsig5_00%s.root",file_path1,run_no);
-	TFile *f = TFile::Open(rec_file_name);
-	TTree *t = (TTree*)f->Get("m_recTree");
+	//const char *file_path1 = "/media/tamasi/DriveT1/tamasi/Desktop/PHD/talks_preps/ctd2k19/data_files/single_particle/rec-files";
+	char rec_file_names[1023];//e.g. pi-_recOPTsig5_005010.root
+	//sprintf(rec_file_name, "%s/pi-_recOPTsig5_00%s.root",file_path1,run_no);
+	//TFile *f = TFile::Open(rec_file_name);
+	//TTree *t = (TTree*)f->Get("m_recTree");
+	sprintf(rec_file_names, "%s/pi*_recTree_%s.root",file_path,run_no);
+	TChain t("m_recTree");
+	t.Add(rec_file_names);
 	double binNum = 100;
 	double relptmin = -0.1, relptmax = 0.1;
 	c1->Clear();
 	char histo_title[1023];
 	sprintf(histo_title,"Relative p_{t} Resolution, triplet gapsize %s, 10GeV single #pi",gapsize);
 	TH1F* h_p = new TH1F("h_p","histo_title",binNum,relptmin,relptmax);
-	t->Draw("(Pt_n - M_pt)/M_pt>>h_p",all_cut);
+	t.Draw("(Pt_n - M_pt)/M_pt>>h_p",all_cut);
 	h_p->SetXTitle("delta p [MeV/c]");
 	h_p->SetTitle(histo_title);
 	h_p->Draw();
@@ -185,14 +190,19 @@ void rmsVspurity(const char *run_no, const char *pileup, const char *gapsize)
 	double pRMS = h_p->GetFunction("gaus")->GetParameter(2);
 	double PRMS_err = h_p->GetFunction("gaus")->GetParError(2);
 	write_file(gapsize, pileup, purity, pRMS, PRMS_err);
+	delete h_num_vs_ptPU;
+	delete h_den_vs_ptPU;
+	delete h_p;
 }
 void rmsZvtxVspurity(const char *run_no, const char *pileup, const char *gapsize)
 {
 	Int_t num_events = 425;
 	//! calculate track purity
-	const char *file_path = "/media/tamasi/DriveT1/tamasi/Desktop/PHD/talks_preps/ctd2k19/data_files/hh4b/pileup_samples/rec-files";
+	//const char *file_path = "/media/tamasi/DriveT1/tamasi/Desktop/PHD/talks_preps/ctd2k19/data_files/hh4b/pileup_samples/rec-files";
+	const char *file_path = "/home/tamasi/repo_tamasi/rec_files/rec_files";
 	char signal_file_names[1023];//e.g. PU200hh4b_recOPTsig5_005004.root
-	sprintf(signal_file_names, "%s/PU%shh4b_recOPTsig5_00%s*.root",file_path,pileup,gapsize);
+	//sprintf(signal_file_names, "%s/PU%shh4b_recOPTsig5_00%s*.root",file_path,pileup,gapsize);
+	sprintf(signal_file_names, "%s/%smm/PU%s/ggFhh4b_SM/*.root",file_path,gapsize,pileup);
 	TChain rec("m_recTree");
 	rec.Add(signal_file_names);
 	std::cout<<"rec tree opened with " << rec.GetEntries() <<"entries\n";
@@ -227,7 +237,7 @@ void rmsZvtxVspurity(const char *run_no, const char *pileup, const char *gapsize
 	//! calculate integral of purity in the high pt region
 	//! https://root.cern.ch/root/roottalk/roottalk03/2211.html
 	//double integral = h_pur_vs_ptPU->Integral();
-	double xmin = 10e3, xmax = 100e3;
+	double xmin = 5e3, xmax = 100e3;
 	TAxis *axis = h_pur_vs_ptPU->GetXaxis();
 	int bmin = axis->FindBin(xmin); 
 	int bmax = axis->FindBin(xmax); 
@@ -249,18 +259,21 @@ void rmsZvtxVspurity(const char *run_no, const char *pileup, const char *gapsize
 	std::cout<<"purity in the pt range [" <<xmin << "," << xmax <<"] = " <<integral/norm << std::endl;
 	
 	//! calculate rel pt resolution using single pions
-	const char *file_path1 = "/media/tamasi/DriveT1/tamasi/Desktop/PHD/talks_preps/ctd2k19/data_files/single_particle/rec-files";
-	char rec_file_name[1023];//e.g. pi-_recOPTsig5_005010.root
-	sprintf(rec_file_name, "%s/pi-_recOPTsig5_00%s.root",file_path1,run_no);
-	TFile *f = TFile::Open(rec_file_name);
-	TTree *t = (TTree*)f->Get("m_recTree");
+	//const char *file_path1 = "/media/tamasi/DriveT1/tamasi/Desktop/PHD/talks_preps/ctd2k19/data_files/single_particle/rec-files";
+	char rec_file_names[1023];//e.g. pi-_recOPTsig5_005010.root
+	//sprintf(rec_file_names, "%s/pi-_recOPTsig5_00%s.root",file_path1,run_no);
+	//TFile *f = TFile::Open(rec_file_names);
+	//TTree *t = (TTree*)f->Get("m_recTree");
+	sprintf(rec_file_names, "%s/pi*_recTree_%s.root",file_path,run_no);
+	TChain t("m_recTree");
+	t.Add(rec_file_names);
 	double binNum = 100;
 	double zmin = -6, zmax = 6;
 	c1->Clear();
 	char histo_title[1023];
 	sprintf(histo_title,"z_{0} Resolution, triplet gapsize %s, 10GeV single #pi",gapsize);
 	TH1F* h_p = new TH1F("h_p","histo_title",binNum,zmin,zmax);
-	t->Draw("Z013 - M_Vz>>h_p",all_cut);
+	t.Draw("Z013 - M_Vz>>h_p",all_cut);
 	h_p->SetXTitle("delta z [mm]");
 	h_p->SetTitle(histo_title);
 	h_p->Draw();
@@ -272,6 +285,9 @@ void rmsZvtxVspurity(const char *run_no, const char *pileup, const char *gapsize
 	double pRMS = h_p->GetFunction("gaus")->GetParameter(2);
 	double PRMS_err = h_p->GetFunction("gaus")->GetParError(2);
 	write_file_Zvtx(gapsize, pileup, purity, pRMS, PRMS_err);
+	delete h_num_vs_ptPU;
+	delete h_den_vs_ptPU;
+	delete h_p;
 }
 
 int writePU200()
@@ -286,12 +302,21 @@ int writePU200()
 }
 int writePU1000()
 {
-	rmsVspurity("5010","1000","50");
-	rmsVspurity("4010","1000","40");
-	rmsVspurity("2010","1000","20");
-	rmsZvtxVspurity("5010","1000","50");
-	rmsZvtxVspurity("4010","1000","40");
-	rmsZvtxVspurity("2010","1000","20");
+	//rmsVspurity("5010","1000","50");
+	//rmsVspurity("4010","1000","40");
+	//rmsVspurity("2010","1000","20");
+	//rmsZvtxVspurity("5010","1000","50");
+	//rmsZvtxVspurity("4010","1000","40");
+	//rmsZvtxVspurity("2010","1000","20");
+	
+	rmsVspurity("250010","1k","25");
+	rmsVspurity("300010","1k","30");
+	rmsVspurity("350010","1k","35");
+	rmsVspurity("400010","1k","40");
+	rmsZvtxVspurity("250010","1k","25");
+	rmsZvtxVspurity("300010","1k","30");
+	rmsZvtxVspurity("350010","1k","35");
+	rmsZvtxVspurity("400010","1k","40");
 	return 0;
 }
 void SaveCanvas(TCanvas *C, char *name)
@@ -311,7 +336,7 @@ void SaveCanvas(TCanvas *C, char *name)
 void summary_relptVspurity()
 {
 	//! no. of points to be plotted
-	Int_t n = 3;
+	Int_t n = 4;
 	//Multi Graph
 	c1->Clear();
 	c1->SetGridx();
@@ -323,9 +348,10 @@ void summary_relptVspurity()
 
 	char plot_title[1023];
 	//! PU 1000
-	sprintf(txt_file1,"%s/summary10-100_rmsVspurityNo30mm_PU%s.txt",txt_path,"1000");
+	sprintf(txt_file1,"%s/FCCsummary10-100_rmsVspurity_PU%s.txt",txt_path,"1k");
 	//! PU 200
-	sprintf(txt_file2,"%s/summary10-100_rmsVspurityNo30mm_PU%s.txt",txt_path,"200");
+	sprintf(txt_file2,"%s/FCCsummary10-100_rmsVspurity_PU%s.txt",txt_path,"1k");
+	//sprintf(txt_file2,"%s/summary10-100_rmsVspurityNo30mm_PU%s.txt",txt_path,"200");
 	//sprintf(txt_file3,"%s/summary20-100_rmsVspurity_PU%s.txt",txt_path,pileup);
 
 	sprintf(plot_title,"Relative p_{t} resolution Vs track purity for various gap sizes of the TTT");
@@ -338,7 +364,7 @@ void summary_relptVspurity()
 	TGraphErrors *g1 = new TGraphErrors(n,t1->GetV1(),t1->GetV2(),0,t1->GetV3());
 	g1->SetTitle(plot_title);
 	g1->GetXaxis()->SetTitle("Track Purity for p_{t} > 10GeV/c");
-	g1->GetXaxis()->SetRangeUser(0.6,1);
+	g1->GetXaxis()->SetRangeUser(0.5,1);
 	g1->GetYaxis()->SetTitleOffset(1.2);
 	g1->GetYaxis()->SetTitle("#sigma_{#Delta(p_{t})/p_{t_{gen}}} [%]@ p_{t} = 10 GeV/c");
 	g1->GetYaxis()->SetRangeUser(0,1.3);
@@ -357,7 +383,7 @@ void summary_relptVspurity()
 	TGraphErrors *g2 = new TGraphErrors(n,t2->GetV1(),t2->GetV2(),0,t2->GetV3());
 	g2->SetTitle(plot_title);
 	g2->GetXaxis()->SetTitle("Track Purity for p_{t} > 10GeV/c");
-	g2->GetXaxis()->SetRangeUser(0.6,1);
+	g2->GetXaxis()->SetRangeUser(0.5,1);
 	g2->GetYaxis()->SetTitleOffset(1.2);
 	g2->GetYaxis()->SetTitle("#sigma_{#Delta(p_{t})/p_{t_{gen}}} [%] @ p_{t} = 10 GeV/c");
 	g2->GetYaxis()->SetRangeUser(0,1.3);
@@ -403,7 +429,7 @@ void summary_relptVspurity()
 	Double_t *nx = g2->GetX();
 	Double_t *ny = g2->GetY();
 	
-	Double_t x1= 0.1,y1= 0.1, x2 = 0.3, y2 = 0.3;
+	Double_t x1= 0.11,y1= 0.11, x2 = 0.31, y2 = 0.31;
 	TLegend *leg=new TLegend(x1,y2,x2,y2+0.1,"<#mu>,  gap size");
 	leg->SetFillColor(kWhite);
 	leg->SetBorderSize(0);
@@ -430,17 +456,22 @@ void summary_relptVspurity()
 	if(j == 0) 
 	{
 		leg1->AddEntry(m1,",");
-		leg1->AddEntry(m,"   50mm");
+		leg1->AddEntry(m,"   25mm");
 	}
 	if(j == 1) 
 	{
 		leg1->AddEntry(m1,",");
-		leg1->AddEntry(m,"   40mm");
+		leg1->AddEntry(m,"   30mm");
 	}
 	if(j == 2)
 	{
 		leg1->AddEntry(m1,",");
-		leg1->AddEntry(m,"   20mm");
+		leg1->AddEntry(m,"   35mm");
+	}
+	if(j == 3)
+	{
+		leg1->AddEntry(m1,",");
+		leg1->AddEntry(m,"   40mm");
 	}
 	}
 	leg->Draw();

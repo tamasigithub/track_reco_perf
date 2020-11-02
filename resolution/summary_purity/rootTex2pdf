@@ -73,11 +73,8 @@ for file in "$@"; do
   # now search and replace (order important!)
   # units
   sed -i -e 's@\[a.u.\]@\~\[a.u.\]@g' $BODY_FILE
-  sed -i -e 's@\[rad@\~\[\\text{rad}@g' $BODY_FILE
-  sed -i -e 's@\[mrad@\~\[\\text{mrad}@g' $BODY_FILE
   sed -i -e 's@\[mm@\~\[\\text{mm}@g' $BODY_FILE
   sed -i -e 's@\[cm@\~\[\\text{cm}@g' $BODY_FILE
-  sed -i -e 's@cm@\\text{~cm}@g' $BODY_FILE
   sed -i -e 's@\[meV\]@\~\[meV\]@g' $BODY_FILE
   sed -i -e 's@\[MeV\]@\~\[MeV\]@g' $BODY_FILE
   sed -i -e 's@\[GeV\]@\~\[GeV\]@g' $BODY_FILE
@@ -89,7 +86,6 @@ for file in "$@"; do
   sed -i -e 's@GeV@\\text{GeV}@g' $BODY_FILE
   sed -i -e 's@TeV@\~\\text{TeV}@g' $BODY_FILE
   sed -i -e 's@event\/cm@\\text{event\/cm}@g' $BODY_FILE
-  sed -i -e 's@\\%@\%@g' $BODY_FILE
   # words
   sed -i -e 's@jets@\\text{jets~}@g' $BODY_FILE
   sed -i -e 's@jet@\\text{jet~}@g' $BODY_FILE
@@ -100,10 +96,6 @@ for file in "$@"; do
   sed -i -e 's@Efficiency@\\text{Efficiency~}@g' $BODY_FILE
   sed -i -e 's@efficiency@\\text{efficiency~}@g' $BODY_FILE
   sed -i -e 's@_{T@_{\\text{T}@g' $BODY_FILE
-  sed -i -e 's@deltadca@delta dca@g' $BODY_FILE
-  sed -i -e 's@deltaz@delta z@g' $BODY_FILE
-  sed -i -e 's@deltap@delta p@g' $BODY_FILE
-  sed -i -e 's@1k@\\text{1k}@g' $BODY_FILE
   # added by tamasi
   #sed -i -e 's@, H1H2@,\~H1H2@g' $BODY_FILE
   sed -i -e 's@=  0.0@=\~\~0.0@g' $BODY_FILE
@@ -118,6 +110,12 @@ for file in "$@"; do
   sed -i -e 's@threshold@\\text{~threshold}@g' $BODY_FILE
   sed -i -e 's@thr\.@\\text{~thr\.}@g' $BODY_FILE
   sed -i -e 's@Hit occupancy @\\text{Hit occupancy }@g' $BODY_FILE
+  sed -i -e 's@\\%@\%@g' $BODY_FILE
+  sed -i -e 's@      gap size@\~\~\~\~gap-size@g' $BODY_FILE
+  sed -i -e 's@1k 200   0@1k\~\~200\~\~\~\~0@g' $BODY_FILE
+  sed -i -e 's@   @\~@g' $BODY_FILE
+  sed -i -e 's@Average track purity, @\\text{Average track purity, }@g' $BODY_FILE
+  sed -i -e 's@, at @\\text{, at }@g' $BODY_FILE
   # derivatives
   sed -i -e 's@d\\sigma@\\text{d}\\sigma@g' $BODY_FILE
   sed -i -e 's@dE@\\text{d}E@g' $BODY_FILE
