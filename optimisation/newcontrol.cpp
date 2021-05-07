@@ -80,8 +80,8 @@ TCut den_select    = "Tid>-2 && Pt_n > 2000  && abs(Z013) < 100 && abs(Eta13) < 
 //! 
 TCut phiBarrel	= "abs(Phi13)< 0.021";
 TCut zBarrel	= "abs(Z13)<380";
-TCut maxdphi2	= "abs(dphi2)<3.0e-4";
-TCut maxdz2	= "abs(dz2)<0.13*(sin(Theta13)^(-1.13))";
+TCut maxdphi2	= "abs(dphi2)<9.0e-4";//3.0e-4
+TCut maxdz2	= "abs(dz2)<5.0";//0.13*(sin(Theta13)^(-1.13))";
 const float dz2_exp   = -1.13;
 const float dz2_const = 0.13;
 //! 
@@ -149,7 +149,7 @@ TCut z0truthmax	= "abs(M_Vz)<100";//! depends on the luminous region along z
 TCut z0recmax	= "abs(Z013)<100";
 void newcontrol
 (
-	const char* output_file_name = "control_30mm_ggF_3",//f-few
+	const char* output_file_name = "control_30mm_ggF_5",//f-few
 	//const char* output_file_name = "control_hh4b_final3",//f-few
 	const char* set = "C",
 	const bool verbose = true
@@ -172,7 +172,8 @@ void newcontrol
 	//rec.Add("/home/tamasi/repo_tamasi/rec_files/PU0hh4b_m260_recTree_200001_wide.root");
 	//! 25mm
 	//rec.Add("/home/tamasi/repo_tamasi/rec_files/rec_files/40mm/PU1k/ggFhh4b_SM/*.root");
-	rec.Add("/home/tamasi/repo_tamasi/rec_files/for_optimization/30mm/ggFhh4b_SM/*.root");
+	//rec.Add("/home/tamasi/repo_tamasi/rec_files/for_optimization/30mm/ggFhh4b_SM/*.root");
+        rec.Add("/home/tamasi/repo_tamasi/rec_files/rec_files/30mm/PU0/new_ggFhh4b1_noSEC_plus1MOD/*.root");
 	//! 30mm
 	//rec.Add("/home/tamasi/repo_tamasi/rec_files/MB_recTree_30000*_samelad.root");
 	//rec.Add("/media/tamasi/Elements/PhD/FCC/data_files/rec_files/30mm/ggFhh4b_SM/*.root");

@@ -14,38 +14,66 @@
 #include <string>
 #include <math.h>
 #include <vector>
+
+const double sigma_max = 3.0;
+//const char* out_path = "/home/tamasi/repo_tamasi/rec_files/rec_files/plots";
 const char* out_path = "./plots"; 
 //const char* out_path = "/media/tamasi/DriveT1/tamasi/Desktop/PHD/talks_preps/ctd2k19/plots/efficiency/singleParticles; 
 
-//int eff_Vs_etaphipt_dR_barcode(const char* output_file_name = "PU1000MB-eff_30mm_samelad_opt5GeV", bool save = false)
-int eff_Vs_etaphipt_dR_barcode(const char* output_file_name = "PU1000hh4b-eff_30mm_samelad_opt5GeVp", bool save = false)
+int eff_Vs_etaphipt_dR_barcode(const char* output_file_name = "PU0allpcles_ggF1.0-eff_30mm_eta1.7opt3_2GeV_noSEC_loose_3")
+//int eff_Vs_etaphipt_dR_barcode(const char* output_file_name = "singleMUeff_30mm_eta1.7opt3_2_10GeV_SEC")
+//int eff_Vs_etaphipt_dR_barcode(const char* output_file_name = "PU1000hh4b-eff_30mm_samelad_opt5GeVp", bool save = false)
 //int eff_Vs_etaphipt_dR_barcode(const char* output_file_name = "PU0hh4b_effVxVy2_300002_N1lad_opt_pi", bool save = false)
 //int eff_Vs_etaphipt_dR_barcode(const char* output_file_name = "hh4b_m260effvxvy20_20mm200001_opt", bool save = false)
 //int eff_Vs_etaphipt_dR_barcode(const char* output_file_name = "MB_effvxvy2_20mm200001_6_opt_3", bool save = false)
-//int eff_Vs_etaphipt_dR_barcode(const char* output_file_name = "mu-effvxvy20_20mm210000_opt", bool save = false)
+//int eff_Vs_etaphipt_dR_barcode(const char* output_file_name = "pieff_35mm_eta2.5opt5GeV", bool save = false)
 {
 	TChain recTree("m_recTree");
 	TChain truthTree("tracks");
-	
-	//! MinBias
-	//recTree.Add("/home/tamasi/repo_tamasi/rec_files/MB_recTree_20000*_opt.root");
-	//truthTree.Add("/home/tamasi/repo_tamasi/rec_files/MB_recTree_20000*_opt.root");
-	//recTree.Add("/media/tamasi/Z/PhD/FCC/Castellated/rec_files/PU1000MB_recTree_3*_samelad_opt.root");
-	//truthTree.Add("/media/tamasi/Z/PhD/FCC/Castellated/rec_files/PU1000MB_recTree_3*_samelad_opt.root");
-	//! hh4b
-	//recTree.Add("/home/tamasi/repo_tamasi/rec_files/PU200hh4b_m260_recTree_200002_opt.root");
-	//truthTree.Add("/home/tamasi/repo_tamasi/rec_files/PU200hh4b_m260_recTree_200002_opt.root");
-	//recTree.Add("/home/tamasi/repo_tamasi/rec_files/PU0hh4b_recTree_300002_N1lad_opt.root");
-	//truthTree.Add("/home/tamasi/repo_tamasi/rec_files/PU0hh4b_recTree_300002_N1lad_opt.root");
-	//recTree.Add("/home/tamasi/repo_tamasi/rec_files/PU1000hh4b_recTree_30000*_samelad_opt.root");
-	//truthTree.Add("/home/tamasi/repo_tamasi/rec_files/PU1000hh4b_recTree_30000*_samelad_opt.root");
-	//recTree.Add("/media/tamasi/Z/PhD/FCC/Castellated/rec_files/PU1000hh4b_recTree_3*_samelad_opt.root");
-	//truthTree.Add("/media/tamasi/Z/PhD/FCC/Castellated/rec_files/PU1000hh4b_recTree_3*_samelad_opt.root");
-	recTree.Add("/media/tamasi/Z/PhD/FCC/Castellated/rec_files/PU1K_hh4bm260_30mm_sig5/*.root");
-	truthTree.Add("/media/tamasi/Z/PhD/FCC/Castellated/rec_files/PU1K_hh4bm260_30mm_sig5/*.root");
+	//! ggF 1.0
+	//recTree.Add("/home/tamasi/repo_tamasi/rec_files/rec_files/30mm/PU0/new_ggFhh4b1_noSEC/*.root");
+	//truthTree.Add("/home/tamasi/repo_tamasi/rec_files/rec_files/30mm/PU0/new_ggFhh4b1_noSEC/*.root");
+	recTree.Add("/home/tamasi/repo_tamasi/rec_files/rec_files/30mm/PU0/new_ggFhh4b1_noSEC_plus1MOD/*.root");
+	truthTree.Add("/home/tamasi/repo_tamasi/rec_files/rec_files/30mm/PU0/new_ggFhh4b1_noSEC_plus1MOD/*.root");
+	//recTree.Add("/home/tamasi/repo_tamasi/rec_files/rec_files/30mm/PU0/ggFhh4b_SM/*.root");
+	//truthTree.Add("/home/tamasi/repo_tamasi/rec_files/rec_files/30mm/PU0/ggFhh4b_SM/*.root");
+	//recTree.Add("/home/tamasi/repo_tamasi/rec_files/rec_files/30mm/PU1k/ggFhh4b_1_noCluster/*.root");
+	//truthTree.Add("/home/tamasi/repo_tamasi/rec_files/rec_files/30mm/PU1k/ggFhh4b_1_noCluster/*.root");
+	//recTree.Add("/home/tamasi/repo_tamasi/rec_files/rec_files/30mm/PU1k/ggFhh4b_SM_1/*.root");
+	//truthTree.Add("/home/tamasi/repo_tamasi/rec_files/rec_files/30mm/PU1k/ggFhh4b_SM_1/*.root");
+	//recTree.Add("/home/tamasi/repo_tamasi/rec_files/rec_files/30mm/PU1k/ggFhh4b_SM/*.root");
+	//truthTree.Add("/home/tamasi/repo_tamasi/rec_files/rec_files/30mm/PU1k/ggFhh4b_SM/*.root");
+	//recTree.Add("/home/tamasi/repo_tamasi/rec_files/rec_files/30mm/PU1k/ggFhh4b_SM/nokap/*.root");
+	//truthTree.Add("/home/tamasi/repo_tamasi/rec_files/rec_files/30mm/PU1k/ggFhh4b_SM/nokap/*.root");
 	////! single particles
-	//recTree.Add("/home/tamasi/repo_tamasi/rec_files/mu-_recTree_210000_opt.root");
-	//truthTree.Add("/home/tamasi/repo_tamasi/rec_files/mu-_recTree_210000_opt.root");
+	//recTree.Add("/media/externalHDD/PhD/FCC/data_files/rec_files/30mm/singlePcles/*recTree.root");
+	//truthTree.Add("/media/externalHDD/PhD/FCC/data_files/rec_files/30mm/singlePcles/*recTree.root");
+	//recTree.Add("/home/tamasi/repo_tamasi/rec_files/rec_files/mu+_recTree_302010.root");
+	//truthTree.Add("/home/tamasi/repo_tamasi/rec_files/rec_files/mu+_recTree_302010.root");
+	//recTree.Add("/home/tamasi/repo_tamasi/rec_files/rec_files/mu-_recTree_302010.root");
+	//truthTree.Add("/home/tamasi/repo_tamasi/rec_files/rec_files/mu-_recTree_302010.root");
+	//recTree.Add("/home/tamasi/repo_tamasi/rec_files/pi-35mm000001_recTree.root");
+	//truthTree.Add("/home/tamasi/repo_tamasi/rec_files/pi-35mm000001_recTree.root");
+	//recTree.Add("/home/tamasi/repo_tamasi/rec_files/pi+35mm000001_recTree.root");
+	//truthTree.Add("/home/tamasi/repo_tamasi/rec_files/pi+35mm000001_recTree.root");
+	
+	
+	////! MinBias
+	////recTree.Add("/home/tamasi/repo_tamasi/rec_files/MB_recTree_20000*_opt.root");
+	////truthTree.Add("/home/tamasi/repo_tamasi/rec_files/MB_recTree_20000*_opt.root");
+	////recTree.Add("/media/tamasi/Z/PhD/FCC/Castellated/rec_files/PU1000MB_recTree_3*_samelad_opt.root");
+	////truthTree.Add("/media/tamasi/Z/PhD/FCC/Castellated/rec_files/PU1000MB_recTree_3*_samelad_opt.root");
+	////! hh4b
+	////recTree.Add("/home/tamasi/repo_tamasi/rec_files/PU200hh4b_m260_recTree_200002_opt.root");
+	////truthTree.Add("/home/tamasi/repo_tamasi/rec_files/PU200hh4b_m260_recTree_200002_opt.root");
+	////recTree.Add("/home/tamasi/repo_tamasi/rec_files/PU0hh4b_recTree_300002_N1lad_opt.root");
+	////truthTree.Add("/home/tamasi/repo_tamasi/rec_files/PU0hh4b_recTree_300002_N1lad_opt.root");
+	////recTree.Add("/home/tamasi/repo_tamasi/rec_files/PU1000hh4b_recTree_30000*_samelad_opt.root");
+	////truthTree.Add("/home/tamasi/repo_tamasi/rec_files/PU1000hh4b_recTree_30000*_samelad_opt.root");
+	////recTree.Add("/media/tamasi/Z/PhD/FCC/Castellated/rec_files/PU1000hh4b_recTree_3*_samelad_opt.root");
+	////truthTree.Add("/media/tamasi/Z/PhD/FCC/Castellated/rec_files/PU1000hh4b_recTree_3*_samelad_opt.root");
+	//recTree.Add("/media/tamasi/Z/PhD/FCC/Castellated/rec_files/PU1K_hh4bm260_30mm_sig5/*.root");
+	//truthTree.Add("/media/tamasi/Z/PhD/FCC/Castellated/rec_files/PU1K_hh4bm260_30mm_sig5/*.root");
 
 	std::cout<<"rec Tree : " <<recTree.GetEntries() << " , truth tree: " << truthTree.GetEntries() <<std::endl;
 	//! define a local vector<double> to store the reconstructed pt values
@@ -60,7 +88,8 @@ int eff_Vs_etaphipt_dR_barcode(const char* output_file_name = "PU1000hh4b-eff_30
         std::vector<double> *Vx = 0;	
         std::vector<double> *Vy = 0;	
         std::vector<double> *Vz = 0;	
-        std::vector<int>   *match_barcodeTTT_bc = 0;
+        std::vector<int>    *match_barcodeTTT_bc = 0;
+        std::vector<double> *k_pull = 0;
 
 	truthTree.SetBranchStatus("*",          0);
 	truthTree.SetBranchStatus("charge", 	1);
@@ -76,6 +105,7 @@ int eff_Vs_etaphipt_dR_barcode(const char* output_file_name = "PU1000hh4b-eff_30
 
 	recTree.SetBranchStatus("*",            0);
 	recTree.SetBranchStatus("Tid",  	1);
+	recTree.SetBranchStatus("kappa_pull",  	1);
 	
 	truthTree.SetBranchAddress("charge",    &charge);
 	truthTree.SetBranchAddress("type_traj", &tinteraction);
@@ -89,9 +119,10 @@ int eff_Vs_etaphipt_dR_barcode(const char* output_file_name = "PU1000hh4b-eff_30
 	truthTree.SetBranchAddress("vz", 	&Vz);
 
 	recTree.SetBranchAddress("Tid", &match_barcodeTTT_bc);
+	recTree.SetBranchAddress("kappa_pull", &k_pull);
 
-	int etabin = 17;
-    	double etamin   = -1.7, etamax = 1.7;
+	int etabin = 25;
+    	double etamin   = -2.5, etamax = 2.5;
 	
 	int phibin = 16;
     	//double phimin   = -3.2, phimax = 3.2;
@@ -102,15 +133,15 @@ int eff_Vs_etaphipt_dR_barcode(const char* output_file_name = "PU1000hh4b-eff_30
 	double xbins[] = {1000, 3500, 7500, 15000, 25000, 35000, 45000, 55000, 65000, 75000, 85000, 95000, 105000 };	
 */	/// LOG BINS for signal sample
 	/// Variable bin width
-	const int ptbins = 40;//no. of bins
+	const int ptbins = 40;//40//no. of bins
 	Double_t xbins[ptbins+1];//elements of this array are
-	double dx = 6./ptbins;//5 -> implies max until 10^5
+	double dx = 5./ptbins;//5 -> implies max until 10^5
 	double l10 = TMath::Log(10);
 	for (int i = 0; i<=ptbins; i++)
 	{
-	        //std::cout<<"i,dx : " <<i << ", "<<dx <<std::endl;
+	        std::cout<<"i,dx : " <<i << ", "<<dx <<std::endl;
 		xbins[i] = TMath::Exp(l10*i*dx);
-	        //std::cout<<"xbin[i] : " <<xbins[i] <<std::endl;
+	        std::cout<<"xbin[i] : " <<xbins[i] <<std::endl;
 	}
 	TH1::SetDefaultSumw2(true);
 	//! TTT barcode matched
@@ -120,29 +151,62 @@ int eff_Vs_etaphipt_dR_barcode(const char* output_file_name = "PU1000hh4b-eff_30
 	TH1* h_num_vs_phiPU = new TH1F("h_num_vs_phiPU", "Numerator Count vs #phi;#phi [rad];Numerator Count"    , phibin, phimin, phimax);
         TH1* h_den_vs_phiPU = new TH1F("h_den_vs_phiPU", "Denominator Count vs #phi;#phi [rad];Denominator Count", phibin, phimin, phimax);
 
-	TH1* h_num_vs_ptPU = new TH1F("h_num_vs_ptPU", "Numerator Count vs P_{t};P_{t} [MeV/c];Numerator Count"    , ptbins, xbins);
-	TH1* h_den_vs_ptPU = new TH1F("h_den_vs_ptPU", "Denominator Count vs P_{t};P_{t} [MeV/c];Denominator Count", ptbins, xbins);
+	TH1* h_num_vs_ptPU = new TH1F("h_num_vs_ptPU", "Numerator Count vs p_{T};p_{T} [MeV/c];Numerator Count"    , ptbins, xbins);
+	TH1* h_den_vs_ptPU = new TH1F("h_den_vs_ptPU", "Denominator Count vs p_{T};p_{T} [MeV/c];Denominator Count", ptbins, xbins);
+	//! TTT muons 
+	TH1* h_num_vs_etamu = new TH1F("h_num_vs_etamu", "Numerator Count vs #eta;#eta;Numerator Count"    , etabin, etamin, etamax);
+        TH1* h_den_vs_etamu = new TH1F("h_den_vs_etamu", "Denominator Count vs #eta;#eta;Denominator Count", etabin, etamin, etamax);
+	
+	TH1* h_num_vs_phimu = new TH1F("h_num_vs_phimu", "Numerator Count vs #phi;#phi [rad];Numerator Count"    , phibin, phimin, phimax);
+        TH1* h_den_vs_phimu = new TH1F("h_den_vs_phimu", "Denominator Count vs #phi;#phi [rad];Denominator Count", phibin, phimin, phimax);
+
+	TH1* h_num_vs_ptmu = new TH1F("h_num_vs_ptmu", "Numerator Count vs p_{T};p_{T} [MeV/c];Numerator Count"    , ptbins, xbins);
+	TH1* h_den_vs_ptmu = new TH1F("h_den_vs_ptmu", "Denominator Count vs p_{T};p_{T} [MeV/c];Denominator Count", ptbins, xbins);
+	//! TTT electrons
+	TH1* h_num_vs_etae = new TH1F("h_num_vs_etae", "Numerator Count vs #eta;#eta;Numerator Count"    , etabin, etamin, etamax);
+        TH1* h_den_vs_etae = new TH1F("h_den_vs_etae", "Denominator Count vs #eta;#eta;Denominator Count", etabin, etamin, etamax);
+	
+	TH1* h_num_vs_phie = new TH1F("h_num_vs_phie", "Numerator Count vs #phi;#phi [rad];Numerator Count"    , phibin, phimin, phimax);
+        TH1* h_den_vs_phie = new TH1F("h_den_vs_phie", "Denominator Count vs #phi;#phi [rad];Denominator Count", phibin, phimin, phimax);
+
+	TH1* h_num_vs_pte = new TH1F("h_num_vs_pte", "Numerator Count vs p_{T};p_{T} [MeV/c];Numerator Count"    , ptbins, xbins);
+	TH1* h_den_vs_pte = new TH1F("h_den_vs_pte", "Denominator Count vs p_{T};p_{T} [MeV/c];Denominator Count", ptbins, xbins);
+	//! TTT pions
+	TH1* h_num_vs_etapi = new TH1F("h_num_vs_etapi", "Numerator Count vs #eta;#eta;Numerator Count"    , etabin, etamin, etamax);
+        TH1* h_den_vs_etapi = new TH1F("h_den_vs_etapi", "Denominator Count vs #eta;#eta;Denominator Count", etabin, etamin, etamax);
+	
+	TH1* h_num_vs_phipi = new TH1F("h_num_vs_phipi", "Numerator Count vs #phi;#phi [rad];Numerator Count"    , phibin, phimin, phimax);
+        TH1* h_den_vs_phipi = new TH1F("h_den_vs_phipi", "Denominator Count vs #phi;#phi [rad];Denominator Count", phibin, phimin, phimax);
+
+	TH1* h_num_vs_ptpi = new TH1F("h_num_vs_ptpi", "Numerator Count vs p_{T};p_{T} [MeV/c];Numerator Count"    , ptbins, xbins);
+	TH1* h_den_vs_ptpi = new TH1F("h_den_vs_ptpi", "Denominator Count vs p_{T};p_{T} [MeV/c];Denominator Count", ptbins, xbins);
 
 
 
 	for(int i = 0; i < truthTree.GetEntries(); ++i)
-	//for(int i = 0; i < 10000; ++i)
+	//for(int i = 0; i < 2000; ++i)
 	{
+		if(i > truthTree.GetEntries()) break;
 		//! get entries for the ith event
 		truthTree.GetEntry(i);
 		recTree.GetEntry(i);
 		//! loop over the truth particles and select stable charge particles passing the selections
 		for(int i1 = 0; i1 < barcode->size(); ++i1)
 		{
+			if(std::abs(pdg->at(i1)) == 25) 	continue;
+			if(std::abs(pdg->at(i1)) == 5) 		continue;
+			
 			int match_flagTTT_bc = -1;
 			if(std::abs(charge->at(i1)) != 1)	continue;
-			if(std::fabs(pt->at(i1)) < 5e3 )	continue;
-			if(std::fabs(eta->at(i1)) > 1.6)	continue;
+			if(std::fabs(pt->at(i1)) < 2e3 )	continue;
+			//if(std::fabs(eta->at(i1)) < 1.5)	continue;
+			if(std::fabs(eta->at(i1)) > 2.5)	continue;
 			if(std::fabs(Vz->at(i1)) > 100 )	continue;
 			if(std::fabs(Vx->at(i1)) > 5 )		continue;
 			if(std::fabs(Vy->at(i1)) > 5 )		continue;
 			if(barcode->at(i1) <= 0) 		continue;
-			//if(std::abs(pdg->at(i1)) != 2212) 	continue;
+			//if((*tinteraction)[i1] != 0)		continue;
+			//if(std::abs(pdg->at(i1)) != 211) 	continue;
 			//if((*tinteraction)[i1] == 6)		continue;
 			//else if(std::abs(pdg->at(i1)) == 313) 	continue;
 			//else if(std::abs(pdg->at(i1)) == 421) 	continue;
@@ -164,7 +228,10 @@ int eff_Vs_etaphipt_dR_barcode(const char* output_file_name = "PU1000hh4b-eff_30
 			//! loop over TTT tracks and the find the corresponding particle it was matched to (with barcode matching)
 			for(int i2 = 0; i2 < match_barcodeTTT_bc->size(); ++i2)
 			{
+				//! apply kappa_cut
+				if(std::fabs((*k_pull)[i2]) > sigma_max) continue;
 				//! get rid of the fakes and double counted reconstructed tracks
+				//if((*match_barcodeTTT_bc)[i2] == -1) 
 				if((*match_barcodeTTT_bc)[i2] < 0) 
 				{
 					match_flagTTT_bc = -1;
@@ -187,12 +254,48 @@ int eff_Vs_etaphipt_dR_barcode(const char* output_file_name = "PU1000hh4b-eff_30
 				h_num_vs_etaPU->Fill((*eta)[i1]);
 				h_num_vs_phiPU->Fill((*phi)[i1]);
 				h_num_vs_ptPU->Fill((*pt)[i1]);
+				if(std::abs(pdg->at(i1)) == 211)
+				{
+					h_num_vs_etapi->Fill((*eta)[i1]);
+					h_num_vs_phipi->Fill((*phi)[i1]);
+					h_num_vs_ptpi->Fill((*pt)[i1]);
+				}
+				if(std::abs(pdg->at(i1)) == 11)
+				{
+					h_num_vs_etae->Fill((*eta)[i1]);
+					h_num_vs_phie->Fill((*phi)[i1]);
+					h_num_vs_pte->Fill((*pt)[i1]);
+				}
+				if(std::abs(pdg->at(i1)) == 13)
+				{
+					h_num_vs_etamu->Fill((*eta)[i1]);
+					h_num_vs_phimu->Fill((*phi)[i1]);
+					h_num_vs_ptmu->Fill((*pt)[i1]);
+				}
 			}
 			if(match_flagTTT_bc > -1)
 			{
 				h_den_vs_etaPU->Fill((*eta)[i1]);
 				h_den_vs_phiPU->Fill((*phi)[i1]);
 				h_den_vs_ptPU->Fill((*pt)[i1]);
+				if(std::abs(pdg->at(i1)) == 211)
+				{
+					h_den_vs_etapi->Fill((*eta)[i1]);
+					h_den_vs_phipi->Fill((*phi)[i1]);
+					h_den_vs_ptpi->Fill((*pt)[i1]);
+				}
+				if(std::abs(pdg->at(i1)) == 11)
+				{
+					h_den_vs_etae->Fill((*eta)[i1]);
+					h_den_vs_phie->Fill((*phi)[i1]);
+					h_den_vs_pte->Fill((*pt)[i1]);
+				}
+				if(std::abs(pdg->at(i1)) == 13)
+				{
+					h_den_vs_etamu->Fill((*eta)[i1]);
+					h_den_vs_phimu->Fill((*phi)[i1]);
+					h_den_vs_ptmu->Fill((*pt)[i1]);
+				}
 			}
 		}
 	}
@@ -215,7 +318,7 @@ int eff_Vs_etaphipt_dR_barcode(const char* output_file_name = "PU1000hh4b-eff_30
 
         h_eff_vs_etaPU->SetTitle("efficiency vs #eta;#eta;efficiency");
         h_eff_vs_phiPU->SetTitle("efficiency vs #phi;#phi [rad];efficiency");
-	h_eff_vs_ptPU->SetTitle("efficiency vs P_{t};P_{t} [MeV/c];efficiency");
+	h_eff_vs_ptPU->SetTitle("efficiency vs p_{T};p_{T} [MeV/c];efficiency");
         
 	h_eff_vs_ptPU->GetXaxis()->SetRangeUser(2000.,106000.);
 	
@@ -247,6 +350,149 @@ int eff_Vs_etaphipt_dR_barcode(const char* output_file_name = "PU1000hh4b-eff_30
         h_eff_vs_phiPU->SetMarkerColor(kBlack);
 	h_eff_vs_ptPU->SetMarkerColor(kBlack);	
 	
+	//! pions
+	h_num_vs_etapi->Draw("e1");
+	h_den_vs_etapi->Draw("e1");
+	TH1* h_eff_vs_etapi = dynamic_cast<TH1*>(h_num_vs_etapi->Clone("h_eff_vs_etapi"));
+        h_eff_vs_etapi->Divide(h_num_vs_etapi, h_den_vs_etapi, 1.0, 1.0, "B");
+	h_num_vs_phipi->Draw("e1");
+	h_den_vs_phipi->Draw("e1");
+	TH1* h_eff_vs_phipi = dynamic_cast<TH1*>(h_num_vs_phipi->Clone("h_eff_vs_phipi"));
+        h_eff_vs_phipi->Divide(h_num_vs_phipi, h_den_vs_phipi, 1.0, 1.0, "B");
+	h_num_vs_ptpi->Draw("e1");
+	h_den_vs_ptpi->Draw("e1");
+	TH1* h_eff_vs_ptpi = dynamic_cast<TH1*>(h_num_vs_ptpi->Clone("h_eff_vs_ptpi"));
+	h_eff_vs_ptpi->Divide(h_num_vs_ptpi, h_den_vs_ptpi, 1.0, 1.0, "B");
+
+        h_eff_vs_etapi->SetTitle("efficiency vs #eta;#eta;efficiency");
+        h_eff_vs_phipi->SetTitle("efficiency vs #phi;#phi [rad];efficiency");
+	h_eff_vs_ptpi->SetTitle("efficiency vs p_{T};p_{T} [MeV/c];efficiency");
+        
+	h_eff_vs_ptpi->GetXaxis()->SetRangeUser(2000.,106000.);
+	
+        h_eff_vs_etapi->GetYaxis()->SetRangeUser(0.1, 1.1);
+        h_eff_vs_phipi->GetYaxis()->SetRangeUser(0.1, 1.1);
+	h_eff_vs_ptpi->GetYaxis()->SetRangeUser(0.1, 1.1);
+        h_eff_vs_etapi->GetYaxis()->SetTitleOffset(0.85);
+        h_eff_vs_phipi->GetYaxis()->SetTitleOffset(0.85);
+	h_eff_vs_ptpi->GetYaxis()->SetTitleOffset(0.85);
+        h_eff_vs_etapi->GetYaxis()->SetTitleSize(0.05);
+        h_eff_vs_phipi->GetYaxis()->SetTitleSize(0.05);
+	h_eff_vs_ptpi->GetYaxis()->SetTitleSize(0.05);
+        h_eff_vs_etapi->GetXaxis()->SetTitleOffset(0.85);
+        h_eff_vs_phipi->GetXaxis()->SetTitleOffset(0.85);
+	h_eff_vs_ptpi->GetXaxis()->SetTitleOffset(0.85);
+        h_eff_vs_etapi->GetXaxis()->SetTitleSize(0.05);
+        h_eff_vs_phipi->GetXaxis()->SetTitleSize(0.05);
+	h_eff_vs_ptpi->GetXaxis()->SetTitleSize(0.05);
+        
+        h_eff_vs_etapi->SetMarkerSize(1.8);
+        h_eff_vs_phipi->SetMarkerSize(1.8);
+	h_eff_vs_ptpi->SetMarkerSize(1.8);
+        
+        h_eff_vs_etapi->SetMarkerStyle(kFullTriangleDown);
+        h_eff_vs_phipi->SetMarkerStyle(kFullTriangleDown);
+	h_eff_vs_ptpi->SetMarkerStyle(kFullTriangleDown);
+        
+        h_eff_vs_etapi->SetMarkerColor(kGreen+2);
+        h_eff_vs_phipi->SetMarkerColor(kGreen+2);
+	h_eff_vs_ptpi->SetMarkerColor(kGreen+2);
+
+	//! electrons
+	h_num_vs_etae->Draw("e1");
+	h_den_vs_etae->Draw("e1");
+	TH1* h_eff_vs_etae = dynamic_cast<TH1*>(h_num_vs_etae->Clone("h_eff_vs_etae"));
+        h_eff_vs_etae->Divide(h_num_vs_etae, h_den_vs_etae, 1.0, 1.0, "B");
+	h_num_vs_phie->Draw("e1");
+	h_den_vs_phie->Draw("e1");
+	TH1* h_eff_vs_phie = dynamic_cast<TH1*>(h_num_vs_phie->Clone("h_eff_vs_phie"));
+        h_eff_vs_phie->Divide(h_num_vs_phie, h_den_vs_phie, 1.0, 1.0, "B");
+	h_num_vs_pte->Draw("e1");
+	h_den_vs_pte->Draw("e1");
+	TH1* h_eff_vs_pte = dynamic_cast<TH1*>(h_num_vs_pte->Clone("h_eff_vs_pte"));
+	h_eff_vs_pte->Divide(h_num_vs_pte, h_den_vs_pte, 1.0, 1.0, "B");
+
+        h_eff_vs_etae->SetTitle("efficiency vs #eta;#eta;efficiency");
+        h_eff_vs_phie->SetTitle("efficiency vs #phi;#phi [rad];efficiency");
+	h_eff_vs_pte->SetTitle("efficiency vs p_{T};p_{T} [MeV/c];efficiency");
+        
+	h_eff_vs_pte->GetXaxis()->SetRangeUser(2000.,106000.);
+	
+        h_eff_vs_etae->GetYaxis()->SetRangeUser(0.1, 1.1);
+        h_eff_vs_phie->GetYaxis()->SetRangeUser(0.1, 1.1);
+	h_eff_vs_pte->GetYaxis()->SetRangeUser(0.1, 1.1);
+        h_eff_vs_etae->GetYaxis()->SetTitleOffset(0.85);
+        h_eff_vs_phie->GetYaxis()->SetTitleOffset(0.85);
+	h_eff_vs_pte->GetYaxis()->SetTitleOffset(0.85);
+        h_eff_vs_etae->GetYaxis()->SetTitleSize(0.05);
+        h_eff_vs_phie->GetYaxis()->SetTitleSize(0.05);
+	h_eff_vs_pte->GetYaxis()->SetTitleSize(0.05);
+        h_eff_vs_etae->GetXaxis()->SetTitleOffset(0.85);
+        h_eff_vs_phie->GetXaxis()->SetTitleOffset(0.85);
+	h_eff_vs_pte->GetXaxis()->SetTitleOffset(0.85);
+        h_eff_vs_etae->GetXaxis()->SetTitleSize(0.05);
+        h_eff_vs_phie->GetXaxis()->SetTitleSize(0.05);
+	h_eff_vs_pte->GetXaxis()->SetTitleSize(0.05);
+        
+        h_eff_vs_etae->SetMarkerSize(1.8);
+        h_eff_vs_phie->SetMarkerSize(1.8);
+	h_eff_vs_pte->SetMarkerSize(1.8);
+        
+        h_eff_vs_etae->SetMarkerStyle(kFullTriangleDown);
+        h_eff_vs_phie->SetMarkerStyle(kFullTriangleDown);
+	h_eff_vs_pte->SetMarkerStyle(kFullTriangleDown);
+        
+        h_eff_vs_etae->SetMarkerColor(kBlue);
+        h_eff_vs_phie->SetMarkerColor(kBlue);
+	h_eff_vs_pte->SetMarkerColor(kBlue);
+	
+	//!muons
+	h_num_vs_etamu->Draw("e1");
+	h_den_vs_etamu->Draw("e1");
+	TH1* h_eff_vs_etamu = dynamic_cast<TH1*>(h_num_vs_etamu->Clone("h_eff_vs_etamu"));
+        h_eff_vs_etamu->Divide(h_num_vs_etamu, h_den_vs_etamu, 1.0, 1.0, "B");
+	h_num_vs_phimu->Draw("e1");
+	h_den_vs_phimu->Draw("e1");
+	TH1* h_eff_vs_phimu = dynamic_cast<TH1*>(h_num_vs_phimu->Clone("h_eff_vs_phimu"));
+        h_eff_vs_phimu->Divide(h_num_vs_phimu, h_den_vs_phimu, 1.0, 1.0, "B");
+	h_num_vs_ptmu->Draw("e1");
+	h_den_vs_ptmu->Draw("e1");
+	TH1* h_eff_vs_ptmu = dynamic_cast<TH1*>(h_num_vs_ptmu->Clone("h_eff_vs_ptmu"));
+	h_eff_vs_ptmu->Divide(h_num_vs_ptmu, h_den_vs_ptmu, 1.0, 1.0, "B");
+
+        h_eff_vs_etamu->SetTitle("efficiency vs #eta;#eta;efficiency");
+        h_eff_vs_phimu->SetTitle("efficiency vs #phi;#phi [rad];efficiency");
+	h_eff_vs_ptmu->SetTitle("efficiency vs p_{T};p_{T} [MeV/c];efficiency");
+        
+	h_eff_vs_ptmu->GetXaxis()->SetRangeUser(2000.,106000.);
+	
+        h_eff_vs_etamu->GetYaxis()->SetRangeUser(0.1, 1.1);
+        h_eff_vs_phimu->GetYaxis()->SetRangeUser(0.1, 1.1);
+	h_eff_vs_ptmu->GetYaxis()->SetRangeUser(0.1, 1.1);
+        h_eff_vs_etamu->GetYaxis()->SetTitleOffset(0.85);
+        h_eff_vs_phimu->GetYaxis()->SetTitleOffset(0.85);
+	h_eff_vs_ptmu->GetYaxis()->SetTitleOffset(0.85);
+        h_eff_vs_etamu->GetYaxis()->SetTitleSize(0.05);
+        h_eff_vs_phimu->GetYaxis()->SetTitleSize(0.05);
+	h_eff_vs_ptmu->GetYaxis()->SetTitleSize(0.05);
+        h_eff_vs_etamu->GetXaxis()->SetTitleOffset(0.85);
+        h_eff_vs_phimu->GetXaxis()->SetTitleOffset(0.85);
+	h_eff_vs_ptmu->GetXaxis()->SetTitleOffset(0.85);
+        h_eff_vs_etamu->GetXaxis()->SetTitleSize(0.05);
+        h_eff_vs_phimu->GetXaxis()->SetTitleSize(0.05);
+	h_eff_vs_ptmu->GetXaxis()->SetTitleSize(0.05);
+        
+        h_eff_vs_etamu->SetMarkerSize(1.8);
+        h_eff_vs_phimu->SetMarkerSize(1.8);
+	h_eff_vs_ptmu->SetMarkerSize(1.8);
+        
+        h_eff_vs_etamu->SetMarkerStyle(kFullTriangleDown);
+        h_eff_vs_phimu->SetMarkerStyle(kFullTriangleDown);
+	h_eff_vs_ptmu->SetMarkerStyle(kFullTriangleDown);
+        
+        h_eff_vs_etamu->SetMarkerColor(kRed);
+        h_eff_vs_phimu->SetMarkerColor(kRed);
+	h_eff_vs_ptmu->SetMarkerColor(kRed);	
 
 	//! write 
 	TCanvas* c1 = new TCanvas();	
@@ -267,6 +513,15 @@ int eff_Vs_etaphipt_dR_barcode(const char* output_file_name = "PU1000hh4b-eff_30
 	h_eff_vs_etaPU->Write();
 	h_eff_vs_phiPU->Write();
 	h_eff_vs_ptPU->Write();
+	h_eff_vs_etapi->Write();
+	h_eff_vs_phipi->Write();
+	h_eff_vs_ptpi->Write();
+	h_eff_vs_etae->Write();
+	h_eff_vs_phie->Write();
+	h_eff_vs_pte->Write();
+	h_eff_vs_etamu->Write();
+	h_eff_vs_phimu->Write();
+	h_eff_vs_ptmu->Write();
 	
 	output_file->Close();
 return 0;

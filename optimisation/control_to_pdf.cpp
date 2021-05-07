@@ -18,7 +18,7 @@
 const char* out_path = "./plots/optimisation";
 
 //int write_to_pdf(const char* input_file_name = "control_PU0hh4b_20mm_wide.root", const char* output_file_name = "control_PU0hh4b_20mm_wide")
-int write_to_pdf(const char* input_file_name = "control_30mm_ggF_2.root", const char* output_file_name = "control_30mm_ggF_2")
+int write_to_pdf(const char* input_file_name = "control_30mm_ggF_5.root", const char* output_file_name = "control_30mm_ggF_5")
 //int write_to_pdf(const char* input_file_name = "control_MB_30mm_samelad.root", const char* output_file_name = "control_MB_30mm_samelad")
 //int write_to_pdf(const char* input_file_name = "control_MB_40mm.root", const char* output_file_name = "control_MB_40mm")
 //int write_to_pdf(const char* input_file_name = "control_MB_50mm.root", const char* output_file_name = "control_MB_50mm")

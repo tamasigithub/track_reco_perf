@@ -24,7 +24,7 @@
 
 const double Constant = 0.299760192; 	
 const double w  = 40e-3;//mm
-const double d	= 40;// gap between the layers in the triplet in mm
+const double d	= 30;// gap between the layers in the triplet in mm
 const double B	= 4;// magnetic field in Tesla
 const double X_0= 0.015;// relative radiation length t/X_0  = 2%
 /*const double w = 50e-6;//m
@@ -39,20 +39,23 @@ const char* out_path = "./plots/optimisation";
 //TCut MS_r = "Tid>0 && Pt_n>2e3 && Pt_n<4e3 && abs(Z013)<100 && abs(Eta13)<2.5 && abs(Phi13)<0.018 && abs(Z13)<320 && abs(dphi2)<3.0e-4 && abs(dz2)<0.12*(sin(Theta13)^(-1.1))";
 //TCut Hit_r = "Tid>0 && Pt_n>20e3 && abs(Z013)<100 && abs(Eta13)<2.5 && abs(Phi13)<0.018 && abs(Z13)<320 && abs(dphi2)<3.0e-4 && abs(dz2)<0.12*(sin(Theta13)^(-1.1))";
 
-////! 30mm
-//TCut cut = "Tid>0 && Pt_n>2e3 && abs(Z013)<100 && abs(Eta13)<2.5 && abs(Phi13)<0.021 && abs(Z13)<380 && abs(dphi2)<3.0e-4 && abs(dz2)<0.13*(sin(Theta13)^(-1.13))";
-//TCut MS_r = "Tid>0 && Pt_n>2e3 && Pt_n<4e3 && abs(Z013)<100 && abs(Eta13)<2.5 && abs(Phi13)<0.021 && abs(Z13)<380 && abs(dphi2)<3.0e-4 && abs(dz2)<0.13*(sin(Theta13)^(-1.13))";
-//TCut Hit_r = "Tid>0 && Pt_n>20e3 && abs(Z013)<100 && abs(Eta13)<2.5 && abs(Phi13)<0.021 && abs(Z13)<380 && abs(dphi2)<3.0e-4 && abs(dz2)<0.13*(sin(Theta13)^(-1.13))";
+//! 30mm
+TCut cut = "Tid>0 && Pt_n>2e3 && abs(Z013)<100 && abs(Eta13)<2.5 && abs(Phi13)<0.021 && abs(Z13)<380 && abs(dphi2)<3.0e-4 && abs(dz2)<0.13*(sin(Theta13)^(-1.13))";
+TCut MS_r = "Tid>0 && Pt_n>2e3 && Pt_n<4e3 && abs(Z013)<100 && abs(Eta13)<2.5 && abs(Phi13)<0.021 && abs(Z13)<380 && abs(dphi2)<3.0e-4 && abs(dz2)<0.13*(sin(Theta13)^(-1.13))";
+TCut Hit_r = "Tid>0 && Pt_n>20e3 && abs(Z013)<100 && abs(Eta13)<2.5 && abs(Phi13)<0.021 && abs(Z13)<380 && abs(dphi2)<3.0e-4 && abs(dz2)<0.13*(sin(Theta13)^(-1.13))";
+//TCut cut = "Tid>0 && Pt_n>2e3 && abs(Z013)<100 && abs(Eta13)<2.5 && abs(Phi13)<0.021 && abs(Z13)<380";
+//TCut MS_r = "Tid>0 && Pt_n>2e3 && Pt_n<4e3 && abs(Z013)<100 && abs(Eta13)<2.5 && abs(Phi13)<0.021 && abs(Z13)<380";
+//TCut Hit_r = "Tid>0 && Pt_n>20e3 && abs(Z013)<100 && abs(Eta13)<2.5 && abs(Phi13)<0.021 && abs(Z13)<380";
 
 ////! 35mm
 //TCut cut = "Tid>0 && Pt_n>2e3 && abs(Z013)<100 && abs(Eta13)<2.5 && abs(Phi13)<0.025 && abs(Z13)<430 && abs(dphi2)<3.0e-4 && abs(dz2)<0.15*(sin(Theta13)^(-1.18))";
 //TCut MS_r = "Tid>0 && Pt_n>2e3 && Pt_n<4e3 && abs(Z013)<100 && abs(Eta13)<2.5 && abs(Phi13)<0.025 && abs(Z13)<430 && abs(dphi2)<3.0e-4 && abs(dz2)<0.15*(sin(Theta13)^(-1.18))";
 //TCut Hit_r = "Tid>0 && Pt_n>20e3 && abs(Z013)<100 && abs(Eta13)<2.5 && abs(Phi13)<0.025 && abs(Z13)<430 && abs(dphi2)<3.0e-4 && abs(dz2)<0.15*(sin(Theta13)^(-1.18))";
 
-//! 40mm
-TCut cut = "Tid>0 && Pt_n>2e3 && abs(Z013)<100 && abs(Eta13)<2.5 && abs(Phi13)<0.028 && abs(Z13)<480 && abs(dphi2)<3e-4 && abs(dz2)<0.16*(sin(Theta13)^(-1.30))";
-TCut MS_r = "Tid>0 && Pt_n>2e3 && Pt_n<4e3 && abs(Z013)<100 && abs(Eta13)<2.5 && abs(Phi13)<0.028 && abs(Z13)<480 && abs(dphi2)<3e-4 && abs(dz2)<0.16*(sin(Theta13)^(-1.30))";
-TCut Hit_r = "Tid>0 && Pt_n>20e3 && abs(Z013)<100 && abs(Eta13)<2.5 && abs(Phi13)<0.028 && abs(Z13)<480 && abs(dphi2)<3e-4 && abs(dz2)<0.16*(sin(Theta13)^(-1.30))";
+////! 40mm
+//TCut cut = "Tid>0 && Pt_n>2e3 && abs(Z013)<100 && abs(Eta13)<2.5 && abs(Phi13)<0.028 && abs(Z13)<480 && abs(dphi2)<3e-4 && abs(dz2)<0.16*(sin(Theta13)^(-1.30))";
+//TCut MS_r = "Tid>0 && Pt_n>2e3 && Pt_n<4e3 && abs(Z013)<100 && abs(Eta13)<2.5 && abs(Phi13)<0.028 && abs(Z13)<480 && abs(dphi2)<3e-4 && abs(dz2)<0.16*(sin(Theta13)^(-1.30))";
+//TCut Hit_r = "Tid>0 && Pt_n>20e3 && abs(Z013)<100 && abs(Eta13)<2.5 && abs(Phi13)<0.028 && abs(Z13)<480 && abs(dphi2)<3e-4 && abs(dz2)<0.16*(sin(Theta13)^(-1.30))";
 
 
 ////! 20mm
@@ -63,10 +66,11 @@ TCut Hit_r = "Tid>0 && Pt_n>20e3 && abs(Z013)<100 && abs(Eta13)<2.5 && abs(Phi13
 //TCut cut = "Tid>0 && Pt_n>2e3 && abs(Z013)<100 && abs(Eta13)<1.6 && abs(Phi13)<0.032 && abs(Z13)<260 && abs(dphi2)<6e-4 && abs(dz2)<0.17*(sin(Theta13)^(-1.5))";
 //TCut MS_r = "Tid>0 && Pt_n>2e3 && Pt_n<4e3 && abs(Z013)<100 && abs(Eta13)<1.6 && abs(Phi13)<0.032 && abs(Z13)<260 && abs(dphi2)<6e-4 && abs(dz2)<0.17*(sin(Theta13)^(-1.5))";
 //TCut Hit_r = "Tid>0 && Pt_n>20e3 && abs(Z013)<100 && abs(Eta13)<1.6 && abs(Phi13)<0.032 && abs(Z13)<260 && abs(dphi2)<6e-4 && abs(dz2)<0.17*(sin(Theta13)^(-1.5))";
-int pull(const char* output_file_name = "pullggF_40mm", const char* constants ="B")
+int pull(const char* output_file_name = "pullggF_30mm", const char* constants ="B")
 {
 	TChain rec("m_recTree");
-        rec.Add("/home/tamasi/repo_tamasi/rec_files/for_optimization/40mm/ggFhh4b_SM/*.root");
+        //rec.Add("/home/tamasi/repo_tamasi/rec_files/rec_files/30mm/PU0/new_ggFhh4b1_noSEC/*.root");
+        rec.Add("/home/tamasi/repo_tamasi/rec_files/for_optimization/30mm/ggFhh4b_SM/*.root");
 	
 	//! 20mm
 	//rec.Add("/home/tamasi/repo_tamasi/rec_files/MB_recTree_20000*_samelad.root");

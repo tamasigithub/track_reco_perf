@@ -52,18 +52,26 @@ void hit_occ(const char *pileup, const char *gapsize)
 	Int_t num_events = 0;
 	const int num_layers = 11;
 	//! default values for TTT with 20mm gap size
+	Double_t layer_radius[num_layers] = {2.5,6,10,15,27, 40, 52, 75, 83.2, 85.7, 88.2};
 	Int_t n_modules[num_layers] = {10,20,32,48,18, 26, 34, 48, 58, 58, 58};
-	Double_t layer_radius[num_layers] = {2.5,6,10,15,27, 40, 52, 75, 82.7, 85.7, 88.7};
+	if(gapsize == "25")
+	{
+		layer_radius[8] = 82.7;
+		layer_radius[9] = 85.7;
+		layer_radius[10] = 88.7;
+	}
 	Double_t sensor_area, module_area ; //in cm^2
 	Int_t n_sensors; //number of sensors in a module
 	Double_t num_hits[num_layers] = {0};
 	Double_t hit_occ[num_layers] = {0};//  #/cm^2/event
 
 	//! Fetch the histograms
-	const char *file_path = "/home/tamasi/repo_tamasi/rec_files";
+	//const char *file_path = "/home/tamasi/repo_tamasi/rec_files";
+	const char *file_path = "/media/tamasi/wdElements/PhD/FCC/data_files/rec_files";
 	char signal_file_names[1023];
 	//sprintf(signal_file_names, "%s/PU%shh4b_m260_recTree_%s0001_opt.root",file_path,pileup,gapsize);
-	sprintf(signal_file_names, "%s/PU%shh4b_recTree_%s0002_samelad_opt.root",file_path,pileup,gapsize);
+	//sprintf(signal_file_names, "%s/PU%shh4b_recTree_%s0002_samelad_opt.root",file_path,pileup,gapsize);
+	sprintf(signal_file_names, "%s/%smm/PU%s/ggFhh4b_SM/user.tkar.ggF1.0hh4b_SIMPU%s_%smm_merged.000001.recTree.root",file_path,gapsize,pileup, pileup, gapsize);
 	TFile *f = new TFile(signal_file_names, "READ");
 	TTree *tree = (TTree*)f->Get("m_recTree");
 	num_events = tree->GetEntries();	
@@ -101,12 +109,17 @@ void hit_occ(const char *pileup, const char *gapsize)
 		if(i < 4)
 		{
 			sensor_area = 2.0 * 2.0; //in cm^2
-			n_sensors = 225; //number of sensors in a module
+			n_sensors = 100; //number of sensors in a module
+		}
+		else if(i < 8)
+		{
+			sensor_area = 10.0 * 9.98; //in cm^2
+			n_sensors = 65; //number of sensors in a module
 		}
 		else
 		{
 			sensor_area = 10 * 9.98; //in cm^2
-			n_sensors = 45; //number of sensors in a module
+			n_sensors = 104; //number of sensors in a module
 			
 		}
 		module_area = sensor_area * n_sensors;
@@ -117,7 +130,7 @@ void hit_occ(const char *pileup, const char *gapsize)
 	std::cout<<"Writing to txt file...." <<std::endl;
         const char* txt_path = "./txt_files";
         char txt_file[1023];
-        sprintf(txt_file,"%s/summary_hitOccVsRadius_PU%s_%s.txt",txt_path, pileup,gapsize);
+        sprintf(txt_file,"%s/summary_hitOccVsRadius_PU%s_%s_Eta2.5.txt",txt_path, pileup,gapsize);
         std::ofstream ofs;
         ofs.open (txt_file, std::ofstream::out | std::ofstream::app);
 	for(int i = 0; i < num_layers; i++)
@@ -140,6 +153,8 @@ void SaveCanvas(TCanvas *C, char *name)
     C->SaveAs(full_name);
     sprintf(full_name,"%s/summary_%s.C", path, name);
     C->SaveAs(full_name);
+    sprintf(full_name,"%s/summary_%s.tex", path, name);
+    C->SaveAs(full_name);
 
 }
 void summary_hitOccVsRadius()
@@ -149,7 +164,7 @@ void summary_hitOccVsRadius()
 	Double_t Xmin_range = 0.0, Xmax_range = 1.0e2;
 	Double_t Ymin_range = 5e-4, Ymax_range = 5.0e1;
 	//Multi Graph
-	TCanvas * c1 = new TCanvas();
+	TCanvas * c1 = new TCanvas("c1","c1", 800.,800.);
 	c1->Clear();
 	c1->SetGridx();
 	c1->SetGridy();
@@ -158,13 +173,15 @@ void summary_hitOccVsRadius()
 	char txt_file2[1023];//PU200
 	char txt_file3[1023];//PU0
 
+	gStyle->SetOptTitle(0);
+
 	char plot_title[1023];
 	//! PU 1000
-	sprintf(txt_file1,"%s/summary_hitOccVsRadius_PU%s_30.txt",txt_path,"1000");
+	sprintf(txt_file1,"%s/summary_hitOccVsRadius_PU%s_%s_Eta2.5.txt",txt_path,"1k","25");
 	//! PU 200
-	sprintf(txt_file2,"%s/summary_hitOccVsRadius_PU%s.txt",txt_path,"200");
+	sprintf(txt_file2,"%s/summary_hitOccVsRadius_PU%s_%s_Eta2.5.txt",txt_path,"200","25");
 	//! no pileup
-	sprintf(txt_file3,"%s/summary_hitOccVsRadius_PU%s_30.txt",txt_path,"0");
+	sprintf(txt_file3,"%s/summary_hitOccVsRadius_PU%s_%s_Eta2.5.txt",txt_path,"0","25");
 
 	sprintf(plot_title,"Hit Occupancy as a function of layer radius");
 
@@ -178,13 +195,13 @@ void summary_hitOccVsRadius()
 	g1->GetXaxis()->SetTitle("Layer Radius [cm]");
 	g1->GetXaxis()->SetRangeUser(Xmin_range, Xmax_range);
 	g1->GetYaxis()->SetTitleOffset(1.2);
-	g1->GetYaxis()->SetTitle("hit occupancy [/event/cm^{2}]");
+	g1->GetYaxis()->SetTitle("Hit occupancy [/event/cm^{2}]");
 	g1->GetYaxis()->SetRangeUser(Ymin_range, Ymax_range);
 	g1->SetMarkerStyle(20);//kFullCircle);
 	g1->SetMarkerSize(1.9);
 	c1->cd(4);
 	g1->SetFillStyle(0);
-	g1->SetTitle("<#mu> = 960");
+	g1->SetTitle("<#mu> = 1000");
 	//g1->Draw("ACPe1");
 	g1->Draw("APe1");
 	
@@ -198,13 +215,13 @@ void summary_hitOccVsRadius()
 	g2->GetXaxis()->SetTitle("Layer Radius [cm]");
 	g2->GetXaxis()->SetRangeUser(Xmin_range, Xmax_range);
 	g2->GetYaxis()->SetTitleOffset(1.2);
-	g2->GetYaxis()->SetTitle("hit occupancy [/event/cm^{2}]");
+	g2->GetYaxis()->SetTitle("Hit occupancy [/event/cm^{2}]");
 	g2->GetYaxis()->SetRangeUser(Ymin_range, Ymax_range);
 	g2->SetMarkerStyle(22);//kFullTriangleUp);
 	g2->SetMarkerSize(1.9);
 	c1->cd(4);
 	g2->SetFillStyle(0);
-	g2->SetTitle("<#mu> = 160");
+	g2->SetTitle("<#mu> = 200");
 	//g2->Draw("CPe1");
 	g2->Draw("Pe1");
 
@@ -218,7 +235,7 @@ void summary_hitOccVsRadius()
 	g3->GetXaxis()->SetTitle("Layer Radius [cm]");
 	g3->GetXaxis()->SetRangeUser(Xmin_range, Xmax_range);
 	g3->GetYaxis()->SetTitleOffset(1.2);
-	g3->GetYaxis()->SetTitle("hit occupancy [/event/cm^{2}]");
+	g3->GetYaxis()->SetTitle("Hit occupancy [/event/cm^{2}]");
 	g3->GetYaxis()->SetRangeUser(Ymin_range, Ymax_range);
 	g3->SetMarkerStyle(29);//kFullStar);
 	g3->SetMarkerSize(2.5);
@@ -231,7 +248,12 @@ void summary_hitOccVsRadius()
 
 //////////////////////////////////////////////////////////////
 	
-	Double_t x1= 0.7,y1= 0.7, x2 = 0.89, y2 = 0.89;
+	Double_t x1= 0.6,y1= 0.65, x2 = 0.89, y2 = 0.89;        
+	TLegend *cms_E = new TLegend(0.2,0.89,0.89,0.97);
+        cms_E->SetFillStyle(0);
+        cms_E->SetBorderSize(0);
+        cms_E->AddEntry((TObject*)0, "#sqrt{s} = 100 TeV, HH #rightarrow b#bar{b}b#bar{b}(SM), B=4T", "");
+        cms_E->SetTextSize(0.04);
 	TMultiGraph *g = new TMultiGraph();
 	g->Add(g1);
 	g->Add(g2);
@@ -239,12 +261,15 @@ void summary_hitOccVsRadius()
 	g->Draw("AP");
 	g->SetTitle(plot_title);
 	g->GetXaxis()->SetTitle("Layer Radius [cm]");
-	g->GetYaxis()->SetTitle("hit occupancy [/event/cm^{2}]");
+	g->GetYaxis()->SetTitle("Hit occupancy [/event/cm^{2}]");
 	g->GetXaxis()->SetTitleSize(0.04);
 	g->GetYaxis()->SetTitleSize(0.04);
+	g->GetXaxis()->CenterTitle();
+	g->GetYaxis()->CenterTitle();
 	//g->GetXaxis()->SetRangeUser(0,100);
-	//g->GetYaxis()->SetTitleOffset(1.5);
+	g->GetYaxis()->SetTitleOffset(1.4);
 	g->GetYaxis()->SetRangeUser(Ymin_range, Ymax_range);
+	cms_E->Draw();
 	c1->BuildLegend(x1,y1,x2,y2,"pileup");
 
 	//! draw a second Y axis
@@ -259,7 +284,7 @@ void summary_hitOccVsRadius()
 	//A1->Draw();
 	c1->SetLogy();
 	c1->Update();
-	SaveCanvas(c1,"summary_hitOcc_variousPU");
+	SaveCanvas(c1,"summary_hitOcc_variousPU_25mm_Eta2.5");
 /////////////////////////////////////////////////////////////
 
 	// get the points in the graph and put them into an array

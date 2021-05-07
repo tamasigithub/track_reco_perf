@@ -99,8 +99,8 @@ for file in "$@"; do
   sed -i -e 's@Efficiency@\\text{Efficiency~}@g' $BODY_FILE
   sed -i -e 's@efficiency@\\text{efficiency~}@g' $BODY_FILE
   sed -i -e 's@_{T@_{\\text{T}@g' $BODY_FILE
-  sed -i -e 's@\$w\/o \\kappa cut\$@w\/o \$\\kappa~ cut\$@g' $BODY_FILE
-  sed -i -e 's@cut@\\text{cut}@g' $BODY_FILE
+  sed -i -e 's@\$w\/o \\kappa cut\$@w\/o \$\\kappa cut\$@g' $BODY_FILE
+  sed -i -e 's@cut@\\text{~cut}@g' $BODY_FILE
   sed -i -e 's@deltadca@delta dca@g' $BODY_FILE
   sed -i -e 's@deltaz@delta z@g' $BODY_FILE
   sed -i -e 's@deltap@delta p@g' $BODY_FILE

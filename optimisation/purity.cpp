@@ -21,11 +21,11 @@ const char* out_path = "/home/tamasi/repo_tamasi/rec_files/rec_files/plots";
 
 //int newTTTpurity_Vs_etaphipt(const char* output_file_name = "pur_PU1000MB_30mm_samelad_opt5GeV", bool save = false)
 //int newTTTpurity_Vs_etaphipt(const char* output_file_name = "pur_PU1000hh4b_m260_30mm_samelad_opt5GeV", bool save = false)
-int newTTTpurity_Vs_etaphipt(const char* output_file_name = "PU1k_ggF1.0-pur_25mm_eta1.7opt3_5GeV", bool save = false)
+int newTTTpurity_Vs_etaphipt(const char* output_file_name = "PU1k_ggF1.0-pur_25mm_eta2.5opt3_2GeV", bool save = false)
 {
 	//! Define Cut
-TCut num_select    = "Tid>0  && abs(Pt_n)>5e3 && abs(kappa_pull) < 3 && abs(Eta13) < 1.7";
-TCut den_select    = "Tid>-2 && abs(Pt_n)>5e3 && abs(kappa_pull) < 3 && abs(Eta13) < 1.7";
+TCut num_select    = "Tid>0  && abs(Pt_n)>2e3 && abs(kappa_pull) < 3 && abs(Eta13) < 2.5";
+TCut den_select    = "Tid>-2 && abs(Pt_n)>2e3 && abs(kappa_pull) < 3 && abs(Eta13) < 2.5";
 
 	TChain recTree("m_recTree");
 	recTree.Add("/home/tamasi/repo_tamasi/rec_files/rec_files/25mm/PU1k/ggFhh4b_SM/*.root");
@@ -56,7 +56,7 @@ TCut den_select    = "Tid>-2 && abs(Pt_n)>5e3 && abs(kappa_pull) < 3 && abs(Eta1
 	/// Variable bin width
 	const int ptbins = 40;//no. of bins
 	Double_t xbins[ptbins+1];//elements of this array are
-	double dx = 6./ptbins;//5 -> implies max until 10^5
+	double dx = 5./ptbins;//5 -> implies max until 10^5
 	double l10 = TMath::Log(10);
 	for (int i = 0; i<=ptbins; i++)
 	{
