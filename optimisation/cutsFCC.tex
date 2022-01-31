@@ -17,18 +17,26 @@
 \maketitle
 
 \section*{Pre-Selection Cuts}
-
-\begin{enumerate}\item Transverse barrel cut : $|\phi_{13}| < \phi_{13 \_ cut}  \: \: rad $ 
-
-\item Longitudinal barrel cut  : $|z_{13}| < z_{13 \_ cut}  \: \: mm$ 
-\item Transverse residual cut : $|d\phi_{2}| < d\phi_{2 \_ cut}  \: \: rad$
-\item Longitudinal residual cut : $|dz_{2}| <  dz_{2 \_const}* sin(\theta_{013})^{dz_{2 \_exp}} \: \: mm$
+\subsection*{Barrel cuts}
+\begin{enumerate}
+\item Transverse barrel cut : $|\phi_{13}| < \phi_{13, cut}^{barrel}$ 
+\item Longitudinal barrel cut  : $|z_{13}| < z_{13, cut}^{barrel}$ 
+\item Transverse residual cut : $|d\phi_{2}| < d\phi_{2, cut}^{barrel}$
+\item Longitudinal residual cut : $|dz_{2}| <  dz_{2 \_const}* sin(\theta_{013})^{dz_{2 \_exp}}$
 \end{enumerate}
+\subsection*{Endcap cuts}
+\begin{enumerate}
+\item Transverse endcap cut : $|\phi_{13}| < \phi_{13, cut}^{disc}$ 
+\item Longitudinal endcap cut  : $|\eta_{13}| < \eta_{13, cut}^{disc}$ 
+\item Transverse residual cut : $|d\phi_{2}| < d\phi_{2, cut}^{disc}$
+\item Longitudinal residual cut : $|d\eta_{2}| <  d\eta_{2, cut}^{disc}$
+\end{enumerate}
+
 \section*{Final - Selection Cuts}
 \begin{enumerate}
-\item Minimum momentum : $ pt_{013} > 2~ GeV/c$\
+\item Minimum momentum : $ p_{T, 013} > 2$\,GeV/c
 \item Longitudinal acceptance : $|\eta_{013}| < 2.5$
-\item Luminous region : $|Z_{013}| < 100mm$
+\item Luminous region : $|Z_{013}| < 100$\,mm
 %\item Momentum consistency : $ \kappa_{013}^2 > a * (\kappa_{123} - \kappa_{013})^2 - b $ where,\\
 %\\$a = 0.5 \:, b = 1.2 * 10^{-7}\quad  \rightarrow$   loose cut\\
 %$a = 0.8 \:, b = 0.8 * 10^{-7}\quad  \rightarrow$   medium cut\\
@@ -82,13 +90,26 @@ hit_{const} &= 0.5 * (\frac{w}{ d^2 })^2 &&\\
 \diagbox{Cuts}{gap size}
 &\makebox[4em]{20mm}&\makebox[4em]{25mm}&\makebox[4em]{30mm}
 &\makebox[4em]{35mm}&\makebox[4em]{40mm}\\\hline\hline
-$\phi_{13\_ cut}$ & 0.014 & 0.018 & 0.021 & 0.025 & 0.028 \\\hline
-$z_{13 \_ cut}$ & 250 & 320 & 380 & 430 & 480\\\hline
-$d\phi_{2 \_ cut}$ & 3.0e-4 & 3.0e-4 & 3.0e-4 & 3.0e-4 & 3.0e-4\\\hline
+$\phi_{13, cut}^{barrel}$ & 0.014 & 0.018 & 0.021 & 0.025 & 0.028 \\\hline
+$z_{13, cut}^{barrel}$ & 250 & 320 & 380 & 430 & 480\\\hline
+$d\phi_{2, cut}^{barrel}$ & 3.0e-4 & 3.0e-4 & 3.0e-4 & 3.0e-4 & 3.0e-4\\\hline
 $ dz_{2 \_ exp}$ & -0.9 & -1.1 & -1.13 & -1.18 & -1.3\\\hline
 $ dz_{2 \_ const}$ & 0.1 & 0.12 & 0.13 & 0.15 & 0.16 \\\hline
 $hit_{const}$ & 5e-09 & 2.048e-09 & 9.87654e-10 & 5.33111e-10&3.125e-10 \\\hline
 $MS_{const}$ & 0.00482438 &0.0030876 & 0.00214417 & 0.00157531 & 0.00120609 \\\hline
+
+\end{tabular}
+
+\vspace{2cm}
+
+\begin{tabular}{|l||*{5}{c|}}\hline
+\diagbox{Cuts}{z_{gap}_{size}}
+&\makebox[4em]{53mm}&\makebox[4em]{67mm}&\makebox[4em]{80mm}
+&\makebox[4em]{93mm}&\makebox[4em]{106mm}\\\hline\hline
+$\phi_{13, cut}^{disc}$ & 0.014 & 0.018 & 0.021 & 0.025 & 0.028 \\\hline
+$\eta_{13, cut}^{disc}$ & 5e-3 & 6e-3 & 7e-3 & 8e-3 & 9e-3\\\hline
+$d\phi_{2, cut}^{disc}$ & 5.0e-4 & 5.0e-4 & 5.0e-4 & 5.0e-4 & 5.0e-4\\\hline
+$d\eta_{2, cut}^{disc}$ & 2e-3 & 2e-3 & 2e-3 & 2e-3 & 2e-3\\\hline
 
 \end{tabular}
 

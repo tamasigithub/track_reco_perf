@@ -75,10 +75,10 @@ const char* out_path = "./plots/optimisation";
 //TCut kapcut_t =  "abs(kappa-kap013)/sqrt(2.048e-09 + 0.0030876 * (1/sin(Theta13)) * kap013^2 ) < 3 ";
 
 //! 30mm
-TCut num_select    = "Tid>0  && Pt_n > 2000  && abs(Z013) < 100 && abs(Eta13) < 2.5 && abs(Phi13)<0.021 && abs(Z13)<380";
-TCut den_select    = "Tid>-2 && Pt_n > 2000  && abs(Z013) < 100 && abs(Eta13) < 2.5 && abs(Phi13)<0.021 && abs(Z13)<380";
+TCut num_select    = "Tid>0  && Pt_n > 2000  && abs(Z013) < 100 && abs(Eta13) < 2.5 && abs(Phi13)<0.021 && abs(Z13)<380 && station==0";
+TCut den_select    = "Tid>-2 && Pt_n > 2000  && abs(Z013) < 100 && abs(Eta13) < 2.5 && abs(Phi13)<0.021 && abs(Z13)<380 && station==0";
 //! 
-TCut phiBarrel	= "abs(Phi13)< 0.021";
+TCut phiBarrel	= "abs(Phi13)< 0.021 && station==0";
 TCut zBarrel	= "abs(Z13)<380";
 TCut maxdphi2	= "abs(dphi2)<9.0e-4";//3.0e-4
 TCut maxdz2	= "abs(dz2)<5.0";//0.13*(sin(Theta13)^(-1.13))";
@@ -135,8 +135,8 @@ TCut kapcut_t =  "abs(kappa-kap013)/sqrt(9.87654e-10 + 0.00214417 * (1/sin(Theta
 //TCut kapcut_t =  "abs(kappa-kap013)/sqrt(1.28e-10 + 0.00102756 * (1/sin(Theta13)) * kap013^2 ) < 3 ";
 
 
-TCut matched	= "Tid>0";
-TCut fakes	= "Tid ==-1";
+TCut matched	= "Tid>0 && station==0";
+TCut fakes	= "Tid ==-1 && station==0";
 TCut minPt	= "Pt_n > 2e3 && abs(Eta13)<2.5";
 TCut minPt_t	= "M_pt > 2e3 && abs(M_eta)<2.5";
 TCut truth_m	= "M_pt < 20e3";
@@ -149,7 +149,7 @@ TCut z0truthmax	= "abs(M_Vz)<100";//! depends on the luminous region along z
 TCut z0recmax	= "abs(Z013)<100";
 void newcontrol
 (
-	const char* output_file_name = "control_30mm_ggF_5",//f-few
+	const char* output_file_name = "control_30mm_ggF_BR",//f-few
 	//const char* output_file_name = "control_hh4b_final3",//f-few
 	const char* set = "C",
 	const bool verbose = true
@@ -173,7 +173,8 @@ void newcontrol
 	//! 25mm
 	//rec.Add("/home/tamasi/repo_tamasi/rec_files/rec_files/40mm/PU1k/ggFhh4b_SM/*.root");
 	//rec.Add("/home/tamasi/repo_tamasi/rec_files/for_optimization/30mm/ggFhh4b_SM/*.root");
-        rec.Add("/home/tamasi/repo_tamasi/rec_files/rec_files/30mm/PU0/new_ggFhh4b1_noSEC_plus1MOD/*.root");
+        //rec.Add("/home/tamasi/repo_tamasi/rec_files/rec_files/30mm/PU0/new_ggFhh4b1_noSEC_plus1MOD/*.root");
+        rec.Add("/user/tkar/work/data/rec/for_opt/Br30mmEC67mm/ggF1.0/*.root");
 	//! 30mm
 	//rec.Add("/home/tamasi/repo_tamasi/rec_files/MB_recTree_30000*_samelad.root");
 	//rec.Add("/media/tamasi/Elements/PhD/FCC/data_files/rec_files/30mm/ggFhh4b_SM/*.root");
