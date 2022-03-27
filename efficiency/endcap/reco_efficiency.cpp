@@ -23,13 +23,15 @@ const double deta2_max = 1e-3;
 const char* out_path = "./plots"; 
 //const char* out_path = "/media/tamasi/DriveT1/tamasi/Desktop/PHD/talks_preps/ctd2k19/plots/efficiency/singleParticles; 
 
-int eff_Vs_etaphipt_dR_barcode(const char* output_file_name = "PU1kallpcles_ggF1.0-eff_30mmEC106mm_opt5_3")
+int eff_Vs_etaphipt_dR_barcode(const char* output_file_name = "PU1kallpcles_MB-eff_30mmEC67mm_sel5_1")
 {
 	TChain recTree("m_recTree");
 	TChain truthTree("tracks");
 	//! ggF 1.0
-	recTree.Add("/user/tkar/work/data/rec/opt/Br30mmEC106mm/PU1k/ggF1.0_/*.root");
-	truthTree.Add("/user/tkar/work/data/rec/opt/Br30mmEC106mm/PU1k/ggF1.0_/*.root");
+	recTree.Add("/data/backup/tamasi/rho0/rec/sel/Br30mmEC67mm/PU1k/MB_1/*.root");
+	truthTree.Add("/data/backup/tamasi/rho0/rec/sel/Br30mmEC67mm/PU1k/MB_1/*.root");
+	//recTree.Add("/user/tkar/work/data/rec/opt/Br30mmEC106mm/PU1k/ggF1.0_/*.root");
+	//truthTree.Add("/user/tkar/work/data/rec/opt/Br30mmEC106mm/PU1k/ggF1.0_/*.root");
 	std::cout<<"rec Tree : " <<recTree.GetEntries() << " , truth tree: " << truthTree.GetEntries() <<std::endl;
 	//int truth_entries=10000;
 	int truth_entries=truthTree.GetEntries();
@@ -174,7 +176,7 @@ int eff_Vs_etaphipt_dR_barcode(const char* output_file_name = "PU1kallpcles_ggF1
 			int match_flagTTT_bc = -1;
 			if(std::abs(charge->at(i1)) != 1)	continue;
 			if(std::fabs(pt->at(i1)) < 2e3 )	continue;
-			if(std::fabs(eta->at(i1)) < 1.75)	continue;
+			//if(std::fabs(eta->at(i1)) < 1.75)	continue;
 			if(std::fabs(eta->at(i1)) > 2.45)	continue;
 			if(std::fabs(Vz->at(i1)) > 100 )	continue;
 			if(std::fabs(Vx->at(i1)) > 5 )		continue;
@@ -189,7 +191,7 @@ int eff_Vs_etaphipt_dR_barcode(const char* output_file_name = "PU1kallpcles_ggF1
 			{
 			
 				//! check if endcap
-				if(std::abs((*station)[i2]) != 1) continue;
+				//if(std::abs((*station)[i2]) != 1) continue;
 				//! apply kappa_cut
 				if(std::fabs((*k_pull)[i2]) > sigma_max) continue;
 				if(std::fabs((*dphi2)[i2]) > dphi2_max ) continue;

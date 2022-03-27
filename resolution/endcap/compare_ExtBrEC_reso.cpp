@@ -52,7 +52,7 @@ TCut mu_cut = "abs(M_pdg)==13 && M_barcode > 0 && abs(M_Vz) < 100 && abs(M_Vx)<5
 TCut pi_cut = "abs(M_pdg)==211 && M_barcode > 0 && abs(M_Vz) < 100 && abs(M_Vx)<5 && abs(M_Vy)<5";
 TCut e_cut  = "abs(M_pdg)==11 && M_barcode > 0 && abs(M_Vz) < 100 && abs(M_Vx)<5 && abs(M_Vy)<5";
 //! use this for TTT track resolution with barcode matching
-TCut all_cut= "abs(station)==1 && Tid > 0 && abs(kappa_pull)<=5 && abs(M_pt)>2000 && abs(M_eta)>1.7 && abs(M_Vz) < 100 && abs(M_Vx) < 5 && abs(M_Vy) < 5 ";
+TCut all_cut= "Tid > 0 && abs(kappa_pull)<=5 && abs(M_pt)>2000 && abs(M_Vz) < 100 && abs(M_Vx) < 5 && abs(M_Vy) < 5 ";
 //! path for input files
 const char* path = "";
 char buf[4096];
@@ -66,8 +66,8 @@ void fit_Gauss(TH1F* h)
 	for(int i = 0; i < 3; i++) 
 	{
     	h->Fit("gaus", "QLL", "", xmin_, xmax_);
-    	xmin_ = h->GetFunction("gaus")->GetParameter(1) - 1.5 * h->GetFunction("gaus")->GetParameter(2);
-    	xmax_ = h->GetFunction("gaus")->GetParameter(1) + 1.5 * h->GetFunction("gaus")->GetParameter(2);
+    	xmin_ = h->GetFunction("gaus")->GetParameter(1) - 2.3 * h->GetFunction("gaus")->GetParameter(2);
+    	xmax_ = h->GetFunction("gaus")->GetParameter(1) + 2.3 * h->GetFunction("gaus")->GetParameter(2);
   	}
 
 	h->GetFunction("gaus")->SetLineColor(2);
@@ -99,7 +99,7 @@ int resolution_plots_Vs_pt
 	//recTree.Add("/media/tamasi/Z/PhD/FCC/Castellated/rec_files/PU1K_hh4bm260_30mm_sig5/*.root");
         //recTree.Add("/home/tamasi/repo_tamasi/rec_files/rec_files/30mm/PU1k/ggFhh4b_SM/*.root");
         //recTree.Add("/home/tamasi/repo_tamasi/rec_files/rec_files/30mm/PU0/ggFhh4b_SM/*.root");
-	recTree.Add("/user/tkar/work/data/rec/for_opt/Br30mmEC53mm/ggF1.0/*.root");
+	recTree.Add("/data/backup/tamasi/rho0/rec/sel/Br30mmEC67mm/PU1k/ggF1.0/*.root");
 	
 	std::cout<<"rec entries:"<<recTree.GetEntries()<<std::endl;
 	TCut cut;

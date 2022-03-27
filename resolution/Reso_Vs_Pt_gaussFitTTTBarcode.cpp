@@ -52,7 +52,7 @@ TCut mu_cut = "abs(M_pdg)==13 && M_barcode > 0 && abs(M_Vz) < 100 && abs(M_Vx)<5
 TCut pi_cut = "abs(M_pdg)==211 && M_barcode > 0 && abs(M_Vz) < 100 && abs(M_Vx)<5 && abs(M_Vy)<5";
 TCut e_cut  = "abs(M_pdg)==11 && M_barcode > 0 && abs(M_Vz) < 100 && abs(M_Vx)<5 && abs(M_Vy)<5";
 //! use this for TTT track resolution with barcode matching
-TCut all_cut= "Tid > 0 && abs(kappa_pull)<=3 && abs(M_pt)>2000 && abs(M_eta)<1.7 && abs(M_Vz) < 100 && abs(M_Vx) < 5 && abs(M_Vy) < 5 ";
+TCut all_cut= "abs(station)==1 && Tid > 0 && abs(kappa_pull)<=3 && abs(M_pt)>2000 && abs(M_eta)>=1.7 && abs(M_eta)<2.5 && abs(M_Vz) < 100 && abs(M_Vx) < 5 && abs(M_Vy) < 5 && abs(Phi13)<0.018 && abs(Eta3 - Eta1)<0.006 && abs(dphi2)<5e-4 && abs(Eta2-0.5*(Eta1+Eta3))<5e-4";
 //! path for input files
 const char* path = "";
 char buf[4096];
@@ -97,9 +97,12 @@ int resolution_plots_Vs_pt
 	//recTree.Add("/media/tamasi/Z/PhD/FCC/Castellated/rec_files/MB_recTree_3*");
 	//recTree.Add("/media/tamasi/Z/PhD/FCC/Castellated/rec_files/PU1000*");
 	//recTree.Add("/media/tamasi/Z/PhD/FCC/Castellated/rec_files/PU1K_hh4bm260_30mm_sig5/*.root");
-        recTree.Add("/home/tamasi/repo_tamasi/rec_files/rec_files/30mm/PU1k/ggFhh4b_SM/*.root");
-        recTree.Add("/home/tamasi/repo_tamasi/rec_files/rec_files/30mm/PU0/ggFhh4b_SM/*.root");
-	
+        //recTree.Add("/home/tamasi/repo_tamasi/rec_files/rec_files/30mm/PU1k/ggFhh4b_SM/*.root");
+        //recTree.Add("/home/tamasi/repo_tamasi/rec_files/rec_files/30mm/PU0/ggFhh4b_SM/*.root");
+	recTree.Add("/data/backup/tamasi/rho0/rec/sel/Br30mmEC67mm/PU1k/ggF1.0/*.root");
+	recTree.Add("/data/backup/tamasi/rho0/rec/opt/Br30mmEC67mm/ggF1.0/*.root");
+	recTree.Add("/data/backup/tamasi/rho0/rec/for_opt/Br30mmEC67mm/ggF1.0/*.root");
+
 	std::cout<<"rec entries:"<<recTree.GetEntries()<<std::endl;
 	TCut cut;
 	//const char* type = p_type;
@@ -469,7 +472,7 @@ return 0;
 }
 int plot_reso_vs_pt()
 {
-	resolution_plots_Vs_pt("ResoVspt_VxVy5_ggFhh4bPU1k_30mm_eta1.7_1",true);
+	resolution_plots_Vs_pt("ResoVspt_VxVy5_ggFhh4bPU1k_30mmEC67mm_eta1.7_2.5_1",true);
 	//resolution_plots_Vs_pt("ResoVspt_VxVy5_PU0_100030mm_1",true);
 	//resolution_plots_Vs_pt("testResoVspt_all1.4_5GeV",true);
 	return 0;

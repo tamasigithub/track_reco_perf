@@ -19,7 +19,7 @@ TCut mu_cut = "abs(M_pdg)==13 && M_barcode > 0 && abs(M_Vz) < 100 && abs(M_Vx)<5
 TCut pi_cut = "abs(M_pdg)==211 && M_barcode > 0 && abs(M_Vz) < 100 && abs(M_Vx)<5 && abs(M_Vy)<5";
 TCut e_cut  = "abs(M_pdg)==11 && M_barcode > 0 && abs(M_Vz) < 100 && abs(M_Vx)<5 && abs(M_Vy)<5";
 //! use this for TTT track resolution with barcode matching
-TCut all_cut= "Tid > 0 && abs(kappa_pull)<=3 && abs(M_pt)>2000 && abs(M_eta)<1.7 && abs(M_Vz) < 100 && abs(M_Vx) < 5 && abs(M_Vy) < 5 ";
+TCut all_cut= "Tid > 0 && abs(kappa_pull)<=3 && abs(M_pt)>2000 && abs(M_Vz) < 100 && abs(M_Vx) < 5 && abs(M_Vy) < 5 ";
 char buf[4096];
 //! User defined Gauss fit function to optimise the fit 
 void fit_Gauss(TH1F* h)
@@ -58,8 +58,10 @@ int resolution_plots_Vs_eta
 	//recTree.Add("/media/tamasi/DriveT/tamasi/Desktop/PHD/work/mere_plots/athena/Analysis/user.tkar.hh4bsig5PU0_2_ntuples3_MYSTREAM/*.root");
 	//
 	TChain recTree("m_recTree");
-        recTree.Add("/home/tamasi/repo_tamasi/rec_files/rec_files/30mm/PU1k/ggFhh4b_SM/*.root");
-        recTree.Add("/home/tamasi/repo_tamasi/rec_files/rec_files/30mm/PU0/ggFhh4b_SM/*.root");
+        //recTree.Add("/home/tamasi/repo_tamasi/rec_files/rec_files/30mm/PU1k/ggFhh4b_SM/*.root");
+        //recTree.Add("/home/tamasi/repo_tamasi/rec_files/rec_files/30mm/PU0/ggFhh4b_SM/*.root");
+	recTree.Add("/data/backup/tamasi/rho0/rec/sel/Br30mmEC67mm/PU1k/ggF1.0/*.root");
+
 	TCut cut;
 	const char* type = p_type;
 	if(type == "muon"){ cut = mu_cut;}
@@ -70,8 +72,8 @@ int resolution_plots_Vs_eta
 	
 /*	int etabin = 15;
     	double etamin   = -1.5, etamax = 1.5;
-*/	int etabin = 9;
-    	double etamin   = -1.7, etamax = 1.7;
+*/	int etabin = 13;
+    	double etamin   = -2.5, etamax = 2.5;
 	int binNum	    = 200;
 	double relptmin, relptmax;    
 	double inv_ptmin, inv_ptmax;    
@@ -179,7 +181,8 @@ int resolution_plots_Vs_eta
 
 	//! divide eta into small bins and fill each bin with a histogram
 	//! Next fit all these small histograms with gauss fit and optimise the fit about the mean
-	for (double eta = -1.6; eta < 1.7; eta+=0.4)
+	//for (double eta = -1.6; eta < 1.7; eta+=0.4)
+	for (double eta = -2.4; eta < 2.5; eta+=0.4)
 	{
 //		double eta = -1.2;
 		TH1F *h1 = new TH1F("h1", "Relative pt", binNum,relptmin,relptmax);
@@ -271,7 +274,7 @@ int resolution_plots_Vs_eta
 		fit_Gauss(h6);
 		//h6->Fit("gaus","L");
 
-		printf("eta = %.3f => mu = %.9f, sigma z0 = %.9f, sigma err = %.9f\n", eta,h6->GetFunction("gaus")->GetParameter(1),h6->GetFunction("gaus")->GetParameter(2), h6->GetFunction("gaus")->GetParError(2));
+		printf("eta = %.3f, etabin = %d, => mu = %.9f, sigma z0 = %.9f, sigma err = %.9f\n", eta, h_sigma_z0->FindBin(eta), h6->GetFunction("gaus")->GetParameter(1),h6->GetFunction("gaus")->GetParameter(2), h6->GetFunction("gaus")->GetParError(2));
 
 		h_sigma_z0->SetBinContent(h_sigma_z0->FindBin(eta), h6->GetFunction("gaus")->GetParameter(2));
 		h_sigma_z0->SetBinError(h_sigma_z0->FindBin(eta), h6->GetFunction("gaus")->GetParError(2));
@@ -328,7 +331,7 @@ return 0;
 
 int plot_one()
 {
-	resolution_plots_Vs_eta("ResoVseta_VxVy5_ggFhh4bPU1k_30mm_eta1.7_1","all",true);
+	resolution_plots_Vs_eta("ResoVseta_VxVy5_ggFhh4bPU1k_30mmEC67mm_eta2.5_2","all",true);
 //resolution_plots_Vs_eta("ResoVseta_barcodeMatchedVxVy10","all",true);
 //resolution_plots_Vs_eta("ResoVsEtaTTT_all1.4_5GeV","all",true);
 return 0;
