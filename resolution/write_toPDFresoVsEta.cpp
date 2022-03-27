@@ -66,7 +66,7 @@ void ScaleYaxis(TH1 *h, Double_t Scale)
   return;
 }
 //int write_topdf(const char* output_file_name = "ResoVsPt_FCC_PU0hh4b_m260_20mm")
-int write_topdf(const char* output_file_name = "ResoVseta_VxVy5_ggFhh4bPU1k_30mm_eta1.7_1")
+int write_topdf(const char* output_file_name = "ResoVseta_VxVy5_ggFhh4bPU1k_30mmEC67mm_eta2.5_1.root")
 {
 
 	char out_file_open[1023];
@@ -87,7 +87,8 @@ int write_topdf(const char* output_file_name = "ResoVseta_VxVy5_ggFhh4bPU1k_30mm
 
 	//! TTT tracks/ TTT barcode matched
 	//TFile* f0 = TFile::Open("./plots/ResoVspt_VxVy10_PU020mm.root");
-	TFile* f0 = TFile::Open("./plots/ResoVseta_VxVy5_ggFhh4bPU1k_30mm_eta1.7_1.root");
+	//TFile* f0 = TFile::Open("./plots/ResoVseta_VxVy5_ggFhh4bPU1k_30mm_eta1.7_1.root");
+	TFile* f0 = TFile::Open("./plots/ResoVseta_VxVy5_ggFhh4bPU1k_30mmEC67mm_eta2.5_1.root");
 	TH1D* h0_dp 	= (TH1D*)f0->Get("h_sigmadp");
 	TH1D* h0_invpt 	= (TH1D*)f0->Get("h_sigma_invPt");
 	TH1D* h0_phi	= (TH1D*)f0->Get("h_sigma_phi");
