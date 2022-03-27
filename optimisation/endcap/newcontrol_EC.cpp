@@ -222,17 +222,17 @@ void bookHistograms()
 void newcontrol
 (
 	//const char* output_file_name = "control_PEC_mupt2_10GeV",//f-few
-	//const char* output_file_name = "control_ggF1.0_PU1k_EC67sel_3",//f-few
-	const char* output_file_name = "control_MB_PU1k_EC67sel_3",//f-few
+	const char* output_file_name = "control_ggF1.0_PU1k_EC67foropt_3",//f-few
+	//const char* output_file_name = "control_MB_PU1k_EC67sel_3",//f-few
 	const char* set = "C",
 	const bool verbose = true
 )
 {
 	//Open a list of root files and get reconstructed tree
 	TChain rec("m_recTree");
-	//rec.Add("/user/tkar/work/data/rec/for_opt/Br30mmEC106mm/ggF1.0/*.root");
+	rec.Add("/user/tkar/work/data/rec/for_opt/Br30mmEC67mm/PU1k/ggF1.0/*.root");
 	//rec.Add("/user/tkar/work/data/rec/opt/Br30mmEC106mm/ggF1.0/user.tkar_*.root");
-	rec.Add("/user/tkar/work/data/rec/sel/Br30mmEC67mm/PU1k/MB_1/user.tkar_*.root");
+	//rec.Add("/user/tkar/work/data/rec/sel/Br30mmEC67mm/PU1k/ggF1.0/user.tkar_*.root");
 	TF1 *fdz2 = new TF1("fdz2", "[0]*(x)^[1]",0.16,1.05);
 	fdz2->SetParameter(0,dz2_const);
 	fdz2->SetParameter(1,dz2_exp);
@@ -246,7 +246,7 @@ void newcontrol
 	//! number of points in the plots
 	//int num_events = 250;//1e5;
 	int num_events = rec.GetEntries();
-	num_events = 1000;
+	num_events = 200;
 
 	int etabin = 31;
         double etamin =-2.6, etamax = 2.6;

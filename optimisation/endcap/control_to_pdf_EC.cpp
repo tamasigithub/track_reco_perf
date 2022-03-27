@@ -18,7 +18,8 @@
 const char* out_path = "./plots";
 const char* in_path  = "./root_files";
 
-int write_to_pdf(const char* input_file_name = "control_ggF1.0_PU0_EC106opt_3.root",const char* output_file_name = "control_ggF1.0_PU0_EC106opt_3")
+//int write_to_pdf(const char* input_file_name = "control_ggF1.0_PU0_EC106opt_3.root",const char* output_file_name = "control_ggF1.0_PU0_EC106opt_3")
+int write_to_pdf(const char* input_file_name = "control_ggF1.0_PU1k_EC67sel_3.root",const char* output_file_name = "control_ggF1.0_PU1k_EC67sel_3")
 {
 
 	char out_file_open[1023];
