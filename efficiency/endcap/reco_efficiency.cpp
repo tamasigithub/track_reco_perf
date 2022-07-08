@@ -23,15 +23,15 @@ const double deta2_max = 1e-3;
 const char* out_path = "./plots"; 
 //const char* out_path = "/media/tamasi/DriveT1/tamasi/Desktop/PHD/talks_preps/ctd2k19/plots/efficiency/singleParticles; 
 
-int eff_Vs_etaphipt_dR_barcode(const char* output_file_name = "PU1kallpcles_MB-eff_30mmEC67mm_sel5_1")
+int eff_Vs_etaphipt_dR_barcode(const char* output_file_name = "PU1kallpcles_ggF1.0-eff_30mmEC93mm_sel5_1")
 {
 	TChain recTree("m_recTree");
 	TChain truthTree("tracks");
 	//! ggF 1.0
-	recTree.Add("/data/backup/tamasi/rho0/rec/sel/Br30mmEC67mm/PU1k/MB_1/*.root");
-	truthTree.Add("/data/backup/tamasi/rho0/rec/sel/Br30mmEC67mm/PU1k/MB_1/*.root");
-	//recTree.Add("/user/tkar/work/data/rec/opt/Br30mmEC106mm/PU1k/ggF1.0_/*.root");
-	//truthTree.Add("/user/tkar/work/data/rec/opt/Br30mmEC106mm/PU1k/ggF1.0_/*.root");
+	//recTree.Add("/data/backup/tamasi/rho0/rec/sel/Br30mmEC67mm/PU1k/MB_1/*.root");
+	//truthTree.Add("/data/backup/tamasi/rho0/rec/sel/Br30mmEC67mm/PU1k/MB_1/*.root");
+	recTree.Add("/user/tkar/work/data/rec/sel/Br30mmEC93mm/PU1k/ggF1.0/*.root");
+	truthTree.Add("/user/tkar/work/data/rec/sel/Br30mmEC93mm/PU1k/ggF1.0/*.root");
 	std::cout<<"rec Tree : " <<recTree.GetEntries() << " , truth tree: " << truthTree.GetEntries() <<std::endl;
 	//int truth_entries=10000;
 	int truth_entries=truthTree.GetEntries();

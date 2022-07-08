@@ -46,7 +46,7 @@ void ScaleXaxis(TH1 *h, Double_t Scale)
   ScaleAxis(h->GetXaxis(), Scale);
   return;
 }
-int write_topdf(const char* output_file_name = "PurVsEtaPtPhi_cutCompFCC-hhCompareEta2_5")
+int write_topdf(const char* output_file_name = "PurVsEtaPtPhi_CompareExtBr30mmEC93mmEta2_5")
 {
 
 	char out_file_open[1023];
@@ -59,25 +59,25 @@ int write_topdf(const char* output_file_name = "PurVsEtaPtPhi_cutCompFCC-hhCompa
 	//! purity wide cuts
 	//! purity TTT barcode matched tracks no kappa cut
 	TFile* f0 = TFile::Open("./plots/PU1k_ggF1.0-pur_30mm_eta2.5opt3_2GeV.root");
-	//TFile* f0 = TFile::Open("./plots/PU1k_ggF1.0-pur_30mmEC67mm_opt10_1.root");
+	//TFile* f0 = TFile::Open("./plots/PU1k_ggF1.0-pur_30mmEC93mm_opt10_1.root");
 	TH1D* h0_pt 	= (TH1D*)f0->Get("h_pur_vs_ptPU");
 	TH1D* h0_phi	= (TH1D*)f0->Get("h_pur_vs_phiPU");
 	TH1D* h0_eta	= (TH1D*)f0->Get("h_pur_vs_etaPU");
 	//! purity TTT barcode matched tracks #sigma 5
 	//TFile* f1 = TFile::Open("./plots/PU1k_ggF1.0-pur_30mm_eta2.5opt5_2GeV.root");
-	TFile* f1 = TFile::Open("./plots/PU1k_ggF1.0-pur_30mmEC67mm_sel3_1.root");
+	TFile* f1 = TFile::Open("./plots/PU1k_ggF1.0-pur_30mmEC93mm_sel3_1.root");
 	TH1D* h1_pt = (TH1D*)f1->Get("h_pur_vs_ptPU");
 	TH1D* h1_phi	= (TH1D*)f1->Get("h_pur_vs_phiPU");
 	TH1D* h1_eta	= (TH1D*)f1->Get("h_pur_vs_etaPU");
 	//! purity TTT barcode matched tracks #sigma 4
 	TFile* f2 = TFile::Open("./plots/PU1k_ggF1.0-pur_30mm_eta2.5opt5_2GeV.root");
-	//TFile* f2 = TFile::Open("./plots/PU1k_ggF1.0-pur_30mmEC67mm_sel4_1.root");
+	//TFile* f2 = TFile::Open("./plots/PU1k_ggF1.0-pur_30mmEC93mm_sel4_1.root");
 	TH1D* h2_pt = (TH1D*)f2->Get("h_pur_vs_ptPU");
 	TH1D* h2_phi	= (TH1D*)f2->Get("h_pur_vs_phiPU");
 	TH1D* h2_eta	= (TH1D*)f2->Get("h_pur_vs_etaPU");
 	//! purity TTT barcode matched tracks #sigma 3
 	//TFile* f3 = TFile::Open("./plots/PU1k_ggF1.0-pur_30mm_eta2.5opt3_2GeV.root");
-	TFile* f3 = TFile::Open("./plots/PU1k_ggF1.0-pur_30mmEC67mm_sel5_1.root");
+	TFile* f3 = TFile::Open("./plots/PU1k_ggF1.0-pur_30mmEC93mm_sel5_1.root");
 	TH1D* h3_pt = (TH1D*)f3->Get("h_pur_vs_ptPU");
 	TH1D* h3_phi	= (TH1D*)f3->Get("h_pur_vs_phiPU");
 	TH1D* h3_eta	= (TH1D*)f3->Get("h_pur_vs_etaPU");

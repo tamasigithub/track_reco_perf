@@ -105,6 +105,8 @@ for file in "$@"; do
   sed -i -e 's@deltaz@delta z@g' $BODY_FILE
   sed -i -e 's@deltap@delta p@g' $BODY_FILE
   sed -i -e 's@1k@\\text{1k}@g' $BODY_FILE
+  sed -i -e 's@4T@4\\,\\text{T}@g' $BODY_FILE
+  sed -i -e 's@p_{T@\\text{p}_{\\text{T}@g' $BODY_FILE
   sed -i -e 's@> 2@> 2\~@g' $BODY_FILE
   # added by tamasi
   #sed -i -e 's@, H1H2@,\~H1H2@g' $BODY_FILE

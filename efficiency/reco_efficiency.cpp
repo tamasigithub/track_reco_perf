@@ -20,7 +20,7 @@ const double sigma_max = 3.0;
 const char* out_path = "./plots"; 
 //const char* out_path = "/media/tamasi/DriveT1/tamasi/Desktop/PHD/talks_preps/ctd2k19/plots/efficiency/singleParticles; 
 
-int eff_Vs_etaphipt_dR_barcode(const char* output_file_name = "PU0allpcles_ggF1.0-eff_30mm_eta1.7opt3_2GeV_noSEC_loose_3")
+int eff_Vs_etaphipt_dR_barcode(const char* output_file_name = "PU1kallpcles_ggF1.0-eff_30mm_eta2.5opt3_2GeV_3")
 //int eff_Vs_etaphipt_dR_barcode(const char* output_file_name = "singleMUeff_30mm_eta1.7opt3_2_10GeV_SEC")
 //int eff_Vs_etaphipt_dR_barcode(const char* output_file_name = "PU1000hh4b-eff_30mm_samelad_opt5GeVp", bool save = false)
 //int eff_Vs_etaphipt_dR_barcode(const char* output_file_name = "PU0hh4b_effVxVy2_300002_N1lad_opt_pi", bool save = false)
@@ -31,10 +31,12 @@ int eff_Vs_etaphipt_dR_barcode(const char* output_file_name = "PU0allpcles_ggF1.
 	TChain recTree("m_recTree");
 	TChain truthTree("tracks");
 	//! ggF 1.0
+	recTree.Add("/user/tkar/from_tachyon/rec_files/30mm/PU1k/ggFhh4b_SM_1/*.root");
+	truthTree.Add("/user/tkar/from_tachyon/rec_files/30mm/PU1k/ggFhh4b_SM_1/*.root");
 	//recTree.Add("/home/tamasi/repo_tamasi/rec_files/rec_files/30mm/PU0/new_ggFhh4b1_noSEC/*.root");
 	//truthTree.Add("/home/tamasi/repo_tamasi/rec_files/rec_files/30mm/PU0/new_ggFhh4b1_noSEC/*.root");
-	recTree.Add("/home/tamasi/repo_tamasi/rec_files/rec_files/30mm/PU0/new_ggFhh4b1_noSEC_plus1MOD/*.root");
-	truthTree.Add("/home/tamasi/repo_tamasi/rec_files/rec_files/30mm/PU0/new_ggFhh4b1_noSEC_plus1MOD/*.root");
+	//recTree.Add("/home/tamasi/repo_tamasi/rec_files/rec_files/30mm/PU0/new_ggFhh4b1_noSEC_plus1MOD/*.root");
+	//truthTree.Add("/home/tamasi/repo_tamasi/rec_files/rec_files/30mm/PU0/new_ggFhh4b1_noSEC_plus1MOD/*.root");
 	//recTree.Add("/home/tamasi/repo_tamasi/rec_files/rec_files/30mm/PU0/ggFhh4b_SM/*.root");
 	//truthTree.Add("/home/tamasi/repo_tamasi/rec_files/rec_files/30mm/PU0/ggFhh4b_SM/*.root");
 	//recTree.Add("/home/tamasi/repo_tamasi/rec_files/rec_files/30mm/PU1k/ggFhh4b_1_noCluster/*.root");

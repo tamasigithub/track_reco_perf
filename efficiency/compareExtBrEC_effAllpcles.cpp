@@ -138,7 +138,7 @@ void CenterAxisTitles()
 }
 const char* out_path = "./plots"; 
 //int write_topdf(const char* output_file_name = "EffVsAll_ggF1.0hh4bPU1kOpt3allPcles_30mmEta1_7_1")
-int write_topdf(const char* output_file_name = "EffVsAll_ggF1.0hh4bPU1kOpt3allPcles_compare30mmEC67mmEta2_5_1")
+int write_topdf(const char* output_file_name = "EffVsAll_ggF1.0hh4bPU1kOpt3allPcles_compare30mmEC80mmEta2_5_3")
 {
 
 	char out_file_open[1023];
@@ -151,7 +151,7 @@ int write_topdf(const char* output_file_name = "EffVsAll_ggF1.0hh4bPU1kOpt3allPc
 	//TFile* f1 = TFile::Open("~/repo_tamasi/rec_files/rec_files/plots/PU1kallpcles_ggF1.0-eff_30mm_eta1.7opt3_2GeV_1.root");
 	//TFile* f1 = TFile::Open("~/repo_tamasi/rec_files/rec_files/plots/PU1kallpcles_ggF1.0-eff_30mm_eta2.5opt3_2GeV_2.root");
 	//! Extended barrel
-	TFile* f1 = TFile::Open("./endcap/plots/PU1kallpcles_ggF1.0-eff_30mm_eta2.5opt3_2GeV_2.root");
+	TFile* f1 = TFile::Open("./endcap/plots/PU1kallpcles_ggF1.0-eff_30mm_eta2.5opt3_2GeV_3.root");
 	h1_pt 	= (TH1D*)f1->Get("h_eff_vs_ptPU");
 	h1_phi	= (TH1D*)f1->Get("h_eff_vs_phiPU");
 	h1_eta	= (TH1D*)f1->Get("h_eff_vs_etaPU");
@@ -165,7 +165,7 @@ int write_topdf(const char* output_file_name = "EffVsAll_ggF1.0hh4bPU1kOpt3allPc
 	hmu_phi	= (TH1D*)f1->Get("h_eff_vs_phimu");
 	hmu_eta	= (TH1D*)f1->Get("h_eff_vs_etamu");
 	//! Barrel Endcap
-	TFile* f2 = TFile::Open("./endcap/plots/PU1kallpcles_ggF1.0-eff_30mmEC67mm_sel3_1.root");
+	TFile* f2 = TFile::Open("./endcap/plots/PU1kallpcles_ggF1.0-eff_30mmEC80mm_sel5_1.root");
 	H1_pt 	= (TH1D*)f2->Get("h_eff_vs_ptPU");
 	H1_phi	= (TH1D*)f2->Get("h_eff_vs_phiPU");
 	H1_eta	= (TH1D*)f2->Get("h_eff_vs_etaPU");

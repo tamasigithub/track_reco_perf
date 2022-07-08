@@ -12,7 +12,7 @@ Float_t TEXT_ALIGN = 32;
 Float_t TEXT_ALIGN_1 = 12;
 Float_t TEXT_FONT = 62;
 Float_t TEXT_SIZE = 0.04;
-Float_t Xl1 = 0.16, Yu1 = 0.9, Xl2 = 0.36, Yu2 = 0.99;
+Float_t Xl1 = 0.16, Yu1 = 0.9, Xl2 = 0.36, Yu2 = 0.95;
 Float_t Xr1 = 0.45, Ym1 = 0.5, Xr2 = 0.899, Ym2 = 0.76;
 Float_t LEFT_MARGIN = 0.15;
 Float_t MARKER_STYLE = 6;
@@ -26,13 +26,13 @@ TLegend *leg5 = nullptr;
 void Legends()
 {
 	leg1 = new TLegend(Xr1, Yu1, Xr2, Yu2);
-	leg1->AddEntry((TObject*)0, "#sqrt{s} = 100 TeV, B = 4T", "");
+	//leg1->AddEntry((TObject*)0, "#sqrt{s} = 100 TeV, B = 4T", "");
 	//leg1->AddEntry((TObject*)0, "HH #rightarrow b#bar{b}b#bar{b}, <#mu> = 0", "");
-	leg1->AddEntry((TObject*)0, "HH #rightarrow b#bar{b}b#bar{b}, <#mu> = 1k", "");
+	leg1->AddEntry((TObject*)0, "HH #rightarrow b#bar{b}b#bar{b}, #langle #mu #rangle = 1k", "");
 	leg1->SetFillStyle(FILL_STYLE);
 	leg1->SetBorderSize(BORDER_SIZE);
 	leg1->SetTextSize(TEXT_SIZE);
-	//leg1->SetTextAlign(kHAlignRight+kVAlignBottom);
+	leg1->SetTextAlign(kHAlignRight+kVAlignCenter);
 
 	leg2 = new TLegend(Xl2, Yu1-0.05, Xr2, Yu1-0.001);
 	//leg2->AddEntry((TObject*)0, "final selection cuts", "");
@@ -60,11 +60,13 @@ void Legends()
 	leg4->SetTextAlign(kHAlignRight+kVAlignCenter);
 
 	leg5 = new TLegend(0.1, Yu1, Xl1, Yu2);
-	leg5->AddEntry((TObject*)0, "gap-size = 30 mm", "");
-	leg5->AddEntry((TObject*)0, " ", "");
+	//leg5->AddEntry((TObject*)0, "gap-size = 30 mm", "");
+	leg5->AddEntry((TObject*)0, "#sqrt{s} = 100 TeV, B = 4T", "");
+	//leg5->AddEntry((TObject*)0, " ", "");
 	leg5->SetFillStyle(FILL_STYLE);
 	leg5->SetBorderSize(BORDER_SIZE);
 	leg5->SetTextSize(TEXT_SIZE);
-	leg5->SetTextAlign(kHAlignLeft+kVAlignBottom);
+	leg5->SetTextAlign(kHAlignLeft+kVAlignCenter);
+	//leg5->SetTextAlign(kHAlignLeft+kVAlignBottom);
 	return;
 }
