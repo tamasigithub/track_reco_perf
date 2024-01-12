@@ -54,7 +54,7 @@ void Legends()
 	leg4 = new TLegend(Xr1+0.22, Yu1-0.16, Xr2,Yu1-0.1);
 	//leg4->AddEntry((TObject*)0, "final selection cuts", "");
 	leg4->AddEntry((TObject*)0,  "d#phi_{2, cut}, dz_{2, cut}","");
-	//leg4->SetFillStyle(FILL_STYLE);
+	leg4->SetFillStyle(FILL_STYLE);
 	leg4->SetBorderSize(BORDER_SIZE);
 	leg4->SetTextSize(TEXT_SIZE);
 	leg4->SetTextAlign(kHAlignRight+kVAlignCenter);

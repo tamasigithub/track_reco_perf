@@ -21,6 +21,7 @@ mk_body_file () {
 \usetikzlibrary{patterns}
 \usepackage{amsmath,amssymb}
 \usepackage{bm}
+\usepackage{siunitx}
 \usepackage{pgfplots}
 \pgfplotsset{compat=1.15}
 % start document

@@ -70,191 +70,191 @@ void summary_rms_pT_Vs_purity()
    
    gre->Draw("alpe1");
    
-   Double_t Graph1_fx1002[5] = {
-   0.958705,
-   0.965413,
-   0.96878,
-   0.969307,
-   0.965768};
-   Double_t Graph1_fy1002[5] = {
-   0.952045,
-   0.783257,
-   0.708941,
-   0.653471,
-   0.620935};
-   Double_t Graph1_fex1002[5] = {
-   0,
-   0,
-   0,
-   0,
-   0};
-   Double_t Graph1_fey1002[5] = {
-   0.000142589,
-   0.000105025,
-   9.75091e-05,
-   9.82524e-05,
-   8.67109e-05};
-   gre = new TGraphErrors(5,Graph1_fx1002,Graph1_fy1002,Graph1_fex1002,Graph1_fey1002);
-   gre->SetName("Graph1");
-   gre->SetTitle("Relative p_{T} resolution Vs track purity for various gap sizes of the TTT");
-   gre->SetFillStyle(0);
-   gre->SetMarkerStyle(22);
-   
-   TH1F *Graph_Graph11002 = new TH1F("Graph_Graph11002","Relative p_{T} resolution Vs track purity for various gap sizes of the TTT",100,0.84,1);
-   Graph_Graph11002->SetMinimum(0);
-   Graph_Graph11002->SetMaximum(1.3);
-   Graph_Graph11002->SetDirectory(0);
-   Graph_Graph11002->SetStats(0);
+   //Double_t Graph1_fx1002[5] = {
+   //0.958705,
+   //0.965413,
+   //0.96878,
+   //0.969307,
+   //0.965768};
+   //Double_t Graph1_fy1002[5] = {
+   //0.952045,
+   //0.783257,
+   //0.708941,
+   //0.653471,
+   //0.620935};
+   //Double_t Graph1_fex1002[5] = {
+   //0,
+   //0,
+   //0,
+   //0,
+   //0};
+   //Double_t Graph1_fey1002[5] = {
+   //0.000142589,
+   //0.000105025,
+   //9.75091e-05,
+   //9.82524e-05,
+   //8.67109e-05};
+   //gre = new TGraphErrors(5,Graph1_fx1002,Graph1_fy1002,Graph1_fex1002,Graph1_fey1002);
+   //gre->SetName("Graph1");
+   //gre->SetTitle("Relative p_{T} resolution Vs track purity for various gap sizes of the TTT");
+   //gre->SetFillStyle(0);
+   //gre->SetMarkerStyle(22);
+   //
+   //TH1F *Graph_Graph11002 = new TH1F("Graph_Graph11002","Relative p_{T} resolution Vs track purity for various gap sizes of the TTT",100,0.84,1);
+   //Graph_Graph11002->SetMinimum(0);
+   //Graph_Graph11002->SetMaximum(1.3);
+   //Graph_Graph11002->SetDirectory(0);
+   //Graph_Graph11002->SetStats(0);
 
-   ci = TColor::GetColor("#000099");
-   Graph_Graph11002->SetLineColor(ci);
-   Graph_Graph11002->GetXaxis()->SetTitle("Average track purity, p_{T} #in (10, 100) GeV/c");
-   Graph_Graph11002->GetXaxis()->CenterTitle(true);
-   Graph_Graph11002->GetXaxis()->SetLabelFont(42);
-   Graph_Graph11002->GetXaxis()->SetTitleSize(0.04);
-   Graph_Graph11002->GetXaxis()->SetTitleOffset(1.2);
-   Graph_Graph11002->GetXaxis()->SetTitleFont(42);
-   Graph_Graph11002->GetYaxis()->SetTitle("#sigma_{#delta p_{T}/p_{T, gen}} [%], at p_{T} = 10 GeV/c");
-   Graph_Graph11002->GetYaxis()->CenterTitle(true);
-   Graph_Graph11002->GetYaxis()->SetLabelFont(42);
-   Graph_Graph11002->GetYaxis()->SetTitleSize(0.04);
-   Graph_Graph11002->GetYaxis()->SetTitleOffset(1.2);
-   Graph_Graph11002->GetYaxis()->SetTitleFont(42);
-   Graph_Graph11002->GetZaxis()->SetLabelFont(42);
-   Graph_Graph11002->GetZaxis()->SetTitleOffset(1);
-   Graph_Graph11002->GetZaxis()->SetTitleFont(42);
-   gre->SetHistogram(Graph_Graph11002);
-   
-   gre->Draw("lpe1");
-   
-   Double_t Graph2_fx1003[5] = {
-   0.971871,
-   0.9704,
-   0.974285,
-   0.976774,
-   0.970408};
-   Double_t Graph2_fy1003[5] = {
-   0.952045,
-   0.783257,
-   0.708941,
-   0.653471,
-   0.620935};
-   Double_t Graph2_fex1003[5] = {
-   0,
-   0,
-   0,
-   0,
-   0};
-   Double_t Graph2_fey1003[5] = {
-   0.000142589,
-   0.000105025,
-   9.75091e-05,
-   9.82524e-05,
-   8.67109e-05};
-   gre = new TGraphErrors(5,Graph2_fx1003,Graph2_fy1003,Graph2_fex1003,Graph2_fey1003);
-   gre->SetName("Graph2");
-   gre->SetTitle("Relative p_{T} resolution Vs track purity for various gap sizes of the TTT");
-   gre->SetFillStyle(0);
-   gre->SetMarkerStyle(21);
-   
-   TH1F *Graph_Graph21003 = new TH1F("Graph_Graph21003","Relative p_{T} resolution Vs track purity for various gap sizes of the TTT",100,0.84,1);
-   Graph_Graph21003->SetMinimum(0);
-   Graph_Graph21003->SetMaximum(1.3);
-   Graph_Graph21003->SetDirectory(0);
-   Graph_Graph21003->SetStats(0);
+   //ci = TColor::GetColor("#000099");
+   //Graph_Graph11002->SetLineColor(ci);
+   //Graph_Graph11002->GetXaxis()->SetTitle("Average track purity, p_{T} #in (10, 100) GeV/c");
+   //Graph_Graph11002->GetXaxis()->CenterTitle(true);
+   //Graph_Graph11002->GetXaxis()->SetLabelFont(42);
+   //Graph_Graph11002->GetXaxis()->SetTitleSize(0.04);
+   //Graph_Graph11002->GetXaxis()->SetTitleOffset(1.2);
+   //Graph_Graph11002->GetXaxis()->SetTitleFont(42);
+   //Graph_Graph11002->GetYaxis()->SetTitle("#sigma_{#delta p_{T}/p_{T, gen}} [%], at p_{T} = 10 GeV/c");
+   //Graph_Graph11002->GetYaxis()->CenterTitle(true);
+   //Graph_Graph11002->GetYaxis()->SetLabelFont(42);
+   //Graph_Graph11002->GetYaxis()->SetTitleSize(0.04);
+   //Graph_Graph11002->GetYaxis()->SetTitleOffset(1.2);
+   //Graph_Graph11002->GetYaxis()->SetTitleFont(42);
+   //Graph_Graph11002->GetZaxis()->SetLabelFont(42);
+   //Graph_Graph11002->GetZaxis()->SetTitleOffset(1);
+   //Graph_Graph11002->GetZaxis()->SetTitleFont(42);
+   //gre->SetHistogram(Graph_Graph11002);
+   //
+   //gre->Draw("lpe1");
+   //
+   //Double_t Graph2_fx1003[5] = {
+   //0.971871,
+   //0.9704,
+   //0.974285,
+   //0.976774,
+   //0.970408};
+   //Double_t Graph2_fy1003[5] = {
+   //0.952045,
+   //0.783257,
+   //0.708941,
+   //0.653471,
+   //0.620935};
+   //Double_t Graph2_fex1003[5] = {
+   //0,
+   //0,
+   //0,
+   //0,
+   //0};
+   //Double_t Graph2_fey1003[5] = {
+   //0.000142589,
+   //0.000105025,
+   //9.75091e-05,
+   //9.82524e-05,
+   //8.67109e-05};
+   //gre = new TGraphErrors(5,Graph2_fx1003,Graph2_fy1003,Graph2_fex1003,Graph2_fey1003);
+   //gre->SetName("Graph2");
+   //gre->SetTitle("Relative p_{T} resolution Vs track purity for various gap sizes of the TTT");
+   //gre->SetFillStyle(0);
+   //gre->SetMarkerStyle(21);
+   //
+   //TH1F *Graph_Graph21003 = new TH1F("Graph_Graph21003","Relative p_{T} resolution Vs track purity for various gap sizes of the TTT",100,0.84,1);
+   //Graph_Graph21003->SetMinimum(0);
+   //Graph_Graph21003->SetMaximum(1.3);
+   //Graph_Graph21003->SetDirectory(0);
+   //Graph_Graph21003->SetStats(0);
 
-   ci = TColor::GetColor("#000099");
-   Graph_Graph21003->SetLineColor(ci);
-   Graph_Graph21003->GetXaxis()->SetTitle("Average track purity, p_{T} #in (10, 100) GeV/c");
-   Graph_Graph21003->GetXaxis()->CenterTitle(true);
-   Graph_Graph21003->GetXaxis()->SetLabelFont(42);
-   Graph_Graph21003->GetXaxis()->SetTitleSize(0.04);
-   Graph_Graph21003->GetXaxis()->SetTitleOffset(1.2);
-   Graph_Graph21003->GetXaxis()->SetTitleFont(42);
-   Graph_Graph21003->GetYaxis()->SetTitle("#sigma_{#delta p_{T}/p_{T, gen}} [%], at p_{T} = 10 GeV/c");
-   Graph_Graph21003->GetYaxis()->CenterTitle(true);
-   Graph_Graph21003->GetYaxis()->SetLabelFont(42);
-   Graph_Graph21003->GetYaxis()->SetTitleSize(0.04);
-   Graph_Graph21003->GetYaxis()->SetTitleOffset(1.2);
-   Graph_Graph21003->GetYaxis()->SetTitleFont(42);
-   Graph_Graph21003->GetZaxis()->SetLabelFont(42);
-   Graph_Graph21003->GetZaxis()->SetTitleOffset(1);
-   Graph_Graph21003->GetZaxis()->SetTitleFont(42);
-   gre->SetHistogram(Graph_Graph21003);
+   //ci = TColor::GetColor("#000099");
+   //Graph_Graph21003->SetLineColor(ci);
+   //Graph_Graph21003->GetXaxis()->SetTitle("Average track purity, p_{T} #in (10, 100) GeV/c");
+   //Graph_Graph21003->GetXaxis()->CenterTitle(true);
+   //Graph_Graph21003->GetXaxis()->SetLabelFont(42);
+   //Graph_Graph21003->GetXaxis()->SetTitleSize(0.04);
+   //Graph_Graph21003->GetXaxis()->SetTitleOffset(1.2);
+   //Graph_Graph21003->GetXaxis()->SetTitleFont(42);
+   //Graph_Graph21003->GetYaxis()->SetTitle("#sigma_{#delta p_{T}/p_{T, gen}} [%], at p_{T} = 10 GeV/c");
+   //Graph_Graph21003->GetYaxis()->CenterTitle(true);
+   //Graph_Graph21003->GetYaxis()->SetLabelFont(42);
+   //Graph_Graph21003->GetYaxis()->SetTitleSize(0.04);
+   //Graph_Graph21003->GetYaxis()->SetTitleOffset(1.2);
+   //Graph_Graph21003->GetYaxis()->SetTitleFont(42);
+   //Graph_Graph21003->GetZaxis()->SetLabelFont(42);
+   //Graph_Graph21003->GetZaxis()->SetTitleOffset(1);
+   //Graph_Graph21003->GetZaxis()->SetTitleFont(42);
+   //gre->SetHistogram(Graph_Graph21003);
    
    gre->Draw("lpe1");
    TMarker *marker = new TMarker(0.932076,0.952045,20);
    marker->SetMarkerStyle(20);
    marker->SetMarkerSize(2);
    marker->Draw();
-   marker = new TMarker(0.958705,0.952045,22);
-   marker->SetMarkerStyle(22);
-   marker->SetMarkerSize(2);
-   marker->Draw();
-   marker = new TMarker(0.971871,0.952045,21);
-   marker->SetMarkerStyle(21);
-   marker->SetMarkerSize(2);
-   marker->Draw();
+   //marker = new TMarker(0.958705,0.952045,22);
+   //marker->SetMarkerStyle(22);
+   //marker->SetMarkerSize(2);
+   //marker->Draw();
+   //marker = new TMarker(0.971871,0.952045,21);
+   //marker->SetMarkerStyle(21);
+   //marker->SetMarkerSize(2);
+   //marker->Draw();
    marker = new TMarker(0.927725,0.783257,20);
    marker->SetMarkerColor(2);
    marker->SetMarkerStyle(20);
    marker->SetMarkerSize(2);
    marker->Draw();
-   marker = new TMarker(0.965413,0.783257,22);
-   marker->SetMarkerColor(2);
-   marker->SetMarkerStyle(22);
-   marker->SetMarkerSize(2);
-   marker->Draw();
-   marker = new TMarker(0.9704,0.783257,21);
-   marker->SetMarkerColor(2);
-   marker->SetMarkerStyle(21);
-   marker->SetMarkerSize(2);
-   marker->Draw();
+   //marker = new TMarker(0.965413,0.783257,22);
+   //marker->SetMarkerColor(2);
+   //marker->SetMarkerStyle(22);
+   //marker->SetMarkerSize(2);
+   //marker->Draw();
+   //marker = new TMarker(0.9704,0.783257,21);
+   //marker->SetMarkerColor(2);
+   //marker->SetMarkerStyle(21);
+   //marker->SetMarkerSize(2);
+   //marker->Draw();
    marker = new TMarker(0.915471,0.708941,20);
    marker->SetMarkerColor(3);
    marker->SetMarkerStyle(20);
    marker->SetMarkerSize(2);
    marker->Draw();
-   marker = new TMarker(0.96878,0.708941,22);
-   marker->SetMarkerColor(3);
-   marker->SetMarkerStyle(22);
-   marker->SetMarkerSize(2);
-   marker->Draw();
-   marker = new TMarker(0.974285,0.708941,21);
-   marker->SetMarkerColor(3);
-   marker->SetMarkerStyle(21);
-   marker->SetMarkerSize(2);
-   marker->Draw();
+   //marker = new TMarker(0.96878,0.708941,22);
+   //marker->SetMarkerColor(3);
+   //marker->SetMarkerStyle(22);
+   //marker->SetMarkerSize(2);
+   //marker->Draw();
+   //marker = new TMarker(0.974285,0.708941,21);
+   //marker->SetMarkerColor(3);
+   //marker->SetMarkerStyle(21);
+   //marker->SetMarkerSize(2);
+   //marker->Draw();
    marker = new TMarker(0.88269,0.653471,20);
    marker->SetMarkerColor(4);
    marker->SetMarkerStyle(20);
    marker->SetMarkerSize(2);
    marker->Draw();
-   marker = new TMarker(0.969307,0.653471,22);
-   marker->SetMarkerColor(4);
-   marker->SetMarkerStyle(22);
-   marker->SetMarkerSize(2);
-   marker->Draw();
-   marker = new TMarker(0.976774,0.653471,21);
-   marker->SetMarkerColor(4);
-   marker->SetMarkerStyle(21);
-   marker->SetMarkerSize(2);
-   marker->Draw();
+   //marker = new TMarker(0.969307,0.653471,22);
+   //marker->SetMarkerColor(4);
+   //marker->SetMarkerStyle(22);
+   //marker->SetMarkerSize(2);
+   //marker->Draw();
+   //marker = new TMarker(0.976774,0.653471,21);
+   //marker->SetMarkerColor(4);
+   //marker->SetMarkerStyle(21);
+   //marker->SetMarkerSize(2);
+   //marker->Draw();
    marker = new TMarker(0.848006,0.620935,20);
    marker->SetMarkerColor(5);
    marker->SetMarkerStyle(20);
    marker->SetMarkerSize(2);
    marker->Draw();
-   marker = new TMarker(0.965768,0.620935,22);
-   marker->SetMarkerColor(5);
-   marker->SetMarkerStyle(22);
-   marker->SetMarkerSize(2);
-   marker->Draw();
-   marker = new TMarker(0.970408,0.620935,21);
-   marker->SetMarkerColor(5);
-   marker->SetMarkerStyle(21);
-   marker->SetMarkerSize(2);
-   marker->Draw();
+   //marker = new TMarker(0.965768,0.620935,22);
+   //marker->SetMarkerColor(5);
+   //marker->SetMarkerStyle(22);
+   //marker->SetMarkerSize(2);
+   //marker->Draw();
+   //marker = new TMarker(0.970408,0.620935,21);
+   //marker->SetMarkerColor(5);
+   //marker->SetMarkerStyle(21);
+   //marker->SetMarkerSize(2);
+   //marker->Draw();
    
    TLegend *leg = new TLegend(0.14,0.31,0.44,0.38,NULL,"brNDC");
    leg->SetBorderSize(0);

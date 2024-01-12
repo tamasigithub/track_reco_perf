@@ -23,8 +23,10 @@ float max_bin = 150.;
 //! File paths
 const char *in_path = "./root";
 const char *out_path = "./root";
-const char *in_file_name = "occ_max_ggF1_PU200";
-const char *out_file_name = "occ_summ_ggF1_PU200";
+const char *in_file_name = "cluster_occ_max_ggF1_PU1k";
+const char *out_file_name = "cluster_occ_max_ggF1_PU1k";
+//const char *in_file_name = "occ_max_ggF1_PU200";
+//const char *out_file_name = "occ_summ_ggF1_PU200";
 char in_file[1023];
 char out_file[1023];
 

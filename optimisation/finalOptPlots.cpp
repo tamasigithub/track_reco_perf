@@ -18,7 +18,8 @@
 
 #include "plot_props.h"
 
-const char *reco_files = "/home/tamasi/repo_tamasi/rec_files/for_optimization/30mm/ggFhh4b_SM/*.root";
+//const char *reco_files = "/home/tamasi/repo_tamasi/rec_files/for_optimization/30mm/ggFhh4b_SM/*.root";
+const char *reco_files = "/user/tkar/work/data/rec/for_opt/ggF1.0/user.tkar_0000*.root";
 
 void ScaleAxis(TAxis *a, Double_t Scale)
 {
@@ -129,8 +130,9 @@ void finalOptPlots()
 	leg->SetBorderSize(BORDER_SIZE);
 	leg->SetTextSize(TEXT_SIZE);
 	leg->Draw();
-	leg3->Draw();
+	//leg3->Draw();
 	leg2->Draw();
+	c->SaveAs("./pdf/dphi2.root");
 	c->SaveAs("./tex/dphi2.tex");
 	c->SaveAs("./pdf/dphi2.pdf");
 	
@@ -157,10 +159,11 @@ void finalOptPlots()
 	fun_->Draw("same");
 	leg1->Draw();
 	leg->Draw();
-	leg3->Draw();
+	//leg3->Draw();
 	leg2->Draw();
 	c->SaveAs("./tex/dz2.tex");
 	c->SaveAs("./pdf/dz2.pdf");
+	c->SaveAs("./pdf/dz2.root");
 	
 	//! kappa_013 Vs kappa_123
 	TH2F *H128 = (TH2F*)f->Get("h128");
@@ -497,16 +500,23 @@ void finalOptPlots()
 	H39->SetMarkerStyle(MARKER_STYLE);
 	H40->SetMarkerStyle(MARKER_STYLE);
 	H41->SetMarkerStyle(MARKER_STYLE);
+	H37->SetMarkerColor(kCyan);
+	H39->SetMarkerColor(kAzure+1);
+	H41->SetMarkerColor(kBlue+2);
+	H37->SetLineColor(kCyan);
+	H39->SetLineColor(kAzure+1);
+	H41->SetLineColor(kBlue+2);
 	H37->Draw();
 	H39->Draw("same");
-	H40->Draw("same");
+	//H40->Draw("same");
 	H41->Draw("same");
 	leg1->Draw();
 	TLegend *leg_ = new TLegend(0.13, Yu1-0.23, Xl2-0.03,Yu1-0.03,"#kappa cut");
+	leg_->AddEntry(H41,"|d#kappa| < 3 #sigma_{#kappa}","l");
+	//leg_->AddEntry(H40,"medium","l");
+	leg_->AddEntry(H39,"|d#kappa| < 5 #sigma_{#kappa}","l");
 	leg_->AddEntry(H37,"--","l");
-	leg_->AddEntry(H39,"loose","l");
-	leg_->AddEntry(H40,"medium","l");
-	leg_->AddEntry(H41,"tight","l");
+
 	leg_->SetTextAlign(kHAlignCenter+kVAlignCenter);
 	//leg_->SetFillStyle(FILL_STYLE);
 	leg_->SetBorderSize(BORDER_SIZE);

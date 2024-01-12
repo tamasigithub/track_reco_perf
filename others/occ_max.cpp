@@ -49,7 +49,8 @@ void occ_max(bool debug = false)
    //f_in = new TFile(input_file_names, "READ");
    //t_in = (TTree*)f_in->Get("mu3e");
    //int num_events = t_in->GetEntries();
-   TChain t_chain("mu3e");
+   //TChain t_chain("mu3e");
+   TChain t_chain("cluster");
    t_chain.Add(input_file_names);
    int num_events = t_chain.GetEntries();
    // ------------ FIX ME ------------//

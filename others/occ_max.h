@@ -20,10 +20,12 @@ int nbins = 500;
 float max_cnt = 500.;
 
 //! File paths
-const char *file_path = "/user/tkar/work/data/merge/user.tkar.ggF1.0hh4b_SIMPU200_Br30mmEC80mm";
-const char *file_names = "user.tkar.24726593._0000*.output.merged";
+//const char *file_path = "/user/tkar/work/data/merge/user.tkar.ggF1.0hh4b_SIMPU200_Br30mmEC80mm";
+//const char *file_names = "user.tkar.24726593._0000*.output.merged";
+const char *file_path = "/user/tkar/work/data/rec/sel/Br30mmEC80mm/PU1k/ggF_clstrocc";
+const char *file_names = "user.tkar_000*.recTree.merged";
 const char *out_path = "./root";
-const char *out_file_name = "occ_max_ggF1_PU200";
+const char *out_file_name = "cluster_occ_max_ggF1_PU1k";
 
 //! some variables
 int current_layer = -1;

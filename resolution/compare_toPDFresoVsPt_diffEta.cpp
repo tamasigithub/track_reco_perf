@@ -66,7 +66,7 @@ void ScaleYaxis(TH1 *h, Double_t Scale)
   return;
 }
 //int write_topdf(const char* output_file_name = "ResoVsPt_FCC_PU0hh4b_m260_20mm")
-int write_topdf(const char* output_file_name = "ResoVspt_VxVy5_1.7_1.7_2.5ExBr_2.5BrEC30mm93mm_2")
+int write_topdf(const char* output_file_name = "ResoVspt_VxVy5_1.7_1.7_2.5ExBr_2.5BrEC30mm80mm_3")
 {
 
 	char out_file_open[1023];
@@ -78,7 +78,7 @@ int write_topdf(const char* output_file_name = "ResoVspt_VxVy5_1.7_1.7_2.5ExBr_2
 	gStyle->SetErrorX(0.); 
 	//! Ext Barrel eta < 1.7
 	//TFile* f = TFile::Open("./plots/ResoVspt_VxVy5_ggFhh4bPU1k_30mm_eta1.7_1.root");
-	TFile* f = TFile::Open("./plots/ResoVspt_VxVy5_ggFhh4bPU1k_30mmEC80mm_eta1.7_1.root");
+	TFile* f = TFile::Open("./plots/ResoVspt_VxVy5_ggFhh4bPU1k_30mmEC80mm_eta1.7_3.root");
 	TH1D* h_dp 	= (TH1D*)f->Get("h_sigmadp");
 	TH1D* h_invpt 	= (TH1D*)f->Get("h_sigma_invPt");
 	TH1D* h_phi	= (TH1D*)f->Get("h_sigma_phi");
@@ -89,7 +89,7 @@ int write_topdf(const char* output_file_name = "ResoVspt_VxVy5_1.7_1.7_2.5ExBr_2
 
 	//! Ext Barrel eta > 1.7 and eta < 2.5 
 	//TFile* f0 = TFile::Open("./plots/ResoVspt_VxVy5_ggFhh4bPU1k_30mm_eta1.7_2.5_1.root");
-	TFile* f0 = TFile::Open("./plots/ResoVspt_VxVy5_ggFhh4bPU1k_30mm_eta1.7_2.5_1.root");
+	TFile* f0 = TFile::Open("./plots/ResoVspt_VxVy5_ggFhh4bPU1k_30mm_eta1.7_2.5_3.root");
 	//TFile* f0 = TFile::Open("./plots/ResoVspt_VxVy5_ggFhh4bPU1k_30mmEC67mm_eta1.7_2.0_1.root");
 	TH1D* h0_dp 	= (TH1D*)f0->Get("h_sigmadp");
 	TH1D* h0_invpt 	= (TH1D*)f0->Get("h_sigma_invPt");
@@ -102,7 +102,8 @@ int write_topdf(const char* output_file_name = "ResoVspt_VxVy5_1.7_1.7_2.5ExBr_2
 	//! Barrel Endcap eta > 1.7 and eta < 2.5 
 	//TFile* f1 = TFile::Open("./plots/ResoVspt_VxVy5_ggFhh4bPU1k_30mmEC67mm_eta1.7_2.5_2.root");
 	//TFile* f1 = TFile::Open("./plots/ResoVspt_VxVy5_ggFhh4bPU1k_30mm80mm_eta1.7_2.5_2.root");
-	TFile* f1 = TFile::Open("./plots/ResoVspt_VxVy5_ggFhh4bPU1k_30mm93mm_eta1.7_2.5_2.root");
+	TFile* f1 = TFile::Open("./plots/ResoVspt_VxVy5_ggFhh4bPU1k_30mmEC80mm_eta1.7_2.5_3.root");
+	//TFile* f1 = TFile::Open("./plots/ResoVspt_VxVy5_ggFhh4bPU1k_30mm93mm_eta1.7_2.5_2.root");
 	TH1D* h1_dp 	= (TH1D*)f1->Get("h_sigmadp");
 	TH1D* h1_invpt 	= (TH1D*)f1->Get("h_sigma_invPt");
 	TH1D* h1_phi	= (TH1D*)f1->Get("h_sigma_phi");
@@ -435,7 +436,7 @@ int write_topdf(const char* output_file_name = "ResoVspt_VxVy5_1.7_1.7_2.5ExBr_2
 	h1_dp->GetYaxis()->CenterTitle();
 	h1_dp->Draw();
 	h_dp->Draw("same");
-	////C->SetLogx();
+	C->SetLogx();
 	//C->Print(out_file_open, "pdf");
 	h0_dp->Draw("same");
 	leg1->Draw();

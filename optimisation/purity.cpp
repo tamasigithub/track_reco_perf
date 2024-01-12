@@ -20,17 +20,18 @@ const char* out_path = "./plots";
 //////////////// Purity for TTT tracks /////////////////
 
 //int newTTTpurity_Vs_etaphipt(const char* output_file_name = "pur_PU1000MB_30mm_samelad_opt5GeV", bool save = false)
-//int newTTTpurity_Vs_etaphipt(const char* output_file_name = "PU1k_ggF1.0-pur_25mm_eta2.5opt3_2GeV", bool save = false)
-int newTTTpurity_Vs_etaphipt(const char* output_file_name = "PU1k_ggF1.0-pur_30mmEC93mm_sel3_1", bool save = false)
+//int newTTTpurity_Vs_etaphipt(const char* output_file_name = "PU1k_ggF1.0-pur_30mmEC80mm_eta2.5opt3_2GeV", bool save = false)
+int newTTTpurity_Vs_etaphipt(const char* output_file_name = "PU0_ggF1.0-pur_30mm_foroptkapp5_1", bool save = false)
 {
 	//! Define Cut
-TCut num_select    = "Tid>0  && abs(Pt_n)>2e3 && abs(kappa_pull) < 3 && abs(Eta13) < 2.5";
-TCut den_select    = "Tid>-2 && abs(Pt_n)>2e3 && abs(kappa_pull) < 3 && abs(Eta13) < 2.5";
+TCut num_select    = "Tid>0  && abs(Pt_n)>2e3 && abs(Phi13)<0.021 && abs(Z13)<380 && abs(dphi2)<9.0e-4 && abs(dz2)<0.16*(sin(Theta13)^(-1.3)) && abs(Eta13) < 2.5 && abs(kappa_pull)<5";
+TCut den_select    = "Tid>-2 && abs(Pt_n)>2e3 && abs(Phi13)<0.021 && abs(Z13)<380 && abs(dphi2)<9.0e-4 && abs(dz2)<0.16*(sin(Theta13)^(-1.3)) && abs(Eta13) < 2.5 && abs(kappa_pull)<5";
 
 	TChain recTree("m_recTree");
 	//recTree.Add("/home/tamasi/repo_tamasi/rec_files/rec_files/25mm/PU1k/ggFhh4b_SM/*.root");
 	//recTree.Add("/data/backup/tamasi/rho0/rec/opt/Br30mmEC67mm/PU1k/ggF1.0_/*.root");
-	recTree.Add("/user/tkar/work/data/rec/sel/Br30mmEC93mm/PU1k/ggF1.0/*.root");
+	//recTree.Add("/user/tkar/work/data/rec/sel/Br30mmEC93mm/PU1k/ggF1.0/*.root");
+	recTree.Add("/user/tkar/from_tachyon/for_optimization/30mm/ggFhh4b_SM/*.root");
 	std::cout<<"number of enteries used: " <<recTree.GetEntries() <<std::endl;
 	
 	////PU1000

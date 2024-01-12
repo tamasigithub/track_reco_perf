@@ -22,6 +22,7 @@ mk_body_file () {
 \usepackage{amsmath,amssymb}
 \usepackage{bm}
 \usepackage{pgfplots}
+\usepackage{siunitx}
 \pgfplotsset{compat=1.15}
 % start document
 \begin{document}

@@ -46,7 +46,8 @@ void ScaleXaxis(TH1 *h, Double_t Scale)
   ScaleAxis(h->GetXaxis(), Scale);
   return;
 }
-int write_topdf(const char* output_file_name = "PurVsEtaPtPhi_cutCompFCC-hh30mmEC67mmEta2_5")
+//int write_topdf(const char* output_file_name = "PurVsEtaPtPhi_cutCompFCC-hh30mmEC67mmEta2_5")
+int write_topdf(const char* output_file_name = "PU0PurVsEtaPtPhi_cutCompFCC-hh30mm80mmEta2_5")
 {
 
 	char out_file_open[1023];
@@ -59,29 +60,36 @@ int write_topdf(const char* output_file_name = "PurVsEtaPtPhi_cutCompFCC-hh30mmE
 	//! purity wide cuts
 	//! purity TTT barcode matched tracks no kappa cut
 	//TFile* f0 = TFile::Open("~/repo_tamasi/rec_files/rec_files/plots/PU1k_ggF1.0-pur_30mm_eta2.5opt5_2GeV.root");
-	//TFile* f0 = TFile::Open("./plots/PU1k_ggF1.0-pur_30mm_eta2.5opt5_2GeV.root");
-	TFile* f0 = TFile::Open("./plots/PU1k_ggF1.0-pur_30mmEC67mm_opt10_1.root");
+	TFile* f0 = TFile::Open("./plots/PU0_ggF1.0-pur_30mm80mm_eta2.5opt20_2GeV.root");
+	//TFile* f0 = TFile::Open("./plots/PU0_ggF1.0-pur_30mm_foroptNokapp_1.root");
+	//TFile* f0 = TFile::Open("./plots/PU1k_ggF1.0-pur_30mmEC67mm_opt10_1.root");
 	TH1D* h0_pt 	= (TH1D*)f0->Get("h_pur_vs_ptPU");
 	TH1D* h0_phi	= (TH1D*)f0->Get("h_pur_vs_phiPU");
 	TH1D* h0_eta	= (TH1D*)f0->Get("h_pur_vs_etaPU");
 	//! purity TTT barcode matched tracks #sigma 5
 	//TFile* f1 = TFile::Open("~/repo_tamasi/rec_files/rec_files/plots/PU1k_ggF1.0-pur_30mm_eta2.5opt5_2GeV.root");
+	TFile* f1 = TFile::Open("./plots/PU0_ggF1.0-pur_30mm80mm_eta2.5opt5_2GeV.root");
+	//TFile* f1 = TFile::Open("./plots/PU0_ggF1.0-pur_30mm_foroptkapp5_1.root");
 	//TFile* f1 = TFile::Open("./plots/PU1k_ggF1.0-pur_30mm_eta2.5opt5_2GeV.root");
-	TFile* f1 = TFile::Open("./plots/PU1k_ggF1.0-pur_30mmEC67mm_sel5_1.root");
+	//TFile* f1 = TFile::Open("./plots/PU1k_ggF1.0-pur_30mmEC67mm_sel5_1.root");
 	TH1D* h1_pt = (TH1D*)f1->Get("h_pur_vs_ptPU");
 	TH1D* h1_phi	= (TH1D*)f1->Get("h_pur_vs_phiPU");
 	TH1D* h1_eta	= (TH1D*)f1->Get("h_pur_vs_etaPU");
 	//! purity TTT barcode matched tracks #sigma 4
 	//TFile* f2 = TFile::Open("~/repo_tamasi/rec_files/rec_files/plots/PU1k_ggF1.0-pur_30mm_eta2.5opt4_2GeV.root");
+	TFile* f2= TFile::Open("./plots/PU0_ggF1.0-pur_30mm80mm_eta2.5opt4_2GeV.root");
+	//TFile* f2 = TFile::Open("./plots/PU0_ggF1.0-pur_30mm_foroptkapp4_1.root");
 	//TFile* f2 = TFile::Open("./plots/PU1k_ggF1.0-pur_30mm_eta2.5opt4_2GeV.root");
-	TFile* f2 = TFile::Open("./plots/PU1k_ggF1.0-pur_30mmEC67mm_sel4_1.root");
+	//TFile* f2 = TFile::Open("./plots/PU1k_ggF1.0-pur_30mmEC67mm_sel4_1.root");
 	TH1D* h2_pt = (TH1D*)f2->Get("h_pur_vs_ptPU");
 	TH1D* h2_phi	= (TH1D*)f2->Get("h_pur_vs_phiPU");
 	TH1D* h2_eta	= (TH1D*)f2->Get("h_pur_vs_etaPU");
 	//! purity TTT barcode matched tracks #sigma 3
 	//TFile* f3 = TFile::Open("~/repo_tamasi/rec_files/rec_files/plots/PU1k_ggF1.0-pur_30mm_eta2.5opt3_2GeV.root");
+	TFile* f3 = TFile::Open("./plots/PU0_ggF1.0-pur_30mm80mm_eta2.5opt3_2GeV.root");
+	//TFile* f3 = TFile::Open("./plots/PU0_ggF1.0-pur_30mm_foroptkapp3_1.root");
 	//TFile* f3 = TFile::Open("./plots/PU1k_ggF1.0-pur_30mm_eta2.5opt3_2GeV.root");
-	TFile* f3 = TFile::Open("./plots/PU1k_ggF1.0-pur_30mmEC67mm_sel3_1.root");
+	//TFile* f3 = TFile::Open("./plots/PU1k_ggF1.0-pur_30mmEC67mm_sel3_1.root");
 	TH1D* h3_pt = (TH1D*)f3->Get("h_pur_vs_ptPU");
 	TH1D* h3_phi	= (TH1D*)f3->Get("h_pur_vs_phiPU");
 	TH1D* h3_eta	= (TH1D*)f3->Get("h_pur_vs_etaPU");
@@ -130,6 +138,7 @@ int write_topdf(const char* output_file_name = "PurVsEtaPtPhi_cutCompFCC-hh30mmE
         h1_phi->SetMarkerSize(1.8);
         h1_eta->SetMarkerSize(1.8);
 
+	
 	//Marker Style	
 	h2_pt->SetMarkerStyle(kFullDiamond);
 	h2_phi->SetMarkerStyle(kFullDiamond);
@@ -221,16 +230,16 @@ int write_topdf(const char* output_file_name = "PurVsEtaPtPhi_cutCompFCC-hh30mmE
         h1_phi->GetYaxis()->SetTitleSize(.05);
         h1_eta->GetYaxis()->SetTitleSize(.05);
 
-	h2_pt->GetYaxis()->SetRangeUser(0.2,1.04);
+	h2_pt->GetYaxis()->SetRangeUser(0.6,1.04);
 	h2_phi->GetYaxis()->SetRangeUser(0.65,1.04);
 	h2_eta->GetYaxis()->SetRangeUser(0.65,1.04);
-        h0_pt->GetYaxis()->SetRangeUser(0.3,1.04);
+        h0_pt->GetYaxis()->SetRangeUser(0.6,1.04);
         h0_phi->GetYaxis()->SetRangeUser(0.65,1.04);
         h0_eta->GetYaxis()->SetRangeUser(0.65,1.04);
-	h3_pt->GetYaxis()->SetRangeUser(0.3,1.04);
+	h3_pt->GetYaxis()->SetRangeUser(0.6,1.04);
 	h3_phi->GetYaxis()->SetRangeUser(0.65,1.04);
 	h3_eta->GetYaxis()->SetRangeUser(0.65,1.04);
-        h1_pt->GetYaxis()->SetRangeUser(0.3,1.04);
+        h1_pt->GetYaxis()->SetRangeUser(0.6,1.04);
         h1_phi->GetYaxis()->SetRangeUser(0.65,1.04);
         h1_eta->GetYaxis()->SetRangeUser(0.65,1.04);
 
@@ -305,7 +314,8 @@ int write_topdf(const char* output_file_name = "PurVsEtaPtPhi_cutCompFCC-hh30mmE
 	//C->SetTickx();
 	//C->SetTicky();
 	Legends();
-
+	
+	//! pg1
 	C->SetLogx();
 	h2_pt->Draw();
 	C->Print(out_file_open, "pdf");
@@ -316,6 +326,7 @@ int write_topdf(const char* output_file_name = "PurVsEtaPtPhi_cutCompFCC-hh30mmE
 	h1_pt->Draw();
 	C->Print(out_file_,"pdf");
 
+	//! pg5
 	C->SetLogx(0);
 	h2_phi->Draw();
 	C->Print(out_file_, "pdf");
@@ -326,6 +337,7 @@ int write_topdf(const char* output_file_name = "PurVsEtaPtPhi_cutCompFCC-hh30mmE
 	h1_phi->Draw();
 	C->Print(out_file_,"pdf");
 	
+	//! pg9
 	h2_eta->Draw();
 	C->Print(out_file_, "pdf");
 	h0_eta->Draw();
@@ -336,6 +348,7 @@ int write_topdf(const char* output_file_name = "PurVsEtaPtPhi_cutCompFCC-hh30mmE
 	C->Print(out_file_,"pdf");
 	
 	//plot same
+	//! pg13
 	
 	Double_t x1= 0.20,y1= 0.2, x2 = 0.35, y2 = 0.4, y11 = 0.15, y22 = 0.35;
 	C->SetLogx();
@@ -356,26 +369,27 @@ int write_topdf(const char* output_file_name = "PurVsEtaPtPhi_cutCompFCC-hh30mmE
 	//leg_1->AddEntry((TObject*)0,"(#sigma_{#kappa} = 5)","");              
 	//leg_1->AddEntry(h3_pt,"tight");
 	//leg_1->AddEntry((TObject*)0,"(#sigma_{#kappa} = 3)","");
-	leg_1->AddEntry(h0_pt,"w/o #kappa cut");
-	leg_1->AddEntry(h1_pt,"|d#kappa| < 5 #sigma_{#kappa}");
-	leg_1->AddEntry(h2_pt,"|d#kappa| < 4 #sigma_{#kappa}");
 	leg_1->AddEntry(h3_pt,"|d#kappa| < 3 #sigma_{#kappa}");
+	leg_1->AddEntry(h2_pt,"|d#kappa| < 4 #sigma_{#kappa}");
+	leg_1->AddEntry(h1_pt,"|d#kappa| < 5 #sigma_{#kappa}");
+	leg_1->AddEntry(h0_pt,"|d#kappa| < 20 #sigma_{#kappa}");
 	leg_1->Draw();
 	leg1->Draw();
 	leg2->Draw();
 	leg5->Draw();
 	C->Print(out_file_,"pdf");
 	C->SaveAs("./tex/purVsptForAllcuts_Eta2_5.tex");
-	h1_pt->Draw();
-	h2_pt->Draw("same");
+	//! pg14
+	h0_pt->Draw();
+	h1_pt->Draw("same");
 	h3_pt->Draw("same");
 	TLegend *leg_1a=new TLegend(x1,y1,x2,y2,"");
 	leg_1a->SetFillStyle(0);
 	leg_1a->SetBorderSize(0);
 	leg_1a->SetTextSize(0.04);
-	leg_1a->AddEntry(h1_pt,"|d#kappa| < 5 #sigma_{#kappa}");
-	leg_1a->AddEntry(h2_pt,"|d#kappa| < 4 #sigma_{#kappa}");
 	leg_1a->AddEntry(h3_pt,"|d#kappa| < 3 #sigma_{#kappa}");
+	leg_1a->AddEntry(h1_pt,"|d#kappa| < 5 #sigma_{#kappa}");
+	leg_1a->AddEntry(h0_pt,"|d#kappa| < 20 #sigma_{#kappa}");
 	//leg_1a->SetNColumns(2);
 	//leg_1a->AddEntry(h1_pt,"loose");
 	//leg_1a->AddEntry((TObject*)0, "(w/o #kappa_{cut})","");   
@@ -389,15 +403,16 @@ int write_topdf(const char* output_file_name = "PurVsEtaPtPhi_cutCompFCC-hh30mmE
 	leg5->Draw();
 	C->Print(out_file_,"pdf");
 	C->SaveAs("./tex/purVsptFor3cuts_Eta2_5.tex");
+	//! pg15
 	h0_pt->Draw();
-	h1_pt->Draw("same");
+	h3_pt->Draw("same");
 	TLegend *leg_1b=new TLegend(x1,y11,x2,y22,"");
 	leg_1b->SetFillStyle(0);
 	leg_1b->SetBorderSize(0);
 	leg_1b->SetTextSize(0.04);
-	leg_1b->AddEntry(h0_pt,"w/o #kappa cut");
-	leg_1b->AddEntry(h1_pt,"|d#kappa| < 5 #sigma_{#kappa}");
-	C->SaveAs("./tex/purVsptForAllcuts_Eta2_5.tex");
+	leg_1b->AddEntry(h3_pt,"|d#kappa| < 3 #sigma_{#kappa}");
+	leg_1b->AddEntry(h0_pt,"|d#kappa| < 20 #sigma_{#kappa}");
+	C->SaveAs("./tex/purVsptFor2cuts_Eta2_5.tex");
 	//leg_1b->AddEntry(h0_pt,"wide   (w/o d#phi_{2}, dz_{2}, #kappa_{cut})");
 	//leg_1b->AddEntry(h1_pt,"loose  (w/o #kappa_{cut})");                 
 	leg_1b->Draw();
@@ -405,6 +420,7 @@ int write_topdf(const char* output_file_name = "PurVsEtaPtPhi_cutCompFCC-hh30mmE
 	leg2->Draw();
 	leg5->Draw();
 	C->Print(out_file_,"pdf");
+	//! pg16
 
 	C->SetLogx(0);
 	h0_phi->Draw();
@@ -415,10 +431,10 @@ int write_topdf(const char* output_file_name = "PurVsEtaPtPhi_cutCompFCC-hh30mmE
 	leg_2->SetFillStyle(0);
 	leg_2->SetBorderSize(0);
 	leg_2->SetTextSize(0.04);
-	leg_2->AddEntry(h0_phi,"w/o #kappa cut");
-	leg_2->AddEntry(h1_phi,"|d#kappa| < 5 #sigma_{#kappa}");
-	leg_2->AddEntry(h2_phi,"|d#kappa| < 4 #sigma_{#kappa}");
 	leg_2->AddEntry(h3_phi,"|d#kappa| < 3 #sigma_{#kappa}");
+	leg_2->AddEntry(h2_phi,"|d#kappa| < 4 #sigma_{#kappa}");
+	leg_2->AddEntry(h1_phi,"|d#kappa| < 5 #sigma_{#kappa}");
+	leg_2->AddEntry(h0_phi,"|d#kappa| < 20 #sigma_{#kappa}");
 	//leg_2->SetNColumns(2);
 	//leg_2->AddEntry(h0_phi,"wide");
 	//leg_2->AddEntry((TObject*)0, "(w/o d#phi_{2}, dz_{2}, #kappa_{cut})","");
@@ -434,6 +450,7 @@ int write_topdf(const char* output_file_name = "PurVsEtaPtPhi_cutCompFCC-hh30mmE
 	leg5->Draw();
 	C->Print(out_file_,"pdf");
 	C->SaveAs("./tex/purVsphiForAllcuts_Eta2_5.tex");
+	//! pg17
 	h1_phi->Draw();
 	h2_phi->Draw("same");
 	h3_phi->Draw("same");
@@ -441,9 +458,9 @@ int write_topdf(const char* output_file_name = "PurVsEtaPtPhi_cutCompFCC-hh30mmE
 	leg_2a->SetFillStyle(0);
 	leg_2a->SetBorderSize(0);
 	leg_2a->SetTextSize(0.04);
-	leg_2a->AddEntry(h1_phi,"|d#kappa| < 5 #sigma_{#kappa}");
-	leg_2a->AddEntry(h2_phi,"|d#kappa| < 4 #sigma_{#kappa}");
 	leg_2a->AddEntry(h3_phi,"|d#kappa| < 3 #sigma_{#kappa}");
+	leg_2a->AddEntry(h2_phi,"|d#kappa| < 4 #sigma_{#kappa}");
+	leg_2a->AddEntry(h1_phi,"|d#kappa| < 5 #sigma_{#kappa}");
 	//leg_2a->SetNColumns(2);
 	//leg_2a->AddEntry(h1_phi,"loose");
 	//leg_2a->AddEntry((TObject*)0, "(w/o #kappa_{cut})","");   
@@ -457,14 +474,15 @@ int write_topdf(const char* output_file_name = "PurVsEtaPtPhi_cutCompFCC-hh30mmE
 	leg5->Draw();
 	C->Print(out_file_,"pdf");
 	C->SaveAs("./tex/purVsphiFor3cuts_Eta2_5.tex");
+	//! pg18
 	h0_phi->Draw();
 	h1_phi->Draw("same");
 	TLegend *leg_2b=new TLegend(x1,y11,x2,y22,"");
 	leg_2b->SetFillStyle(0);
 	leg_2b->SetBorderSize(0);
 	leg_2b->SetTextSize(0.04);
-	leg_2b->AddEntry(h0_phi,"w/o #kappa cut");
 	leg_2b->AddEntry(h1_phi,"|d#kappa| < 5 #sigma_{#kappa}");
+	leg_2b->AddEntry(h0_phi,"|d#kappa| < 20 #sigma_{#kappa}");
 	C->SaveAs("./tex/purVsphiFor2cuts_Eta2_5.tex");
 	//leg_2b->AddEntry(h0_phi,"wide   (w/o d #phi_{2}, dz_{2}, #kappa_{cut})");
 	//leg_2b->AddEntry(h1_phi,"loose  (w/o #kappa_{cut})");                 
@@ -475,6 +493,7 @@ int write_topdf(const char* output_file_name = "PurVsEtaPtPhi_cutCompFCC-hh30mmE
 	C->Print(out_file_,"pdf");
 
 
+	//! pg19
 	h0_eta->Draw();
 	h1_eta->Draw("same");
 	h2_eta->Draw("same");
@@ -483,10 +502,10 @@ int write_topdf(const char* output_file_name = "PurVsEtaPtPhi_cutCompFCC-hh30mmE
 	leg_3->SetFillStyle(0);
 	leg_3->SetBorderSize(0); 
 	leg_3->SetTextSize(0.04);
-	leg_3->AddEntry(h0_eta,"w/o #kappa cut");
-	leg_3->AddEntry(h1_eta,"|d#kappa| < 5 #sigma_{#kappa}");
-	leg_3->AddEntry(h2_eta,"|d#kappa| < 4 #sigma_{#kappa}");
+	leg_3->AddEntry(h0_eta,"|d#kappa| < 20 #sigma_{#kappa}");
 	leg_3->AddEntry(h3_eta,"|d#kappa| < 3 #sigma_{#kappa}");
+	leg_3->AddEntry(h2_eta,"|d#kappa| < 4 #sigma_{#kappa}");
+	leg_3->AddEntry(h1_eta,"|d#kappa| < 5 #sigma_{#kappa}");
 	//leg_3->SetNColumns(2);
 	//leg_3->AddEntry(h0_eta,"wide");
 	//leg_3->AddEntry((TObject*)0, "(w/o d#phi_{2}, dz_{2}, #kappa_{cut})","");
@@ -502,6 +521,7 @@ int write_topdf(const char* output_file_name = "PurVsEtaPtPhi_cutCompFCC-hh30mmE
 	leg5->Draw();
 	C->Print(out_file_,"pdf");
 	C->SaveAs("./tex/purVsetaForAllcuts_Eta2_5.tex");
+	//! pg20
 	h1_eta->Draw();
 	h2_eta->Draw("same");
 	h3_eta->Draw("same");
@@ -509,9 +529,9 @@ int write_topdf(const char* output_file_name = "PurVsEtaPtPhi_cutCompFCC-hh30mmE
 	leg_3a->SetFillStyle(0);
 	leg_3a->SetBorderSize(0);
 	leg_3a->SetTextSize(0.04);
-	leg_3a->AddEntry(h1_eta,"|d#kappa| < 5 #sigma_{#kappa}");
-	leg_3a->AddEntry(h2_eta,"|d#kappa| < 4 #sigma_{#kappa}");
 	leg_3a->AddEntry(h3_eta,"|d#kappa| < 3 #sigma_{#kappa}");
+	leg_3a->AddEntry(h2_eta,"|d#kappa| < 4 #sigma_{#kappa}");
+	leg_3a->AddEntry(h1_eta,"|d#kappa| < 5 #sigma_{#kappa}");
 	//leg_3a->SetNColumns(2);
 	//leg_3a->AddEntry(h1_eta,"loose");
 	//leg_3a->AddEntry((TObject*)0, "(w/o #kappa_{cut})","");   
@@ -525,14 +545,15 @@ int write_topdf(const char* output_file_name = "PurVsEtaPtPhi_cutCompFCC-hh30mmE
 	leg5->Draw();
 	C->Print(out_file_,"pdf");
 	C->SaveAs("./tex/purVsetaFor3cuts_Eta2_5.tex");
+	//! pg21
 	h0_eta->Draw();
 	h1_eta->Draw("same");
 	TLegend *leg_3b=new TLegend(x1,y11,x2,y22,"");
 	leg_3b->SetFillStyle(0);
 	leg_3b->SetBorderSize(0);
 	leg_3b->SetTextSize(0.04);
-	leg_3b->AddEntry(h0_eta,"w/o #kappa cut");
 	leg_3b->AddEntry(h1_eta,"|d#kappa| < 5 #sigma_{#kappa}");
+	leg_3b->AddEntry(h0_eta,"|d#kappa| < 20 #sigma_{#kappa}");
 	C->SaveAs("./tex/purVsetaFor2cuts_Eta2_5.tex");
 	//leg_3b->AddEntry(h0_eta,"wide   (w/o d #phi_{2}, dz_{2}, #kappa_{cut})");
 	//leg_3b->AddEntry(h1_eta,"loose  (w/o #kappa_{cut})");                 

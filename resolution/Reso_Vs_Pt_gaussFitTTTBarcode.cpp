@@ -53,7 +53,9 @@ TCut pi_cut = "abs(M_pdg)==211 && M_barcode > 0 && abs(M_Vz) < 100 && abs(M_Vx)<
 TCut e_cut  = "abs(M_pdg)==11 && M_barcode > 0 && abs(M_Vz) < 100 && abs(M_Vx)<5 && abs(M_Vy)<5";
 //! use this for TTT track resolution with barcode matching
 //TCut all_cut= "abs(station)==1 && Tid > 0 && abs(kappa_pull)<=3 && abs(M_pt)>2000 && abs(M_eta)>=1.7 && abs(M_eta)<2.5 && abs(M_Vz) < 100 && abs(M_Vx) < 5 && abs(M_Vy) < 5 && abs(Phi13)<0.018 && abs(Eta3 - Eta1)<0.006 && abs(dphi2)<5e-4 && abs(Eta2-0.5*(Eta1+Eta3))<5e-4";
-TCut all_cut= "abs(station)==1 && Tid > 0 && abs(kappa_pull)<=3 && abs(M_pt)>2000 && abs(M_eta)>=1.7 && abs(M_eta)<=2.5 && abs(M_Vz) < 100 && abs(M_Vx) < 5 && abs(M_Vy) < 5";
+TCut all_cut= "abs(station)==0 && Tid > 0 && abs(kappa_pull)<=3 && abs(M_pt)>2000 && abs(M_eta)<=1.7 && abs(M_Vz) < 100 && abs(M_Vx) < 5 && abs(M_Vy) < 5";
+//TCut all_cut= "abs(station)==1 && Tid > 0 && abs(kappa_pull)<=3 && abs(M_pt)>2000 && abs(M_eta)>=1.7 && abs(M_eta)<=2.5 && abs(M_Vz) < 100 && abs(M_Vx) < 5 && abs(M_Vy) < 5";
+//TCut all_cut= "Tid > 0 && abs(kappa_pull)<=3 && abs(M_pt)>2000 && abs(M_eta)>=1.7 && abs(M_eta)<=2.5 && abs(M_Vz) < 100 && abs(M_Vx) < 5 && abs(M_Vy) < 5";
 //! path for input files
 const char* path = "";
 char buf[4096];
@@ -67,8 +69,8 @@ void fit_Gauss(TH1F* h)
 	for(int i = 0; i < 3; i++) 
 	{
     	h->Fit("gaus", "QLL", "", xmin_, xmax_);
-    	xmin_ = h->GetFunction("gaus")->GetParameter(1) - 1.3 * h->GetFunction("gaus")->GetParameter(2);
-    	xmax_ = h->GetFunction("gaus")->GetParameter(1) + 1.3 * h->GetFunction("gaus")->GetParameter(2);
+    	xmin_ = h->GetFunction("gaus")->GetParameter(1) - 2 * h->GetFunction("gaus")->GetParameter(2);
+    	xmax_ = h->GetFunction("gaus")->GetParameter(1) + 2 * h->GetFunction("gaus")->GetParameter(2);
   	}
 
 	h->GetFunction("gaus")->SetLineColor(2);
@@ -106,9 +108,9 @@ int resolution_plots_Vs_pt
 	//recTree.Add("/data/backup/tamasi/rho0/rec/opt/Br30mmEC67mm/ggF1.0/*.root");
 	//recTree.Add("/data/backup/tamasi/rho0/rec/for_opt/Br30mmEC67mm/ggF1.0/*.root");
 	
-	recTree.Add("/user/tkar/work/data/rec/sel/Br30mmEC93mm/PU0/ggF1.0/*.root");
-	recTree.Add("/user/tkar/work/data/rec/sel/Br30mmEC93mm/PU0/pp_4bQCD/*.root");
-	recTree.Add("/user/tkar/work/data/rec/sel/Br30mmEC93mm/PU1k/ggF1.0/*.root");
+	recTree.Add("/user/tkar/work/data/rec/sel/Br30mmEC80mm/PU0/ggF1.0/*.root");
+	recTree.Add("/user/tkar/work/data/rec/sel/Br30mmEC80mm/PU0/pp_4bQCD/*.root");
+	recTree.Add("/user/tkar/work/data/rec/sel/Br30mmEC80mm/PU1k/ggF1.0/*.root");
 	//recTree.Add("/user/tkar/work/data/rec/opt/Br30mm/PU0/ggF1.0/*.root");
 
 	std::cout<<"rec entries:"<<recTree.GetEntries()<<std::endl;
@@ -128,7 +130,7 @@ int resolution_plots_Vs_pt
 	//double binlow[] = {0, 2000, 5000, 10000, 20000, 30000, 40000, 50000, 60000, 70000, 80000, 90000, 100000};
 	//double binhigh[] = {0, 2000, 5000, 10000, 20000, 30000, 40000, 50000, 60000, 70000, 80000, 90000, 100000};
 	int ptbin = 9;
-	double bincenter[] = {2000, 5000, 10000, 20000, 30000, 40000, 50000, 70000, 100000};
+	double bincenter[] = {2500, 5000, 10000, 20000, 30000, 40000, 50000, 70000, 100000};
 	double binlow[] = {0, 2000, 5000, 10000, 20000, 30000, 40000, 50000, 70000, 100000};
 	double binhigh[] = {0, 2000, 5000, 10000,20000, 30000, 40000, 50000, 70000, 100000};
 	//int ptbin = 7;
@@ -159,13 +161,17 @@ int resolution_plots_Vs_pt
 		}
 		binlow[ik+1] = bincenter[ik] - binwidth_low;
 		binhigh[ik+1] = bincenter[ik] + binwidth_high;
-	//	std::cout<<"binlow[" <<ik <<"] : " << binlow[ik] << std::endl; 
+		//std::cout<<"binlow[" <<ik <<"] : " << binlow[ik] << std::endl; 
+		//std::cout<<"bincenter[" <<ik <<"] : " << bincenter[ik] << std::endl; 
+		//std::cout<<"binhigh[" <<ik <<"] : " << binhigh[ik] << std::endl; 
 	}
 	for (unsigned ik = 0; ik <= sizeof(bincenter)/sizeof(double); ++ik)
 	{
+		//bincenter[ik] = (binhigh[ik]-binlow[ik])*0.5 + binlow[ik];
 	
-		std::cout<<"binlow[" <<ik <<"] : " << binlow[ik] << std::endl; 
-		std::cout<<"binhigh[" <<ik <<"] : " << binhigh[ik] << std::endl; 
+		std::cout<<"binlow[" <<ik <<"] : " << binlow[ik+1] << std::endl; 
+		std::cout<<"bincenter[" <<ik <<"] : " << bincenter[ik] << std::endl; 
+		std::cout<<"binhigh[" <<ik <<"] : " << binhigh[ik+1] << std::endl; 
 	}
 	int binNum	    = 200;
 	double relptmin, relptmax;    
@@ -187,7 +193,7 @@ int resolution_plots_Vs_pt
         TH1::SetDefaultSumw2(true);
 	//! Final histograms showing the resolution as a funtion of eta
 	//! sigma relpt Vs eta //
-	TH1D *h_sigmadp = new TH1D("h_sigmadp", "Relative Pt resolution Vs P_{t}",ptbin,binlow);
+	TH1D *h_sigmadp = new TH1D("h_sigmadp", "Relative Pt resolution Vs P_{t}",ptbin,binhigh);
 	h_sigmadp->SetLineColor(1);
   	h_sigmadp->SetLineWidth(2);
   	h_sigmadp->SetMarkerColor(1);
@@ -196,7 +202,7 @@ int resolution_plots_Vs_pt
 	h_sigmadp->GetYaxis()->SetTitleOffset(1.3);
   	h_sigmadp->GetYaxis()->SetTitle("#sigma_{#Delta(p_{t})/gen_p_{t}}");
 	//! sigma invpt Vs eta//
-	TH1D *h_sigma_invPt = new TH1D("h_sigma_invPt", "Inverse Pt resolution Vs P_{t}",ptbin,binlow);
+	TH1D *h_sigma_invPt = new TH1D("h_sigma_invPt", "Inverse Pt resolution Vs P_{t}",ptbin,binhigh);
 	h_sigma_invPt->SetLineColor(1);
   	h_sigma_invPt->SetLineWidth(2);
   	h_sigma_invPt->SetMarkerColor(1);
@@ -205,7 +211,7 @@ int resolution_plots_Vs_pt
 	h_sigma_invPt->GetYaxis()->SetTitleOffset(1.3);
   	h_sigma_invPt->GetYaxis()->SetTitle("#sigma_{#Delta(1/p_{t})} [MeV^{-1}/c]");
 	//! sigma phi Vs eta//
-	TH1D *h_sigma_phi = new TH1D("h_sigma_phi", "Phi resolution Vs P_{t}",ptbin,binlow);
+	TH1D *h_sigma_phi = new TH1D("h_sigma_phi", "Phi resolution Vs P_{t}",ptbin,binhigh);
         h_sigma_phi->SetLineColor(1);
         h_sigma_phi->SetLineWidth(2);
         h_sigma_phi->SetMarkerColor(1);
@@ -214,7 +220,7 @@ int resolution_plots_Vs_pt
         h_sigma_phi->GetYaxis()->SetTitleOffset(1.3);
         h_sigma_phi->GetYaxis()->SetTitle("#sigma_{#Delta(#phi)} [rad]");
 	//! sigma theta Vs eta//
-	TH1D *h_sigma_theta = new TH1D("h_sigma_theta", "Theta resolution Vs P_{t}",ptbin,binlow);
+	TH1D *h_sigma_theta = new TH1D("h_sigma_theta", "Theta resolution Vs P_{t}",ptbin,binhigh);
         h_sigma_theta->SetLineColor(1);
         h_sigma_theta->SetLineWidth(2);
         h_sigma_theta->SetMarkerColor(1);
@@ -223,7 +229,7 @@ int resolution_plots_Vs_pt
         h_sigma_theta->GetYaxis()->SetTitleOffset(1.3);
         h_sigma_theta->GetYaxis()->SetTitle("#sigma_{#Delta(#theta)} [rad]");
 	//! sigma eta Vs eta//
-	TH1D *h_sigma_eta = new TH1D("h_sigma_eta", "Eta resolution Vs P_{t}",ptbin,binlow);
+	TH1D *h_sigma_eta = new TH1D("h_sigma_eta", "Eta resolution Vs P_{t}",ptbin,binhigh);
         h_sigma_eta->SetLineColor(1);
         h_sigma_eta->SetLineWidth(2);
         h_sigma_eta->SetMarkerColor(1);
@@ -232,7 +238,7 @@ int resolution_plots_Vs_pt
         h_sigma_eta->GetYaxis()->SetTitleOffset(1.3);
         h_sigma_eta->GetYaxis()->SetTitle("#sigma_{#Delta(#eta)}");
 	//! sigma z0 Vs eta//
-	TH1D *h_sigma_z0 = new TH1D("h_sigma_z0", "Z0 resolution Vs P_{t}",ptbin,binlow);
+	TH1D *h_sigma_z0 = new TH1D("h_sigma_z0", "Z0 resolution Vs P_{t}",ptbin,binhigh);
         h_sigma_z0->SetLineColor(1);
         h_sigma_z0->SetLineWidth(2);
         h_sigma_z0->SetMarkerColor(1);
@@ -241,7 +247,7 @@ int resolution_plots_Vs_pt
         h_sigma_z0->GetYaxis()->SetTitleOffset(1.3);
         h_sigma_z0->GetYaxis()->SetTitle("#sigma_{#Delta(z0)} [mm]");
 	//! sigma dca Vs eta//
-	TH1D *h_sigma_dca = new TH1D("h_sigma_dca", "Dca resolution Vs P_{t}",ptbin,binlow);
+	TH1D *h_sigma_dca = new TH1D("h_sigma_dca", "Dca resolution Vs P_{t}",ptbin,binhigh);
         h_sigma_dca->SetLineColor(1);
         h_sigma_dca->SetLineWidth(2);
         h_sigma_dca->SetMarkerColor(1);

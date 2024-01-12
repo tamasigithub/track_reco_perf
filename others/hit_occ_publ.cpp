@@ -186,7 +186,8 @@ void summary_hitOccVsRadius()
 	//! no. of points to be plotted
 	const Int_t n = 12;//11;
 	Double_t Xmin_range = 0.0, Xmax_range = 1.0e2;
-	Double_t Ymin_range = 5e-4, Ymax_range = 5.0e1;
+	//Double_t Ymin_range = 5e-4, Ymax_range = 5.0e1;
+	Double_t Ymin_range = 5e-2, Ymax_range = 7.0e1;
 	//Multi Graph
 	TCanvas * c1 = new TCanvas("c1","c1", 800.,800.);
 	//TCanvas * c1 = new TCanvas();
@@ -363,7 +364,8 @@ void summary_hitOccVsRadius()
 
 //////////////////////////////////////////////////////////////
 	
-	Double_t x1= 0.55,y1= 0.7, x2 = 0.89, y2 = 0.89;        
+	//Double_t x1= 0.55,y1= 0.7, x2 = 0.89, y2 = 0.89;        
+	Double_t x1= 0.53,y1= 0.75, x2 = 0.87, y2 = 0.89;        
 	TLegend *cms_E = new TLegend(0.2,0.89,0.89,0.97);
         cms_E->SetFillStyle(0);
         cms_E->SetBorderSize(0);
@@ -371,12 +373,12 @@ void summary_hitOccVsRadius()
         cms_E->SetTextSize(0.04);
 	TMultiGraph *g = new TMultiGraph();
 	g->Add(g1);
-	g->Add(g2);
-	g->Add(g3);
+	//g->Add(g2);
+	//g->Add(g3);
 	g->Add(g4);
-	g->Add(g5);
-	g->Add(g6);
-	g->Draw("APe1Y+");
+	//g->Add(g5);
+	//g->Add(g6);
+	g->Draw("APe1");
 
 	g->SetTitle(plot_title);
 	g->GetXaxis()->SetTitle("Layer Radius [cm]");
@@ -390,18 +392,18 @@ void summary_hitOccVsRadius()
 	g->GetYaxis()->SetRangeUser(Ymin_range, Ymax_range);
 	cms_E->Draw();
 	//c1->BuildLegend(x1,y1,x2,y2,"pileup");
-	TLegend *leg = new TLegend(x1,y1,x2,y2,"barrel  endcap   pileup");
+	TLegend *leg = new TLegend(x1,y1,x2,y2,"barrel  endcap   #mu");
 	leg->SetBorderSize(0);
 	leg->SetTextSize(0.04);
 	TLegendEntry *header = (TLegendEntry*)leg->GetListOfPrimitives()->First();
 	header->SetTextSize(0.04);
 	leg->SetNColumns(2);
 	leg->AddEntry(g1,"        ");
-	leg->AddEntry(g4,"    <#mu> = 1000");
-	leg->AddEntry(g2,"        ");
-	leg->AddEntry(g5,"    <#mu> = 200");
-	leg->AddEntry(g3,"        ");
-	leg->AddEntry(g6,"    <#mu> = 0");
+	leg->AddEntry(g4,"    ~~~~1000");
+	//leg->AddEntry(g2,"        ");
+	//leg->AddEntry(g5,"    <#mu> = 200");
+	//leg->AddEntry(g3,"        ");
+	//leg->AddEntry(g6,"    <#mu> = 0");
 	leg->Draw();
 
 	//! draw a second Y axis
@@ -426,7 +428,7 @@ void summary_hitOccVsRadius()
 	TGaxis *axis = new TGaxis(gPad->GetUxmax(),gPad->GetUymin(),
 	gPad->GetUxmax(),rightmax,40*Ymin_range,40*Ymax_range,510,"+G");
 //	axis->SetLabelSize(0.05);
-	axis->SetTitle("rate [MHz/cm^2]");
+	axis->SetTitle("rate [MHz/cm^{2}]");
 	axis->SetTitleSize(0.05);
 	axis->SetLabelOffset(0.05);
 	axis->SetTitleOffset(1.08);
